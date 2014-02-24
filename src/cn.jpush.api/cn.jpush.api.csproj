@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,15 +41,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseClient.cs" />
+    <Compile Include="common\BaseHttpClient.cs" />
+    <Compile Include="common\BaseResult.cs" />
+    <Compile Include="common\DeviceEnum.cs" />
+    <Compile Include="common\ResponseResult.cs" />
     <Compile Include="HttpTools.cs" />
     <Compile Include="JPushClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="push\CustomMessageParams.cs" />
+    <Compile Include="push\MessageParams.cs" />
+    <Compile Include="push\MessageResult.cs" />
+    <Compile Include="push\NotificationParams.cs" />
+    <Compile Include="push\PushClient.cs" />
     <Compile Include="ReceivedVO.cs" />
+    <Compile Include="report\ReceivedResult.cs" />
+    <Compile Include="report\ReportClient.cs" />
     <Compile Include="SecretEncode.cs" />
+    <Compile Include="util\Base64.cs" />
+    <Compile Include="util\JsonTool.cs" />
+    <Compile Include="util\Md5.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SendVO.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

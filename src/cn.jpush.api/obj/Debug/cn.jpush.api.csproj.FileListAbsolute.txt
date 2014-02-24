@@ -1,0 +1,1 @@
+E:\work\code_net\jpush-api-csharp-client\src\cn.jpush.api\obj\Debug\cn.jpush.api.csprojResolveAssemblyReference.cache
