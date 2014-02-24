@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.push
 {
-    class PushClient:BaseHttpClient
+    internal class PushClient:BaseHttpClient
     {
         private const String HOST_NAME_SSL = "https://api.jpush.cn";
         private const String HOST_NAME = "http://api.jpush.cn:8800";
@@ -21,42 +21,38 @@ namespace cn.jpush.api.push
         private bool apnsProduction = false;
         private HashSet<DeviceEnum> devices = new HashSet<DeviceEnum>();
 
-        public PushClient(String masterSecret, String appKey, long timeToLive, DeviceEnum device, bool apnsProduction) 
+        public PushClient(String masterSecret, String appKey, long timeToLive, HashSet<DeviceEnum> devices, bool apnsProduction)
         {
             this.appKey = appKey;
             this.masterSecret = masterSecret;
             this.timeToLive = timeToLive;
-            if (device != null)
-            {
-                this.devices.Add(device);            
-            }        
+            this.devices = devices;
         }
 
         public MessageResult sendNotification(String notificationContent, NotificationParams notParams, Dictionary<String, Object> extras)
         {
             if (extras != null)
             {
-                notParams.MsgContent.Extras = extras;
-
+                notParams.NotyfyMsgContent.Extras = extras;
             }
-            return sendMessage(notificationContent, notParams);
+            return sendMessage(notificationContent, notParams, MsgTypeEnum.NOTIFICATIFY);
         }
 
         public MessageResult sendCustomMessage(String msgTitle, String msgContent, CustomMessageParams cParams, Dictionary<String, Object> extras)
         {
             if (msgTitle != null)
             {
-                cParams.MsgContent.Title = msgTitle;
+                cParams.CustomMsgContent.Title = msgTitle;
             }
             if (extras != null)
             {
-                cParams.MsgContent.Extras = extras;
+                cParams.CustomMsgContent.Extras = extras;
             }
-            return sendMessage(msgContent, cParams);
+            return sendMessage(msgContent, cParams, MsgTypeEnum.COUSTOM_MESSAGE);
         }
 
 
-        private MessageResult sendMessage(String notificationContent, MessageParams msgParams) 
+        private MessageResult sendMessage(String notificationContent, MessageParams msgParams, MsgTypeEnum msgType) 
         {
             msgParams.ApnsProduction = this.apnsProduction ? 1 : 0;
             msgParams.AppKey = this.appKey;
@@ -69,7 +65,7 @@ namespace cn.jpush.api.push
             {
                 msgParams.addPlatform(device);
             }
-            return null; 
+            return sendPush(notificationContent, msgParams, msgType); 
         }
 
         private MessageResult sendPush(String notificationContent, MessageParams msgParams, MsgTypeEnum msgType) 
@@ -80,7 +76,7 @@ namespace cn.jpush.api.push
             ResponseResult result = sendPost(url, pamrams, null);
             MessageResult messResult = new MessageResult();
             messResult.ResponseResult = result;
-            if (result.responseCode == System.Net.HttpStatusCode.OK) 
+            if (result.responseCode == System.Net.HttpStatusCode.OK)
             {
                 messResult = (MessageResult)JsonTool.JsonToObject(result.responseContent, messResult);
                 String content = result.responseContent;

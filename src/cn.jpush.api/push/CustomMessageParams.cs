@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.push
 {
-    class CustomMessageParams:MessageParams
+    public class CustomMessageParams:MessageParams
     {
-        private CustomMessageContent msgContent = new CustomMessageContent();
+        private CustomMessageContent customMsgContent;
 
-        public CustomMessageContent MsgContent
+        public CustomMessageContent CustomMsgContent
         {
-            get { return msgContent; }
-            set { msgContent = value; }
-        }
+            get { return customMsgContent; }
+            set { customMsgContent = value; }
+        }   
 
         public class CustomMessageContent : MessageParams.MsgContent 
         {

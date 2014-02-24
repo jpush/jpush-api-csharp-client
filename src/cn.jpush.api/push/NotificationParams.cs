@@ -7,16 +7,16 @@ using System.Collections;
 
 namespace cn.jpush.api.push
 {
-    class NotificationParams:MessageParams
+    public class NotificationParams:MessageParams
     {
-        private NotificationContent msgContent = new NotificationContent();
-        
-        internal NotificationContent MsgContent
-        {
-            get { return msgContent; }
-            set { msgContent = value; }
-        }        
+        private NotificationContent notyfyMsgContent;
 
+        public NotificationContent NotyfyMsgContent
+        {
+            get { return notyfyMsgContent; }
+            set { notyfyMsgContent = value; }
+        }
+        
         public class NotificationContent : MessageParams.MsgContent
         {
             private Dictionary<String, Object> extras = new Dictionary<String, Object>();

@@ -160,11 +160,17 @@ namespace cn.jpush.api.push
 
     }
 
-    public enum ReceiverTypeEnum 
+    public enum ReceiverTypeEnum
     {
-        NOTIFY = 1,
+        IMEI = 1,
 
-        CUSTOM = 2
+        TAG = 2,
+
+        ALIAS = 3,
+
+        APP_KEY = 4,
+
+        REGISTRATION_ID = 5
     
     }
 }

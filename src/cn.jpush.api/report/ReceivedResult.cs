@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.report
 {
-    class ReceivedResult
+    public class ReceivedResult
     {
     }
 }

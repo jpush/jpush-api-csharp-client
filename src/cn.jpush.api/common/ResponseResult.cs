@@ -9,7 +9,7 @@ using System.Net;
 
 namespace cn.jpush.api.common
 {
-    class ResponseResult
+    public class ResponseResult
     {
         private const int RESPONSE_CODE_NONE = -1;
     
@@ -53,8 +53,8 @@ namespace cn.jpush.api.common
 
 
 	    public class ErrorObject {
-	        private int code;
-	        private String message;
+	        public int code;
+            public String message;
 
 	    }
 

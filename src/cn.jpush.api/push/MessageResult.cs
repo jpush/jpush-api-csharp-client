@@ -39,7 +39,7 @@ namespace cn.jpush.api.push
 
         override public bool isResultOK()
         {
-            if (Equals(ResponseResult.responseCode, HttpStatusCode.OK) && this.errcode == ERROR_CODE_OK)
+            if (Equals(ResponseResult, HttpStatusCode.OK) && this.errcode == ERROR_CODE_OK)
             {
                 return true;            
             }

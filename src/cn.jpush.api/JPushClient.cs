@@ -1,4 +1,7 @@
-﻿using System;
+﻿using cn.jpush.api.common;
+using cn.jpush.api.push;
+using cn.jpush.api.report;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,241 +11,67 @@ namespace cn.jpush.api
 {
     public class JPushClient
     {
-        //appkey
-        private String app_key;
-        //密匙
-        private String masterSecret;
-        //离线时长int    $time_to_live 从消息推送时起，保存离线的时长。秒为单位。最多支持10天（864000秒）。 0 表示该消息不保存离线。
-        private int time_to_live;
+        private PushClient _pushClient;
 
+        private ReportClient _reportClient;
 
-        public JPushClient(String app_key, String masterSecret, int time_to_live)
+        public JPushClient(String app_key, String masterSecret)
         {
-            this.app_key = app_key;
-            this.masterSecret = masterSecret;
-            this.time_to_live = time_to_live;
+            _pushClient = new PushClient(masterSecret, app_key, MessageParams.NO_TIME_TO_LIVE, null, true);
+            _reportClient = new ReportClient(app_key, masterSecret);
         }
 
+
+        public JPushClient(String app_key, String masterSecret, int time_to_live, HashSet<DeviceEnum> devices, bool apnsProduction)
+        {
+            _pushClient = new PushClient(masterSecret, app_key, time_to_live, devices, apnsProduction);
+            _reportClient = new ReportClient(app_key, masterSecret);
+        }
 
         /**
-        * 通过tag发送通知
-        * @param Strng $tag
-        * @param Strng $app_key
-        * @param int $sendno
-        * @param Strng $send_description
-        * @param Strng $mes_title
-        * @param Strng $mes_content
-        * @param Strng $perform
-        * @param Strng $extras
-        */
-        public String sendNotificationByTag(String tag, int sendno, String send_description,
-        String mes_title, String mes_content, String platform, String extras, String override_msg_id)
+         * 发送通知
+         * 
+         */
+        public MessageResult sendNotification(String notificationContent, NotificationParams notifyParams, Dictionary<String, Object> extras)
         {
-            int mes_type = 1;
-            int receiver_type = 2;
-
-
-            //设置对象参数
-            SendVO sendVO = new SendVO(this.app_key, this.masterSecret, this.time_to_live, mes_type, receiver_type, tag,
-            sendno, send_description, mes_title, mes_content, platform, extras, override_msg_id);
-
-
-            //发送通知 Or自定义消息
-            BaseClient baseClient = new BaseClient();
-            //echo $sendVO->getParams();
-            String rsStr = baseClient.send(sendVO);
-
-
-            return rsStr;
+            return _pushClient.sendNotification(notificationContent, notifyParams, extras);
         }
-
 
         /**
-        * 通过tag发送自定义消息
-        * @param Strng $tag
-        * @param Strng $app_key
-        * @param int $sendno
-        * @param Strng $send_description
-        * @param Strng $mes_title
-        * @param Strng $mes_content
-        * @param Strng $perform
-        * @param Strng $extras
-        */
-        public String sendCustomMesByTag(String tag, int sendno, String send_description,
-        String mes_title, String mes_content, String platform, String extras, String override_msg_id)
+         * 发送自定义消息
+         * 
+         */
+        public MessageResult sendCustomMessage(String msgTitle, String msgContent, CustomMessageParams customParams, Dictionary<String, Object> extras)
         {
-            int mes_type = 2;
-            int receiver_type = 2;
-
-
-            //设置对象参数
-            SendVO sendVO = new SendVO(this.app_key, this.masterSecret, this.time_to_live, mes_type, receiver_type, tag,
-            sendno, send_description, mes_title, mes_content, platform, extras, override_msg_id);
-
-
-            //发送通知 Or自定义消息
-            BaseClient baseClient = new BaseClient();
-            //echo $sendVO->getParams();
-            String rsStr = baseClient.send(sendVO);
-
-
-            return rsStr;
-
-
+            return _pushClient.sendCustomMessage(msgTitle, msgContent, customParams, extras);
         }
 
-
-        /**
-        * 通过alias发送通知
-        * @param Strng $alias
-        * @param Strng $app_key
-        * @param int $sendno
-        * @param Strng $send_description
-        * @param Strng $mes_title
-        * @param Strng $mes_content
-        * @param Strng $perform
-        * @param Strng $extras
-        */
-        public String sendNotificationByAlias(String alias, int sendno, String send_description,
-                String mes_title, String mes_content, String platform, String extras, String override_msg_id)
+        public MessageResult sendNotificationAll(String notificationContent)
         {
-            int mes_type = 1;
-            int receiver_type = 3;
-
-
-            //设置对象参数
-            SendVO sendVO = new SendVO(this.app_key, this.masterSecret, this.time_to_live, mes_type, receiver_type, alias,
-            sendno, send_description, mes_title, mes_content, platform, extras, override_msg_id);
-
-
-            //发送通知 Or自定义消息
-            BaseClient baseClient = new BaseClient();
-            //echo $sendVO->getParams();
-            String rsStr = baseClient.send(sendVO);
-
-
-            return rsStr;
-
-
+            NotificationParams notifyParams = new NotificationParams();
+            notifyParams.ReceiverType = ReceiverTypeEnum.APP_KEY;
+            return _pushClient.sendNotification(notificationContent, notifyParams, null);
         }
 
-
-        /**
-        * 通过alias发送自定义消息
-        * @param Strng $alias
-        * @param Strng $app_key
-        * @param int $sendno
-        * @param Strng $send_description
-        * @param Strng $mes_title
-        * @param Strng $mes_content
-        * @param Strng $perform
-        * @param Strng $extras
-        */
-        public String sendCustomMesByAlias(String alias, int sendno, String send_description,
-        String mes_title, String mes_content, String platform, String extras, String override_msg_id)
-        {
-            int mes_type = 2;
-            int receiver_type = 3;
-
-
-
-
-            //设置对象参数
-            SendVO sendVO = new SendVO(this.app_key, this.masterSecret, this.time_to_live, mes_type, receiver_type, alias,
-            sendno, send_description, mes_title, mes_content, platform, extras, override_msg_id);
-
-
-            //发送通知 Or自定义消息
-            BaseClient baseClient = new BaseClient();
-            //echo $sendVO->getParams();
-            String rsStr = baseClient.send(sendVO);
-
-
-            return rsStr;
-
-
-        }
-
-
-        /**
-        * 发送广播通知
-        * @param Strng $app_key
-        * @param int $sendno
-        * @param Strng $send_description
-        * @param Strng $mes_title
-        * @param Strng $mes_content
-        * @param Strng $perform
-        * @param Strng $extras
-        */
-        public String sendNotificationByAppkey(int sendno, String send_description,
-        String mes_title, String mes_content, String platform, String extras, String override_msg_id)
-        {
-            int mes_type = 1;
-            int receiver_type = 4;
-
-
-            //设置对象参数
-            SendVO sendVO = new SendVO(this.app_key, this.masterSecret, this.time_to_live, mes_type, receiver_type, "",
-            sendno, send_description, mes_title, mes_content, platform, extras, override_msg_id);
-
-
-            //发送通知 Or自定义消息
-            BaseClient baseClient = new BaseClient();
-            //echo $sendVO->getParams();
-            String rsStr = baseClient.send(sendVO);
-            return rsStr;
-
-
-        }
-
-
-        /**
-        * 发送广播自定义消息
-        * @param Strng $app_key
-        * @param int $sendno
-        * @param Strng $send_description
-        * @param Strng $mes_title
-        * @param Strng $mes_content
-        * @param Strng $perform
-        * @param Strng $extras
-        */
-        public String sendCustomMesByAppkey(int sendno, String send_description,
-                 String mes_title, String mes_content, String platform, String extras, String override_msg_id)
-        {
-            int mes_type = 2;
-            int receiver_type = 4;
-
-
-            //设置对象参数
-            SendVO sendVO = new SendVO(this.app_key, this.masterSecret, this.time_to_live, mes_type, receiver_type, "",
-            sendno, send_description, mes_title, mes_content, platform, extras, override_msg_id);
-
-
-            //发送通知 Or自定义消息
-            BaseClient baseClient = new BaseClient();
-            //echo $sendVO->getParams();
-            String rsStr = baseClient.send(sendVO);
-            return rsStr;
-
-
-        }
-
-
-
-
-
+	    public MessageResult sendCustomMessageAll(String msgTitle, String msgContent) {
+            CustomMessageParams customParams = new CustomMessageParams();
+            customParams.ReceiverType = ReceiverTypeEnum.APP_KEY;
+	        return _pushClient.sendCustomMessage(msgTitle, msgContent, customParams, null);
+	    }
 
         /**
          * 
          * @param String $app_key
          * @param String $msg_ids  msg_id以，连接
          */
-        public String getReceivedApi(String msg_ids)
+        public ReceivedResult getReceivedApi(String msg_ids)
         {
-            ReceivedVO receivedVO = new ReceivedVO(this.app_key, this.masterSecret, msg_ids);
-            BaseClient baseClient = new BaseClient();
-            return baseClient.getReceivedData(receivedVO);
+            return _reportClient.getReceiveds(msg_ids);
         }
 
+        static void Main(String[] args) 
+        {
+            Console.WriteLine("2222");
+        }
     }
 }
