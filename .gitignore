@@ -1,0 +1,12 @@
+*.pyc
+log/
+build/
+bin/
+.pydevproject
+.tar
+.zip
+.buildpath
+.project
+.settings/
+Rlease/
+Debug/
