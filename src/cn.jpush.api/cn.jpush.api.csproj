@@ -33,6 +33,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +51,7 @@
     <Compile Include="JPushClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="push\CustomMessageParams.cs" />
+    <Compile Include="push\Jsontool.cs" />
     <Compile Include="push\MessageParams.cs" />
     <Compile Include="push\MessageResult.cs" />
     <Compile Include="push\NotificationParams.cs" />
@@ -60,6 +63,7 @@
     <Compile Include="util\Base64.cs" />
     <Compile Include="util\JsonTool.cs" />
     <Compile Include="util\Md5.cs" />
+    <Compile Include="util\StringUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SendVO.cs" />

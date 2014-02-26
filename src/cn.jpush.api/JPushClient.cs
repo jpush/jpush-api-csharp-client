@@ -17,6 +17,9 @@ namespace cn.jpush.api
 
         public JPushClient(String app_key, String masterSecret)
         {
+            HashSet<DeviceEnum> devices = new HashSet<DeviceEnum>();
+            devices.Add(DeviceEnum.IOS);
+            devices.Add(DeviceEnum.Android);
             _pushClient = new PushClient(masterSecret, app_key, MessageParams.NO_TIME_TO_LIVE, null, true);
             _reportClient = new ReportClient(app_key, masterSecret);
         }

@@ -1,13 +1,14 @@
 ﻿using cn.jpush.api.common;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace cn.jpush.api.push
 {
-    public class MessageParams
+    public abstract class MessageParams
     {
         
         public const int DEFAULT_TIME_TO_LIVE = 86400;   //s
@@ -104,13 +105,27 @@ namespace cn.jpush.api.push
 
         public String getPlatform()
         {
-            if (this.platform == null) return "";
+            //Console.WriteLine("platfrom"+this.platform);
+            //if (this.platform == null) return "";
 
             String keys = "";
-            foreach (DeviceEnum key in this.platform)
+            if (this.receiverType == ReceiverTypeEnum.APP_KEY)
             {
-                keys += (key.ToString() + ",");
+                foreach (String device in Enum.GetNames(typeof(DeviceEnum)))
+                {
+                    keys += device.ToLower();
+                    keys += ",";
+                }
             }
+            else
+            {
+                foreach (DeviceEnum key in this.platform)
+                {
+                    keys += (key.ToString().ToLower() + ",");
+                }
+            }
+            Debug.Print(keys);
+
             return keys.Length > 0 ? keys.Substring(0, keys.Length - 1) : "";
         }
 
@@ -132,31 +147,17 @@ namespace cn.jpush.api.push
 	     * 发送消息的内容。
 	     * 与 msg_type 相对应的值。
 	     */
-        private MsgContent msgContent = new MsgContent();
+        private String msgContent = "";
 
-        public MsgContent MessageContent
+        public String MsgContent
         {
             get { return msgContent; }
             set { msgContent = value; }
-        }
+        }             
 
-	    public class MsgContent {
+        public abstract void setMsgContent();
 
-            private String title = "";
-
-            private String message = "";
-
-            public String Title 
-            {
-                set { this.title = value; }
-                get { return this.title; }
-            }
-            public String Message 
-            {
-                set { this.message = value; }
-                get { return this.message; }
-            }
-	    }
+	   
 
     }
 

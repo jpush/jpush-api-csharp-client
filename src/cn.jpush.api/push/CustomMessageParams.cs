@@ -1,4 +1,5 @@
-﻿using System;
+﻿using cn.jpush.api.util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace cn.jpush.api.push
 {
     public class CustomMessageParams:MessageParams
     {
-        private CustomMessageContent customMsgContent;
+        private CustomMessageContent customMsgContent = new CustomMessageContent();
 
         public CustomMessageContent CustomMsgContent
         {
@@ -16,25 +17,24 @@ namespace cn.jpush.api.push
             set { customMsgContent = value; }
         }   
 
-        public class CustomMessageContent : MessageParams.MsgContent 
+        public class CustomMessageContent
         {
-            private String contentType;
+            public String content_type;
 
-            private Dictionary<String, Object> extras = new Dictionary<String, Object>();
+            public Dictionary<String, Object> extras = new Dictionary<string, object>();
 
-            public String ContentType
-            {
-                get { return contentType; }
-                set { contentType = value; }
-            }
+            public String title = "";
 
-            public Dictionary<String, Object> Extras
-            {
-                get { return extras; }
-                set { extras = value; }
-            }
-
+            public String message = "";
         }
 
+
+        public override void setMsgContent()
+        {
+            if (customMsgContent != null)
+            {
+                MsgContent = JsonTool.ObjectToJson(customMsgContent);
+            }
+        }
     }
 }

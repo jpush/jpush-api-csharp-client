@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using cn.jpush.api.util;
 
 namespace cn.jpush.api.push
 {
     public class NotificationParams:MessageParams
     {
-        private NotificationContent notyfyMsgContent;
+        private NotificationContent notyfyMsgContent = new NotificationContent();
 
         public NotificationContent NotyfyMsgContent
         {
@@ -17,23 +18,23 @@ namespace cn.jpush.api.push
             set { notyfyMsgContent = value; }
         }
         
-        public class NotificationContent : MessageParams.MsgContent
+        public class NotificationContent
         {
-            private Dictionary<String, Object> extras = new Dictionary<String, Object>();
-            private int builderId = 0;
+            public Dictionary<String, Object> n_extras = new Dictionary<string, object>();
 
-            public int BuilderId
-            {
-                get { return builderId; }
-                set { builderId = value; }
-            }
+            public int n_builder_id = 0;
 
-            public Dictionary<String, Object> Extras
-            {
-                get { return extras; }
-                set { extras = value; }
-            }           
+            public String n_title = "";
+
+            public String n_content = "";        
         }
 
+        public override void setMsgContent()
+        {
+            if(notyfyMsgContent != null)
+            {
+                MsgContent =  JsonTool.ObjectToJson(notyfyMsgContent);             
+            }
+        }
     }
 }

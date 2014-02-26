@@ -2,6 +2,7 @@
 using cn.jpush.api.util;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,26 +34,28 @@ namespace cn.jpush.api.push
         {
             if (extras != null)
             {
-                notParams.NotyfyMsgContent.Extras = extras;
+                notParams.NotyfyMsgContent.n_extras = extras;
             }
-            return sendMessage(notificationContent, notParams, MsgTypeEnum.NOTIFICATIFY);
+            notParams.NotyfyMsgContent.n_content = notificationContent;
+            return sendMessage(notParams, MsgTypeEnum.NOTIFICATIFY);
         }
 
         public MessageResult sendCustomMessage(String msgTitle, String msgContent, CustomMessageParams cParams, Dictionary<String, Object> extras)
         {
             if (msgTitle != null)
             {
-                cParams.CustomMsgContent.Title = msgTitle;
+                cParams.CustomMsgContent.title = msgTitle;
             }
             if (extras != null)
             {
-                cParams.CustomMsgContent.Extras = extras;
+                cParams.CustomMsgContent.extras = extras;
             }
-            return sendMessage(msgContent, cParams, MsgTypeEnum.COUSTOM_MESSAGE);
+            cParams.CustomMsgContent.message = msgContent;
+            return sendMessage(cParams, MsgTypeEnum.COUSTOM_MESSAGE);
         }
 
 
-        private MessageResult sendMessage(String notificationContent, MessageParams msgParams, MsgTypeEnum msgType) 
+        private MessageResult sendMessage(MessageParams msgParams, MsgTypeEnum msgType) 
         {
             msgParams.ApnsProduction = this.apnsProduction ? 1 : 0;
             msgParams.AppKey = this.appKey;
@@ -61,26 +64,33 @@ namespace cn.jpush.api.push
             {
                 msgParams.TimeToLive = this.timeToLive;            
             }
-            foreach(DeviceEnum device in this.devices)
+            if (this.devices != null)
             {
-                msgParams.addPlatform(device);
+                foreach (DeviceEnum device in this.devices)
+                {
+                    msgParams.addPlatform(device);
+                }
             }
-            return sendPush(notificationContent, msgParams, msgType); 
+            return sendPush(msgParams, msgType); 
         }
 
-        private MessageResult sendPush(String notificationContent, MessageParams msgParams, MsgTypeEnum msgType) 
+        private MessageResult sendPush(MessageParams msgParams, MsgTypeEnum msgType) 
         { 
             String url = enableSSL ? HOST_NAME_SSL : HOST_NAME;
             url += PUSH_PATH;
             String pamrams = prase(msgParams, msgType);
-            ResponseResult result = sendPost(url, pamrams, null);
+            //Console.WriteLine("begin post");
+            ResponseResult result = sendPost(url, null, pamrams);
+            //Console.WriteLine("end post");
+
             MessageResult messResult = new MessageResult();
-            messResult.ResponseResult = result;
             if (result.responseCode == System.Net.HttpStatusCode.OK)
             {
+                //Console.WriteLine("responseContent===" + result.responseContent);
                 messResult = (MessageResult)JsonTool.JsonToObject(result.responseContent, messResult);
                 String content = result.responseContent;
             }
+            messResult.ResponseResult = result;
 
             return messResult;
 
@@ -89,14 +99,15 @@ namespace cn.jpush.api.push
         private String prase(MessageParams message, MsgTypeEnum msgType) 
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(message.SendNo).Append(message.ReceiverType).Append(message.ReceiverValue).Append(message.MasterSecret);
+            sb.Append(message.SendNo).Append((int)message.ReceiverType).Append(message.ReceiverValue).Append(message.MasterSecret);
             String verificationCode = sb.ToString();
+            //Console.WriteLine(verificationCode);
             verificationCode = Md5.getMD5Hash(verificationCode);
             sb.Clear();
-
-            sb.Append("sendno=").Append(message.SendNo).Append("&app_key=").Append(message.AppKey).Append("&receiver_type=").Append(message.ReceiverType)
+            message.setMsgContent();
+            sb.Append("sendno=").Append(message.SendNo).Append("&app_key=").Append(message.AppKey).Append("&receiver_type=").Append((int)message.ReceiverType)
                 .Append("&receiver_value=").Append(message.ReceiverValue).Append("&verification_code=").Append(verificationCode)
-                .Append("&msg_type=").Append(msgType).Append("&msg_content=").Append(message.MessageContent).Append("&platform=").Append(message.getPlatform())
+                .Append("&msg_type=").Append((int)msgType).Append("&msg_content=").Append(message.MsgContent).Append("&platform=").Append(message.getPlatform())
                 .Append("&apns_production=").Append(message.ApnsProduction);
             if(message.TimeToLive >= 0)
             {
@@ -106,6 +117,8 @@ namespace cn.jpush.api.push
             {
                 sb.Append("&override_msg_id=").Append(message.OverrideMsgId);
             }
+            //Console.WriteLine(sb.ToString());
+            Debug.Print(sb.ToString());
             return sb.ToString();
         }
 

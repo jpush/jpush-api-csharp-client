@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Reflection;
+
 
 namespace cn.jpush.api.common
 {
     public enum DeviceEnum
     {
-        Android,
-        IOS
+        [Description("andriod")]  Android,
+        [Description("ios")]  IOS
     }
 }

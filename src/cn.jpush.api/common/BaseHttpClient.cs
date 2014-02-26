@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
+using System.Diagnostics;
 
 namespace cn.jpush.api.common
 {
@@ -43,6 +44,7 @@ namespace cn.jpush.api.common
          */
         public ResponseResult sendRequest(String method, String url, String auth,String reqParams)
         {
+            //Console.WriteLine("begin send" + reqParams);
             ResponseResult result = new ResponseResult();
             HttpWebRequest myReq = null;
             HttpWebResponse response = null;
@@ -58,26 +60,72 @@ namespace cn.jpush.api.common
                     myReq.Headers.Add("Authorization", "Basic " + auth);
                 }
 
+                if (method == "POST")
+                {
+                    byte[] bs = Encoding.ASCII.GetBytes(reqParams);
+                    myReq.ContentLength = bs.Length;
+                    using (Stream reqStream = myReq.GetRequestStream())
+                    {
+                        reqStream.Write(bs, 0, bs.Length);
+                        reqStream.Close();
+                    }
+                }
+               // Console.WriteLine("begin responese");
 
                 response = (HttpWebResponse)myReq.GetResponse();
-                result.responseCode = response.StatusCode;
+                HttpStatusCode statusCode = response.StatusCode;
+                result.responseCode = statusCode;
+                //    Console.WriteLine("prepare");
                 if (Equals(response.StatusCode, HttpStatusCode.OK))
                 {
+                    //Console.WriteLine("enter");
                     using (StreamReader reader = new StreamReader(response.GetResponseStream(), System.Text.Encoding.GetEncoding("utf-8")))
                     {
                         result.responseContent = reader.ReadToEnd();
+                       // Console.WriteLine(result.responseContent);
                     }
+                    result.setErrorObject();
                 }
-                String limitQuota = response.GetResponseHeader(RATE_LIMIT_QUOTA);
-                String limitRemaining = response.GetResponseHeader(RATE_LIMIT_Remaining);
-                String limitReset = response.GetResponseHeader(RATE_LIMIT_Reset);
-                result.setRateLimit(limitQuota, limitRemaining, limitReset);
+                    //Console.WriteLine("end");
+                //Console.WriteLine("response = " + response.Headers + "  contet=" + result.responseContent + "   status=" + response.StatusCode);
+                //Console.WriteLine("remaining = " + remaining);
+               // Console.WriteLine("code = " + result.error.errcode);
+                
+
+                if (statusCode == HttpStatusCode.OK)
+                {
+                    String limitQuota = response.GetResponseHeader(RATE_LIMIT_QUOTA);
+                    String limitRemaining = response.GetResponseHeader(RATE_LIMIT_Remaining);
+                    String limitReset = response.GetResponseHeader(RATE_LIMIT_Reset);
+                    result.setRateLimit(limitQuota, limitRemaining, limitReset);
+                    //Console.WriteLine("send success  ");
+                }
+                else if (statusCode == HttpStatusCode.NotFound)
+                {
+                    Debug.Print("error is 404");
+                }
+                else if (statusCode == HttpStatusCode.Forbidden)
+                {
+                    Debug.Print("error is 403");
+                }
+                else if (statusCode == HttpStatusCode.Unauthorized)
+                {
+                    Debug.Print("error is 401");
+                }
+                else if (statusCode == HttpStatusCode.InternalServerError)
+                {
+                    Debug.Print("error is 500");
+                }
+                else 
+                {
+                    Debug.Print("error is " + statusCode.ToString());
+                }
 
             }
             catch (System.Exception ex)
             {
                 String errorMsg = ex.Message;
-                Console.Write(errorMsg);
+                Debug.Print(errorMsg);
             }
             finally 
             {
@@ -91,6 +139,7 @@ namespace cn.jpush.api.common
                     myReq.Abort();
                 }            
             }
+            //Console.WriteLine("sssssssssssssss======="+result.responseCode);
             return result;
         }
     }
