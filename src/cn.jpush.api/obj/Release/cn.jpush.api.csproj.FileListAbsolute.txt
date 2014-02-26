@@ -1,5 +1,0 @@
-E:\work\code_net\jpush-api-csharp-client\src\cn.jpush.api\obj\Release\cn.jpush.api.csprojResolveAssemblyReference.cache
-E:\work\code_net\jpush-api-csharp-client\src\cn.jpush.api\bin\Release\cn.jpush.api.dll
-E:\work\code_net\jpush-api-csharp-client\src\cn.jpush.api\bin\Release\cn.jpush.api.pdb
-E:\work\code_net\jpush-api-csharp-client\src\cn.jpush.api\obj\Release\cn.jpush.api.dll
-E:\work\code_net\jpush-api-csharp-client\src\cn.jpush.api\obj\Release\cn.jpush.api.pdb
