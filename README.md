@@ -1,4 +1,4 @@
-# JPush API client library for C#
+# JPush API client library for C Sharp
 
 ## 概述
 这是 JPush REST API 的 C# 版本封装开发包，是由极光推送官方提供的，一般支持最新的 API 功能。
