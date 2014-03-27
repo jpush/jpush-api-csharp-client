@@ -42,12 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseClient.cs" />
     <Compile Include="common\BaseHttpClient.cs" />
     <Compile Include="common\BaseResult.cs" />
     <Compile Include="common\DeviceEnum.cs" />
     <Compile Include="common\ResponseResult.cs" />
-    <Compile Include="HttpTools.cs" />
     <Compile Include="JPushClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="push\CustomMessageParams.cs" />
@@ -56,17 +54,12 @@
     <Compile Include="push\MessageResult.cs" />
     <Compile Include="push\NotificationParams.cs" />
     <Compile Include="push\PushClient.cs" />
-    <Compile Include="ReceivedVO.cs" />
     <Compile Include="report\ReceivedResult.cs" />
     <Compile Include="report\ReportClient.cs" />
-    <Compile Include="SecretEncode.cs" />
     <Compile Include="util\Base64.cs" />
     <Compile Include="util\JsonTool.cs" />
     <Compile Include="util\Md5.cs" />
     <Compile Include="util\StringUtil.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="SendVO.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
