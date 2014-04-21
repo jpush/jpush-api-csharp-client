@@ -79,7 +79,7 @@ namespace cn.jpush.api.common
                 if (Equals(response.StatusCode, HttpStatusCode.OK))
                 {
                     //Console.WriteLine("enter");
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream(), System.Text.Encoding.GetEncoding("utf-8")))
+                    using (StreamReader reader = new StreamReader(response.GetResponseStream(), System.Text.Encoding.UTF8))
                     {
                         result.responseContent = reader.ReadToEnd();
                        // Console.WriteLine(result.responseContent);
