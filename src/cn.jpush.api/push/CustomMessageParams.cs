@@ -21,7 +21,7 @@ namespace cn.jpush.api.push
         {
             public String content_type;
 
-            public Dictionary<String, Object> extras = new Dictionary<string, object>();
+            public String extras = "[]";
 
             public String title = "";
 
@@ -33,7 +33,11 @@ namespace cn.jpush.api.push
         {
             if (customMsgContent != null)
             {
-                MsgContent = JsonTool.ObjectToJson(customMsgContent);
+                MsgContent = "{\"content_type\":\"" + customMsgContent.content_type + 
+                             "\",\"extras\":" + customMsgContent.extras +
+                             ",\"message\":\"" + customMsgContent.message + 
+                             "\",\"title\":\"" + customMsgContent.title+ "\"}";
+                //MsgContent = JsonTool.ObjectToJson(customMsgContent);
             }
         }
     }

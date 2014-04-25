@@ -30,27 +30,30 @@ namespace cn.jpush.api.push
             this.devices = devices;
         }
 
-        public MessageResult sendNotification(String notificationContent, NotificationParams notParams, Dictionary<String, Object> extras)
+        public MessageResult sendNotification(String notificationContent, NotificationParams notParams, String extras)
         {
-            if (extras != null)
+            if (extras != null && extras != "")
             {
                 notParams.NotyfyMsgContent.n_extras = extras;
             }
-            notParams.NotyfyMsgContent.n_content = notificationContent;
+            notParams.NotyfyMsgContent.n_content = System.Web.HttpUtility.UrlEncode(notificationContent, Encoding.UTF8);
+            //notParams.NotyfyMsgContent.n_content = notificationContent;
             return sendMessage(notParams, MsgTypeEnum.NOTIFICATIFY);
         }
 
-        public MessageResult sendCustomMessage(String msgTitle, String msgContent, CustomMessageParams cParams, Dictionary<String, Object> extras)
+        public MessageResult sendCustomMessage(String msgTitle, String msgContent, CustomMessageParams cParams, String extras)
         {
             if (msgTitle != null)
             {
-                cParams.CustomMsgContent.title = msgTitle;
+                //cParams.CustomMsgContent.title = msgTitle;
+                cParams.CustomMsgContent.title = System.Web.HttpUtility.UrlEncode(msgTitle, Encoding.UTF8);
             }
-            if (extras != null)
+            if (extras != null && extras != "")
             {
                 cParams.CustomMsgContent.extras = extras;
             }
-            cParams.CustomMsgContent.message = msgContent;
+
+            cParams.CustomMsgContent.message = System.Web.HttpUtility.UrlEncode(msgContent, Encoding.UTF8);
             return sendMessage(cParams, MsgTypeEnum.COUSTOM_MESSAGE);
         }
 

@@ -20,7 +20,7 @@ namespace cn.jpush.api.push
         
         public class NotificationContent
         {
-            public Dictionary<String, Object> n_extras = new Dictionary<string, object>();
+            public String n_extras = "[]";
 
             public int n_builder_id = 0;
 
@@ -33,7 +33,12 @@ namespace cn.jpush.api.push
         {
             if(notyfyMsgContent != null)
             {
-                MsgContent =  JsonTool.ObjectToJson(notyfyMsgContent);             
+
+                MsgContent = "{\"n_builder_id\":" + notyfyMsgContent.n_builder_id + 
+                             ",\"n_content\":\"" + notyfyMsgContent.n_content + 
+                             "\",\"n_extras\":" + notyfyMsgContent.n_extras + 
+                             ",\"n_title\":\"" + notyfyMsgContent.n_title + "\"}";
+                //MsgContent =  JsonTool.ObjectToJson(notyfyMsgContent);             
             }
         }
     }

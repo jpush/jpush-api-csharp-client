@@ -35,7 +35,7 @@ namespace cn.jpush.api
          * 发送通知
          * 
          */
-        public MessageResult sendNotification(String notificationContent, NotificationParams notifyParams, Dictionary<String, Object> extras)
+        public MessageResult sendNotification(String notificationContent, NotificationParams notifyParams, String extras)
         {
             return _pushClient.sendNotification(notificationContent, notifyParams, extras);
         }
@@ -44,7 +44,7 @@ namespace cn.jpush.api
          * 发送自定义消息
          * 
          */
-        public MessageResult sendCustomMessage(String msgTitle, String msgContent, CustomMessageParams customParams, Dictionary<String, Object> extras)
+        public MessageResult sendCustomMessage(String msgTitle, String msgContent, CustomMessageParams customParams, String extras)
         {
             return _pushClient.sendCustomMessage(msgTitle, msgContent, customParams, extras);
         }

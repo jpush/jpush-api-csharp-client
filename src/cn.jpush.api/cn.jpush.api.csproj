@@ -49,7 +49,6 @@
     <Compile Include="JPushClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="push\CustomMessageParams.cs" />
-    <Compile Include="push\Jsontool.cs" />
     <Compile Include="push\MessageParams.cs" />
     <Compile Include="push\MessageResult.cs" />
     <Compile Include="push\NotificationParams.cs" />
