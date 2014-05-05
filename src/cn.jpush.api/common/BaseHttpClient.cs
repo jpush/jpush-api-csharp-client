@@ -62,7 +62,8 @@ namespace cn.jpush.api.common
 
                 if (method == "POST")
                 {
-                    byte[] bs = Encoding.ASCII.GetBytes(reqParams);
+                    //byte[] bs = Encoding.ASCII.GetBytes(reqParams);
+                    byte[] bs = Encoding.UTF8.GetBytes(reqParams);
                     myReq.ContentLength = bs.Length;
                     using (Stream reqStream = myReq.GetRequestStream())
                     {
