@@ -122,8 +122,8 @@ namespace cn.jpush.api.push
             {
                 sb.Append("&override_msg_id=").Append(message.OverrideMsgId);
             }
-            Console.WriteLine(sb.ToString());
-            Debug.Print(sb.ToString());
+            //Console.WriteLine(sb.ToString());
+            //Debug.Print(sb.ToString());
             return sb.ToString();
         }
 
