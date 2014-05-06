@@ -108,8 +108,9 @@ namespace cn.jpush.api.push
             verificationCode = Md5.getMD5Hash(verificationCode);
             sb.Clear();
             message.setMsgContent();
+            String receiverVallue = System.Web.HttpUtility.UrlEncode(message.ReceiverValue, Encoding.UTF8);
             sb.Append("sendno=").Append(message.SendNo).Append("&app_key=").Append(message.AppKey).Append("&receiver_type=").Append((int)message.ReceiverType)
-                .Append("&receiver_value=").Append(message.ReceiverValue).Append("&verification_code=").Append(verificationCode)
+                .Append("&receiver_value=").Append(receiverVallue).Append("&verification_code=").Append(verificationCode)
                 .Append("&msg_type=").Append((int)msgType).Append("&msg_content=").Append(message.MsgContent).Append("&platform=").Append(message.getPlatform())
                 .Append("&apns_production=").Append(message.ApnsProduction);
             if(message.TimeToLive >= 0)
