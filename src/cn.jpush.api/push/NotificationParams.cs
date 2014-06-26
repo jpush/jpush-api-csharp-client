@@ -20,7 +20,7 @@ namespace cn.jpush.api.push
         
         public class NotificationContent
         {
-            public String n_extras = "[]";
+            public String n_extras = "";
 
             public int n_builder_id = 0;
 

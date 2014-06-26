@@ -33,7 +33,7 @@ namespace cn.jpush.api.push
 
         public MessageResult sendNotification(String notificationContent, NotificationParams notParams, String extras)
         {
-            if (extras != null && extras != "")
+            if ( !string.IsNullOrEmpty(extras) )
             {
                 notParams.NotyfyMsgContent.n_extras = extras;
             }
@@ -49,7 +49,7 @@ namespace cn.jpush.api.push
                 //cParams.CustomMsgContent.title = msgTitle;
                 cParams.CustomMsgContent.title = System.Web.HttpUtility.UrlEncode(msgTitle, Encoding.UTF8);
             }
-            if (extras != null && extras != "")
+            if ( !string.IsNullOrEmpty(extras) )
             {
                 cParams.CustomMsgContent.extras = extras;
             }

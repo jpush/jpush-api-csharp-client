@@ -21,7 +21,7 @@ namespace cn.jpush.api.push
         {
             public String content_type;
 
-            public String extras = "[]";
+            public String extras = "";
 
             public String title = "";
 
