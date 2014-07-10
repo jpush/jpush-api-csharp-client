@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>cn.jpush.api.example.JPushExample</StartupObject>
+    <StartupObject>JpushApiClientExample.JPushApiExample</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -44,9 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Hashmap.cs" />
-    <Compile Include="JPushExample.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="JPushApiExample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

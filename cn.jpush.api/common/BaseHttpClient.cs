@@ -55,7 +55,7 @@ namespace cn.jpush.api.common
                 myReq.Accept = "text/html, application/xhtml+xml, */*";
                 myReq.ContentType = "application/x-www-form-urlencoded";
                 myReq.Headers.Add("Charset", "UTF-8");
-                if (!Equals("", auth))
+                if ( !String.IsNullOrEmpty(auth) )
                 {
                     myReq.Headers.Add("Authorization", "Basic " + auth);
                 }

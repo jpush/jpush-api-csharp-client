@@ -163,6 +163,7 @@ namespace cn.jpush.api.push
 
     public enum ReceiverTypeEnum
     {
+        [Obsolete]
         IMEI = 1,
 
         TAG = 2,
