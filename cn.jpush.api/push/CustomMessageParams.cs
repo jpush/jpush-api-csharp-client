@@ -33,10 +33,21 @@ namespace cn.jpush.api.push
         {
             if (customMsgContent != null)
             {
-                MsgContent = "{\"content_type\":\"" + customMsgContent.content_type + 
-                             "\",\"extras\":" + customMsgContent.extras +
-                             ",\"message\":\"" + customMsgContent.message + 
-                             "\",\"title\":\"" + customMsgContent.title+ "\"}";
+                MsgContent = "{\"message\":\"" + customMsgContent.message + "\"";
+                
+                if (!String.IsNullOrEmpty(customMsgContent.content_type))
+                {
+                    MsgContent += ",\"content_type\":\"" + customMsgContent.content_type + "\"";
+                }
+                if (!String.IsNullOrEmpty(customMsgContent.extras))
+                {
+                    MsgContent += ",\"extras\":" + customMsgContent.extras;
+                }
+                if (!String.IsNullOrEmpty(customMsgContent.title))
+                {
+                    MsgContent += ",\"title\":\"" + customMsgContent.title + "\"";
+                }
+                MsgContent += "}";
                 //MsgContent = JsonTool.ObjectToJson(customMsgContent);
             }
         }

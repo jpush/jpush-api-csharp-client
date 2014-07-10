@@ -20,7 +20,7 @@ namespace cn.jpush.api.push
         
         public class NotificationContent
         {
-            public String n_extras = "";
+            public String n_extras = null;
 
             public int n_builder_id = 0;
 
@@ -33,11 +33,17 @@ namespace cn.jpush.api.push
         {
             if(notyfyMsgContent != null)
             {
-
-                MsgContent = "{\"n_builder_id\":" + notyfyMsgContent.n_builder_id + 
-                             ",\"n_content\":\"" + notyfyMsgContent.n_content + 
-                             "\",\"n_extras\":" + notyfyMsgContent.n_extras + 
-                             ",\"n_title\":\"" + notyfyMsgContent.n_title + "\"}";
+                MsgContent = "{\"n_builder_id\":" + notyfyMsgContent.n_builder_id +
+                             ",\"n_content\":\"" + notyfyMsgContent.n_content + "\"";
+                if (!String.IsNullOrEmpty(notyfyMsgContent.n_title))
+                {
+                    MsgContent += ",\"n_title\":\"" + notyfyMsgContent.n_title + "\"";
+                }
+                if ( !String.IsNullOrEmpty(notyfyMsgContent.n_extras) )
+                {
+                    MsgContent += ",\"n_extras\":" + notyfyMsgContent.n_extras;
+                }
+                MsgContent += "}";
                 //MsgContent =  JsonTool.ObjectToJson(notyfyMsgContent);             
             }
         }
