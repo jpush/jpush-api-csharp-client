@@ -30,8 +30,8 @@ namespace JpushApiClientExample
             Console.WriteLine("*****开始发送******");
 
             //String result;
-            String app_key = "228a71eadccde93549bbf5c4";
-            String master_secret = "62ec85b3c76e98f6d6d61d8b";
+            String app_key = "_";
+            String master_secret = "_";
             //int sendno = 9;
 
             HashSet<DeviceEnum> set = new HashSet<DeviceEnum>();
@@ -69,15 +69,6 @@ namespace JpushApiClientExample
              */
             notifyParams.ReceiverType = ReceiverTypeEnum.APP_KEY;
 
-            //notifyParams.ReceiverType = ReceiverTypeEnum.TAG;
-            //notifyParams.ReceiverValue = "tag_api";
-
-            //notifyParams.ReceiverType = ReceiverTypeEnum.ALIAS;
-            //notifyParams.ReceiverValue = "alias_api";
-            //notifyParams.ReceiverType = ReceiverTypeEnum.REGISTRATION_ID;
-            //notifyParams.ReceiverValue = "REGISTRATION_ID";
-            //notifyParams.SendNo = sendno
-
             notifyParams.SendNo = 256;
             //notifyParams.OverrideMsgId = "1";
 
@@ -98,11 +89,6 @@ namespace JpushApiClientExample
             customParams.ReceiverType = ReceiverTypeEnum.TAG;
             customParams.ReceiverValue = "tag_api";
 
-            //customParams.ReceiverType = ReceiverTypeEnum.ALIAS;
-            //customParams.ReceiverValue = "alias_api";
-            //customParams.ReceiverType = ReceiverTypeEnum.REGISTRATION_ID;
-            //customParams.ReceiverValue = "REGISTRATION_ID";
-
             customParams.SendNo = 256;
             result = client.sendCustomMessage("send custom mess by tag", "tag notify content", customParams, extras);
             Console.WriteLine("sendCustomMessage:**返回状态：" + result.getErrorCode().ToString() +
@@ -117,7 +103,6 @@ namespace JpushApiClientExample
             Console.WriteLine();
 
             String msg_ids = "1613113584,1229760629,1174658841,1174658641";
-            msg_ids = "2138680754,2124555049";
             ReceivedResult receivedResult = client.getReceivedApi(msg_ids);
 
             Console.WriteLine("Report Result:");

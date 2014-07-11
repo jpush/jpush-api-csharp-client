@@ -18,6 +18,11 @@ namespace cn.jpush.api
 
         private ReportClient _reportClient;
 
+        /// <summary>
+        /// 带两个参数的构造函数，该状态下，ApnsProduction默认为true
+        /// </summary>
+        /// <param name="app_key">Portal上产生的app_key</param>
+        /// <param name="masterSecret">你的API MasterSecret</param>
         public JPushClient(String app_key, String masterSecret)
         {
             HashSet<DeviceEnum> devices = new HashSet<DeviceEnum>();

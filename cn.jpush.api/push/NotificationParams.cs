@@ -29,6 +29,9 @@ namespace cn.jpush.api.push
             public String n_content = "";        
         }
 
+        /// <summary>
+        /// 构造msg_content内容
+        /// </summary>
         public override void setMsgContent()
         {
             if(notyfyMsgContent != null)
