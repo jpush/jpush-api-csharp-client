@@ -15,9 +15,7 @@ namespace cn.jpush.api
     public class JPushClient
     {
         private PushClient _pushClient;
-
         private ReportClient _reportClient;
-
         /// <summary>
         /// 带两个参数的构造函数，该状态下，ApnsProduction默认为true
         /// </summary>
@@ -25,14 +23,9 @@ namespace cn.jpush.api
         /// <param name="masterSecret">你的API MasterSecret</param>
         public JPushClient(String app_key, String masterSecret)
         {
-            HashSet<DeviceEnum> devices = new HashSet<DeviceEnum>();
-            devices.Add(DeviceEnum.IOS);
-            devices.Add(DeviceEnum.Android);
-            _pushClient = new PushClient(masterSecret, app_key, MessageParams.NO_TIME_TO_LIVE, null, true);
+            _pushClient = new PushClient(masterSecret, app_key);
             _reportClient = new ReportClient(app_key, masterSecret);
         }
-
-
         /// <summary>
         /// JPushClient构造函数，可指定
         /// </summary>
@@ -41,11 +34,6 @@ namespace cn.jpush.api
         /// <param name="time_to_live">有效期</param>
         /// <param name="platform">目标推送平台</param>
         /// <param name="apnsProduction">是否iOS生产环境 - true为生产环境，false为开发环境</param>
-        public JPushClient(String app_key, String masterSecret, int time_to_live, HashSet<DeviceEnum> platform, bool apnsProduction)
-        {
-            _pushClient = new PushClient(masterSecret, app_key, time_to_live, platform, apnsProduction);
-            _reportClient = new ReportClient(app_key, masterSecret);
-        }
 
         /// <summary>
         /// 发送通知
@@ -54,10 +42,10 @@ namespace cn.jpush.api
         /// <param name="notifyParams"></param>
         /// <param name="extras"></param>
         /// <returns></returns>
-        public MessageResult sendNotification(String notificationContent, NotificationParams notifyParams, String extras)
-        {
-            return _pushClient.sendNotification(notificationContent, notifyParams, extras);
-        }
+        //public MessageResult sendNotification(String notificationContent, NotificationParams notifyParams, String extras)
+        //{
+        //    return _pushClient.sendNotification(notificationContent, notifyParams, extras);
+        //}
 
         /// <summary>
         /// 发送自定义消息
@@ -67,24 +55,26 @@ namespace cn.jpush.api
         /// <param name="customParams"></param>
         /// <param name="extras"></param>
         /// <returns></returns>
-        public MessageResult sendCustomMessage(String msgTitle, String msgContent, CustomMessageParams customParams, String extras)
-        {
-            return _pushClient.sendCustomMessage(msgTitle, msgContent, customParams, extras);
+        //public MessageResult sendCustomMessage(String msgTitle, String msgContent, CustomMessageParams customParams, String extras)
+        //{
+        //    return _pushClient.sendCustomMessage(msgTitle, msgContent, customParams, extras);
+        //}
+
+        //public MessageResult sendNotificationAll(String notificationContent)
+        //{
+        //    NotificationParams notifyParams = new NotificationParams();
+        //    notifyParams.ReceiverType = ReceiverTypeEnum.APP_KEY;
+        //    return _pushClient.sendNotification(notificationContent, notifyParams, null);
+        //}
+
+        //public MessageResult sendCustomMessageAll(String msgTitle, String msgContent) {
+        //    CustomMessageParams customParams = new CustomMessageParams();
+        //    customParams.ReceiverType = ReceiverTypeEnum.APP_KEY;
+        //    return _pushClient.sendCustomMessage(msgTitle, msgContent, customParams, null);
+        //}
+        public void SendPush(String message){
+
         }
-
-        public MessageResult sendNotificationAll(String notificationContent)
-        {
-            NotificationParams notifyParams = new NotificationParams();
-            notifyParams.ReceiverType = ReceiverTypeEnum.APP_KEY;
-            return _pushClient.sendNotification(notificationContent, notifyParams, null);
-        }
-
-	    public MessageResult sendCustomMessageAll(String msgTitle, String msgContent) {
-            CustomMessageParams customParams = new CustomMessageParams();
-            customParams.ReceiverType = ReceiverTypeEnum.APP_KEY;
-	        return _pushClient.sendCustomMessage(msgTitle, msgContent, customParams, null);
-	    }
-
         /// <summary>
         /// 
         /// </summary>
