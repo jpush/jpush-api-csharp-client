@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using cn.jpush.api.util;
 
 namespace cn.jpush.api.push.audience
 {
@@ -28,7 +29,20 @@ namespace cn.jpush.api.push.audience
         {
             return new AudienceTarget(AudienceType.alias, values);
         }
+		public static AudienceTarget segment(HashSet<string> values)
+		{
+			return new AudienceTarget(AudienceType.segment, values);
+		}
+		public static AudienceTarget registrationId(HashSet<string> values)
+		{
+			return new AudienceTarget(AudienceType.registration_id, values);
+		}
+		public string toJSON(){
 
-
+			StringBuilder json = new StringBuiler ();
+			json.Apped (this.audienceType.toString());
+			json.Apped (":");
+			json.Apped (JsonTool.ObjectToJson (this.values));
+		}
     }
 }
