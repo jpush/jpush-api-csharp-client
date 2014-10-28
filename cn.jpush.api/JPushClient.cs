@@ -1,8 +1,10 @@
 ﻿using cn.jpush.api.common;
 using cn.jpush.api.push;
+using cn.jpush.api.push.mode;
 using cn.jpush.api.report;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +27,39 @@ namespace cn.jpush.api
         {
             _pushClient = new PushClient(masterSecret, app_key);
             _reportClient = new ReportClient(app_key, masterSecret);
+
+            Options options = new Options(1,2,2,false);
+            string json = options.toJSON();
+            Debug.WriteLine(json);
+            //
+            Platform platform = Platform.allPlatform();
+            json = platform.toJSON();
+            Debug.WriteLine(json);
+            //
+            platform = Platform.android();
+            json = platform.toJSON();
+            Debug.WriteLine(json);
+            //
+            platform = Platform.ios();
+            json = platform.toJSON();
+            Debug.WriteLine(json);
+            //
+            platform = Platform.winphone();
+            json = platform.toJSON();
+            Debug.WriteLine(json);
+            //
+            platform = Platform.android_ios();
+            json = platform.toJSON();
+            Debug.WriteLine(json);
+            //
+            platform = Platform.android_winphone();
+            json = platform.toJSON();
+            Debug.WriteLine(json);
+            //
+            platform = Platform.ios_winphone();
+            json = platform.toJSON();
+            Debug.WriteLine(json);
+            //
         }
         /// <summary>
         /// JPushClient构造函数，可指定

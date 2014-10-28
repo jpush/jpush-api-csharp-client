@@ -48,11 +48,18 @@
   <ItemGroup>
     <Compile Include="common\BaseHttpClient.cs" />
     <Compile Include="common\BaseResult.cs" />
+    <Compile Include="common\DeviceType.cs" />
     <Compile Include="common\ResponseResult.cs" />
     <Compile Include="JPushClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="push\audience\Audience.cs" />
+    <Compile Include="push\audience\AudienceTarget.cs" />
+    <Compile Include="push\audience\AudienceType.cs" />
     <Compile Include="push\MessageResult.cs" />
+    <Compile Include="push\mode\Options.cs" />
+    <Compile Include="push\mode\Platform.cs" />
     <Compile Include="push\PushClient.cs" />
+    <Compile Include="push\PushPayload.cs" />
     <Compile Include="report\ReceivedResult.cs" />
     <Compile Include="report\ReportClient.cs" />
     <Compile Include="util\Base64.cs" />

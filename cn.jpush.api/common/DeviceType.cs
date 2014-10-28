@@ -9,9 +9,11 @@ using System.Reflection;
 
 namespace cn.jpush.api.common
 {
-    public enum DeviceEnum
+    public enum DeviceType
     {
-        [Description("andriod")]  Android,
-        [Description("ios")]  IOS
+        [Description("andriod")] andriod,
+        [Description("ios")]     ios,
+        [Description("wp")]      wp
+
     }
 }

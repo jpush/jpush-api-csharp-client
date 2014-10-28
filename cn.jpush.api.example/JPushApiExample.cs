@@ -36,56 +36,7 @@ namespace JpushApiClientExample
             JPushClient client = new JPushClient(app_key, master_secret);
             
             MessageResult result = null;
-            //Params.
-            //传入json字符串
-
             Console.WriteLine("*****发送******");
-            //String	msg_json = {
-            //    "platform":["ios","android","winphone"],#android,ios,winphone
-            //    "audience":"all",#{"alias":[u"别名11"]},#{"registration_id":["0900a5daa82"]},#{"registration_id":["0506b515432"]},#{"alias":[u"苹果公司",u"5890"]}, #{"tag_and":[u"标签",u"看看"]}"registration_id":["040f62efa59","0112a362e14","062214f49a3"]
-
-            //    "notification":
-            //        {
-            //            "android":
-            //            {"alert":u"Android－ %d notifi－V3  %d ,%s" %(i+1,i+1,c_time),
-            //            "title":u"android 通知标题 %d" %(i+1),
-            //            "builder_id":2,
-            //            "extras":
-            //                {u"android notification jian1":u"android notification zhi1",u"第%d 次android推送" %(i+1) :"我是值2"}
-            //            },
-
-            //            "ios":
-            //            {"alert":u"－－ %d apns－－V3 APNS %d , %s" % (i+1,i+1, c_time),#abcde12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890",#u"第%d 条ios通知 %s" % (i+1, c_time),
-            //            "sound":"sound.caf",
-            //            "badge":"3",
-            //            "content-available":1,
-            //            "extras":
-            //                {"sound":"default","badge":"＋5","p":"1035","c":1}
-            //                # {"ios apns jian1":"ios apns zhi1",,u"第%d 次ios推送" %(i+1) :"我是值2"}
-            //            },
-
-            //            "winphone":
-            //            {"alert":u"V3 Winphone MPNS %d ,%s" % (i+1, c_time),
-            //            "title":"WinPhone title",
-            //            "_open_page":"Page1.xaml",
-            //            "extras":
-            //                {"winphone mpns key1":"winphone mpns value1",u"第%d 次wp推送" %(i+1) :"我是值2"}
-            //            }
-            //        }, 
-
-            //    "message":
-            //    {
-            //        "msg_content":"－－ %d message－－V3:This is  %d 时间：%s" %(i+1,i+1,c_time),
-            //       // #This is the %d ‘s message%s" % (i+1, c_time),
-            //        "title":u"自定义消息标题 %d" %(i+1),
-            //        "content_type":u"我是content-type",
-            //        "extras":
-            //            {u"MSG键1":u"MSG值1",u"第%d 次推送" %(i+1) :"我是值2" }
-            //    },
-
-            //    "options":{"time_to_live":6000, "sendno":sendno,"apns_production":False,"content-avaliable":1}#,"override_msg_id":687188391,"apns_production":False
-                //}"
-            //
 
             /**
              *发送类型 
