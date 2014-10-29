@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace cn.jpush.api.push.audience
+using cn.jpush.api.push.audience;
+namespace cn.jpush.api.push.mode
 {
-    class Audience
+    class Audience : IPushMode
     {
 		private const String ALL = "all";
 		private bool all;
@@ -15,7 +15,8 @@ namespace cn.jpush.api.push.audience
 			this.all = all;
 			this.targets = targets;
 		}
-		public static Audience allPlatform(){
+        public static Audience allAudience()
+        {
 			return new Audience(true,null);
 		}
 		public static Audience tag(HashSet<string> values){
@@ -46,21 +47,19 @@ namespace cn.jpush.api.push.audience
 		public bool isAll(){
 			return all;
 		}
-		public string toJSON(){
-			if (all) {
-				return "\""+ALL+"\"";
-			}
-			StringBuilder json = StringBuilder ();
-			foreach (var target in this.targets) {
-				json.Append(target.toJSON()).Append(",");
-			}
-			if (json.length > 0) {
-				json.remove(json.length-1,1);
-			}
-			json.Append("}");
-			json.Append ("{");
-			return json.toString ();
-		}
+        public object toJsonObject()
+        {
+            if (all)
+            {
+                return  ALL;
+            }
+            List<string> jsonList = new List<string>();
+            foreach (var target in this.targets)
+            {
+                jsonList.Add(target.ToString());
+            }
+            return jsonList;
+        }
 
     }
 }

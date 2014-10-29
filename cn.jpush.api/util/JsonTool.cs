@@ -8,6 +8,7 @@ using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using cn.jpush.api.report;
 using System.Web.Script.Serialization;
+using System.Diagnostics;
 
 namespace cn.jpush.api.util
 {
@@ -40,7 +41,7 @@ namespace cn.jpush.api.util
             
             foreach (KeyValuePair<String, Object> pair in dict) 
             {
-                json.Append(pair.Key).Append(":").Append(pair.Value).Append(",");            
+                json.Append(pair.Key).Append(":").Append(ValueToJson(pair.Value)).Append(",");            
             }
             //Console.WriteLine("json String ******"+json);
             if (json.Length > 0) 
@@ -59,6 +60,29 @@ namespace cn.jpush.api.util
             List<ReceivedResult.Received> jsonclassList = Serializer.Deserialize<List<ReceivedResult.Received>>(jsonString);
             return jsonclassList;
         }
+        //从dictionary 的value中解析出字符串
+        private static string ValueToJson(object value)
+        {
+            Type type = value.GetType();
+            if(type==typeof(int)){
 
+                return value.ToString();
+            }else if(type==typeof(string)){
+
+                return "\""+value+"\"";
+
+            }else if(type==typeof(List<int>)||type==typeof(List<string>)){
+
+                return ObjectToJson(value);
+
+            }else if(type==typeof(Dictionary<string,object>)){
+
+                return JsonTool.DictionaryToJson((Dictionary<string, object>)value);
+            }
+            else{
+                Debug.WriteLine("Type in Dictionary is error!");
+                return "type erro";
+            }
+        }
     }
 }

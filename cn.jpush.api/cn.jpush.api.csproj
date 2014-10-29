@@ -51,25 +51,27 @@
     <Compile Include="common\ResponseResult.cs" />
     <Compile Include="JPushClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="push\audience\Audience.cs" />
+    <Compile Include="push\mode\Audience.cs" />
     <Compile Include="push\audience\AudienceTarget.cs" />
     <Compile Include="push\audience\AudienceType.cs" />
     <Compile Include="push\MessageResult.cs" />
+    <Compile Include="push\mode\IPushMode.cs" />
+    <Compile Include="push\mode\Message.cs" />
     <Compile Include="push\mode\Options.cs" />
     <Compile Include="push\mode\Platform.cs" />
+    <Compile Include="push\notificaiton\AndroidPlatformNotification.cs" />
+    <Compile Include="push\notificaiton\iosPlatformNotification.cs" />
+    <Compile Include="push\notificaiton\PlatformNotification.cs" />
+    <Compile Include="push\notificaiton\WinphonePlatformNotification.cs" />
     <Compile Include="push\PushClient.cs" />
-    <Compile Include="push\PushPayload.cs" />
+    <Compile Include="push\mode\PushPayload.cs" />
     <Compile Include="report\ReceivedResult.cs" />
     <Compile Include="report\ReportClient.cs" />
     <Compile Include="util\Base64.cs" />
     <Compile Include="util\JsonTool.cs" />
     <Compile Include="util\Md5.cs" />
     <Compile Include="util\StringUtil.cs" />
-    <Compile Include="push\notification\Notification.cs" />
-    <Compile Include="push\notification\PlatformNotification.cs" />
-    <Compile Include="push\notification\AndroidPlatformNotification.cs" />
-    <Compile Include="push\notification\WpPlatformNotification.cs" />
-    <Compile Include="push\notification\iosPlatformNotification.cs" />
+    <Compile Include="push\mode\Notification.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -80,7 +82,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Folder Include="push\notification\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

@@ -39,10 +39,11 @@ namespace cn.jpush.api.push.audience
 		}
 		public string toJSON(){
 
-			StringBuilder json = new StringBuiler ();
-			json.Apped (this.audienceType.toString());
-			json.Apped (":");
-			json.Apped (JsonTool.ObjectToJson (this.values));
+			StringBuilder json = new StringBuilder ();
+			json.Append (this.audienceType.ToString());
+			json.Append (":");
+			json.Append (JsonTool.ObjectToJson (this.values));
+            return json.ToString();
 		}
     }
 }

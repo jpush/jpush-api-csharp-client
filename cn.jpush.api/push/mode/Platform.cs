@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.push.mode
 {
-    class Platform
+    class Platform : IPushMode
     {
         private  const String ALL = "\"all\"";
     
@@ -68,21 +68,20 @@ namespace cn.jpush.api.push.mode
         {
             return all;
         }
-        public string toJSON()
+        public object toJsonObject()
         {
-            if (all){ return ALL;}
-            StringBuilder json=new StringBuilder();
+            if (all) 
+            { 
+                return ALL;
+            }
+            List<string> jsonList = new List<string>();
             foreach (var type in this.deviceTypes)
             {
-                json.Append("\"").Append(type.ToString()).Append("\"").Append(",");
+                jsonList.Add(type.ToString());
             }
-            if (json.Length > 0) { json.Remove(json.Length - 1, 1); }
-
-            json.Append("]");
-            json.Insert(0,"[");
-
-            return json.ToString();
+            return jsonList;
         }
+
 
     }
 }

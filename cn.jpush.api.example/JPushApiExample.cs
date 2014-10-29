@@ -35,7 +35,7 @@ namespace JpushApiClientExample
             //int sendno = 9;
             JPushClient client = new JPushClient(app_key, master_secret);
             
-            MessageResult result = null;
+            
             Console.WriteLine("*****发送******");
 
             /**

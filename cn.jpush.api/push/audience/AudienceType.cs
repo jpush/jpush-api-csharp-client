@@ -13,6 +13,5 @@ namespace cn.jpush.api.push.audience
         alias,
         segment,
         registration_id
-
     }
 }

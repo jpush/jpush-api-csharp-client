@@ -29,54 +29,6 @@ namespace cn.jpush.api.push
             //this.devices = devices;
             //this.apnsProduction = apnsProduction;
         }
-
-        //public MessageResult sendNotification(String notificationContent, NotificationParams notParams, String extras)
-        //{
-        //    if ( !string.IsNullOrEmpty(extras) )
-        //    {
-        //        notParams.NotyfyMsgContent.n_extras = extras;
-        //    }
-        //    notParams.NotyfyMsgContent.n_content = System.Web.HttpUtility.UrlEncode(notificationContent, Encoding.UTF8);
-        //    //notParams.NotyfyMsgContent.n_content = notificationContent;
-        //    return sendMessage(notParams, MsgTypeEnum.NOTIFICATIFY);
-        //}
-
-        //public MessageResult sendCustomMessage(String msgTitle, String msgContent, CustomMessageParams cParams, String extras)
-        //{
-        //    if (msgTitle != null)
-        //    {
-        //        //cParams.CustomMsgContent.title = msgTitle;
-        //        cParams.CustomMsgContent.title = System.Web.HttpUtility.UrlEncode(msgTitle, Encoding.UTF8);
-        //    }
-        //    if ( !string.IsNullOrEmpty(extras) )
-        //    {
-        //        cParams.CustomMsgContent.extras = extras;
-        //    }
-
-        //    cParams.CustomMsgContent.message = System.Web.HttpUtility.UrlEncode(msgContent, Encoding.UTF8);
-        //    return sendMessage(cParams, MsgTypeEnum.COUSTOM_MESSAGE);
-        //}
-
-
-        //private MessageResult sendMessage(MessageParams msgParams, MsgTypeEnum msgType) 
-        //{
-        //    msgParams.ApnsProduction = this.apnsProduction ? 1 : 0;
-        //    msgParams.AppKey = this.appKey;
-        //    msgParams.MasterSecret = this.masterSecret;
-        //    if (msgParams.TimeToLive == MessageParams.NO_TIME_TO_LIVE) 
-        //    {
-        //        msgParams.TimeToLive = this.timeToLive;            
-        //    }
-        //    if (this.devices != null)
-        //    {
-        //        foreach (DeviceEnum device in this.devices)
-        //        {
-        //            msgParams.addPlatform(device);
-        //        }
-        //    }
-        //    return sendPush(msgParams, msgType); 
-        //}
-
         private MessageResult sendPush(String msgParams) 
         { 
             String url =   HOST_NAME_SSL ;
@@ -98,33 +50,6 @@ namespace cn.jpush.api.push
             return messResult;
 
         }
-
-        //private String prase(MessageParams message, MsgTypeEnum msgType) 
-        //{
-        //    StringBuilder sb = new StringBuilder();
-        //    sb.Append(message.SendNo).Append((int)message.ReceiverType).Append(message.ReceiverValue).Append(message.MasterSecret);
-        //    String verificationCode = sb.ToString();
-        //    //Console.WriteLine(verificationCode);
-        //    verificationCode = Md5.getMD5Hash(verificationCode);
-        //    sb.Clear();
-        //    message.setMsgContent();
-        //    String receiverVallue = System.Web.HttpUtility.UrlEncode(message.ReceiverValue, Encoding.UTF8);
-        //    sb.Append("sendno=").Append(message.SendNo).Append("&app_key=").Append(message.AppKey).Append("&receiver_type=").Append((int)message.ReceiverType)
-        //        .Append("&receiver_value=").Append(receiverVallue).Append("&verification_code=").Append(verificationCode)
-        //        .Append("&msg_type=").Append((int)msgType).Append("&msg_content=").Append(message.MsgContent).Append("&platform=").Append(message.getPlatform())
-        //        .Append("&apns_production=").Append(message.ApnsProduction);
-        //    if(message.TimeToLive >= 0)
-        //    {
-        //        sb.Append("&time_to_live=").Append(message.TimeToLive);
-        //    }
-        //    if(message.OverrideMsgId != null)
-        //    {
-        //        sb.Append("&override_msg_id=").Append(message.OverrideMsgId);
-        //    }
-        //    Console.WriteLine(sb.ToString());
-        //    //Debug.Print(sb.ToString());
-        //    return sb.ToString();
-        //}
         private String Authorization(){
 
             Debug.Assert(!string.IsNullOrEmpty(this.appKey));
@@ -136,7 +61,6 @@ namespace cn.jpush.api.push
         }
 
     }
-
     enum MsgTypeEnum
     {
         NOTIFICATIFY = 1,

@@ -2,6 +2,7 @@
 using cn.jpush.api.push;
 using cn.jpush.api.push.mode;
 using cn.jpush.api.report;
+using cn.jpush.api.util;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,37 +28,24 @@ namespace cn.jpush.api
         {
             _pushClient = new PushClient(masterSecret, app_key);
             _reportClient = new ReportClient(app_key, masterSecret);
+            List<int> list0 = new List<int>();
+            list0.Add(1);
 
-            Options options = new Options(1,2,2,false);
-            string json = options.toJSON();
-            Debug.WriteLine(json);
-            //
-            Platform platform = Platform.allPlatform();
-            json = platform.toJSON();
-            Debug.WriteLine(json);
-            //
-            platform = Platform.android();
-            json = platform.toJSON();
-            Debug.WriteLine(json);
-            //
-            platform = Platform.ios();
-            json = platform.toJSON();
-            Debug.WriteLine(json);
-            //
-            platform = Platform.winphone();
-            json = platform.toJSON();
-            Debug.WriteLine(json);
-            //
-            platform = Platform.android_ios();
-            json = platform.toJSON();
-            Debug.WriteLine(json);
-            //
-            platform = Platform.android_winphone();
-            json = platform.toJSON();
-            Debug.WriteLine(json);
-            //
-            platform = Platform.ios_winphone();
-            json = platform.toJSON();
+            List<String> list1 = new List<String>();
+            list1.Add("2");
+            list1.Add("3");
+
+            Dictionary<string, object> dict2 = new Dictionary<string, object>();
+            dict2.Add("subdict", 2);
+
+
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            dict.Add("int",2);
+            dict.Add("string", "2");
+            dict.Add("list<int>", list0);
+            dict.Add("list<string>",list1);
+            dict.Add("dict<string,object>", dict2);
+            string json = JsonTool.DictionaryToJson(dict);
             Debug.WriteLine(json);
             //
         }
