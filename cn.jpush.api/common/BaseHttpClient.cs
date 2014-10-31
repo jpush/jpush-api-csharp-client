@@ -52,14 +52,11 @@ namespace cn.jpush.api.common
             {
                 myReq = (HttpWebRequest)WebRequest.Create(url);
                 myReq.Method = method;
-                myReq.Accept = "text/html, application/xhtml+xml, */*";
-                myReq.ContentType = "application/x-www-form-urlencoded";
-                myReq.Headers.Add("Charset", "UTF-8");
+                myReq.ContentType = "application/json";
                 if ( !String.IsNullOrEmpty(auth) )
                 {
-                    myReq.Headers.Add("Authorization", "Basic " + auth);
+                    myReq.Headers.Add("Authorization", "Basic " + auth);    
                 }
-
                 if (method == "POST")
                 {
                     byte[] bs = Encoding.UTF8.GetBytes(reqParams);
@@ -70,27 +67,17 @@ namespace cn.jpush.api.common
                         reqStream.Close();
                     }
                 }
-               // Console.WriteLine("begin responese");
-
                 response = (HttpWebResponse)myReq.GetResponse();
                 HttpStatusCode statusCode = response.StatusCode;
                 result.responseCode = statusCode;
-                //    Console.WriteLine("prepare");
                 if (Equals(response.StatusCode, HttpStatusCode.OK))
                 {
-                    //Console.WriteLine("enter");
                     using (StreamReader reader = new StreamReader(response.GetResponseStream(), System.Text.Encoding.UTF8))
                     {
                         result.responseContent = reader.ReadToEnd();
-                       // Console.WriteLine(result.responseContent);
                     }
                     result.setErrorObject();
                 }
-                    //Console.WriteLine("end");
-                //Console.WriteLine("response = " + response.Headers + "  contet=" + result.responseContent + "   status=" + response.StatusCode);
-                //Console.WriteLine("remaining = " + remaining);
-               // Console.WriteLine("code = " + result.error.errcode);
-                
 
                 if (statusCode == HttpStatusCode.OK)
                 {
@@ -98,7 +85,6 @@ namespace cn.jpush.api.common
                     String limitRemaining = response.GetResponseHeader(RATE_LIMIT_Remaining);
                     String limitReset = response.GetResponseHeader(RATE_LIMIT_Reset);
                     result.setRateLimit(limitQuota, limitRemaining, limitReset);
-                    //Console.WriteLine("send success  ");
                 }
                 else if (statusCode == HttpStatusCode.NotFound)
                 {
@@ -120,7 +106,6 @@ namespace cn.jpush.api.common
                 {
                     Debug.Print("error is " + statusCode.ToString());
                 }
-
             }
             catch (System.Exception ex)
             {
@@ -133,7 +118,6 @@ namespace cn.jpush.api.common
                 {
                     response.Close();                
                 }
-
                 if(myReq != null)
                 {
                     myReq.Abort();

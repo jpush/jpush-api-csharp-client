@@ -34,9 +34,12 @@ namespace cn.jpush.api.push.mode
             {
                 dict.Add(PlatformNotification.ALERT, alert);
             }
-            foreach (var item in this.notifications)
+            if (this.notifications != null)
             {
-                dict.Add(item.getPlatformName(), item.toJsonObject());
+                foreach (var item in this.notifications)
+                {
+                    dict.Add(item.getPlatformName(), item.toJsonObject());
+                }
             }
             return dict;
         }

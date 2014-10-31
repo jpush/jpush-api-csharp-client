@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.push.mode
 {
-    class PushPayload
+    public class PushPayload
     {
         private static  String PLATFORM = "platform";
         private static  String AUDIENCE = "audience";
@@ -48,7 +48,11 @@ namespace cn.jpush.api.push.mode
         */
         public static PushPayload MessageAll(String msgContent)
         {
-            throw new NotImplementedException();
+            return new PushPayload(Platform.allPlatform(),
+                                   Audience.allAudience(),
+                                   null,
+                                   Message.content(msgContent),
+                                   null);
         }
 
         public static PushPayload FromJSON(String payloadString)
@@ -75,7 +79,7 @@ namespace cn.jpush.api.push.mode
         {
             throw new NotImplementedException();
         }
-        public string toJson()
+        public string ToJson()
         {
             Dictionary<string, object> dict = new Dictionary<string, object>();
             if (platform != null)
@@ -88,15 +92,15 @@ namespace cn.jpush.api.push.mode
             }
             if (notificaiton != null)
             {
-                dict.Add(NOTIFICATION, notificaiton);
+                dict.Add(NOTIFICATION, notificaiton.toJsonObject());
             }
             if(message != null)
             {
-                dict.Add(MESSAGE, message);
+                dict.Add(MESSAGE, message.toJsonObject());
             }
             if(options !=null)
             {
-                dict.Add(OPTIONS, options);
+                dict.Add(OPTIONS, options.toJsonObject());
             }
             return JsonTool.DictionaryToJson(dict);
 

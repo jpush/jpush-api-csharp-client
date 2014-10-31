@@ -10,7 +10,7 @@ namespace cn.jpush.api.push.mode
 {
     class Platform : IPushMode
     {
-        private  const String ALL = "\"all\"";
+        private  const String ALL = "all";
     
         private  bool all;
         private  HashSet<DeviceType> deviceTypes;

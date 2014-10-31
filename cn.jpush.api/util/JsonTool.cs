@@ -41,7 +41,7 @@ namespace cn.jpush.api.util
             
             foreach (KeyValuePair<String, Object> pair in dict) 
             {
-                json.Append(pair.Key).Append(":").Append(ValueToJson(pair.Value)).Append(",");            
+                json.Append("\"").Append(pair.Key).Append("\"").Append(":").Append(ValueToJson(pair.Value)).Append(",");            
             }
             //Console.WriteLine("json String ******"+json);
             if (json.Length > 0) 

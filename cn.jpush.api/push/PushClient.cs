@@ -1,4 +1,5 @@
 ﻿using cn.jpush.api.common;
+using cn.jpush.api.push.mode;
 using cn.jpush.api.util;
 using System;
 using System.Collections.Generic;
@@ -29,14 +30,16 @@ namespace cn.jpush.api.push
             //this.devices = devices;
             //this.apnsProduction = apnsProduction;
         }
-        private MessageResult sendPush(String msgParams) 
-        { 
+        public MessageResult sendPush(PushPayload payload) 
+        {
+            String msgParams = payload.ToJson();
             String url =   HOST_NAME_SSL ;
             url += PUSH_PATH;
             //String pamrams = prase(msgParams, msgType);
-            //Console.WriteLine("begin post");
+            Console.WriteLine("begin post");
+            Console.WriteLine("send json:{0}",msgParams);
             ResponseResult result = sendPost(url, Authorization(), msgParams);
-            //Console.WriteLine("end post");
+            Console.WriteLine("end post");
 
             MessageResult messResult = new MessageResult();
             if (result.responseCode == System.Net.HttpStatusCode.OK)
