@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.push.mode
 {
-    class Options : IPushMode
+    public class Options : IPushMode
     {
         private  const String SENDNO = "sendno";
         private  const String OVERRIDE_MSG_ID = "override_msg_id";

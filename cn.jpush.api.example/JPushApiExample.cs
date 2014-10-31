@@ -16,14 +16,11 @@ namespace JpushApiClientExample
 {
     class JPushApiExample
     {
-
-        public class ExtralClass
-        {
-            public String sound = "ssss";
-
-            public String menu="button";
-        }
-
+        public static String TITLE = "Test from API example";
+        public static String ALERT = "Test from API Example - alert";
+        public static String MSG_CONTENT = "Test from API Example - msgContent";
+        public static String REGISTRATION_ID = "0900e8d85ef";
+        public static String TAG = "tag_api";
 
         static void Main(string[] args)
         {
@@ -35,14 +32,30 @@ namespace JpushApiClientExample
             JPushClient client = new JPushClient(app_key, master_secret);
             PushPayload payload = PushPayload.AlertAll("test");
 
+            //PushPayload payload2 = PushPayload.FromJSON("{\"platform\":\"all\",\"audience\":\"all\",\"notification\":{\"alert\":\"test\"}}");
+
             client.SendPush(payload);
             Console.WriteLine("*****发送******");
         }
-    
-        public class IOSExtras
+
+        public static PushPayload PushObject_All_All_Alert()
         {
-            public int badge = 888;
-            public String sound = "happy";
+            return PushPayload.AlertAll(ALERT);
         }
+        public static PushPayload PushObject_All_All_Alias_Alert(string alert)
+        {
+            PushPayload pushPayload = new PushPayload(Platform.all(),
+                                                      Audience.alias("alias1"),
+                                                      Notification.alert(alert));
+            return pushPayload;
+        }
+
+        public static PushPayload PushObject_Android_Tag_AlertWithTitle()
+        {
+            return new PushPayload(Platform.android(),
+                                   Audience.tag("tag1"),
+                                   Notification.alert(TITLE));
+        }
+
     }
 }

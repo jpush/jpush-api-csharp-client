@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.push.notificaiton
 {
-    class AndroidPlatformNotification:PlatformNotification
+   public class AndroidPlatformNotification:PlatformNotification
     {
         public const String NOTIFICATION_ANDROID = "android";
     
@@ -16,23 +16,36 @@ namespace cn.jpush.api.push.notificaiton
         private  String title;
         private  int builderId;
 
-        private AndroidPlatformNotification(String alert, String title, int builderId,Dictionary<string,object> extras)
+        private AndroidPlatformNotification(String alert, String title, int builderId,Dictionary<string,string> extras)
             : base(alert,extras)
         {
             this.title = title;
             this.builderId = builderId;
         }
-        public static AndroidPlatformNotification alert(string alert)
+        public new static AndroidPlatformNotification alert(string alert)
         {
             return new AndroidPlatformNotification(alert, null, 0, null);
         }
-        public void setTitle(String title)
+        public AndroidPlatformNotification setTitle(String title)
         {
+            
             this.title = title;
+            return this;
         }
-        public void setBuilderID(int builderId)
+        public AndroidPlatformNotification setBuilderID(int builderId)
         {
             this.builderId = builderId;
+            return this;
+        }
+        public AndroidPlatformNotification setAlert(String alert)
+        {
+            base.alert = alert;
+            return this;
+        }
+        public AndroidPlatformNotification setExras(Dictionary<string, string> extras)
+        {
+            base.extras = extras;
+            return this;
         }
         override public string getPlatformName()
         {

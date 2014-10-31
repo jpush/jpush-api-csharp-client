@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace cn.jpush.api.common
 {
@@ -22,7 +23,6 @@ namespace cn.jpush.api.common
 	
 	    //设置连接超时时间
 	    private const int DEFAULT_CONNECTION_TIMEOUT = (20 * 1000); // milliseconds
-	
 	    //设置读取超时时间
 	    private const int DEFAULT_SOCKET_TIMEOUT = (30 * 1000); // milliseconds
 
@@ -45,6 +45,7 @@ namespace cn.jpush.api.common
         public ResponseResult sendRequest(String method, String url, String auth,String reqParams)
         {
             //Console.WriteLine("begin send" + reqParams);
+            var parameter = JsonConvert.DeserializeObject<Dictionary<string, object>>(reqParams);
             ResponseResult result = new ResponseResult();
             HttpWebRequest myReq = null;
             HttpWebResponse response = null;
@@ -123,8 +124,8 @@ namespace cn.jpush.api.common
                     myReq.Abort();
                 }            
             }
-            //Console.WriteLine("sssssssssssssss======="+result.responseCode);
             return result;
         }
+
     }
 }

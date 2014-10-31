@@ -7,10 +7,10 @@ using cn.jpush.api.util;
 
 namespace cn.jpush.api.push.audience
 {
-    class AudienceTarget
+    public class AudienceTarget
     {
-        private AudienceType audienceType;
-        private HashSet<string> values;
+        public AudienceType audienceType{get;private set;}
+        public HashSet<string> values { get; private set; }
 
         private AudienceTarget(AudienceType audienceType, HashSet<string> values)
         {
@@ -37,13 +37,6 @@ namespace cn.jpush.api.push.audience
 		{
 			return new AudienceTarget(AudienceType.registration_id, values);
 		}
-		public string toJSON(){
-
-			StringBuilder json = new StringBuilder ();
-			json.Append (this.audienceType.ToString());
-			json.Append (":");
-			json.Append (JsonTool.ObjectToJson (this.values));
-            return json.ToString();
-		}
+		
     }
 }

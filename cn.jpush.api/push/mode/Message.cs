@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.push.mode
 {
-    class Message : IPushMode
+    public class Message : IPushMode
     {
         private static  String TITLE = "title";
         private static  String MSG_CONTENT = "msg_content";
@@ -17,6 +17,7 @@ namespace cn.jpush.api.push.mode
         private  String msgContent;
         private  String contentType;
         Dictionary<string, object> dict;
+      
         private Message(String title, String msgContent, String contentType, Dictionary<string, object> dict)
         {
             this.title = title;

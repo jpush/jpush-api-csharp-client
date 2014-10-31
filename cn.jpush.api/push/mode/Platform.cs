@@ -8,19 +8,23 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.push.mode
 {
-    class Platform : IPushMode
+   public class Platform : IPushMode
     {
         private  const String ALL = "all";
-    
-        private  bool all;
-        private  HashSet<DeviceType> deviceTypes;
 
-        private Platform(bool all, HashSet<DeviceType> deviceTypes)
+        private bool allPlatform;
+        private  HashSet<DeviceType> deviceTypes;
+        public Platform()
         {
-            this.all = all;
+            this.allPlatform = true;
+            this.deviceTypes = null;
+        }
+        public Platform(bool all, HashSet<DeviceType> deviceTypes)
+        {
+            this.allPlatform = all;
             this.deviceTypes = deviceTypes;
         }
-        public static Platform allPlatform()
+        public static Platform all()
         {
             return new Platform(true, null);
         }
@@ -66,11 +70,11 @@ namespace cn.jpush.api.push.mode
         }
         public bool isAll()
         {
-            return all;
+            return allPlatform;
         }
         public object toJsonObject()
         {
-            if (all) 
+            if (allPlatform) 
             { 
                 return ALL;
             }

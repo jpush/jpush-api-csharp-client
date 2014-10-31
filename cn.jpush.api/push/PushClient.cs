@@ -14,6 +14,8 @@ namespace cn.jpush.api.push
     {
         private const String HOST_NAME_SSL = "https://api.jpush.cn";
         private const String PUSH_PATH = "/v3/push";
+        //private const String HOST_NAME_SSL = "http://192.168.3.1:20015";
+        //private const String PUSH_PATH = "";
 
         private String appKey;
         private String masterSecret;
@@ -26,9 +28,7 @@ namespace cn.jpush.api.push
         {
             this.appKey = appKey;
             this.masterSecret = masterSecret;
-            //this.timeToLive = timeToLive;
-            //this.devices = devices;
-            //this.apnsProduction = apnsProduction;
+
         }
         public MessageResult sendPush(PushPayload payload) 
         {

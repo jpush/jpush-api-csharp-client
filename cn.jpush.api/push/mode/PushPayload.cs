@@ -1,6 +1,8 @@
 ﻿using cn.jpush.api.util;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +26,12 @@ namespace cn.jpush.api.push.mode
         private Message message;
         private Options options;
 
-        private PushPayload(Platform platform, Audience audience, Notification notification, Message message, Options options)
+        public PushPayload(Platform platform, Audience audience, Notification notification, Message message=null, Options options=null)
         {
+            Debug.Assert(platform != null);
+            Debug.Assert(audience != null);
+            Debug.Assert(notificaiton != null || message != null);
+
             this.platform = platform;
             this.audience = audience;
             this.notificaiton = notification;
@@ -37,9 +43,9 @@ namespace cn.jpush.api.push.mode
         */
         public static PushPayload AlertAll(String alert)
         {
-            return new PushPayload(Platform.allPlatform(),
-                                   Audience.allAudience(),
-                                   Notification.alertNotificaiton(alert),
+            return new PushPayload(Platform.all(),
+                                   Audience.all(),
+                                   Notification.alert(alert),
                                    null,
                                    null);
         }
@@ -48,8 +54,8 @@ namespace cn.jpush.api.push.mode
         */
         public static PushPayload MessageAll(String msgContent)
         {
-            return new PushPayload(Platform.allPlatform(),
-                                   Audience.allAudience(),
+            return new PushPayload(Platform.all(),
+                                   Audience.all(),
                                    null,
                                    Message.content(msgContent),
                                    null);
@@ -57,7 +63,16 @@ namespace cn.jpush.api.push.mode
 
         public static PushPayload FromJSON(String payloadString)
         {
-             throw new NotImplementedException();
+            try
+            {
+               PushPayload pushPayLoad = JsonConvert.DeserializeObject<PushPayload>(payloadString);
+               return pushPayLoad;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("JSON to PushPayLoad occur error:" + e.Message);
+                return null;
+            }
         }
         public void ResetOptionsApnsProduction(bool apnsProduction) 
         {
@@ -67,7 +82,7 @@ namespace cn.jpush.api.push.mode
         {
             throw new NotImplementedException();
         }
-        public int GetSendno()
+        public int  GetSendno()
         {
             throw new NotImplementedException();
         }
@@ -102,8 +117,8 @@ namespace cn.jpush.api.push.mode
             {
                 dict.Add(OPTIONS, options.toJsonObject());
             }
-            return JsonTool.DictionaryToJson(dict);
-
+            return JsonConvert.SerializeObject(dict);
+            //return JsonTool.DictionaryToJson(dict);
         }
     }
 }

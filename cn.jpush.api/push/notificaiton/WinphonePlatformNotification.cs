@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.push.notificaiton
 {
-    class WinphonePlatformNotification:PlatformNotification
+    public class WinphonePlatformNotification : PlatformNotification
     {
         private static  String NOTIFICATION_WINPHONE = "winphone";
     
@@ -16,14 +16,34 @@ namespace cn.jpush.api.push.notificaiton
         private  String title;
         private  String openPage;
 
-        private WinphonePlatformNotification(String alert, String title, String openPage, Dictionary<string,object> extras):base(alert,extras) {
+        private WinphonePlatformNotification(String alert, String title, String openPage, Dictionary<string,string> extras):base(alert,extras) {
         
             this.title = title;
             this.openPage = openPage;
         }
-        public static WinphonePlatformNotification alert(String alert)
+        public new static WinphonePlatformNotification alert(String alert)
         {
             return new WinphonePlatformNotification(alert, null, null, null);
+        }
+        public WinphonePlatformNotification setTitle(string title)
+        {
+            this.title = title;
+            return this;
+        }
+        public WinphonePlatformNotification setOpenPage(string openPage)
+        {
+            this.openPage = openPage;
+            return this;
+        }
+        public WinphonePlatformNotification setAlert(String alert)
+        {
+            base.alert = alert;
+            return this;
+        }
+        public WinphonePlatformNotification setExras(Dictionary<string, string> extras)
+        {
+            base.extras = extras;
+            return this;
         }
         override public String getPlatformName()
         {

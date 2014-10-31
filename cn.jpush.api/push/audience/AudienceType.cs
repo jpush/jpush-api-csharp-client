@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.push.audience
 {
-    enum AudienceType
+    public enum AudienceType
     {
         tag,
         tag_and,

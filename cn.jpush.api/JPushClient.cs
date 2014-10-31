@@ -28,6 +28,7 @@ namespace cn.jpush.api
         {
             _pushClient = new PushClient(masterSecret, app_key);
             _reportClient = new ReportClient(app_key, masterSecret);
+
         }
         public void SendPush(PushPayload payload){
             _pushClient.sendPush(payload);

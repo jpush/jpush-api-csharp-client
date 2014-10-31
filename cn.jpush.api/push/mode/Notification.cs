@@ -14,25 +14,36 @@ namespace cn.jpush.api.push.mode
 {
     public class Notification : IPushMode
 	{
-        private  String alert;
+        private  String alertNotificaiton;
         private  HashSet<PlatformNotification> notifications;
-    
-        private Notification(String alert, HashSet<PlatformNotification> notifications)
+
+        public Notification(String alert, HashSet<PlatformNotification> notifications)
         {
-            this.alert = alert;
+            this.alertNotificaiton = alert;
             this.notifications = notifications;
         }
-        public static Notification alertNotificaiton(string alert)
+        public static Notification alert(string alert)
         {
             return new Notification(alert, null);
         }
+        public static Notification android(String alert, String title, Dictionary<String, String> extras)
+        {
+            var platformNotification = AndroidPlatformNotification.alert("alert").setTitle(title).setExras(extras);
+            return Notification.alert(alert).addPlatformNotification(platformNotification);
+        }
+        public Notification addPlatformNotification(PlatformNotification platformNotification)
+        {
+            notifications.Add(platformNotification);
+            return this;
+        }
+
 
         public object toJsonObject()
         {
             Dictionary<string, object> dict = new Dictionary<string, object>();
-            if (alert != null)
+            if (alertNotificaiton != null)
             {
-                dict.Add(PlatformNotification.ALERT, alert);
+                dict.Add(PlatformNotification.ALERT, alertNotificaiton);
             }
             if (this.notifications != null)
             {
