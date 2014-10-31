@@ -43,7 +43,10 @@ namespace cn.jpush.api.push.notificaiton
             this.soundDisabled = soundDisabled;
             this.badgeDisabled = badgeDisabled;
         }
-
+        public static iosPlatformNotification alert(string alert)
+        {
+            return new iosPlatformNotification(alert,);
+        }
         public iosPlatformNotification setSoundDisabled(bool soundDisabled)
         {
             this.soundDisabled = soundDisabled;
@@ -72,12 +75,6 @@ namespace cn.jpush.api.push.notificaiton
         public iosPlatformNotification setCategory(String category)
         {
             this.category = category;
-            return this;
-        }
-
-        public iosPlatformNotification setAlert(String alert)
-        {
-            base.alert = alert;
             return this;
         }
         public iosPlatformNotification setExras(Dictionary<string, string> extras)

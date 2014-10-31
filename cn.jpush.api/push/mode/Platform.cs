@@ -19,7 +19,7 @@ namespace cn.jpush.api.push.mode
             this.allPlatform = true;
             this.deviceTypes = null;
         }
-        public Platform(bool all, HashSet<DeviceType> deviceTypes)
+        private Platform(bool all, HashSet<DeviceType> deviceTypes)
         {
             this.allPlatform = all;
             this.deviceTypes = deviceTypes;

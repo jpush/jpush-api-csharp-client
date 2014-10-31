@@ -46,7 +46,7 @@ namespace JpushApiClientExample
         {
             PushPayload pushPayload = new PushPayload(Platform.all(),
                                                       Audience.alias("alias1"),
-                                                      Notification.alert(alert));
+                                                      Notification.android(ALERT,TITLE,null));
             return pushPayload;
         }
 

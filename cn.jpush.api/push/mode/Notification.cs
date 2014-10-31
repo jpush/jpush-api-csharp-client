@@ -10,6 +10,7 @@ using cn.jpush.api.push.notificaiton;
 // ------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using cn.jpush.api.push.notificaiton
 namespace cn.jpush.api.push.mode
 {
     public class Notification : IPushMode
@@ -17,7 +18,7 @@ namespace cn.jpush.api.push.mode
         private  String alertNotificaiton;
         private  HashSet<PlatformNotification> notifications;
 
-        public Notification(String alert, HashSet<PlatformNotification> notifications)
+        private Notification(String alert, HashSet<PlatformNotification> notifications)
         {
             this.alertNotificaiton = alert;
             this.notifications = notifications;
@@ -31,13 +32,18 @@ namespace cn.jpush.api.push.mode
             var platformNotification = AndroidPlatformNotification.alert("alert").setTitle(title).setExras(extras);
             return Notification.alert(alert).addPlatformNotification(platformNotification);
         }
+        public static Notification ios(String alert, Dictionary<String, String> extras)
+        {
+            throw new NotImplementedException();
+           // var platformNotification = iosPlatformNotification
+
+           // return Notification.alert(alert).addPlatformNotification(platformNotification);
+        }
         public Notification addPlatformNotification(PlatformNotification platformNotification)
         {
             notifications.Add(platformNotification);
             return this;
         }
-
-
         public object toJsonObject()
         {
             Dictionary<string, object> dict = new Dictionary<string, object>();
