@@ -17,7 +17,7 @@ namespace cn.jpush.api.common
     
         //private static Gson _gson = new Gson();
 
-        public HttpStatusCode responseCode = HttpStatusCode.OK;
+        public HttpStatusCode responseCode = HttpStatusCode.BadRequest;
         public String responseContent;
     
         public ErrorObject error;     // error for non-200 response, used by new API

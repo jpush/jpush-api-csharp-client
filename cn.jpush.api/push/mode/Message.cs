@@ -16,20 +16,34 @@ namespace cn.jpush.api.push.mode
         private  String title;
         private  String msgContent;
         private  String contentType;
-        Dictionary<string, object> dict;
+        Dictionary<string, object> extras;
       
         private Message(String title, String msgContent, String contentType, Dictionary<string, object> dict)
         {
             this.title = title;
             this.msgContent = msgContent;
             this.contentType = contentType;
-            this.dict = dict;
+            this.extras = dict;
         }
         public static Message content(String msgContent)
         {
             return new Message(null,msgContent,null,null);
         }
-
+        public Message setTitle(string title)
+        {
+            this.title=title;
+            return this;
+        }
+        public Message setContentType(string contentType)
+        {
+            this.contentType = contentType;
+            return this;
+        }
+        public Message setExtras(Dictionary<string,object> extras)
+        {
+            this.extras = extras;
+            return this;
+        }
         public object toJsonObject()
         {
             Dictionary<string, object> dict = new Dictionary<string, object>();
@@ -45,13 +59,11 @@ namespace cn.jpush.api.push.mode
             {
                 dict.Add(CONTENT_TYPE,contentType);
             }
-            if(EXTRAS!=null)
+            if (this.extras != null)
             {
-                dict.Add(EXTRAS, this.dict);
+                dict.Add(EXTRAS, this.extras);
             }
             return dict;
         }
-
-
     }
 }

@@ -53,6 +53,7 @@
     <Compile Include="common\BaseResult.cs" />
     <Compile Include="common\DeviceType.cs" />
     <Compile Include="common\ResponseResult.cs" />
+    <Compile Include="common\ServiceHelper.cs" />
     <Compile Include="JPushClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="push\mode\Audience.cs" />

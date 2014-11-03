@@ -21,7 +21,7 @@ namespace cn.jpush.api.push.notificaiton
             this.title = title;
             this.openPage = openPage;
         }
-        public new static WinphonePlatformNotification alert(String alert)
+        public  static WinphonePlatformNotification alert(String alert)
         {
             return new WinphonePlatformNotification(alert, null, null, null);
         }
@@ -37,7 +37,7 @@ namespace cn.jpush.api.push.notificaiton
         }
         public WinphonePlatformNotification setAlert(String alert)
         {
-            base.alert = alert;
+            base.alertNotification = alert;
             return this;
         }
         public WinphonePlatformNotification setExras(Dictionary<string, string> extras)

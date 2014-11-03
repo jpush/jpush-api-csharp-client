@@ -13,7 +13,6 @@ namespace cn.jpush.api.report
         private  const String REPORT_HOST_NAME = "https://report.jpush.cn";
         private  const String REPORT_RECEIVE_PATH = "/v2/received";
         private String appKey;
-
         private String masterSecret;
 
         public ReportClient(String appKey, String masterSecret) 
@@ -21,7 +20,6 @@ namespace cn.jpush.api.report
             this.appKey = appKey;
             this.masterSecret = masterSecret;        
         }
-
         public ReceivedResult getReceiveds(String msg_ids) 
         {
 
@@ -31,12 +29,10 @@ namespace cn.jpush.api.report
             ReceivedResult result = new ReceivedResult();
             List<ReceivedResult.Received> list = new List<ReceivedResult.Received>();
 
-            //Console.WriteLine("recie content=="+rsp.responseContent);
+            Console.WriteLine("recie content=="+rsp.responseContent);
             if (rsp.responseCode == System.Net.HttpStatusCode.OK)
             {
-                //Console.WriteLine("responseContent===" + result.responseContent);
                 list = (List<ReceivedResult.Received>)JsonTool.JsonToObject(rsp.responseContent,list);
-                //Console.WriteLine(obj);
                 String content = rsp.responseContent;
             }
             result.ResponseResult = rsp;

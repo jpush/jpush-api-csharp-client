@@ -1,4 +1,5 @@
-﻿using System;
+﻿using cn.jpush.api.common;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -45,16 +46,16 @@ namespace cn.jpush.api.push.notificaiton
         }
         public static iosPlatformNotification alert(string alert)
         {
-            return new iosPlatformNotification(alert,);
+            return new iosPlatformNotification(alert,null,"+1",false,false,false,null,null);
         }
-        public iosPlatformNotification setSoundDisabled(bool soundDisabled)
+        public iosPlatformNotification disableSound()
         {
-            this.soundDisabled = soundDisabled;
+            this.soundDisabled = true;
             return this;
         }
-        public iosPlatformNotification setBadgeDisabled(bool badgeDisabled)
+        public iosPlatformNotification disableBadge()
         {
-            this.badgeDisabled = badgeDisabled;
+            this.badgeDisabled = true;
             return this;
         }
         public iosPlatformNotification setSound(String sound)
@@ -62,11 +63,33 @@ namespace cn.jpush.api.push.notificaiton
             this.sound = sound;
             return this;
         }
-        public iosPlatformNotification setBadge(String badge)
+        public iosPlatformNotification setBadge(int badge)
         {
-            this.badge = badge;
+            this.badge = badge.ToString();
             return this;
         }
+        public iosPlatformNotification autoBadge()
+        {
+            return incrBadge(1);
+        }
+        public iosPlatformNotification incrBadge(int badge)
+        {
+            if (ServiceHelper.isValidIntBadge(Math.Abs(badge)))
+            {
+                Debug.WriteLine(ALERT_VALID_BADGE);
+                return this;
+            }
+            if (badge >= 0)
+            {
+                this.badge = "+" + badge;
+            }
+            else
+            {
+                this.badge = "" + badge;
+            }
+            return this;
+        }
+
         public iosPlatformNotification setContentAvailable(bool contentAvailable)
         {
             this.contentAvailable = contentAvailable;
@@ -77,15 +100,10 @@ namespace cn.jpush.api.push.notificaiton
             this.category = category;
             return this;
         }
-        public iosPlatformNotification setExras(Dictionary<string, string> extras)
+        public iosPlatformNotification setExtras(Dictionary<string, string> extras)
         {
             base.extras = extras;
             return this;
-        }
-        public new iosPlatformNotification alert(string alert)
-        {
-            Debug.Assert(!string.IsNullOrEmpty(alert));
-            return new iosPlatformNotification(alert, null, null, false, false, false, null, null);
         }
         override  public String getPlatformName()
         {

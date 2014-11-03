@@ -22,7 +22,7 @@ namespace cn.jpush.api.push.notificaiton
             this.title = title;
             this.builderId = builderId;
         }
-        public new static AndroidPlatformNotification alert(string alert)
+        public  static AndroidPlatformNotification alert(string alert)
         {
             return new AndroidPlatformNotification(alert, null, 0, null);
         }
@@ -39,7 +39,7 @@ namespace cn.jpush.api.push.notificaiton
         }
         public AndroidPlatformNotification setAlert(String alert)
         {
-            base.alert = alert;
+            base.alertNotification = alert;
             return this;
         }
         public AndroidPlatformNotification setExras(Dictionary<string, string> extras)

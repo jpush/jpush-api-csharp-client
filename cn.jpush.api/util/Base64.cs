@@ -11,6 +11,7 @@ namespace cn.jpush.api.util
         public static String getBase64Encode(String str)
         {
             byte[] bytes = Encoding.Default.GetBytes(str);
+            //
             return Convert.ToBase64String(bytes).Replace("=", "");
         }
     }

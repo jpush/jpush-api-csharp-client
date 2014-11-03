@@ -30,9 +30,22 @@ namespace cn.jpush.api
             _reportClient = new ReportClient(app_key, masterSecret);
 
         }
-        public void SendPush(PushPayload payload){
-            _pushClient.sendPush(payload);
+        // ----------------------------- Push API
+        public MessageResult SendPush(PushPayload payload)
+        {
+            return _pushClient.sendPush(payload);
         }
+        public MessageResult sendPush(String payloadString)
+        {
+            return _pushClient.sendPush(payloadString);
+        }
+        // ------------------------------- Report API
+        /**
+         * Get received report. 
+         * 
+         * @param msgIds 100 msgids to batch getting is supported.
+         * @return ReceivedResult. Can be printed to JSON.
+        */
         public ReceivedResult getReceivedApi(String msg_ids)
         {
             return _reportClient.getReceiveds(msg_ids);

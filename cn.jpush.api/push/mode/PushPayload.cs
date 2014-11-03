@@ -1,4 +1,5 @@
-﻿using cn.jpush.api.util;
+﻿using cn.jpush.api.push.notificaiton;
+using cn.jpush.api.util;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace cn.jpush.api.push.mode
 
         private Platform platform;
         private Audience audience;
-        private Notification notificaiton;
+        private Notification notification;
         private Message message;
         private Options options;
 
@@ -30,11 +31,11 @@ namespace cn.jpush.api.push.mode
         {
             Debug.Assert(platform != null);
             Debug.Assert(audience != null);
-            Debug.Assert(notificaiton != null || message != null);
+            Debug.Assert(notification != null || message != null);
 
             this.platform = platform;
             this.audience = audience;
-            this.notificaiton = notification;
+            this.notification = notification;
             this.message = message;
             this.options = options;
         }
@@ -60,13 +61,13 @@ namespace cn.jpush.api.push.mode
                                    Message.content(msgContent),
                                    null);
         }
-
+        
         public static PushPayload FromJSON(String payloadString)
         {
             try
             {
-               PushPayload pushPayLoad = JsonConvert.DeserializeObject<PushPayload>(payloadString);
-               return pushPayLoad;
+               var jsonObject = JsonConvert.DeserializeObject(payloadString);
+               return null;
             }
             catch(Exception e)
             {
@@ -88,11 +89,45 @@ namespace cn.jpush.api.push.mode
         }
         public bool IsGlobalExceedLength()
         {
-            throw new NotImplementedException();
+            int messageLength = 0;
+            if (notification!=null)
+            {
+                var notificationContent=notification.toJsonObject();
+                var notificaitonJson = JsonConvert.SerializeObject(notificationContent);
+                if (notificaitonJson != null)
+                {
+                    messageLength += UTF8Encoding.UTF8.GetBytes(notificaitonJson).Length;
+                }
+                if( message ==null){
+                    return messageLength > MAX_GLOBAL_ENTITY_LENGTH;
+                }
+                else
+                {
+                    var messageJson = JsonConvert.SerializeObject(message.toJsonObject());
+                    if (messageJson != null)
+                    {
+                        messageLength += UTF8Encoding.UTF8.GetBytes(messageJson).Length;
+                    }
+                    return messageLength > MAX_GLOBAL_ENTITY_LENGTH;
+                }
+            }
+            return false;
         }
         public bool IsIosExceedLength()
         {
-            throw new NotImplementedException();
+          
+            if(this.notification!=null){
+                Dictionary<string,object> dict = this.notification.toJsonObject() as Dictionary<string,object>;
+                if (dict != null && dict.ContainsKey(iosPlatformNotification.NOTIFICATION_IOS))
+                {
+                    var value = dict[iosPlatformNotification.NOTIFICATION_IOS];
+                    var iosJson = JsonConvert.SerializeObject(value);
+                    if(iosJson != null){
+                        return UTF8Encoding.UTF8.GetBytes(iosJson).Length > MAX_IOS_PAYLOAD_LENGTH;
+                    }
+                }
+            }
+            return false;
         }
         public string ToJson()
         {
@@ -105,9 +140,9 @@ namespace cn.jpush.api.push.mode
             {
                 dict.Add(AUDIENCE, audience.toJsonObject());
             }
-            if (notificaiton != null)
+            if (this.notification != null)
             {
-                dict.Add(NOTIFICATION, notificaiton.toJsonObject());
+                dict.Add(NOTIFICATION, this.notification.toJsonObject());
             }
             if(message != null)
             {

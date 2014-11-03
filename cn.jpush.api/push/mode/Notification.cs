@@ -10,14 +10,13 @@ using cn.jpush.api.push.notificaiton;
 // ------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using cn.jpush.api.push.notificaiton
 namespace cn.jpush.api.push.mode
 {
     public class Notification : IPushMode
 	{
         private  String alertNotificaiton;
         private  HashSet<PlatformNotification> notifications;
-
+        
         private Notification(String alert, HashSet<PlatformNotification> notifications)
         {
             this.alertNotificaiton = alert;
@@ -29,17 +28,35 @@ namespace cn.jpush.api.push.mode
         }
         public static Notification android(String alert, String title, Dictionary<String, String> extras)
         {
-            var platformNotification = AndroidPlatformNotification.alert("alert").setTitle(title).setExras(extras);
-            return Notification.alert(alert).addPlatformNotification(platformNotification);
+            var platformNotification = AndroidPlatformNotification.alert(alert).setTitle(title).setExras(extras);
+            return Notification.alert(alert).addPlatform(platformNotification);
         }
         public static Notification ios(String alert, Dictionary<String, String> extras)
         {
-            throw new NotImplementedException();
-           // var platformNotification = iosPlatformNotification
-
-           // return Notification.alert(alert).addPlatformNotification(platformNotification);
+            var platformNotification = iosPlatformNotification.alert(alert).setExtras(extras);
+            return Notification.alert(alert).addPlatform(platformNotification);
         }
-        public Notification addPlatformNotification(PlatformNotification platformNotification)
+        public static Notification ios_auto_badge()
+        {
+           var platformNotification = iosPlatformNotification.alert("").autoBadge();
+           return Notification.alert(null).addPlatform(platformNotification);
+        }
+        public static Notification ios_set_badge(int badge)
+        {
+            var platformNotification = iosPlatformNotification.alert("").setBadge(badge);
+            return Notification.alert(null).addPlatform(platformNotification);
+        }
+        public static Notification ios_incr_badge(int badge)
+        {
+            var platformNotification = iosPlatformNotification.alert("").incrBadge(badge);
+            return Notification.alert(null).addPlatform(platformNotification);
+        }
+        public static Notification winphone(String alert,Dictionary<string,string> extras)
+        {
+            var plarformNotification = WinphonePlatformNotification.alert("").setExras(extras);
+            return Notification.alert(null).addPlatform(plarformNotification);
+        }
+        public   Notification  addPlatform(PlatformNotification platformNotification)
         {
             notifications.Add(platformNotification);
             return this;

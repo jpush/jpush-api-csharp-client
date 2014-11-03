@@ -30,12 +30,10 @@ namespace cn.jpush.api.common
         { 
             return this.sendRequest( "POST",  url,  auth, reqParams);        
         }
-
         public ResponseResult sendGet(String url, String auth, String reqParams)
         {
             return this.sendRequest("GET", url, auth, reqParams);
         }
-
         /**
          *
          * method "POST" or "GET"
@@ -44,8 +42,11 @@ namespace cn.jpush.api.common
          */
         public ResponseResult sendRequest(String method, String url, String auth,String reqParams)
         {
-            //Console.WriteLine("begin send" + reqParams);
-            var parameter = JsonConvert.DeserializeObject<Dictionary<string, object>>(reqParams);
+            Console.WriteLine("Send request - " + method.ToString()+ " " + url);
+            if (null != reqParams)
+            {
+                Console.WriteLine("Request Content - " + reqParams);
+            }
             ResponseResult result = new ResponseResult();
             HttpWebRequest myReq = null;
             HttpWebResponse response = null;
@@ -54,13 +55,14 @@ namespace cn.jpush.api.common
                 myReq = (HttpWebRequest)WebRequest.Create(url);
                 myReq.Method = method;
                 myReq.ContentType = "application/json";
+
                 if ( !String.IsNullOrEmpty(auth) )
                 {
                     myReq.Headers.Add("Authorization", "Basic " + auth);    
                 }
                 if (method == "POST")
                 {
-                    byte[] bs = Encoding.UTF8.GetBytes(reqParams);
+                    byte[] bs = UTF8Encoding.UTF8.GetBytes(reqParams);
                     myReq.ContentLength = bs.Length;
                     using (Stream reqStream = myReq.GetRequestStream())
                     {
@@ -89,18 +91,22 @@ namespace cn.jpush.api.common
                 }
                 else if (statusCode == HttpStatusCode.NotFound)
                 {
+                    result.responseCode = HttpStatusCode.NotFound;
                     Debug.Print("error is 404");
                 }
                 else if (statusCode == HttpStatusCode.Forbidden)
                 {
+                    result.responseCode = HttpStatusCode.Forbidden;
                     Debug.Print("error is 403");
                 }
                 else if (statusCode == HttpStatusCode.Unauthorized)
                 {
+                    result.responseCode = HttpStatusCode.Unauthorized;
                     Debug.Print("error is 401");
                 }
                 else if (statusCode == HttpStatusCode.InternalServerError)
                 {
+                    result.responseCode = HttpStatusCode.InternalServerError;
                     Debug.Print("error is 500");
                 }
                 else 
