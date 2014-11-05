@@ -24,9 +24,19 @@ namespace cn.jpush.api.push
         }
         public MessageResult sendPush(PushPayload payload) 
         {
-            throw new NotImplementedException();
-            //String msgParams = payload.ToJson();
-            //return sendPush(msgParams);
+            Debug.Assert(payload != null);
+            Debug.Assert(payload.platform != null);
+            Debug.Assert(payload.audience != null);
+            Debug.Assert(payload.message!= null||payload.notification!=null);
+            if (payload != null && 
+                payload.platform != null &&
+                payload.audience != null && 
+                (payload.message != null || payload.notification != null))
+            {
+                String payloadJson = payload.ToJson();
+                return sendPush(payloadJson);
+            }
+            return null;
         }
         public MessageResult sendPush(string payloadString)
         {
@@ -46,6 +56,7 @@ namespace cn.jpush.api.push
 
             Debug.Assert(!string.IsNullOrEmpty(this.appKey));
             Debug.Assert(!string.IsNullOrEmpty(this.masterSecret));
+
             String origin=this.appKey+":"+this.masterSecret;
             return  Base64.getBase64Encode(origin);
         }

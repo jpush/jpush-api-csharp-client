@@ -87,5 +87,6 @@ namespace cn.jpush.api.push.mode
             }
             return jsonList;
         }
+
     }
 }

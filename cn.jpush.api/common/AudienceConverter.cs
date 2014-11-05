@@ -68,7 +68,6 @@ namespace cn.jpush.api.common
             }
             else if (reader.TokenType == JsonToken.StartObject)
             {
-
                 audience.all = null;
                 Dictionary<string, HashSet<string>> dictionary=new Dictionary<string,HashSet<string>>();
                 string key="key";

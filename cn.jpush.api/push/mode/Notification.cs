@@ -15,9 +15,6 @@ namespace cn.jpush.api.push.mode
 {
     public class Notification 
 	{
-       
-        public Dictionary<string,object> dictionary;
-
         public String alert{get;set;}
         [JsonProperty(PropertyName = "ios")]
         public iosPlatformNotification iosNotification { get; set; }
@@ -25,8 +22,6 @@ namespace cn.jpush.api.push.mode
         public AndroidPlatformNotification AndroidNotification { get; set; }
         [JsonProperty(PropertyName = "winphone")]
         public WinphonePlatformNotification WinphoneNotification { get; set; }
-
-       // private  HashSet<PlatformNotification> notifications;
 
         public Notification()
         {
@@ -98,27 +93,7 @@ namespace cn.jpush.api.push.mode
             notificaiton.WinphoneNotification = platformNotification;
             return notificaiton;
         }
-        //public   Notification  addPlatform(PlatformNotification platformNotification)
-        //{
-        //    notifications.Add(platformNotification);
-        //    return this;
-        //}
-        //public object toJsonObject()
-        //{
-        //    Dictionary<string, object> dict = new Dictionary<string, object>();
-        //    if (alert != null)
-        //    {
-        //        dict.Add(PlatformNotification.ALERT, alert);
-        //    }
-        //    if (this.notifications != null)
-        //    {
-        //        foreach (var item in this.notifications)
-        //        {
-        //            dict.Add(item.getPlatformName(), item.toJsonObject());
-        //        }
-        //    }
-        //    return dict;
-        //}
+      
 	}
 }
 

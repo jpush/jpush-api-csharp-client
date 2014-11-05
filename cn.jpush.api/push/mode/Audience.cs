@@ -79,7 +79,7 @@ namespace cn.jpush.api.push.mode
                 }
             }
         }
-
+        
 		public void tag(HashSet<string> values){
 
             AudienceTarget target = AudienceTarget.tag(values);
@@ -121,7 +121,7 @@ namespace cn.jpush.api.push.mode
            
             AddWithAudienceTarget( AudienceTarget.alias(values));
 		}
-        public void  alias(params string[] values)
+        public void alias(params string[] values)
         {
             alias(new HashSet<string>(values));
         }

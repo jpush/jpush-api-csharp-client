@@ -27,16 +27,12 @@ namespace JpushApiClientExample
           
             Console.WriteLine("*****开始发送******");
 
-            var json = PushPayload.ToJson();
-            //string json="{\"platform\":\"all\"}";
-            //var test = PushPayload.FromJSON(json);
-
-            //String app_key = "997f28c1cea5a9f17d82079a";
-            //String master_secret = "47d264a3c02a6a5a4a256a45";
-            //JPushClient client = new JPushClient(app_key, master_secret);
-            //var payload = PushPayload.AlertAll("test");
-            //PushPayload payloadMessage = PushPayload.MessageAll("qinghe_message");
-            //client.SendPush(payloadMessage);
+            String app_key = "997f28c1cea5a9f17d82079a";
+            String master_secret = "47d264a3c02a6a5a4a256a45";
+            JPushClient client = new JPushClient(app_key, master_secret);
+         
+            PushPayload payloadMessage = PushPayload.MessageAll("qinghe_message");
+            client.SendPush(payloadMessage);
             Console.WriteLine("*****结束发送******");
         }
         public static PushPayload PushObject_All_All_Alert()

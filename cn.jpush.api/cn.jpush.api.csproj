@@ -62,7 +62,6 @@
     <Compile Include="push\audience\AudienceTarget.cs" />
     <Compile Include="push\audience\AudienceType.cs" />
     <Compile Include="push\MessageResult.cs" />
-    <Compile Include="push\mode\IPushMode.cs" />
     <Compile Include="push\mode\Message.cs" />
     <Compile Include="push\mode\Options.cs" />
     <Compile Include="push\mode\Platform.cs" />
