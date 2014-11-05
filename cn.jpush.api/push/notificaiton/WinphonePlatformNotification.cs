@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,37 +14,25 @@ namespace cn.jpush.api.push.notificaiton
         private static  String TITLE = "title";
         private static  String _OPEN_PAGE = "_open_page";
     
-        private  String title;
-        private  String openPage;
-
-        private WinphonePlatformNotification(String alert, String title, String openPage, Dictionary<string,string> extras):base(alert,extras) {
+        public  String title;
+        [JsonProperty(PropertyName = "_open_page")]
+        public  String openPage;
+        public WinphonePlatformNotification():base()
+        {
+            this.title = null;
+            this.openPage = null;
+        }
+        public WinphonePlatformNotification(string alert)
+            : base(alert)
+        {
+            this.title = null;
+            this.openPage = null;
+        }
+        public WinphonePlatformNotification(String alert, String title, String openPage, Dictionary<string,string> extras):
+            base(alert,extras) {
         
             this.title = title;
             this.openPage = openPage;
-        }
-        public  static WinphonePlatformNotification alert(String alert)
-        {
-            return new WinphonePlatformNotification(alert, null, null, null);
-        }
-        public WinphonePlatformNotification setTitle(string title)
-        {
-            this.title = title;
-            return this;
-        }
-        public WinphonePlatformNotification setOpenPage(string openPage)
-        {
-            this.openPage = openPage;
-            return this;
-        }
-        public WinphonePlatformNotification setAlert(String alert)
-        {
-            base.alertNotification = alert;
-            return this;
-        }
-        public WinphonePlatformNotification setExras(Dictionary<string, string> extras)
-        {
-            base.extras = extras;
-            return this;
         }
         override public String getPlatformName()
         {

@@ -4,94 +4,145 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using cn.jpush.api.push.audience;
+using System.Diagnostics;
 namespace cn.jpush.api.push.mode
 {
-    public  class Audience : IPushMode
+    public  class Audience
     {
-		private const String ALL = "all";
-        private bool allAudience;
-		private HashSet<AudienceTarget> targets;
+        private const String ALL = "all";
+        private void AddWithAudienceTarget(AudienceTarget target)
+        {
+            Debug.Assert(target != null && target.values != null);
+            if (target != null && target.values != null)
+            {
+                this.all = null;
+                if (dictionary == null)
+                {
+                    dictionary = new Dictionary<string, HashSet<string>>();
+                }
+                if (dictionary.ContainsKey(target.audienceType.ToString()))
+                {
+                    HashSet<string> origin = dictionary[target.audienceType.ToString()];
+                    foreach (var item in target.values)
+                    {
+                        origin.Add(item);
+                    }
+                }
+                else
+                {
+                    dictionary.Add(target.audienceType.ToString(), target.values);
+                }
+            }
+        }
 
-        private Audience(bool all, HashSet<AudienceTarget> targets)
+        public string all;
+        public Dictionary<string, HashSet<string>> dictionary;
+        public Audience()
         {
-            this.allAudience = all;
-			this.targets = targets;
-		}
-        public static Audience all()
-        {
-			return new Audience(true,null);
-		}
-		public static Audience tag(HashSet<string> values){
-			HashSet<AudienceTarget> audienceTargets = new HashSet<AudienceTarget> ();
-			audienceTargets.Add (AudienceTarget.tag (values));
-			return new Audience (false, audienceTargets);
-		}
-        public static Audience tag(params string[] values)
-        {
-            HashSet<AudienceTarget> audienceTargets = new HashSet<AudienceTarget>();
-            audienceTargets.Add(AudienceTarget.tag(new HashSet<string>(values)));
-            return new Audience(false, audienceTargets);
+            all = ALL;
+            dictionary = null;
         }
-		public static Audience tag_and(HashSet<string> values){
-			HashSet<AudienceTarget> audienceTargets = new HashSet<AudienceTarget> ();
-			audienceTargets.Add (AudienceTarget.tag_and (values));
-			return new Audience (false, audienceTargets);
-		}
-        public static Audience tag_and(params string[] values)
+        public Audience(bool all)
         {
-            HashSet<AudienceTarget> audienceTargets = new HashSet<AudienceTarget>();
-            audienceTargets.Add(AudienceTarget.tag_and(new HashSet<string>( values)));
-            return new Audience(false, audienceTargets);
+            if (all)
+            {
+                this.all = ALL;
+            }
+            dictionary = null;
         }
-		public static Audience alias(HashSet<string> values){
-			HashSet<AudienceTarget> audienceTargets = new HashSet<AudienceTarget> ();
-			audienceTargets.Add (AudienceTarget.alias (values));
-			return new Audience (false, audienceTargets);
-		}
-        public static Audience alias(params string[] values)
+        public Audience(HashSet<AudienceTarget> targets)
         {
-            HashSet<AudienceTarget> audienceTargets = new HashSet<AudienceTarget>();
-            audienceTargets.Add(AudienceTarget.alias(new HashSet<string>(values)));
-            return new Audience(false, audienceTargets);
+            this.all = null;
+            if (targets != null)
+            {
+                dictionary = new Dictionary<string, HashSet<string>>(targets.Count);
+                foreach (var target in targets)
+                {
+                    dictionary.Add(target.audienceType.ToString(), target.values);
+                }
+            }
         }
-		public static Audience segment(HashSet<string> values){
-			HashSet<AudienceTarget> audienceTargets = new HashSet<AudienceTarget> ();
-			audienceTargets.Add (AudienceTarget.tag (values));
-			return new Audience (false, audienceTargets);
-		}
-        public static Audience segment(params string[] values)
+        public Audience(bool all, HashSet<AudienceTarget> targets)
         {
-            HashSet<AudienceTarget> audienceTargets = new HashSet<AudienceTarget>();
-            audienceTargets.Add(AudienceTarget.tag(new HashSet<string>(values)));
-            return new Audience(false, audienceTargets);
+            Debug.Assert(all && targets == null || !all && targets != null);
+
+            if (all)
+            {
+                this.all = ALL;
+            }
+            if (targets != null)
+            {
+                dictionary = new Dictionary<string, HashSet<string>>(targets.Count);
+                foreach (var target in targets)
+                {
+                    dictionary.Add(target.audienceType.ToString(), target.values);
+                }
+            }
         }
-		public static Audience registrationId(HashSet<string> values){
-			HashSet<AudienceTarget> audienceTargets = new HashSet<AudienceTarget> ();
-			audienceTargets.Add (AudienceTarget.tag (values));
-			return new Audience (false, audienceTargets);
+
+		public void tag(HashSet<string> values){
+
+            AudienceTarget target = AudienceTarget.tag(values);
+            AddWithAudienceTarget(target);
+           
 		}
-        public static Audience registrationId(params string[] values)
+        public void tag(params string[] values)
         {
-            HashSet<AudienceTarget> audienceTargets = new HashSet<AudienceTarget>();
-            audienceTargets.Add(AudienceTarget.tag(new HashSet<string>(values)));
-            return new Audience(false, audienceTargets);
+            var valueList = new HashSet<string>(values);
+            tag(valueList);
+        }
+		public void tag_and(HashSet<string> values)
+        {
+            AudienceTarget target = AudienceTarget.tag_and(values);
+            this.all = null;
+            if (dictionary == null)
+            {
+                dictionary = new Dictionary<string, HashSet<string>>();
+            }
+            if (dictionary.ContainsKey(target.audienceType.ToString()))
+            {
+                HashSet<string> origin = dictionary[target.audienceType.ToString()];
+                foreach (var item in values)
+                {
+                    origin.Add(item);
+                }
+            }
+            else
+            {
+                dictionary.Add(target.audienceType.ToString(), values);
+            }
+		}
+        public void tag_and(params string[] values)
+        {
+            HashSet<string> list = new HashSet<string>();
+            tag_and(list);
+        }
+		public void alias(HashSet<string> values){
+           
+            AddWithAudienceTarget( AudienceTarget.alias(values));
+		}
+        public void  alias(params string[] values)
+        {
+            alias(new HashSet<string>(values));
+        }
+		public void segment(HashSet<string> values)
+        {
+            AddWithAudienceTarget(AudienceTarget.segment(values));
+		}
+        public void segment(params string[] values)
+        {
+            segment(new HashSet<string>(values));
+        }
+		public void registrationId(HashSet<string> values)
+        {
+            AddWithAudienceTarget(AudienceTarget.registrationId(values));
+		}
+        public void registrationId(params string[] values)
+        {
+            registrationId(new HashSet<string>(values));
         }
 		public bool isAll(){
-            return allAudience;
+            return all!=null;
 		}
-        public object toJsonObject()
-        {
-            if (allAudience)
-            {
-                return  ALL;
-            }
-            Dictionary<string, object> dictionary = new Dictionary<string, object>();
-            foreach (var target in this.targets)
-            {
-                dictionary.Add(target.audienceType.ToString(), target.values);
-            }
-            return dictionary;
-        }
-
     }
 }

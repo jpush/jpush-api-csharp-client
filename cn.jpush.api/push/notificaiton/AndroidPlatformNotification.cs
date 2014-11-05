@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,40 +13,26 @@ namespace cn.jpush.api.push.notificaiton
     
         private const String TITLE = "title";
         private const String BUILDER_ID = "builder_id";
-    
-        private  String title;
-        private  int builderId;
 
-        private AndroidPlatformNotification(String alert, String title, int builderId,Dictionary<string,string> extras)
+        public String title{get;set;}
+        [DefaultValue(0)]
+        public int builder_id { get; set; }
+        public AndroidPlatformNotification():base()
+        {
+            this.title = null;
+            this.builder_id = 0;
+        }
+        public AndroidPlatformNotification(string alert)
+            : base(alert)
+        {
+            this.title = null;
+            this.builder_id = 0;
+        }
+        public AndroidPlatformNotification(String alert, String title, int builderId,Dictionary<string,string> extras)
             : base(alert,extras)
         {
             this.title = title;
-            this.builderId = builderId;
-        }
-        public  static AndroidPlatformNotification alert(string alert)
-        {
-            return new AndroidPlatformNotification(alert, null, 0, null);
-        }
-        public AndroidPlatformNotification setTitle(String title)
-        {
-            
-            this.title = title;
-            return this;
-        }
-        public AndroidPlatformNotification setBuilderID(int builderId)
-        {
-            this.builderId = builderId;
-            return this;
-        }
-        public AndroidPlatformNotification setAlert(String alert)
-        {
-            base.alertNotification = alert;
-            return this;
-        }
-        public AndroidPlatformNotification setExras(Dictionary<string, string> extras)
-        {
-            base.extras = extras;
-            return this;
+            this.builder_id = builderId;
         }
         override public string getPlatformName()
         {
@@ -57,7 +44,7 @@ namespace cn.jpush.api.push.notificaiton
             if (dictionary == null) { dictionary = new Dictionary<string, object>(); }
 
             if (title != null) { dictionary.Add(TITLE, title); }
-            if (builderId > 0) { dictionary.Add(BUILDER_ID, builderId); }
+            if (builder_id > 0) { dictionary.Add(BUILDER_ID, builder_id); }
 
             return dictionary;
         }

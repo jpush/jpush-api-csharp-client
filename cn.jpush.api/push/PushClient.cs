@@ -24,9 +24,9 @@ namespace cn.jpush.api.push
         }
         public MessageResult sendPush(PushPayload payload) 
         {
-            String msgParams = payload.ToJson();
-            return sendPush(msgParams);
-
+            throw new NotImplementedException();
+            //String msgParams = payload.ToJson();
+            //return sendPush(msgParams);
         }
         public MessageResult sendPush(string payloadString)
         {

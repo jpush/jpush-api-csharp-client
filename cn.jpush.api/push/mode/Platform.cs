@@ -2,79 +2,81 @@
 using cn.jpush.api.util;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace cn.jpush.api.push.mode
 {
-   public class Platform : IPushMode
+   public class Platform 
     {
         private  const String ALL = "all";
-
-        private bool allPlatform;
-        private  HashSet<DeviceType> deviceTypes;
+        public string all{get;set;}
+        public  HashSet<string> deviceTypes;
         public Platform()
         {
-            this.allPlatform = true;
-            this.deviceTypes = null;
+            all = ALL;
+            deviceTypes = null;
         }
-        private Platform(bool all, HashSet<DeviceType> deviceTypes)
+        private Platform(bool all, HashSet<string> deviceTypes)
         {
-            this.allPlatform = all;
+            //用来判断all=true时deviceTypes必须为空，反之当all=false时deviceTypes有值，不然json序列化会出错
+            Debug.Assert(all && deviceTypes == null || !all && deviceTypes != null);
+            if (all)
+            {
+                //string = ALL;
+            }
             this.deviceTypes = deviceTypes;
         }
-        public static Platform all()
-        {
-            return new Platform(true, null);
-        }
+
         public static Platform ios()
         {
-            HashSet<DeviceType> types=new HashSet<DeviceType>();
-            types.Add(DeviceType.ios);
+            HashSet<string> types = new HashSet<string>();
+            types.Add(DeviceType.ios.ToString());
             return new Platform(false,types);
         }
         public static Platform android()
         {
-            HashSet<DeviceType> types = new HashSet<DeviceType>();
-            types.Add(DeviceType.andriod);
+            HashSet<string> types = new HashSet<string>();
+            types.Add(DeviceType.andriod.ToString());
             return new Platform(false, types);
         }
         public static Platform winphone()
         {
-            HashSet<DeviceType> types = new HashSet<DeviceType>();
-            types.Add(DeviceType.wp);
+            HashSet<string> types = new HashSet<string>();
+            types.Add(DeviceType.wp.ToString());
             return new Platform(false, types);
         }
         public static Platform android_ios()
         {
-            HashSet<DeviceType> types = new HashSet<DeviceType>();
-            types.Add(DeviceType.andriod);
-            types.Add(DeviceType.ios);
+            HashSet<string> types = new HashSet<string>();
+            types.Add(DeviceType.andriod.ToString());
+            types.Add(DeviceType.ios.ToString());
             return new Platform(false, types);
         }
         public static Platform android_winphone()
         {
-            HashSet<DeviceType> types = new HashSet<DeviceType>();
-            types.Add(DeviceType.andriod);
-            types.Add(DeviceType.wp);
+            HashSet<string> types = new HashSet<string>();
+            types.Add(DeviceType.andriod.ToString());
+            types.Add(DeviceType.wp.ToString());
             return new Platform(false, types);
         }
         public static Platform ios_winphone()
         {
-            HashSet<DeviceType> types = new HashSet<DeviceType>();
-            types.Add(DeviceType.ios);
-            types.Add(DeviceType.wp);
+            HashSet<string> types = new HashSet<string>();
+            types.Add(DeviceType.ios.ToString());
+            types.Add(DeviceType.wp.ToString());
 
             return new Platform(false, types);
         }
         public bool isAll()
         {
-            return allPlatform;
+            return all!=null;
         }
         public object toJsonObject()
         {
-            if (allPlatform) 
+            if (all!=null) 
             { 
                 return ALL;
             }
@@ -85,7 +87,5 @@ namespace cn.jpush.api.push.mode
             }
             return jsonList;
         }
-
-
     }
 }

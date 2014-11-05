@@ -18,5 +18,6 @@ namespace cn.jpush.api.common
             }
             return false;
         }
+
     }
 }

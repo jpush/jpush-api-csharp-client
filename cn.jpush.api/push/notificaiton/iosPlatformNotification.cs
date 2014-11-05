@@ -1,4 +1,5 @@
 ﻿using cn.jpush.api.common;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,62 +23,106 @@ namespace cn.jpush.api.push.notificaiton
     
         private   const String ALERT_VALID_BADGE = "Badge number should be 0~99999, "
                 + "and can be prefixed with + to add, - to minus";
+        private const String SOUNd_VALID_BADGE = "Sound  should not be null or empty, "
+                + "and disableSound property must be false";
 
 
-        public bool soundDisabled;
-        public bool badgeDisabled;
-        public String sound;
-        public String badge;
-        public bool contentAvailable;
-        public String category;
+        private bool soundDisabled;
+        private bool badgeDisabled;
 
-        private iosPlatformNotification(String alert, String sound, String badge,
-           bool contentAvailable, bool soundDisabled, bool badgeDisabled,
-           String category,
-           Dictionary<String, string> extras)
+        public String sound{get;set;}
+        public String badge{get;set;}
+
+        [JsonProperty(PropertyName = "content-available")]
+        public bool contentAvailable{get;set;}
+
+        public String category{get;set;}
+        public iosPlatformNotification()
+        {
+            base.alert = null;
+            base.extras = null;
+            this.soundDisabled = false;
+            this.badgeDisabled = false;
+            this.contentAvailable = false;
+            this.category = null;
+            this.badge = DEFAULT_BADGE;
+            this.sound = DEFAULT_SOUND;
+        }
+        public iosPlatformNotification(string alert)
+        {
+            this.alert = alert;
+            this.soundDisabled = false;
+            this.badgeDisabled = false;
+            this.contentAvailable = false;
+            this.category = null;
+            this.badge = null != badge ? badge : DEFAULT_BADGE;
+            this.sound = null != sound ? sound : DEFAULT_SOUND;
+        }
+
+        public iosPlatformNotification(String alert, 
+                                        String sound=null, 
+                                        String badge=null,
+                                        bool contentAvailable=false,
+                                        bool soundDisabled=false,
+                                        bool badgeDisabled=false,
+                                        String category=null,
+                                        Dictionary<String, string> extras=null)
             : base(alert,extras)
         {
-            this.sound = sound;
-            this.badge = badge;
             this.category = category;
             this.contentAvailable = contentAvailable;
             this.soundDisabled = soundDisabled;
             this.badgeDisabled = badgeDisabled;
+            if (!badgeDisabled)
+            {
+                this.badge = null != badge ? badge : DEFAULT_BADGE;
+            }
+            if (!soundDisabled)
+            {
+                this.sound = null != sound ? sound : DEFAULT_SOUND;
+            }
         }
-        public static iosPlatformNotification alert(string alert)
-        {
-            return new iosPlatformNotification(alert,null,"+1",false,false,false,null,null);
-        }
-        public iosPlatformNotification disableSound()
+
+        public void disableSound()
         {
             this.soundDisabled = true;
-            return this;
+            this.sound = null;
+           
         }
-        public iosPlatformNotification disableBadge()
+        public void disableBadge()
         {
             this.badgeDisabled = true;
-            return this;
+            this.badge = null;
         }
-        public iosPlatformNotification setSound(String sound)
+        public void setSound(String sound)
         {
-            this.sound = sound;
-            return this;
+            Debug.Assert(!string.IsNullOrEmpty(sound) && !soundDisabled);
+            if (!soundDisabled && !string.IsNullOrEmpty(sound))
+            {
+                 this.sound = sound;
+            }
+            else
+            {
+                Console.WriteLine(SOUNd_VALID_BADGE);
+            }
         }
-        public iosPlatformNotification setBadge(int badge)
-        {
-            this.badge = badge.ToString();
-            return this;
-        }
-        public iosPlatformNotification autoBadge()
-        {
-            return incrBadge(1);
-        }
-        public iosPlatformNotification incrBadge(int badge)
+        public void setBadge(int badge)
         {
             if (ServiceHelper.isValidIntBadge(Math.Abs(badge)))
             {
-                Debug.WriteLine(ALERT_VALID_BADGE);
-                return this;
+                Console.WriteLine(ALERT_VALID_BADGE);
+            }
+            this.badge = badge.ToString();
+        }
+        public void autoBadge()
+        {
+             incrBadge(1);
+        }
+        public void incrBadge(int badge)
+        {
+            if (ServiceHelper.isValidIntBadge(Math.Abs(badge)))
+            {
+                Console.WriteLine(ALERT_VALID_BADGE);
             }
             if (badge >= 0)
             {
@@ -87,24 +132,10 @@ namespace cn.jpush.api.push.notificaiton
             {
                 this.badge = "" + badge;
             }
-            return this;
         }
 
-        public iosPlatformNotification setContentAvailable(bool contentAvailable)
-        {
-            this.contentAvailable = contentAvailable;
-            return this;
-        }
-        public iosPlatformNotification setCategory(String category)
-        {
-            this.category = category;
-            return this;
-        }
-        public iosPlatformNotification setExtras(Dictionary<string, string> extras)
-        {
-            base.extras = extras;
-            return this;
-        }
+      
+
         override  public String getPlatformName()
         {
             return NOTIFICATION_IOS;

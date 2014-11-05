@@ -7,27 +7,37 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.push.notificaiton
 {
-    public abstract class PlatformNotification:IPushMode
+    public abstract class PlatformNotification
     {
         public abstract string getPlatformName();
         public const String ALERT = "alert";
         private const String EXTRAS = "extras";
 
-        protected String alertNotification;
-        protected Dictionary<String, string> extras;
+        public String alert{get;set;}
+        public Dictionary<String, string> extras { get; set; }
 
+        public PlatformNotification()
+        {
+            this.alert = null;
+            this.extras = null;
+        }
+        public PlatformNotification(String alert)
+        {
+            this.alert = alert;
+            this.extras = null;
+        }
         public PlatformNotification(String alert, Dictionary<string,string> extras)
         {
-            this.alertNotification = alert;
+            this.alert = alert;
             this.extras = extras;
         }
      
         virtual  public object toJsonObject()
         {
             Dictionary<string, object> dictionary = new Dictionary<string, object>();
-            if (alertNotification != null)
+            if (alert != null)
             {
-                dictionary.Add(ALERT, alertNotification);
+                dictionary.Add(ALERT, alert);
             }
             if (extras != null)
             {

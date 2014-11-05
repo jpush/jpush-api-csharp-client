@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.push.mode
 {
-    interface IPushMode
-    {
-         object toJsonObject();
-    }
+    //interface IPushMode
+    //{
+    //     object toJsonObject();
+    //}
 }

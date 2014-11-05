@@ -49,9 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="common\AudienceConverter.cs" />
     <Compile Include="common\BaseHttpClient.cs" />
     <Compile Include="common\BaseResult.cs" />
     <Compile Include="common\DeviceType.cs" />
+    <Compile Include="common\PlatformConverter.cs" />
     <Compile Include="common\ResponseResult.cs" />
     <Compile Include="common\ServiceHelper.cs" />
     <Compile Include="JPushClient.cs" />
