@@ -21,8 +21,6 @@ namespace cn.jpush.api.common
             get { return responseResult; }
             set { responseResult = value; }
         }
-
-    
         public abstract bool isResultOK();
     
         public abstract int getErrorCode();

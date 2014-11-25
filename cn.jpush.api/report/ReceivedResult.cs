@@ -40,7 +40,7 @@ namespace cn.jpush.api.report
         {
             if (null != ResponseResult)
             {
-                return ResponseResult.error.errcode;
+                return (int)ResponseResult.responseCode;
             }
             return 0;
         }
@@ -49,7 +49,7 @@ namespace cn.jpush.api.report
         {
             if (null != ResponseResult)
             {
-                return ResponseResult.error.errmsg;
+                return ResponseResult.exceptionString;
             }
             return "";
         }

@@ -31,7 +31,7 @@ namespace JpushApiClientExample
             String master_secret = "47d264a3c02a6a5a4a256a45";
             JPushClient client = new JPushClient(app_key, master_secret);
 
-            PushPayload payloadMessage = PushObject_All_All_Alias_Alert(ALERT);
+            PushPayload payloadMessage = PushObject_Android_Tag_AlertWithTitle();
            
             var result = client.SendPush(payloadMessage);
 
@@ -51,30 +51,26 @@ namespace JpushApiClientExample
             audience.alias("alias1","alias2");
             pushPayload.audience = audience;
             pushPayload.notification = new Notification(alert);
-
             return pushPayload;
             
         }
         public static PushPayload PushObject_Android_Tag_AlertWithTitle()
         {
-            //return new PushPayload(Platform.android(),
-            //                       Audience.tag("tag1"),
-            //                       Notification.alert(TITLE));
-            throw new NotImplementedException();
+            PushPayload pushPayload = new PushPayload();
+            pushPayload.platform = new Platform(true);
+
+            var audience = new Audience();
+            audience.tag("tag1");
+            pushPayload.audience = audience;
+
+            pushPayload.notification =  Notification.android(ALERT,TITLE,null);
+
+            return pushPayload;
         }
-        public static PushPayload PushObject_android_and_ios() 
+        public static PushPayload PushObject_android_and_ios()
         {
-            //Dictionary<string, string> extras = new Dictionary<string, string>();
-            //extras.Add("extras_key", "extras_value");
-            //var android = AndroidPlatformNotification.alert("Android Title");
-            //var ios = iosPlatformNotification.initWithAlert(null).incrBadge(1).setExtras(extras);
-
-            //return new PushPayload(Platform.android_ios(),
-            //                      Audience.tag_and("tag1", "tag_all"),
-            //                      Notification.alert("alert content").addPlatform(android).addPlatform(ios)
-            //                      );
-
             throw new NotImplementedException();
+          
         }
         public static PushPayload buildPushObject_ios_tagAnd_alertWithExtrasAndMessage()
         {

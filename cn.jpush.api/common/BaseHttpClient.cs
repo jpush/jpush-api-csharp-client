@@ -79,9 +79,7 @@ namespace cn.jpush.api.common
                     {
                         result.responseContent = reader.ReadToEnd();
                     }
-                    result.setErrorObject();
                 }
-
                 if (statusCode == HttpStatusCode.OK)
                 {
                     String limitQuota = response.GetResponseHeader(RATE_LIMIT_QUOTA);
@@ -89,35 +87,27 @@ namespace cn.jpush.api.common
                     String limitReset = response.GetResponseHeader(RATE_LIMIT_Reset);
                     result.setRateLimit(limitQuota, limitRemaining, limitReset);
                 }
-                else if (statusCode == HttpStatusCode.NotFound)
-                {
-                    result.responseCode = HttpStatusCode.NotFound;
-                    Debug.Print("error is 404");
-                }
-                else if (statusCode == HttpStatusCode.Forbidden)
-                {
-                    result.responseCode = HttpStatusCode.Forbidden;
-                    Debug.Print("error is 403");
-                }
-                else if (statusCode == HttpStatusCode.Unauthorized)
-                {
-                    result.responseCode = HttpStatusCode.Unauthorized;
-                    Debug.Print("error is 401");
-                }
-                else if (statusCode == HttpStatusCode.InternalServerError)
-                {
-                    result.responseCode = HttpStatusCode.InternalServerError;
-                    Debug.Print("error is 500");
-                }
                 else 
                 {
                     Debug.Print("error is " + statusCode.ToString());
                 }
             }
+            catch (WebException e)
+            {
+                HttpStatusCode errorCode = ((HttpWebResponse)e.Response).StatusCode;
+                string statusDescription = ((HttpWebResponse)e.Response).StatusDescription;
+                using (StreamReader sr = new StreamReader(((HttpWebResponse)e.Response).GetResponseStream(), System.Text.Encoding.UTF8))
+                {
+                    result.responseContent = sr.ReadToEnd();
+                }
+                result.responseCode = errorCode;
+                result.exceptionString = e.Message;
+                Debug.Print(e.Message);
+            }
             catch (System.Exception ex)
             {
-                String errorMsg = ex.Message;
-                Debug.Print(errorMsg);
+                 String errorMsg = ex.Message;
+                 Debug.Print(errorMsg);
             }
             finally 
             {

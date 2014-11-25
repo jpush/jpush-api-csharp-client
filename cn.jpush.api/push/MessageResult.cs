@@ -15,18 +15,14 @@ namespace cn.jpush.api.push
         public int sendno;
         public int errcode = ERROR_CODE_NONE;
         public String errmsg;
-
-    
         public long getMessageId() 
         {
             return this.msg_id;
         }
-    
         public int getSendNo() 
         {
             return this.sendno;
         }
-    
         override public int getErrorCode() 
         {
             return this.errcode;
@@ -45,7 +41,6 @@ namespace cn.jpush.api.push
             }
             return false;
         }
-
         public override string ToString()
         {
             if (errcode == ERROR_CODE_NONE)
@@ -57,5 +52,14 @@ namespace cn.jpush.api.push
                 return string.Format("errcode:{0},errmsg:{1}", errcode, errmsg);
             }
         }
+    }
+    public class JpushError
+    {
+       public JpushErrorDetail error;
+    }
+    public class JpushErrorDetail
+    {
+       public int     code;
+       public String  message;
     }
 }

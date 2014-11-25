@@ -19,18 +19,15 @@ namespace cn.jpush.api.common
 
         public HttpStatusCode responseCode = HttpStatusCode.BadRequest;
         public String responseContent;
-    
-        public ErrorObject error;     // error for non-200 response, used by new API
-    
+
         public int rateLimitQuota;
         public int rateLimitRemaining;
         public int rateLimitReset;
-    
+
         public String exceptionString;
 
 	    public ResponseResult() {
 	    }
-	
         public void setRateLimit(String quota, String remaining, String reset) {
             if (null == quota) return;
 
@@ -62,19 +59,6 @@ namespace cn.jpush.api.common
             }
             //Console.WriteLine("end");    
         }
-
-        public void setErrorObject()
-        {
-            this.error = (ErrorObject)JsonTool.JsonToObject(responseContent, new ErrorObject());
-            //Console.WriteLine(this.error.errcode);
-        }
-
-
-	    public class ErrorObject {
-	        public int errcode;
-            public String errmsg;
-
-	    }
 
     }
 }
