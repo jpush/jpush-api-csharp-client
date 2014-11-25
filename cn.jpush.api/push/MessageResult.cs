@@ -45,5 +45,17 @@ namespace cn.jpush.api.push
             }
             return false;
         }
+
+        public override string ToString()
+        {
+            if (errcode == ERROR_CODE_NONE)
+            {
+                return string.Format("sendno:{0},message_id:{1}", sendno, msg_id);
+            }
+            else
+            {
+                return string.Format("errcode:{0},errmsg:{1}", errcode, errmsg);
+            }
+        }
     }
 }

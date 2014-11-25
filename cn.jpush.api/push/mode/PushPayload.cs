@@ -40,7 +40,7 @@ namespace cn.jpush.api.push.mode
             audience = null;
             notification = null;
             message = null;
-            options = null;
+            options = new Options();
             jSetting = new JsonSerializerSettings();
             jSetting.NullValueHandling = NullValueHandling.Ignore;
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
@@ -70,7 +70,7 @@ namespace cn.jpush.api.push.mode
                                    new Audience(),
                                    new Notification(alert),
                                    null,
-                                   null);
+                                   new Options());
         }
         ///**
         //* The shortcut of building a simple message object to all platforms and all audiences
@@ -81,7 +81,7 @@ namespace cn.jpush.api.push.mode
                                    new Audience(),
                                    null,
                                    new Message(msgContent),
-                                   null);
+                                   new Options());
         }
 
         public static PushPayload FromJSON(String payloadString)

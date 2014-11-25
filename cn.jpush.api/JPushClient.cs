@@ -35,10 +35,6 @@ namespace cn.jpush.api
         {
             return _pushClient.sendPush(payload);
         }
-        public MessageResult sendPush(String payloadString)
-        {
-            return _pushClient.sendPush(payloadString);
-        }
         // ------------------------------- Report API
         /**
          * Get received report. 

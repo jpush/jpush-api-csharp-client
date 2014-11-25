@@ -55,6 +55,8 @@ namespace cn.jpush.api.push.notificaiton
             this.badgeDisabled = false;
             this.contentAvailable = false;
             this.category = null;
+            this.badge = null;
+            this.sound = null;
             this.badge = null != badge ? badge : DEFAULT_BADGE;
             this.sound = null != sound ? sound : DEFAULT_SOUND;
         }
@@ -87,7 +89,6 @@ namespace cn.jpush.api.push.notificaiton
         {
             this.soundDisabled = true;
             this.sound = null;
-           
         }
         public void disableBadge()
         {
@@ -133,8 +134,6 @@ namespace cn.jpush.api.push.notificaiton
                 this.badge = "" + badge;
             }
         }
-
-      
 
         override  public String getPlatformName()
         {

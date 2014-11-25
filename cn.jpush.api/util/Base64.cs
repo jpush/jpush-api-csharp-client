@@ -12,7 +12,7 @@ namespace cn.jpush.api.util
         {
             byte[] bytes = Encoding.Default.GetBytes(str);
             //
-            return Convert.ToBase64String(bytes).Replace("=", "");
+            return Convert.ToBase64String(bytes);
         }
     }
 }

@@ -19,6 +19,13 @@ namespace cn.jpush.api.push.mode
             all = ALL;
             deviceTypes = null;
         }
+        public Platform(bool all)
+        {
+            if (all)
+            {
+                this.all = ALL;
+            }
+        }
         private Platform(bool all, HashSet<string> deviceTypes)
         {
             //用来判断all=true时deviceTypes必须为空，反之当all=false时deviceTypes有值，不然json序列化会出错
@@ -29,7 +36,7 @@ namespace cn.jpush.api.push.mode
             }
             this.deviceTypes = deviceTypes;
         }
-
+        
         public static Platform ios()
         {
             HashSet<string> types = new HashSet<string>();

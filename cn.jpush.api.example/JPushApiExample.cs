@@ -30,23 +30,30 @@ namespace JpushApiClientExample
             String app_key = "997f28c1cea5a9f17d82079a";
             String master_secret = "47d264a3c02a6a5a4a256a45";
             JPushClient client = new JPushClient(app_key, master_secret);
-         
-            PushPayload payloadMessage = PushPayload.MessageAll("qinghe_message");
-            client.SendPush(payloadMessage);
+
+            PushPayload payloadMessage = PushObject_All_All_Alias_Alert(ALERT);
+           
+            var result = client.SendPush(payloadMessage);
+
+            Console.WriteLine("发送结果：{0}",result);
             Console.WriteLine("*****结束发送******");
         }
         public static PushPayload PushObject_All_All_Alert()
         {
-            //return PushPayload.AlertAll(ALERT);
-            throw new NotImplementedException();
+            return PushPayload.AlertAll(ALERT);
         }
         public static PushPayload PushObject_All_All_Alias_Alert(string alert)
         {
-            //PushPayload pushPayload = new PushPayload(Platform.all(),
-            //                                          Audience.alias("alias1"),
-            //                                          Notification.android(ALERT,TITLE,null));
-            //return pushPayload;
-            throw new NotImplementedException();
+            PushPayload pushPayload = new PushPayload();
+            pushPayload.platform = new Platform(true);
+
+            var audience = new Audience();
+            audience.alias("alias1","alias2");
+            pushPayload.audience = audience;
+            pushPayload.notification = new Notification(alert);
+
+            return pushPayload;
+            
         }
         public static PushPayload PushObject_Android_Tag_AlertWithTitle()
         {
