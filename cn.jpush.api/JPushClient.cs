@@ -3,6 +3,7 @@ using cn.jpush.api.push;
 using cn.jpush.api.push.mode;
 using cn.jpush.api.report;
 using cn.jpush.api.util;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -33,7 +34,20 @@ namespace cn.jpush.api
         // ----------------------------- Push API
         public MessageResult SendPush(PushPayload payload)
         {
+            Preconditions.checkArgument(payload!=null, "pushPayload should not be empty");
+
             return _pushClient.sendPush(payload);
+        }
+        public MessageResult SendPush(string payloadString)
+        {
+             Preconditions.checkArgument(!string.IsNullOrEmpty(payloadString), "payloadString should not be empty");
+             
+             PushPayload payload = JsonConvert.DeserializeObject<PushPayload>(payloadString);
+             if (payload == null)
+             {
+                 Preconditions.checkArgument(false, "payloadString should be a valid JSON string.");
+             }
+             return _pushClient.sendPush(payload);
         }
         // ------------------------------- Report API
         /**

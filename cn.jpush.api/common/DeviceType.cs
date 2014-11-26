@@ -11,7 +11,7 @@ namespace cn.jpush.api.common
 {
     public enum DeviceType
     {
-        [Description("andriod")] andriod,
+        [Description("android")] andriod,
         [Description("ios")]     ios,
         [Description("wp")]      wp
 

@@ -76,6 +76,7 @@
     <Compile Include="util\Base64.cs" />
     <Compile Include="util\JsonTool.cs" />
     <Compile Include="util\Md5.cs" />
+    <Compile Include="util\Preconditions.cs" />
     <Compile Include="util\StringUtil.cs" />
     <Compile Include="push\mode\Notification.cs" />
   </ItemGroup>

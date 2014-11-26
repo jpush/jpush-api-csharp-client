@@ -37,7 +37,10 @@ namespace cn.jpush.api.push.mode
             this.AndroidNotification = null;
             this.WinphoneNotification = null;
         }
-        public Notification(String alert, iosPlatformNotification iosNotification, AndroidPlatformNotification AndroidNotification, WinphonePlatformNotification WinphoneNotification)
+        public Notification(String alert, 
+                            iosPlatformNotification iosNotification,
+                            AndroidPlatformNotification AndroidNotification, 
+                            WinphonePlatformNotification WinphoneNotification)
         {
             this.alert = alert;
             this.iosNotification = iosNotification;

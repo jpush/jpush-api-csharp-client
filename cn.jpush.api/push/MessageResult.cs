@@ -35,7 +35,7 @@ namespace cn.jpush.api.push
 
         override public bool isResultOK()
         {
-            if (Equals(ResponseResult, HttpStatusCode.OK) && this.errcode == ERROR_CODE_OK)
+            if (Equals(ResponseResult.responseCode, HttpStatusCode.OK))
             {
                 return true;            
             }
@@ -52,6 +52,12 @@ namespace cn.jpush.api.push
                 return string.Format("errcode:{0},errmsg:{1}", errcode, errmsg);
             }
         }
+    }
+    //"{\"sendno\":\"0\",\"msg_id\":\"1704649583\"}"
+    public class JpushSuccess
+    {
+        public string sendno;
+        public string msg_id;
     }
     public class JpushError
     {

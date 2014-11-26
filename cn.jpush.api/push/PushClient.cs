@@ -17,12 +17,6 @@ namespace cn.jpush.api.push
         private const String HOST_NAME_SSL = "https://api.jpush.cn";
         private const String PUSH_PATH = "/v3/push";
 
-        //private const String kError = "error";
-        //private const String kMessage = "message";
-        //private const String kCode = "code";
-
-       // {"error": {"message": "Parameter value is invalid", "code": 1003}}
-
         private String appKey;
         private String masterSecret;
         public PushClient(String masterSecret, String appKey)
@@ -48,14 +42,18 @@ namespace cn.jpush.api.push
         }
         public MessageResult sendPush(string payloadString)
         {
+
             String url = HOST_NAME_SSL;
             url += PUSH_PATH;
             ResponseResult result = sendPost(url, Authorization(), payloadString);
             MessageResult messResult = new MessageResult();
             messResult.ResponseResult = result;
+            //"{\"sendno\":\"0\",\"msg_id\":\"1704649583\"}"
             if (messResult.isResultOK())
             {
-
+                JpushSuccess jpushSuccess = JsonConvert.DeserializeObject<JpushSuccess>(result.responseContent);
+                messResult.sendno = int.Parse(jpushSuccess.sendno);
+                messResult.msg_id = int.Parse(jpushSuccess.msg_id);
             }
             else
             {

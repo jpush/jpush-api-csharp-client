@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.common
 {
-    class PlatformConverter:JsonConverter
+  public  class PlatformConverter:JsonConverter
     {
         /// <summary>
         /// Platform whether this instance can convert the specified object type.
@@ -41,7 +41,7 @@ namespace cn.jpush.api.common
             }
             if (platform.isAll())
             {
-                writer.WriteValue(platform.all);
+                writer.WriteValue(platform.allPlatform);
             }
             else
             {
@@ -74,7 +74,7 @@ namespace cn.jpush.api.common
             }
             else if (reader.TokenType==JsonToken.String)
             {
-                platform.all = reader.Value.ToString();
+                platform.allPlatform = reader.Value.ToString();
             }
             else
             {

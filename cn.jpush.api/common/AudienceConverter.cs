@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.common
 {
-    class AudienceConverter : JsonConverter
+   public  class AudienceConverter : JsonConverter
     {
         /// <summary>
         /// Platform whether this instance can convert the specified object type.

@@ -1,5 +1,6 @@
 ﻿using cn.jpush.api.common;
 using cn.jpush.api.util;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,18 +13,19 @@ namespace cn.jpush.api.push.mode
    public class Platform 
     {
         private  const String ALL = "all";
-        public string all{get;set;}
+        [JsonProperty(PropertyName = "winphone")]
+        public string allPlatform{get;set;}
         public  HashSet<string> deviceTypes;
         public Platform()
         {
-            all = ALL;
+            allPlatform = ALL;
             deviceTypes = null;
         }
         public Platform(bool all)
         {
             if (all)
             {
-                this.all = ALL;
+                this.allPlatform = ALL;
             }
         }
         private Platform(bool all, HashSet<string> deviceTypes)
@@ -32,11 +34,14 @@ namespace cn.jpush.api.push.mode
             Debug.Assert(all && deviceTypes == null || !all && deviceTypes != null);
             if (all)
             {
-                //string = ALL;
+                allPlatform = ALL;
             }
             this.deviceTypes = deviceTypes;
         }
-        
+        public static Platform all()
+        {
+            return new Platform(true, null);
+        }
         public static Platform ios()
         {
             HashSet<string> types = new HashSet<string>();
@@ -79,21 +84,21 @@ namespace cn.jpush.api.push.mode
         }
         public bool isAll()
         {
-            return all!=null;
+            return allPlatform != null;
         }
-        public object toJsonObject()
-        {
-            if (all!=null) 
-            { 
-                return ALL;
-            }
-            List<string> jsonList = new List<string>();
-            foreach (var type in this.deviceTypes)
-            {
-                jsonList.Add(type.ToString());
-            }
-            return jsonList;
-        }
+        //public object toJsonObject()
+        //{
+        //    if (allPlatform != null) 
+        //    { 
+        //        return ALL;
+        //    }
+        //    List<string> jsonList = new List<string>();
+        //    foreach (var type in this.deviceTypes)
+        //    {
+        //        jsonList.Add(type.ToString());
+        //    }
+        //    return jsonList;
+        //}
 
     }
 }
