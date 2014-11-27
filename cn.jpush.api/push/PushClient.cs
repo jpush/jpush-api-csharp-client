@@ -26,23 +26,15 @@ namespace cn.jpush.api.push
         }
         public MessageResult sendPush(PushPayload payload) 
         {
-            Debug.Assert(payload != null);
-            Debug.Assert(payload.platform != null);
-            Debug.Assert(payload.audience != null);
-            Debug.Assert(payload.message!= null||payload.notification!=null);
-            if (payload != null && 
-                payload.platform != null &&
-                payload.audience != null && 
-                (payload.message != null || payload.notification != null))
-            {
-                String payloadJson = payload.ToJson();
-                return sendPush(payloadJson);
-            }
-            return null;
+            Preconditions.checkArgument(payload != null, "pushPayload should not be empty");
+            payload.Check();
+            String payloadJson = payload.ToJson();
+            return sendPush(payloadJson);
         }
         public MessageResult sendPush(string payloadString)
         {
-
+            Preconditions.checkArgument(!string.IsNullOrEmpty(payloadString), "payloadString should not be empty");
+           
             String url = HOST_NAME_SSL;
             url += PUSH_PATH;
             ResponseResult result = sendPost(url, Authorization(), payloadString);

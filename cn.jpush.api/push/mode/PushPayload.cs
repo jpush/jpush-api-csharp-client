@@ -6,9 +6,11 @@ using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace cn.jpush.api.push.mode
 {
@@ -72,7 +74,6 @@ namespace cn.jpush.api.push.mode
                                    null,
                                    new Options());
         }
-        ///**
         //* The shortcut of building a simple message object to all platforms and all audiences
         //*/
         public static PushPayload MessageAll(String msgContent)
@@ -83,7 +84,6 @@ namespace cn.jpush.api.push.mode
                                    new Message(msgContent),
                                    new Options());
         }
-
         public static PushPayload FromJSON(String payloadString)
         {
             try
@@ -148,13 +148,38 @@ namespace cn.jpush.api.push.mode
         }
         public bool IsIosExceedLength()
         {
-            if (this.notification != null&&this.notification.iosNotification!=null)
+            if (this.notification != null)
             {
-                var iosJson = JsonConvert.SerializeObject(this.notification.iosNotification,jSetting);
-                if (iosJson != null)
+                if (this.notification.iosNotification != null)
                 {
-                    return UTF8Encoding.UTF8.GetBytes(iosJson).Length > MAX_IOS_PAYLOAD_LENGTH;
+                    var iosJson = JsonConvert.SerializeObject(this.notification.iosNotification, jSetting);
+                    if (iosJson != null)
+                    {
+                        return UTF8Encoding.UTF8.GetBytes(iosJson).Length > MAX_IOS_PAYLOAD_LENGTH;
+                    }
                 }
+                else
+                {
+                    if (!string.IsNullOrEmpty(this.notification.alert))
+                    {
+                        string jsonText;
+                        using (StringWriter sw = new StringWriter())
+                        {
+                            JsonWriter writer = new JsonTextWriter(sw);
+                            writer.WriteValue(this.notification.alert);
+                            writer.Flush();
+                            jsonText = sw.GetStringBuilder().ToString();
+                        }
+                        return UTF8Encoding.UTF8.GetBytes(jsonText).Length > MAX_IOS_PAYLOAD_LENGTH;
+                    }
+                    else
+                    {
+                        // No iOS Payload
+                    }
+                   
+
+                }
+                
             }
             return false;
         }
@@ -162,6 +187,23 @@ namespace cn.jpush.api.push.mode
         {
             return JsonConvert.SerializeObject(this, jSetting);
         }
-    
+        public void Check()
+        {
+            Preconditions.checkArgument(!(null == audience || null == platform), "audience and platform both should be set.");
+            Preconditions.checkArgument(!(null == notification && null == message), "notification or message should be set at least one.");
+            if (audience!=null)
+            {
+                audience.Check();
+            }
+            if (platform != null)
+            {
+                platform.Check();
+            }
+            if (message != null)
+            {
+                message.Check();
+            }
+        }
+
     }
 }

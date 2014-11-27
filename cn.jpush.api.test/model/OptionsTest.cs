@@ -108,8 +108,8 @@ namespace cn.jpush.api.test.model
             Assert.AreEqual(jsonObject, jsonString);
 
         }
-         [TestMethod]
-         public void testApnsProduction_defaultFalse() 
+        [TestMethod]
+        public void testApnsProduction_defaultFalse() 
          {
             int sendno = ServiceHelper.generateSendno();
 
@@ -149,8 +149,8 @@ namespace cn.jpush.api.test.model
 
             Assert.AreEqual(jsonObject, jsonString);
      }
-      [TestMethod]
-      public void testBigPushDuration() 
+        [TestMethod]
+        public void testBigPushDuration() 
       {
              int sendno = ServiceHelper.generateSendno();
              JObject json = new JObject();

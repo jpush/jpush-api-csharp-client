@@ -42,6 +42,7 @@ namespace cn.jpush.api
         {
              Preconditions.checkArgument(!string.IsNullOrEmpty(payloadString), "payloadString should not be empty");
              
+
              PushPayload payload = JsonConvert.DeserializeObject<PushPayload>(payloadString);
              if (payload == null)
              {

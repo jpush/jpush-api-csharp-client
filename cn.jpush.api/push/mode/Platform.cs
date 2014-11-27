@@ -15,7 +15,22 @@ namespace cn.jpush.api.push.mode
         private  const String ALL = "all";
         [JsonProperty(PropertyName = "winphone")]
         public string allPlatform{get;set;}
-        public  HashSet<string> deviceTypes;
+        private HashSet<string> _deviceTypes;
+        public HashSet<string> deviceTypes
+        {
+            get
+            {
+                return _deviceTypes;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    allPlatform = null;
+                }
+                _deviceTypes = value;
+            }
+        }
         public Platform()
         {
             allPlatform = ALL;
@@ -51,7 +66,7 @@ namespace cn.jpush.api.push.mode
         public static Platform android()
         {
             HashSet<string> types = new HashSet<string>();
-            types.Add(DeviceType.andriod.ToString());
+            types.Add(DeviceType.android.ToString());
             return new Platform(false, types);
         }
         public static Platform winphone()
@@ -63,14 +78,14 @@ namespace cn.jpush.api.push.mode
         public static Platform android_ios()
         {
             HashSet<string> types = new HashSet<string>();
-            types.Add(DeviceType.andriod.ToString());
+            types.Add(DeviceType.android.ToString());
             types.Add(DeviceType.ios.ToString());
             return new Platform(false, types);
         }
         public static Platform android_winphone()
         {
             HashSet<string> types = new HashSet<string>();
-            types.Add(DeviceType.andriod.ToString());
+            types.Add(DeviceType.android.ToString());
             types.Add(DeviceType.wp.ToString());
             return new Platform(false, types);
         }
@@ -86,19 +101,22 @@ namespace cn.jpush.api.push.mode
         {
             return allPlatform != null;
         }
-        //public object toJsonObject()
-        //{
-        //    if (allPlatform != null) 
-        //    { 
-        //        return ALL;
-        //    }
-        //    List<string> jsonList = new List<string>();
-        //    foreach (var type in this.deviceTypes)
-        //    {
-        //        jsonList.Add(type.ToString());
-        //    }
-        //    return jsonList;
-        //}
+        public void setAll(bool all)
+        {
+            if (all)
+            {
+                allPlatform = ALL;
+            }
+            else
+            {
+                allPlatform = null;
+            }
+        }
+        public void Check()
+        {
+            Preconditions.checkArgument(!(isAll() && null != deviceTypes), "Since all is enabled, any platform should not be set.");
+            Preconditions.checkArgument(!(!isAll() && null == deviceTypes), "No any deviceType is set.");
+        }
 
     }
 }

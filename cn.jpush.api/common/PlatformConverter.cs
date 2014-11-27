@@ -1,4 +1,5 @@
 ﻿using cn.jpush.api.push.mode;
+using cn.jpush.api.util;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,7 @@ namespace cn.jpush.api.common
             {
                 return;
             }
+            platform.Check();
             if (platform.isAll())
             {
                 writer.WriteValue(platform.allPlatform);

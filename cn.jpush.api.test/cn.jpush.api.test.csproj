@@ -54,8 +54,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="audience\AudienceTest.cs" />
     <Compile Include="model\OptionsTest.cs" />
     <Compile Include="model\PlatformTest.cs" />
+    <Compile Include="model\MessageTest.cs" />
+    <Compile Include="model\PushPayloadTest.cs" />
     <Compile Include="PushClientTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseTest.cs" />

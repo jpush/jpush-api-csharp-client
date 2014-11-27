@@ -37,9 +37,10 @@ namespace cn.jpush.api.common
             {
                 return;
             }
+            audience.Check();
             if (audience.isAll())
             {
-                writer.WriteValue(audience.all);
+                writer.WriteValue(audience.allAudience);
             }
             else
             {
@@ -64,11 +65,11 @@ namespace cn.jpush.api.common
             }
             else if (reader.TokenType == JsonToken.String)
             {
-                audience.all = reader.Value.ToString();
+                audience.allAudience = reader.Value.ToString();
             }
             else if (reader.TokenType == JsonToken.StartObject)
             {
-                audience.all = null;
+                audience.allAudience = null;
                 Dictionary<string, HashSet<string>> dictionary=new Dictionary<string,HashSet<string>>();
                 string key="key";
                 HashSet<string> value=null;
