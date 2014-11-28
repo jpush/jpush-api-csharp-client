@@ -187,7 +187,7 @@ namespace cn.jpush.api.push.mode
         {
             return JsonConvert.SerializeObject(this, jSetting);
         }
-        public void Check()
+        public PushPayload Check()
         {
             Preconditions.checkArgument(!(null == audience || null == platform), "audience and platform both should be set.");
             Preconditions.checkArgument(!(null == notification && null == message), "notification or message should be set at least one.");
@@ -203,6 +203,7 @@ namespace cn.jpush.api.push.mode
             {
                 message.Check();
             }
+            return this;
         }
 
     }

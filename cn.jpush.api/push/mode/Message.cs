@@ -61,9 +61,10 @@ namespace cn.jpush.api.push.mode
             }
             extras.Add(key, value);
         }
-        public void Check()
+        public Message Check()
         {
             Preconditions.checkArgument(!(string.IsNullOrEmpty(msg_content)), "msgContent should be set");
+            return this;
         }
     }
 }

@@ -112,11 +112,13 @@ namespace cn.jpush.api.push.mode
                 allPlatform = null;
             }
         }
-        public void Check()
+        public Platform Check()
         {
             Preconditions.checkArgument(!(isAll() && null != deviceTypes), "Since all is enabled, any platform should not be set.");
             Preconditions.checkArgument(!(!isAll() && null == deviceTypes), "No any deviceType is set.");
+            return this;
         }
+
 
     }
 }

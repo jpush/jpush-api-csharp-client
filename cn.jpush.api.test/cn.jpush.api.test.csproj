@@ -55,6 +55,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="audience\AudienceTest.cs" />
+    <Compile Include="audience\AudienceTargetTest.cs" />
     <Compile Include="model\OptionsTest.cs" />
     <Compile Include="model\PlatformTest.cs" />
     <Compile Include="model\MessageTest.cs" />
