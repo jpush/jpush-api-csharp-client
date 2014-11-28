@@ -65,14 +65,15 @@ namespace cn.jpush.api.common
         /// <returns>The object value.</returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            Platform platform = new Platform();
+            Platform platform =  Platform.all();
             if (reader.TokenType == JsonToken.Null)
             {
                 return null;
             }
             else if(reader.TokenType==JsonToken.StartArray)
             {
-                platform.deviceTypes=ReadArray(reader);
+                platform.allPlatform = null;
+                platform.deviceTypes = ReadArray(reader);
             }
             else if (reader.TokenType==JsonToken.String)
             {

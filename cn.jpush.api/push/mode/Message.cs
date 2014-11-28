@@ -16,54 +16,75 @@ namespace cn.jpush.api.push.mode
         [JsonProperty]
         private Dictionary<string, object> extras { get; set; } 
        
-        public Message()
+        private Message()
         {
 
         }
-        public Message(String msgContent)
+        private Message(String msgContent)
         {
-            Preconditions.checkArgument(!(string.IsNullOrEmpty(msgContent)), "msgContent should be set");
+            Preconditions.checkArgument(!(msgContent==null), "msgContent should be set");
 
             this.title = null;
             this.msg_content = msgContent;
             this.content_type = null;
             this.extras = null;
         }
-        public Message(String msgContent, String title, String contentType)
+        private Message(String msgContent, String title, String contentType)
         {
-            Preconditions.checkArgument(!(string.IsNullOrEmpty(msgContent)), "msgContent should be set");
+            Preconditions.checkArgument(!(msgContent == null), "msgContent should be set");
 
             this.title = title;
             this.msg_content = msgContent;
             this.content_type = contentType;
         }
-        public void AddExtras(string key,string value)
+        public static Message msgContent(string msgContent)
         {
-            if (extras == null)
-            {
-                extras = new Dictionary<string, object>();
-            }
-            extras.Add(key, value);
+            return new Message(msgContent).Check();
         }
-        public void AddExtras(string key, int value)
+        public Message setTitle(String title)
         {
-            if (extras == null)
-            {
-                extras = new Dictionary<string, object>();
-            }
-            extras.Add(key, value);
+            this.title = title;
+            return this;
         }
-        public void AddExtras(string key, bool value)
+        public Message setContentType(String ContentType)
+        {
+            this.content_type = ContentType;
+            return this;
+        }
+        public Message AddExtras(string key, string value)
+        {
+            if (extras == null)
+            {
+                extras = new Dictionary<string, object>();
+            }
+            if (value != null)
+            {
+                extras.Add(key, value);
+            }
+            return this;
+        }
+        public Message AddExtras(string key, int value)
         {
             if (extras == null)
             {
                 extras = new Dictionary<string, object>();
             }
             extras.Add(key, value);
+            return this;
+        }
+        public Message AddExtras(string key, bool value)
+        {
+            if (extras == null)
+            {
+                extras = new Dictionary<string, object>();
+            }
+            extras.Add(key, value);
+            return this;
+
         }
         public Message Check()
         {
-            Preconditions.checkArgument(!(string.IsNullOrEmpty(msg_content)), "msgContent should be set");
+            Preconditions.checkArgument(!(msg_content==null), "msgContent should be set");
             return this;
         }
     }

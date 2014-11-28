@@ -58,7 +58,7 @@ namespace cn.jpush.api.common
         /// <returns>The object value.</returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            Audience audience = new Audience();
+            Audience audience = Audience.all();
             if (reader.TokenType == JsonToken.Null)
             {
                 return null;

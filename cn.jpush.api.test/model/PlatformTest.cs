@@ -33,24 +33,23 @@ namespace cn.jpush.api.test.model
         [ExpectedException(typeof(ArgumentException))]
         public void testNotAll() 
         {
-            Platform notPlatfom = new Platform(false);
-            var jsonString = JsonConvert.SerializeObject(notPlatfom, Formatting.None, new PlatformConverter()).Replace("\r\n", "").Replace(" ", ""); ;
-
+            Platform notPlatfom =  Platform.all();
+            notPlatfom.allPlatform = null;
+            notPlatfom.Check();
+           
         }
          [TestMethod]
         public void testAndroid() 
         {
-            Platform android=new Platform();
+            Platform android = Platform.all();
+
             android.deviceTypes = new System.Collections.Generic.HashSet<string>();
             android.deviceTypes.Add(DeviceType.android.ToString());
-
-
             JArray array = new JArray();
             array.Add(JToken.FromObject("android"));
 
-            var jsonString = JsonConvert.SerializeObject(android, Formatting.None, new PlatformConverter()).Replace("\r\n", "").Replace(" ", ""); ;
-
-            var jsonArray  = array.ToString().Replace("\r\n", "").Replace(" ", ""); 
+            var jsonString = JsonConvert.SerializeObject(android, Formatting.None, new PlatformConverter());
+            var jsonArray = array.ToString(Formatting.None);
 
             Assert.AreEqual(jsonArray, jsonString);
 

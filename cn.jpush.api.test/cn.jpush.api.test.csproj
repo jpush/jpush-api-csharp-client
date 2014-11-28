@@ -60,6 +60,9 @@
     <Compile Include="model\PlatformTest.cs" />
     <Compile Include="model\MessageTest.cs" />
     <Compile Include="model\PushPayloadTest.cs" />
+    <Compile Include="notification\AndroidNotificationTest.cs" />
+    <Compile Include="notification\IosNotificationTest.cs" />
+    <Compile Include="notification\WinphoneNotificationTest.cs" />
     <Compile Include="PushClientTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseTest.cs" />
@@ -70,7 +73,6 @@
       <Name>cn.jpush.api</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

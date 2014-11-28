@@ -44,25 +44,20 @@ namespace JpushApiClientExample
         public static PushPayload PushObject_All_All_Alias_Alert(string alert)
         {
             PushPayload pushPayload = new PushPayload();
-            pushPayload.platform = new Platform(true);
+            pushPayload.platform =  Platform.all();
 
-            var audience = new Audience();
-            audience.alias("alias1","alias2");
-            pushPayload.audience = audience;
+            pushPayload.audience = Audience.s_alias("alias1", "alias2"); 
             pushPayload.notification = new Notification(alert);
+
             return pushPayload;
-            
         }
         public static PushPayload PushObject_Android_Tag_AlertWithTitle()
         {
             PushPayload pushPayload = new PushPayload();
             pushPayload.platform = Platform.ios();
-
-            var audience = new Audience();
-            audience.tag("tag1");
-            pushPayload.audience = audience;
-
-            pushPayload.notification =  Notification.android(ALERT,TITLE,null);
+           
+            pushPayload.audience = Audience.s_tag("tag1"); 
+            pushPayload.notification =  Notification.android(ALERT,TITLE);
 
             return pushPayload;
         }
@@ -71,47 +66,26 @@ namespace JpushApiClientExample
             PushPayload pushPayload = new PushPayload();
             pushPayload.platform = Platform.android_ios();
 
-            var audience = new Audience();
-            audience.tag("tag1");
+            var audience = Audience.s_tag("tag1");
+
             pushPayload.audience = audience;
 
             pushPayload.notification = new Notification("alert content");
-            pushPayload.notification.AndroidNotification = new AndroidPlatformNotification();
-            pushPayload.notification.AndroidNotification.title = "Android Title";
+            pushPayload.notification.AndroidNotification = new AndroidNotification().setTitle("Android Title");
 
-            pushPayload.notification.iosNotification = new iosPlatformNotification();
+            pushPayload.notification.iosNotification = new IosNotification();
             pushPayload.notification.iosNotification.incrBadge(1);
-            var extras = new Dictionary<string, string>();
-            extras.Add("extra_key", "extra_value");
-            pushPayload.notification.iosNotification.extras = extras;
+            pushPayload.notification.iosNotification.AddExtra("extra_key", "extra_value");
+       
             return pushPayload;
-          
         }
         public static PushPayload buildPushObject_ios_tagAnd_alertWithExtrasAndMessage()
         {
-            //return PushPayload.newBuilder()
-            //    .setPlatform(Platform.android_ios())
-            //    .setAudience(Audience.newBuilder()
-            //            .addAudienceTarget(AudienceTarget.tag("tag1", "tag2"))
-            //            .addAudienceTarget(AudienceTarget.alias("alias1", "alias2"))
-            //            .build())
-            //    .setMessage(Message.newBuilder()
-            //            .setMsgContent(MSG_CONTENT)
-            //            .addExtra("from", "JPush")
-            //            .build())
-            //    .build();
             PushPayload pushPayload = new PushPayload();
             pushPayload.platform = Platform.android_ios();
-
-            var audience = new Audience();
-            audience.tag("tag1","tag2");
-            audience.alias("alias1", "alias2");
-
-            pushPayload.audience = audience;
+            pushPayload.audience = Audience.s_tag("tag1", "tag2").alias("alias1", "alias2"); ;
             Dictionary<string,string> extras=new Dictionary<string,string>();
             extras.Add("from","JPush");
-            //pushPayload.message = new Message(null, "MSG_CONTENT", extras);
-        
             return pushPayload;
 
         }

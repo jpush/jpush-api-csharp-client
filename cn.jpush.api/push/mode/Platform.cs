@@ -31,17 +31,10 @@ namespace cn.jpush.api.push.mode
                 _deviceTypes = value;
             }
         }
-        public Platform()
+        private Platform()
         {
             allPlatform = ALL;
             deviceTypes = null;
-        }
-        public Platform(bool all)
-        {
-            if (all)
-            {
-                this.allPlatform = ALL;
-            }
         }
         private Platform(bool all, HashSet<string> deviceTypes)
         {
@@ -55,39 +48,39 @@ namespace cn.jpush.api.push.mode
         }
         public static Platform all()
         {
-            return new Platform(true, null);
+            return new Platform(true, null).Check();
         }
         public static Platform ios()
         {
             HashSet<string> types = new HashSet<string>();
             types.Add(DeviceType.ios.ToString());
-            return new Platform(false,types);
+            return new Platform(false,types).Check();
         }
         public static Platform android()
         {
             HashSet<string> types = new HashSet<string>();
             types.Add(DeviceType.android.ToString());
-            return new Platform(false, types);
+            return new Platform(false, types).Check();
         }
         public static Platform winphone()
         {
             HashSet<string> types = new HashSet<string>();
             types.Add(DeviceType.wp.ToString());
-            return new Platform(false, types);
+            return new Platform(false, types).Check();
         }
         public static Platform android_ios()
         {
             HashSet<string> types = new HashSet<string>();
             types.Add(DeviceType.android.ToString());
             types.Add(DeviceType.ios.ToString());
-            return new Platform(false, types);
+            return new Platform(false, types).Check();
         }
         public static Platform android_winphone()
         {
             HashSet<string> types = new HashSet<string>();
             types.Add(DeviceType.android.ToString());
             types.Add(DeviceType.wp.ToString());
-            return new Platform(false, types);
+            return new Platform(false, types).Check();
         }
         public static Platform ios_winphone()
         {
@@ -95,7 +88,7 @@ namespace cn.jpush.api.push.mode
             types.Add(DeviceType.ios.ToString());
             types.Add(DeviceType.wp.ToString());
 
-            return new Platform(false, types);
+            return new Platform(false, types).Check();
         }
         public bool isAll()
         {

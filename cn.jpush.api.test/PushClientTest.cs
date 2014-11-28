@@ -10,22 +10,11 @@ namespace cn.jpush.api.test
     public class PushClientTest:BaseTest
     {
         [TestMethod]
+        [ExpectedException(typeof(Newtonsoft.Json.JsonReaderException))]
         public void test_invalid_json()
         {
             JPushClient pushClient = new JPushClient(APP_KEY, MASTER_SECRET);
-            try
-            {
-                pushClient.SendPush("{aaa:'a}");
-            }
-            catch(ArgumentException e)
-            {
-                Debug.WriteLine(e.Message);
-            }
-            catch (Exception e)
-            {
-                Assert.AreEqual(e.GetType().ToString(), "Newtonsoft.Json.JsonReaderException");
-            }
-
+            pushClient.SendPush("{aaa:'a}");
         }
         [TestMethod]
         public void test_empty_string()
@@ -54,7 +43,5 @@ namespace cn.jpush.api.test
                 Debug.WriteLine(e.Message);
             }
         }
-
-
     }
 }

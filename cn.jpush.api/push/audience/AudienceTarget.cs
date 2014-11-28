@@ -11,13 +11,12 @@ namespace cn.jpush.api.push.audience
     {
         public AudienceType audienceType{get;private set;}
         public HashSet<string> valueBuilder { get; private set; }
-
+        
         private AudienceTarget(AudienceType audienceType, HashSet<string> values)
         {
             this.audienceType = audienceType;
             this.valueBuilder = values;
         }
-      
         public static AudienceTarget tag(HashSet<string> values)
         {
            return new AudienceTarget(AudienceType.tag,values).Check();
@@ -46,6 +45,5 @@ namespace cn.jpush.api.push.audience
             Preconditions.checkArgument(null != valueBuilder, "Target values should be set one at least.");
             return this;
         }
-		
     }
 }

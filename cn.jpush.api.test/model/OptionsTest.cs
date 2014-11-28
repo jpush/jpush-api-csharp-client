@@ -44,8 +44,8 @@ namespace cn.jpush.api.test.model
             options.sendno = 111;
             var jSetting = new JsonSerializerSettings();
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
-            var jsonString = JsonConvert.SerializeObject(options, jSetting).Replace("\r\n", "").Replace(" ", ""); ;
-            var jsonObject = json.ToString().Replace("\r\n", "").Replace(" ",""); 
+            var jsonString = JsonConvert.SerializeObject(options, jSetting);
+            var jsonObject = json.ToString(Formatting.None); 
             Assert.AreEqual(jsonObject, jsonString);
        }
         [TestMethod]
@@ -62,8 +62,8 @@ namespace cn.jpush.api.test.model
 
             var jSetting = new JsonSerializerSettings();
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
-            var jsonString = JsonConvert.SerializeObject(options, jSetting).Replace("\r\n", "").Replace(" ", ""); ;
-            var jsonObject = json.ToString().Replace("\r\n", "").Replace(" ", "");
+            var jsonString = JsonConvert.SerializeObject(options, jSetting);
+            var jsonObject = json.ToString(Formatting.None);
 
             Assert.AreEqual(jsonObject, jsonString);
          }
@@ -84,8 +84,8 @@ namespace cn.jpush.api.test.model
 
             var jSetting = new JsonSerializerSettings();
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
-            var jsonString = JsonConvert.SerializeObject(options, jSetting).Replace("\r\n", "").Replace(" ", ""); ;
-            var jsonObject = json.ToString().Replace("\r\n", "").Replace(" ", "");
+            var jsonString = JsonConvert.SerializeObject(options, jSetting);
+            var jsonObject = json.ToString(Formatting.None);
 
             Assert.AreEqual(jsonObject, jsonString);
         }
@@ -102,8 +102,8 @@ namespace cn.jpush.api.test.model
 
             var jSetting = new JsonSerializerSettings();
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
-            var jsonString = JsonConvert.SerializeObject(options, jSetting).Replace("\r\n", "").Replace(" ", ""); ;
-            var jsonObject = json.ToString().Replace("\r\n", "").Replace(" ", "");
+            var jsonString = JsonConvert.SerializeObject(options, jSetting);
+            var jsonObject = json.ToString(Formatting.None);
 
             Assert.AreEqual(jsonObject, jsonString);
 
@@ -123,8 +123,8 @@ namespace cn.jpush.api.test.model
 
             var jSetting = new JsonSerializerSettings();
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
-            var jsonString = JsonConvert.SerializeObject(options, jSetting).Replace("\r\n", "").Replace(" ", ""); ;
-            var jsonObject = json.ToString().Replace("\r\n", "").Replace(" ", "");
+            var jsonString = JsonConvert.SerializeObject(options, jSetting);
+            var jsonObject = json.ToString(Formatting.None);
 
             Assert.AreEqual(jsonObject, jsonString);
         }
@@ -144,8 +144,8 @@ namespace cn.jpush.api.test.model
 
             var jSetting = new JsonSerializerSettings();
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
-            var jsonString = JsonConvert.SerializeObject(options, jSetting).Replace("\r\n", "").Replace(" ", ""); ;
-            var jsonObject = json.ToString().Replace("\r\n", "").Replace(" ", "");
+            var jsonString = JsonConvert.SerializeObject(options, jSetting);
+            var jsonObject = json.ToString(Formatting.None);
 
             Assert.AreEqual(jsonObject, jsonString);
      }
@@ -164,10 +164,10 @@ namespace cn.jpush.api.test.model
 
              var jSetting = new JsonSerializerSettings();
              jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
-             var jsonString = JsonConvert.SerializeObject(options, jSetting).Replace("\r\n", "").Replace(" ", ""); ;
-             var jsonObject = json.ToString().Replace("\r\n", "").Replace(" ", "");
+             var jsonString = JsonConvert.SerializeObject(options, jSetting);
+             var jsonObject = json.ToString(Formatting.None);
 
-             Assert.AreEqual(jsonObject, jsonString);
+             Assert.AreEqual(jsonString, jsonObject);
 
     }
 

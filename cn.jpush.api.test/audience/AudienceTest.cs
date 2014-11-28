@@ -41,5 +41,6 @@ namespace cn.jpush.api.test.audience
 
             Assert.AreEqual(jsonObject, jsonString);
         }
+
     }
 }

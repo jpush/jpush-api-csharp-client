@@ -65,10 +65,10 @@
     <Compile Include="push\mode\Message.cs" />
     <Compile Include="push\mode\Options.cs" />
     <Compile Include="push\mode\Platform.cs" />
-    <Compile Include="push\notificaiton\AndroidPlatformNotification.cs" />
-    <Compile Include="push\notificaiton\iosPlatformNotification.cs" />
+    <Compile Include="push\notificaiton\AndroidNotification.cs" />
+    <Compile Include="push\notificaiton\IosNotification.cs" />
     <Compile Include="push\notificaiton\PlatformNotification.cs" />
-    <Compile Include="push\notificaiton\WinphonePlatformNotification.cs" />
+    <Compile Include="push\notificaiton\WinphoneNotification.cs" />
     <Compile Include="push\PushClient.cs" />
     <Compile Include="push\mode\PushPayload.cs" />
     <Compile Include="report\ReceivedResult.cs" />

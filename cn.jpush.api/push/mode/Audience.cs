@@ -40,30 +40,10 @@ namespace cn.jpush.api.push.mode
 
      
         public Dictionary<string, HashSet<string>> dictionary;
-        public Audience()
+        private Audience()
         {
             allAudience = ALL;
             dictionary = null;
-        }
-        public Audience(bool all)
-        {
-            if (all)
-            {
-                this.allAudience = ALL;
-            }
-            dictionary = null;
-        }
-        public Audience(HashSet<AudienceTarget> targets)
-        {
-            this.allAudience = null;
-            if (targets != null)
-            {
-                dictionary = new Dictionary<string, HashSet<string>>(targets.Count);
-                foreach (var target in targets)
-                {
-                    dictionary.Add(target.audienceType.ToString(), target.valueBuilder);
-                }
-            }
         }
 
         public static Audience all()

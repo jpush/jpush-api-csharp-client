@@ -14,42 +14,25 @@ namespace cn.jpush.api.test.model
         [ExpectedException(typeof(ArgumentException))]
         public void testIllegalOfNull()
         {
-            Message message = new Message(null);
-            message.Check();
+            Message message =  Message.msgContent(null);
         }
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void testIllegalOfEmpty()
         {
-            Message message = new Message("");
-            message.Check();
-        }
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void testIllegalOfConstructNull()
-        {
-            Message message = new Message(null,null,null);
-            message.Check();
-        }
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void testIllegalOfConstructEmpty()
-        {
-            Message message = new Message("",null,null);
-            message.Check();
+            Message message = Message.msgContent("");
         }
         [TestMethod]
         public void testMsgContent() 
         {
-            Message message = new Message("msg content");
+            Message message = Message.msgContent("msg content");
         
             JObject json = new JObject();
             json.Add("msg_content",JToken.FromObject("msg content"));
 
             var jSetting = new JsonSerializerSettings();
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
-            var jsonString = JsonConvert.SerializeObject(message, jSetting).Replace("\r\n", "").Replace(" ", ""); ;
-            var jsonObject = json.ToString().Replace("\r\n", "").Replace(" ", "");
+            var jsonString = JsonConvert.SerializeObject(message, jSetting);
+            var jsonObject = json.ToString(Formatting.None);
 
             Assert.AreEqual(jsonObject, jsonString);
             
@@ -57,7 +40,7 @@ namespace cn.jpush.api.test.model
         [TestMethod]
         public void testMsgContentAndExtras()
         {
-            Message message = new Message("msgContent");
+            Message message = Message.msgContent("msgContent");
             message.AddExtras("key1", "value1");
             message.AddExtras("key2", 222);
             message.AddExtras("key3", false);
@@ -75,8 +58,8 @@ namespace cn.jpush.api.test.model
 
             var jSetting = new JsonSerializerSettings();
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
-            var jsonString = JsonConvert.SerializeObject(message, jSetting).Replace("\r\n", "").Replace(" ", ""); ;
-            var jsonObject = json.ToString().Replace("\r\n", "").Replace(" ", "");
+            var jsonString = JsonConvert.SerializeObject(message, jSetting);
+            var jsonObject = json.ToString(Formatting.None);
             var fromJson = JsonConvert.DeserializeObject<Message>(jsonObject);
             Assert.AreEqual(jsonObject, jsonString);
      }

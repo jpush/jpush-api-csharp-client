@@ -68,8 +68,8 @@ namespace cn.jpush.api.push.mode
         */
         public static PushPayload AlertAll(String alert)
         {
-            return new PushPayload(new Platform(),
-                                   new Audience(),
+            return new PushPayload(Platform.all(),
+                                   Audience.all(),
                                    new Notification(alert),
                                    null,
                                    new Options());
@@ -78,10 +78,10 @@ namespace cn.jpush.api.push.mode
         //*/
         public static PushPayload MessageAll(String msgContent)
         {
-            return new PushPayload(new Platform(),
-                                   new Audience(),
+            return new PushPayload( Platform.all(),
+                                   Audience.all(),
                                    null,
-                                   new Message(msgContent),
+                                   Message.msgContent(msgContent),
                                    new Options());
         }
         public static PushPayload FromJSON(String payloadString)
@@ -160,7 +160,7 @@ namespace cn.jpush.api.push.mode
                 }
                 else
                 {
-                    if (!string.IsNullOrEmpty(this.notification.alert))
+                    if (!(this.notification.alert==null))
                     {
                         string jsonText;
                         using (StringWriter sw = new StringWriter())

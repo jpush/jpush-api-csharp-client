@@ -17,10 +17,8 @@ namespace cn.jpush.api.test.model
         [ExpectedException(typeof(ArgumentException))]
         public void testIllegal_OnlyAudience()
         {
-            Audience audience = new Audience(true);
-
             PushPayload pushPayliad = new PushPayload();
-            pushPayliad.audience = audience;
+            pushPayliad.audience = Audience.all();
             pushPayliad.Check();
 
         }
@@ -38,7 +36,7 @@ namespace cn.jpush.api.test.model
         public void testIllegal_PlatformAudience()
         {
             Platform platform = Platform.all();
-            Audience audience = new Audience(true);
+            Audience audience = Audience.all();
            
             PushPayload pushPayliad = new PushPayload();
             pushPayliad.platform = platform;
@@ -64,11 +62,11 @@ namespace cn.jpush.api.test.model
         [ExpectedException(typeof(ArgumentException))]
         public void testIllegal_NoPlatform()
         {
-            Audience audience = new Audience(true);
+           
             Notification notifcation = new Notification("alert");
 
             PushPayload pushPayliad = new PushPayload();
-            pushPayliad.audience = audience;
+            pushPayliad.audience = Audience.all(); ;
             pushPayliad.notification = notifcation;
 
             pushPayliad.Check();
@@ -80,7 +78,7 @@ namespace cn.jpush.api.test.model
            
             PushPayload payload = new PushPayload();
             payload.platform = Platform.all();
-            payload.audience = new Audience(true);
+            payload.audience = Audience.all(); 
             payload.options = new Options() { sendno = number };
             payload.notification = new Notification("alert");
 
@@ -100,8 +98,8 @@ namespace cn.jpush.api.test.model
 
             var jSetting = new JsonSerializerSettings();
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
-            var jsonString = JsonConvert.SerializeObject(payload, jSetting).Replace("\r\n", "").Replace(" ", ""); ;
-            var jsonObject = json.ToString().Replace("\r\n", "").Replace(" ", "");
+            var jsonString = JsonConvert.SerializeObject(payload, jSetting);
+            var jsonObject = json.ToString(Formatting.None);
 
             Assert.AreEqual(jsonObject, jsonString);
         }
@@ -111,9 +109,9 @@ namespace cn.jpush.api.test.model
             int number = ServiceHelper.generateSendno();
             PushPayload payload = new PushPayload();
             payload.platform = Platform.all();
-            payload.audience = new Audience(true);
+            payload.audience = Audience.all();
             payload.options = new Options() { sendno = number };
-            payload.message = new Message("message");
+            payload.message = Message.msgContent("message");
             payload.Check();
 
             JObject json = new JObject();
@@ -132,8 +130,8 @@ namespace cn.jpush.api.test.model
 
             var jSetting = new JsonSerializerSettings();
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
-            var jsonString = JsonConvert.SerializeObject(payload, jSetting).Replace("\r\n", "").Replace(" ", ""); ;
-            var jsonObject = json.ToString().Replace("\r\n", "").Replace(" ", "");
+            var jsonString = JsonConvert.SerializeObject(payload, jSetting) ;
+            var jsonObject = json.ToString(Formatting.None);
 
             Assert.AreEqual(jsonObject, jsonString);
         }
@@ -142,8 +140,8 @@ namespace cn.jpush.api.test.model
          {
              PushPayload payload = new PushPayload();
              payload.platform = Platform.all();
-             payload.audience = new Audience(true);
-             payload.message = new Message(LONG_TEXT_2);
+             payload.audience = Audience.all();
+             payload.message = Message.msgContent(LONG_TEXT_2);
              payload.Check();
 
              Debug.WriteLine("Size: " + UTF8Encoding.UTF8.GetBytes(LONG_TEXT_2).Length);
@@ -154,7 +152,7 @@ namespace cn.jpush.api.test.model
         {
              PushPayload payload = new PushPayload();
              payload.platform = Platform.all();
-             payload.audience = new Audience(true);
+             payload.audience = Audience.all();
              payload.notification= new Notification(LONG_TEXT_1);
              payload.Check();
 
@@ -166,9 +164,9 @@ namespace cn.jpush.api.test.model
          {
              PushPayload payload = new PushPayload();
              payload.platform = Platform.all();
-             payload.audience = new Audience(true);
+             payload.audience = Audience.all();
              payload.notification = new Notification();
-             payload.notification.iosNotification = new iosPlatformNotification(LONG_TEXT_1);
+             payload.notification.iosNotification = new IosNotification().setAlert(LONG_TEXT_1);
 
              payload.Check();
 
