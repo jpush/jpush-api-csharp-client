@@ -26,11 +26,11 @@ namespace cn.jpush.api.common
 	    //设置读取超时时间
 	    private const int DEFAULT_SOCKET_TIMEOUT = (30 * 1000); // milliseconds
 
-        public ResponseResult sendPost(String url, String auth, String reqParams) 
+        public ResponseWrapper sendPost(String url, String auth, String reqParams) 
         { 
             return this.sendRequest( "POST",  url,  auth, reqParams);        
         }
-        public ResponseResult sendGet(String url, String auth, String reqParams)
+        public ResponseWrapper sendGet(String url, String auth, String reqParams)
         {
             return this.sendRequest("GET", url, auth, reqParams);
         }
@@ -40,14 +40,14 @@ namespace cn.jpush.api.common
          * url
          * auth   可选
          */
-        public ResponseResult sendRequest(String method, String url, String auth,String reqParams)
+        public ResponseWrapper sendRequest(String method, String url, String auth,String reqParams)
         {
             Console.WriteLine("Send request - " + method.ToString()+ " " + url);
             if (null != reqParams)
             {
                 Console.WriteLine("Request Content - " + reqParams);
             }
-            ResponseResult result = new ResponseResult();
+            ResponseWrapper result = new ResponseWrapper();
             HttpWebRequest myReq = null;
             HttpWebResponse response = null;
             try

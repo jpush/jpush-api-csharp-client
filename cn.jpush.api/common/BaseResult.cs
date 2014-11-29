@@ -14,9 +14,9 @@ namespace cn.jpush.api.common
         
         public const int RESPONSE_OK = 200;
 
-        private ResponseResult responseResult;
+        private ResponseWrapper responseResult;
 
-        public ResponseResult ResponseResult
+        public ResponseWrapper ResponseResult
         {
             get { return responseResult; }
             set { responseResult = value; }

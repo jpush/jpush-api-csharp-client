@@ -37,7 +37,7 @@ namespace cn.jpush.api.push
            
             String url = HOST_NAME_SSL;
             url += PUSH_PATH;
-            ResponseResult result = sendPost(url, Authorization(), payloadString);
+            ResponseWrapper result = sendPost(url, Authorization(), payloadString);
             MessageResult messResult = new MessageResult();
             messResult.ResponseResult = result;
            

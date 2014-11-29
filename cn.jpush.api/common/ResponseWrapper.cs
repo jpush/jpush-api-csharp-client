@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace cn.jpush.api.common
 {
-    public class ResponseResult
+    public class ResponseWrapper
     {
         private const int RESPONSE_CODE_NONE = -1;
     
@@ -47,7 +47,7 @@ namespace cn.jpush.api.common
 
         public String exceptionString;
 
-	    public ResponseResult() {
+	    public ResponseWrapper() {
 	    }
         public void setRateLimit(String quota, String remaining, String reset) {
             if (null == quota) return;

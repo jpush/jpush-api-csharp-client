@@ -61,9 +61,15 @@ namespace cn.jpush.api
         {
             return _reportClient.getReceiveds(msg_ids);
         }
-        static void Main(String[] args) 
+        public ReceivedResult getReceivedApi_v3(String msg_ids)
         {
-            Console.WriteLine("2222");
+            return _reportClient.getReceiveds_v3(msg_ids);
         }
+        //public MessagesResult getReportMessages(String msgIds)
+        //{
+        //    return _reportClient.getMessages(msgIds);
+        //}
+        
     }
+   
 }

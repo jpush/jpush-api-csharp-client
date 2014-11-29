@@ -55,7 +55,7 @@
     <Compile Include="common\BaseResult.cs" />
     <Compile Include="common\DeviceType.cs" />
     <Compile Include="common\PlatformConverter.cs" />
-    <Compile Include="common\ResponseResult.cs" />
+    <Compile Include="common\ResponseWrapper.cs" />
     <Compile Include="common\ServiceHelper.cs" />
     <Compile Include="JPushClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,6 +72,7 @@
     <Compile Include="push\notification\WinphoneNotification.cs" />
     <Compile Include="push\PushClient.cs" />
     <Compile Include="push\mode\PushPayload.cs" />
+    <Compile Include="report\MessagesResult.cs" />
     <Compile Include="report\ReceivedResult.cs" />
     <Compile Include="report\ReportClient.cs" />
     <Compile Include="util\Base64.cs" />
@@ -81,7 +82,9 @@
     <Compile Include="util\StringUtil.cs" />
     <Compile Include="push\mode\Notification.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="device\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

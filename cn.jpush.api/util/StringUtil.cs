@@ -37,6 +37,21 @@ namespace cn.jpush.api.util
         {
                   return Regex.IsMatch(value, @"^\d*[.]?\d*$");
         }
+        public static String arrayToString(String[] values)
+        {
+            if (null == values) return "";
+
+            StringBuilder buffer = new StringBuilder(values.Length);
+            for (int i = 0; i < values.Length; i++)
+            {
+                buffer.Append(values[i]).Append(",");
+            }
+            if (buffer.Length > 0)
+            {
+                return buffer.ToString().Substring(0, buffer.Length - 1);
+            }
+            return "";
+        }
 
     }
 }

@@ -11,8 +11,8 @@ namespace cn.jpush.api.common
     public class APIRequestException:Exception
     {
 
-        private ResponseResult responseRequest;
-        public APIRequestException(ResponseResult responseRequest)
+        private ResponseWrapper responseRequest;
+        public APIRequestException(ResponseWrapper responseRequest)
             : base(responseRequest.exceptionString)
         {
             this.responseRequest = responseRequest;
@@ -63,28 +63,5 @@ namespace cn.jpush.api.common
             return responseRequest.rateLimitReset;
         }
     }
-    
-  
-    
-   
-    
-    
-
-    //@Override
-    //public int getRateLimitQuota() {
-    //    return responseWrapper.rateLimitQuota;
-    //}
-
-    //@Override
-    //public int getRateLimitRemaining() {
-    //    return responseWrapper.rateLimitRemaining;
-    //}
-
-    //@Override
-    //public int getRateLimitReset() {
-    //    return responseWrapper.rateLimitReset;
-    //}
-
-
     
 }
