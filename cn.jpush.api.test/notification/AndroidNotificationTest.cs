@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using cn.jpush.api.push.notificaiton;
+using cn.jpush.api.push.notification;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
@@ -71,8 +71,5 @@ namespace cn.jpush.api.test.notification
 
             Assert.AreEqual(json.ToString(Formatting.None), JsonConvert.SerializeObject(an, jSetting));
         }
-       
-    
-
     }
 }

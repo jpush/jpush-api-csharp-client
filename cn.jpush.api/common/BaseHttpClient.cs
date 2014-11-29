@@ -55,7 +55,6 @@ namespace cn.jpush.api.common
                 myReq = (HttpWebRequest)WebRequest.Create(url);
                 myReq.Method = method;
                 myReq.ContentType = "application/json";
-
                 if ( !String.IsNullOrEmpty(auth) )
                 {
                     myReq.Headers.Add("Authorization", "Basic " + auth);    
@@ -79,17 +78,10 @@ namespace cn.jpush.api.common
                     {
                         result.responseContent = reader.ReadToEnd();
                     }
-                }
-                if (statusCode == HttpStatusCode.OK)
-                {
                     String limitQuota = response.GetResponseHeader(RATE_LIMIT_QUOTA);
                     String limitRemaining = response.GetResponseHeader(RATE_LIMIT_Remaining);
                     String limitReset = response.GetResponseHeader(RATE_LIMIT_Reset);
                     result.setRateLimit(limitQuota, limitRemaining, limitReset);
-                }
-                else 
-                {
-                    Debug.Print("error is " + statusCode.ToString());
                 }
             }
             catch (WebException e)
@@ -102,6 +94,11 @@ namespace cn.jpush.api.common
                 }
                 result.responseCode = errorCode;
                 result.exceptionString = e.Message;
+                String limitQuota = ((HttpWebResponse)e.Response).GetResponseHeader(RATE_LIMIT_QUOTA);
+                String limitRemaining = ((HttpWebResponse)e.Response).GetResponseHeader(RATE_LIMIT_Remaining);
+                String limitReset = ((HttpWebResponse)e.Response).GetResponseHeader(RATE_LIMIT_Reset);
+                result.setRateLimit(limitQuota, limitRemaining, limitReset);
+
                 Debug.Print(e.Message);
             }
             catch (System.Exception ex)

@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Text;
-using cn.jpush.api.push.notificaiton;
+using cn.jpush.api.push.notification;
 
 namespace cn.jpush.api.test.model
 {
@@ -166,10 +166,9 @@ namespace cn.jpush.api.test.model
              payload.platform = Platform.all();
              payload.audience = Audience.all();
              payload.notification = new Notification();
-             payload.notification.iosNotification = new IosNotification().setAlert(LONG_TEXT_1);
-
+             payload.notification.IosNotification = new IosNotification().setAlert(LONG_TEXT_1);
              payload.Check();
-
+             
              Debug.WriteLine("Size: " + UTF8Encoding.UTF8.GetBytes(LONG_TEXT_1).Length);
              Assert.IsTrue(payload.IsIosExceedLength(), "Should exceed - " + UTF8Encoding.UTF8.GetBytes(LONG_TEXT_1).Length); 
        }

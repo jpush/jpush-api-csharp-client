@@ -1,4 +1,4 @@
-using cn.jpush.api.push.notificaiton;
+using cn.jpush.api.push.notification;
 using cn.jpush.api.util;
 using Newtonsoft.Json;
 // ------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ namespace cn.jpush.api.push.mode
 	{
         public String alert{get;set;}
         [JsonProperty(PropertyName = "ios")]
-        public IosNotification iosNotification { get; set; }
+        public IosNotification IosNotification { get; set; }
         [JsonProperty(PropertyName = "android")]
         public AndroidNotification AndroidNotification { get; set; }
         [JsonProperty(PropertyName = "winphone")]
@@ -27,14 +27,14 @@ namespace cn.jpush.api.push.mode
         public Notification()
         {
             this.alert = null;
-            this.iosNotification = null;
+            this.IosNotification = null;
             this.AndroidNotification = null;
             this.WinphoneNotification = null;
         }
         public Notification(String alert)
         {
             this.alert = alert;
-            this.iosNotification = null;
+            this.IosNotification = null;
             this.AndroidNotification = null;
             this.WinphoneNotification = null;
         }
@@ -44,7 +44,7 @@ namespace cn.jpush.api.push.mode
                             WinphoneNotification WinphoneNotification)
         {
             this.alert = alert;
-            this.iosNotification = iosNotification;
+            this.IosNotification = iosNotification;
             this.AndroidNotification = AndroidNotification;
             this.WinphoneNotification = WinphoneNotification;
         }
@@ -60,7 +60,7 @@ namespace cn.jpush.api.push.mode
         {
             var iosNotification = new IosNotification().setAlert(alert);
             var notification = new Notification(alert);
-            notification.iosNotification = iosNotification;
+            notification.IosNotification = iosNotification;
             return notification;
         }
         public static Notification ios_auto_badge()
@@ -68,7 +68,7 @@ namespace cn.jpush.api.push.mode
             var platformNotification = new IosNotification();
             platformNotification.autoBadge();
             var notificaiton = new Notification();
-            notificaiton.iosNotification = platformNotification;
+            notificaiton.IosNotification = platformNotification;
             return notificaiton;
         }
         public static Notification ios_set_badge(int badge)
@@ -77,7 +77,7 @@ namespace cn.jpush.api.push.mode
             platformNotification.setBadge(badge);
 
             var notificaiton = new Notification();
-            notificaiton.iosNotification = platformNotification;
+            notificaiton.IosNotification = platformNotification;
             return notificaiton;
         }
         public static Notification ios_incr_badge(int badge)
@@ -85,7 +85,7 @@ namespace cn.jpush.api.push.mode
             var platformNotification = new IosNotification();
             platformNotification.incrBadge(badge);
             var notificaiton = new Notification();
-            notificaiton.iosNotification = platformNotification;
+            notificaiton.IosNotification = platformNotification;
             return notificaiton;
         }
         public static Notification winphone(String alert)
@@ -100,9 +100,9 @@ namespace cn.jpush.api.push.mode
         public  Notification Check()
         {
             Preconditions.checkArgument(!(isPlatformEmpty() && null == alert), "No notification payload is set.");
-            if (iosNotification!=null)
+            if (IosNotification!=null)
             {
-                Preconditions.checkArgument(!(null==iosNotification.alert && null == alert), "No notification payload is set.");
+                Preconditions.checkArgument(!(null==IosNotification.alert && null == alert), "No notification payload is set.");
             }
             if(AndroidNotification!=null)
             {
@@ -118,7 +118,7 @@ namespace cn.jpush.api.push.mode
         }
         private bool isPlatformEmpty() 
         {
-            return (iosNotification == null && AndroidNotification == null && WinphoneNotification == null);
+            return (IosNotification == null && AndroidNotification == null && WinphoneNotification == null);
         }
 	}
 }

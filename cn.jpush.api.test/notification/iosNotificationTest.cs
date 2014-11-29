@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using cn.jpush.api.push.notificaiton;
+using cn.jpush.api.push.notification;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 

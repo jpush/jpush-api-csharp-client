@@ -1,5 +1,5 @@
 ﻿using cn.jpush.api.common;
-using cn.jpush.api.push.notificaiton;
+using cn.jpush.api.push.notification;
 using cn.jpush.api.util;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -70,7 +70,7 @@ namespace cn.jpush.api.push.mode
         {
             return new PushPayload(Platform.all(),
                                    Audience.all(),
-                                   new Notification(alert),
+                                   new Notification(alert).Check(),
                                    null,
                                    new Options());
         }
@@ -93,7 +93,7 @@ namespace cn.jpush.api.push.mode
                 jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
 
                 var jsonObject = JsonConvert.DeserializeObject<PushPayload>(payloadString, jSetting);
-                return jsonObject;
+                return jsonObject.Check();
             }
             catch (Exception e)
             {
@@ -150,9 +150,9 @@ namespace cn.jpush.api.push.mode
         {
             if (this.notification != null)
             {
-                if (this.notification.iosNotification != null)
+                if (this.notification.IosNotification != null)
                 {
-                    var iosJson = JsonConvert.SerializeObject(this.notification.iosNotification, jSetting);
+                    var iosJson = JsonConvert.SerializeObject(this.notification.IosNotification, jSetting);
                     if (iosJson != null)
                     {
                         return UTF8Encoding.UTF8.GetBytes(iosJson).Length > MAX_IOS_PAYLOAD_LENGTH;
@@ -202,6 +202,10 @@ namespace cn.jpush.api.push.mode
             if (message != null)
             {
                 message.Check();
+            }
+            if (notification != null)
+            {
+                notification.Check();
             }
             return this;
         }

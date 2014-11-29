@@ -62,6 +62,7 @@
     <Compile Include="model\PushPayloadTest.cs" />
     <Compile Include="notification\AndroidNotificationTest.cs" />
     <Compile Include="notification\IosNotificationTest.cs" />
+    <Compile Include="notification\NotificationTest.cs" />
     <Compile Include="notification\WinphoneNotificationTest.cs" />
     <Compile Include="PushClientTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

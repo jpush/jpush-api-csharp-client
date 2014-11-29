@@ -11,7 +11,7 @@ using cn.jpush.api.report;
 using cn.jpush.api.common;
 using cn.jpush.api.util;
 using cn.jpush.api.push.mode;
-using cn.jpush.api.push.notificaiton;
+using cn.jpush.api.push.notification;
 namespace JpushApiClientExample
 {
     class JPushApiExample
@@ -30,7 +30,8 @@ namespace JpushApiClientExample
             Console.WriteLine("*****开始发送******");
 
             JPushClient client = new JPushClient(app_key, master_secret);
-            PushPayload payloadMessage = PushObject_android_and_ios();
+
+            PushPayload payloadMessage = PushObject_All_All_Alert();
             var result = client.SendPush(payloadMessage);
             var apiResult = client.getReceivedApi(result.msg_id.ToString());
 
@@ -70,13 +71,13 @@ namespace JpushApiClientExample
 
             pushPayload.audience = audience;
 
-            pushPayload.notification = new Notification("alert content");
-            pushPayload.notification.AndroidNotification = new AndroidNotification().setTitle("Android Title");
+            var notification = new Notification("alert content");
+            notification.AndroidNotification = new AndroidNotification().setTitle("Android Title");
+            notification.IosNotification = new IosNotification();
+            notification.IosNotification.incrBadge(1);
+            notification.IosNotification.AddExtra("extra_key", "extra_value");
 
-            pushPayload.notification.iosNotification = new IosNotification();
-            pushPayload.notification.iosNotification.incrBadge(1);
-            pushPayload.notification.iosNotification.AddExtra("extra_key", "extra_value");
-       
+            pushPayload.notification = notification.Check();       
             return pushPayload;
         }
         public static PushPayload buildPushObject_ios_tagAnd_alertWithExtrasAndMessage()

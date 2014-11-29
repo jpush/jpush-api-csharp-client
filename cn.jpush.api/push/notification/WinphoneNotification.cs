@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cn.jpush.api.push.notificaiton
+namespace cn.jpush.api.push.notification
 {
     public class WinphoneNotification : PlatformNotification
     {
