@@ -40,19 +40,11 @@ namespace cn.jpush.api.push
             ResponseResult result = sendPost(url, Authorization(), payloadString);
             MessageResult messResult = new MessageResult();
             messResult.ResponseResult = result;
-            //"{\"sendno\":\"0\",\"msg_id\":\"1704649583\"}"
-            if (messResult.isResultOK())
-            {
-                JpushSuccess jpushSuccess = JsonConvert.DeserializeObject<JpushSuccess>(result.responseContent);
-                messResult.sendno = int.Parse(jpushSuccess.sendno);
-                messResult.msg_id = int.Parse(jpushSuccess.msg_id);
-            }
-            else
-            {
-                JpushError jpushError = JsonConvert.DeserializeObject<JpushError>(result.responseContent);
-                messResult.errcode = jpushError.error.code;
-                messResult.errmsg  = jpushError.error.message;
-            }
+           
+            JpushSuccess jpushSuccess = JsonConvert.DeserializeObject<JpushSuccess>(result.responseContent);
+            messResult.sendno = int.Parse(jpushSuccess.sendno);
+            messResult.msg_id = int.Parse(jpushSuccess.msg_id);
+           
             return messResult;
         }
         private String Authorization(){

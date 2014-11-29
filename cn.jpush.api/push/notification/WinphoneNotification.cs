@@ -25,7 +25,7 @@ namespace cn.jpush.api.push.notification
             this.alert = alert;
             return this;
         }
-        public WinphoneNotification setPenPage(String openPage)
+        public WinphoneNotification setOpenPage(String openPage)
         {
             this.openPage = openPage;
             return this;

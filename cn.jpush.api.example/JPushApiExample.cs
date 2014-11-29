@@ -32,10 +32,16 @@ namespace JpushApiClientExample
             JPushClient client = new JPushClient(app_key, master_secret);
 
             PushPayload payloadMessage = PushObject_All_All_Alert();
-            var result = client.SendPush(payloadMessage);
-            var apiResult = client.getReceivedApi(result.msg_id.ToString());
-
-            Console.WriteLine("发送结果：{0}", result);
+            try
+            {
+                var result = client.SendPush(payloadMessage);
+                var apiResult = client.getReceivedApi(result.msg_id.ToString());
+            }
+            catch (APIRequestException e)
+            {
+               
+            }
+           
             Console.WriteLine("*****结束发送******");
         }
         public static PushPayload PushObject_All_All_Alert()
@@ -65,10 +71,9 @@ namespace JpushApiClientExample
         public static PushPayload PushObject_android_and_ios()
         {
             PushPayload pushPayload = new PushPayload();
+
             pushPayload.platform = Platform.android_ios();
-
             var audience = Audience.s_tag("tag1");
-
             pushPayload.audience = audience;
 
             var notification = new Notification("alert content");
@@ -77,16 +82,25 @@ namespace JpushApiClientExample
             notification.IosNotification.incrBadge(1);
             notification.IosNotification.AddExtra("extra_key", "extra_value");
 
-            pushPayload.notification = notification.Check();       
+            pushPayload.notification = notification.Check(); 
+      
+
             return pushPayload;
         }
         public static PushPayload buildPushObject_ios_tagAnd_alertWithExtrasAndMessage()
         {
             PushPayload pushPayload = new PushPayload();
             pushPayload.platform = Platform.android_ios();
-            pushPayload.audience = Audience.s_tag("tag1", "tag2").alias("alias1", "alias2"); ;
-            Dictionary<string,string> extras=new Dictionary<string,string>();
-            extras.Add("from","JPush");
+            pushPayload.audience = Audience.s_tag("tag1", "tag2").alias("alias1", "alias2"); 
+            var notification = new Notification();
+            notification.IosNotification = new IosNotification();
+            notification.IosNotification.setAlert("alert");
+            notification.IosNotification.disableSound().setSound("");
+
+            var winphone = new WinphoneNotification().setOpenPage("SettingPage.xaml").AddExtra("string","aaa");
+
+            notification.WinphoneNotification = winphone;
+
             return pushPayload;
 
         }

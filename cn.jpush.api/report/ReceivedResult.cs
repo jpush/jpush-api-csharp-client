@@ -27,25 +27,23 @@ namespace cn.jpush.api.report
 
         public override bool isResultOK()
         {
-            if (Equals(ResponseResult, HttpStatusCode.OK))
+            if (Equals(ResponseResult.responseCode, HttpStatusCode.OK))
             {
                 return true;
             }
             return false;
         }
 
-        
-
-        public override int getErrorCode()
+        public HttpStatusCode getErrorCode()
         {
             if (null != ResponseResult)
             {
-                return (int)ResponseResult.responseCode;
+                return ResponseResult.responseCode;
             }
             return 0;
         }
 
-        public override string getErrorMessage()
+        public  string getErrorMessage()
         {
             if (null != ResponseResult)
             {

@@ -29,7 +29,7 @@ namespace cn.jpush.api.report
             ReceivedResult result = new ReceivedResult();
             List<ReceivedResult.Received> list = new List<ReceivedResult.Received>();
 
-            Console.WriteLine("recie content=="+rsp.responseContent);
+            Console.WriteLine("recieve content=="+rsp.responseContent);
             if (rsp.responseCode == System.Net.HttpStatusCode.OK)
             {
                 list = (List<ReceivedResult.Received>)JsonTool.JsonToObject(rsp.responseContent,list);

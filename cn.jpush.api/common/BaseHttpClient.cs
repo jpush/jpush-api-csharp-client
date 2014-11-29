@@ -82,6 +82,7 @@ namespace cn.jpush.api.common
                     String limitRemaining = response.GetResponseHeader(RATE_LIMIT_Remaining);
                     String limitReset = response.GetResponseHeader(RATE_LIMIT_Reset);
                     result.setRateLimit(limitQuota, limitRemaining, limitReset);
+                    Console.WriteLine("Succeed to get response - 200 OK");
                 }
             }
             catch (WebException e)
@@ -98,14 +99,19 @@ namespace cn.jpush.api.common
                 String limitRemaining = ((HttpWebResponse)e.Response).GetResponseHeader(RATE_LIMIT_Remaining);
                 String limitReset = ((HttpWebResponse)e.Response).GetResponseHeader(RATE_LIMIT_Reset);
                 result.setRateLimit(limitQuota, limitRemaining, limitReset);
-
                 Debug.Print(e.Message);
+                result.setErrorObject();
+                Console.WriteLine("fail  to get response - {0}", errorCode);
+                Console.WriteLine("Response Content - {0}", result.responseContent);
+                 
+                throw new APIRequestException(result);
             }
-            catch (System.Exception ex)
-            {
-                 String errorMsg = ex.Message;
-                 Debug.Print(errorMsg);
-            }
+            //这里不再抓取非http的异常，如果异常抛出交给开发者自行处理
+            //catch (System.Exception ex)
+            //{
+            //     String errorMsg = ex.Message;
+            //     Debug.Print(errorMsg);
+            //}
             finally 
             {
                 if (response != null)

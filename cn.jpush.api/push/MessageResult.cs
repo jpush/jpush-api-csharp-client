@@ -11,27 +11,8 @@ namespace cn.jpush.api.push
 {
     public class MessageResult : BaseResult
     {
-        public int msg_id;
-        public int sendno;
-        public int errcode = ERROR_CODE_NONE;
-        public String errmsg;
-        public long getMessageId() 
-        {
-            return this.msg_id;
-        }
-        public int getSendNo() 
-        {
-            return this.sendno;
-        }
-        override public int getErrorCode() 
-        {
-            return this.errcode;
-        }
-    
-        override public String getErrorMessage() 
-        {
-            return this.errmsg;
-        }
+        public int msg_id{get;set;}
+        public int sendno{ get; set; }
 
         override public bool isResultOK()
         {
@@ -43,14 +24,7 @@ namespace cn.jpush.api.push
         }
         public override string ToString()
         {
-            if (errcode == ERROR_CODE_NONE)
-            {
-                return string.Format("sendno:{0},message_id:{1}", sendno, msg_id);
-            }
-            else
-            {
-                return string.Format("errcode:{0},errmsg:{1}", errcode, errmsg);
-            }
+             return string.Format("sendno:{0},message_id:{1}", sendno, msg_id);
         }
     }
     //"{\"sendno\":\"0\",\"msg_id\":\"1704649583\"}"
@@ -61,9 +35,10 @@ namespace cn.jpush.api.push
     }
     public class JpushError
     {
-       public JpushErrorDetail error;
+        public JpushErrorObject error;
+        public long msg_id;
     }
-    public class JpushErrorDetail
+    public class JpushErrorObject
     {
        public int     code;
        public String  message;

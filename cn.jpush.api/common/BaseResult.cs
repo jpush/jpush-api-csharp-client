@@ -23,9 +23,9 @@ namespace cn.jpush.api.common
         }
         public abstract bool isResultOK();
     
-        public abstract int getErrorCode();
+      
     
-        public abstract String getErrorMessage();
+       // public override String getErrorMessage();
     
         public int getRateLimitQuota() {
             if (null != responseResult) {

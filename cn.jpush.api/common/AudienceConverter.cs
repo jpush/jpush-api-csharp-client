@@ -41,6 +41,7 @@ namespace cn.jpush.api.common
             if (audience.isAll())
             {
                 writer.WriteValue(audience.allAudience);
+                //writer.WriteValue("alll");
             }
             else
             {

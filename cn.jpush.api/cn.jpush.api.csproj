@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="common\APIRequestException.cs" />
     <Compile Include="common\AudienceConverter.cs" />
     <Compile Include="common\BaseHttpClient.cs" />
     <Compile Include="common\BaseResult.cs" />
