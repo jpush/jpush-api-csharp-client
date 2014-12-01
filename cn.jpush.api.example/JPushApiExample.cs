@@ -44,13 +44,21 @@ namespace JpushApiClientExample
         {
             return PushPayload.AlertAll(ALERT);
         }
+        public static PushPayload buildPushObject_all_alias_alert()
+        {
+            return new PushPayload(Platform.all(),
+                                  Audience.s_alias("alias1"),
+                                  new Notification().setAlert(ALERT),
+                                  null,
+                                  new Options());
+        }
         public static PushPayload PushObject_All_All_Alias_Alert(string alert)
         {
             PushPayload pushPayload = new PushPayload();
             pushPayload.platform =  Platform.all();
 
-            pushPayload.audience = Audience.s_alias("alias1", "alias2"); 
-            pushPayload.notification = new Notification(alert);
+            pushPayload.audience = Audience.s_alias("alias1", "alias2");
+            pushPayload.notification = new Notification().setAlert(alert);
 
             return pushPayload;
         }
@@ -71,8 +79,8 @@ namespace JpushApiClientExample
             pushPayload.platform = Platform.android_ios();
             var audience = Audience.s_tag("tag1");
             pushPayload.audience = audience;
-
-            var notification = new Notification("alert content");
+           
+            var notification = new Notification().setAlert("alert content");
             notification.AndroidNotification = new AndroidNotification().setTitle("Android Title");
             notification.IosNotification = new IosNotification();
             notification.IosNotification.incrBadge(1);

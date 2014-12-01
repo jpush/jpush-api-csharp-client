@@ -45,6 +45,10 @@ namespace cn.jpush.api.common
         public int rateLimitRemaining;
         public int rateLimitReset;
 
+        public bool isServerResponse()
+        {
+            return responseCode == HttpStatusCode.OK;
+        }
         public String exceptionString;
 
 	    public ResponseWrapper() {

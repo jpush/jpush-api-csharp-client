@@ -56,7 +56,14 @@
     <Compile Include="common\DeviceType.cs" />
     <Compile Include="common\PlatformConverter.cs" />
     <Compile Include="common\ResponseWrapper.cs" />
+    <Compile Include="common\resp\BooleanResult.cs" />
+    <Compile Include="common\resp\DefaultResult.cs" />
     <Compile Include="common\ServiceHelper.cs" />
+    <Compile Include="common\TimeUnit.cs" />
+    <Compile Include="device\AliasDeviceListResult.cs" />
+    <Compile Include="device\DeviceClient.cs" />
+    <Compile Include="device\TagAliasResult.cs" />
+    <Compile Include="device\TagListResult.cs" />
     <Compile Include="JPushClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="push\mode\Audience.cs" />
@@ -75,6 +82,7 @@
     <Compile Include="report\MessagesResult.cs" />
     <Compile Include="report\ReceivedResult.cs" />
     <Compile Include="report\ReportClient.cs" />
+    <Compile Include="report\UsersResult.cs" />
     <Compile Include="util\Base64.cs" />
     <Compile Include="util\JsonTool.cs" />
     <Compile Include="util\Md5.cs" />
@@ -82,9 +90,7 @@
     <Compile Include="util\StringUtil.cs" />
     <Compile Include="push\mode\Notification.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="device\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

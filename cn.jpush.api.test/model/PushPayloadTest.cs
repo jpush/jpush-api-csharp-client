@@ -49,7 +49,7 @@ namespace cn.jpush.api.test.model
         public void testIllegal_NoAudience()
         {
             Platform platform = Platform.all();
-            Notification notifcation =new Notification("alert");
+            Notification notifcation = new Notification().setAlert("alert");
 
             PushPayload pushPayliad = new PushPayload();
 
@@ -62,8 +62,8 @@ namespace cn.jpush.api.test.model
         [ExpectedException(typeof(ArgumentException))]
         public void testIllegal_NoPlatform()
         {
-           
-            Notification notifcation = new Notification("alert");
+
+            Notification notifcation = new Notification().setAlert("alert");
 
             PushPayload pushPayliad = new PushPayload();
             pushPayliad.audience = Audience.all(); ;
@@ -80,7 +80,7 @@ namespace cn.jpush.api.test.model
             payload.platform = Platform.all();
             payload.audience = Audience.all(); 
             payload.options = new Options() { sendno = number };
-            payload.notification = new Notification("alert");
+            Notification notifcation = new Notification().setAlert("alert");
 
             JObject json = new JObject();
             json.Add("platform", JToken.FromObject("all"));
@@ -153,7 +153,7 @@ namespace cn.jpush.api.test.model
              PushPayload payload = new PushPayload();
              payload.platform = Platform.all();
              payload.audience = Audience.all();
-             payload.notification= new Notification(LONG_TEXT_1);
+             Notification notifcation = new Notification().setAlert(LONG_TEXT_1);
              payload.Check();
 
              Debug.WriteLine("Size: " + UTF8Encoding.UTF8.GetBytes(LONG_TEXT_1).Length);

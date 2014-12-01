@@ -14,10 +14,10 @@ namespace cn.jpush.api.report
         private  const String REPORT_HOST_NAME = "https://report.jpush.cn";
         private  const String REPORT_RECEIVE_PATH = "/v2/received";
         private const String REPORT_RECEIVE_PATH_V3 = "/v3/received";
+        private const String REPORT_USER_PATH = "/v3/users";
 
         private String appKey;
         private String masterSecret;
-
         public ReportClient(String appKey, String masterSecret) 
         {
             this.appKey = appKey;
@@ -31,39 +31,17 @@ namespace cn.jpush.api.report
         {
             return getReceiveds_common(msg_ids, REPORT_RECEIVE_PATH_V3);
         }
-        private ReceivedResult getReceiveds_common(String msg_ids,string path)
+       
+        public  UsersResult    getUsers(TimeUnit timeUnit, String start, int duration)
         {
-            String url = REPORT_HOST_NAME + path + "?msg_ids=" + msg_ids;
+            String startEncoded = null;
+            String url = REPORT_HOST_NAME + REPORT_USER_PATH
+                    + "?time_unit=" + timeUnit.ToString()
+                    + "&start=" + startEncoded + "&duration=" + duration;
             String auth = Base64.getBase64Encode(this.appKey + ":" + this.masterSecret);
-            ResponseWrapper rsp = this.sendGet(url, auth, null);
-            ReceivedResult result = new ReceivedResult();
-            List<ReceivedResult.Received> list = new List<ReceivedResult.Received>();
+            ResponseWrapper response = this.sendGet(url, auth, null);
 
-            Console.WriteLine("recieve content==" + rsp.responseContent);
-            if (rsp.responseCode == System.Net.HttpStatusCode.OK)
-            {
-                list = (List<ReceivedResult.Received>)JsonTool.JsonToObject(rsp.responseContent, list);
-                String content = rsp.responseContent;
-            }
-            result.ResponseResult = rsp;
-            result.ReceivedList = list;
-            return result;
-        }
-        //public MessagesResult getReportMessages(String[] msgIds)
-        //{
-            
-
-        //}
-        //public MessagesResult getReportMessages(params String msgIds)
-        //{
-            
-
-        //}
-        public MessagesResult getReportMessages(String msgIds)
-        {
-            checkMsgids(msgIds);
-            throw new NotImplementedException();
-
+            return UsersResult.fromResponse(response);
         }
         public  void checkMsgids(String msgIds)
         {
@@ -82,8 +60,6 @@ namespace cn.jpush.api.report
             if (msgIds.EndsWith(",")) {
                 msgIds = msgIds.Substring(0, msgIds.Length - 1);
             }
-
-        
             String[] splits = msgIds.Split(',');
             try {
                 foreach (String s in splits) {
@@ -92,10 +68,41 @@ namespace cn.jpush.api.report
                         int.Parse(trim);
                     }
                 }
-            } catch (Exception e) {
+            } catch (Exception) {
                 throw new Exception("Every msg_id should be valid Integer number which splits by ','");
             }
         }
+
+        private ReceivedResult getReceiveds_common(String msg_ids, string path)
+        {
+            String url = REPORT_HOST_NAME + path + "?msg_ids=" + msg_ids;
+            String auth = Base64.getBase64Encode(this.appKey + ":" + this.masterSecret);
+            ResponseWrapper rsp = this.sendGet(url, auth, null);
+            ReceivedResult result = new ReceivedResult();
+            List<ReceivedResult.Received> list = new List<ReceivedResult.Received>();
+
+            Console.WriteLine("recieve content==" + rsp.responseContent);
+            if (rsp.responseCode == System.Net.HttpStatusCode.OK)
+            {
+                list = (List<ReceivedResult.Received>)JsonTool.JsonToObject(rsp.responseContent, list);
+                String content = rsp.responseContent;
+            }
+            result.ResponseResult = rsp;
+            result.ReceivedList = list;
+            return result;
+        }
+        private MessagesResult getReportMessages(String msgIds)
+        {
+            checkMsgids(msgIds);
+
+            String url = REPORT_HOST_NAME + REPORT_RECEIVE_PATH + "?msg_ids=" + msgIds;
+            String auth = Base64.getBase64Encode(this.appKey + ":" + this.masterSecret);
+            ResponseWrapper response = this.sendGet(url, auth, null);
+
+            return MessagesResult.fromResponse(response);
+
+        }
+   
        
     }
 }

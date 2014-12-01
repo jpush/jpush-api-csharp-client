@@ -70,7 +70,7 @@ namespace cn.jpush.api.push.mode
         {
             return new PushPayload(Platform.all(),
                                    Audience.all(),
-                                   new Notification(alert).Check(),
+                                   new Notification().setAlert(alert),
                                    null,
                                    new Options());
         }

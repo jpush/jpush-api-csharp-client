@@ -31,35 +31,39 @@ namespace cn.jpush.api.push.mode
             this.AndroidNotification = null;
             this.WinphoneNotification = null;
         }
-        public Notification(String alert)
+    
+        public Notification setAlert(string alert)
         {
             this.alert = alert;
-            this.IosNotification = null;
-            this.AndroidNotification = null;
-            this.WinphoneNotification = null;
+            return this;
         }
-        public Notification(String alert, 
-                            IosNotification iosNotification,
-                            AndroidNotification AndroidNotification, 
-                            WinphoneNotification WinphoneNotification)
+        public Notification setAndroid(AndroidNotification android)
         {
-            this.alert = alert;
-            this.IosNotification = iosNotification;
-            this.AndroidNotification = AndroidNotification;
-            this.WinphoneNotification = WinphoneNotification;
+            this.AndroidNotification = android;
+            return this;
         }
-
+        public Notification setIos(IosNotification ios)
+        {
+            this.IosNotification = ios;
+            return this;
+        }
+        public Notification setWinphone(WinphoneNotification winphone)
+        {
+            this.WinphoneNotification = winphone;
+            return this;
+        }
+        
         public static Notification android(String alert, String title)
         {
             var platformNotification = new AndroidNotification().setAlert(alert).setTitle(title);
-            var notificaiton = new Notification(alert);
+            var notificaiton = new Notification().setAlert(alert);
             notificaiton.AndroidNotification = platformNotification;
             return notificaiton;
         }
         public static Notification ios(String alert)
         {
             var iosNotification = new IosNotification().setAlert(alert);
-            var notification = new Notification(alert);
+            var notification = new Notification().setAlert(alert);
             notification.IosNotification = iosNotification;
             return notification;
         }
@@ -91,8 +95,8 @@ namespace cn.jpush.api.push.mode
         public static Notification winphone(String alert)
         {
             var platformNotification = new WinphoneNotification().setAlert(alert);
-           
-            var notificaiton = new Notification(alert);
+
+            var notificaiton = new Notification().setAlert(alert);
             notificaiton.WinphoneNotification = platformNotification;
             return notificaiton;
         }

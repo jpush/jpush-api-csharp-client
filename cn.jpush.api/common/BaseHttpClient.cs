@@ -30,6 +30,10 @@ namespace cn.jpush.api.common
         { 
             return this.sendRequest( "POST",  url,  auth, reqParams);        
         }
+        public ResponseWrapper sendDelete(String url, String auth, String reqParams)
+        {
+            return this.sendRequest("DELETE", url, auth, reqParams);
+        }
         public ResponseWrapper sendGet(String url, String auth, String reqParams)
         {
             return this.sendRequest("GET", url, auth, reqParams);
