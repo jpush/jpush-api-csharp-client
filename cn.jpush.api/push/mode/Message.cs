@@ -37,7 +37,7 @@ namespace cn.jpush.api.push.mode
             this.msg_content = msgContent;
             this.content_type = contentType;
         }
-        public static Message msgContent(string msgContent)
+        public static Message content(string msgContent)
         {
             return new Message(msgContent).Check();
         }

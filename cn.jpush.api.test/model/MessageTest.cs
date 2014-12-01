@@ -14,17 +14,17 @@ namespace cn.jpush.api.test.model
         [ExpectedException(typeof(ArgumentException))]
         public void testIllegalOfNull()
         {
-            Message message =  Message.msgContent(null);
+            Message message = Message.content(null);
         }
         [TestMethod]
         public void testIllegalOfEmpty()
         {
-            Message message = Message.msgContent("");
+            Message message = Message.content("");
         }
         [TestMethod]
         public void testMsgContent() 
         {
-            Message message = Message.msgContent("msg content");
+            Message message = Message.content("msg content");
         
             JObject json = new JObject();
             json.Add("msg_content",JToken.FromObject("msg content"));
@@ -40,7 +40,7 @@ namespace cn.jpush.api.test.model
         [TestMethod]
         public void testMsgContentAndExtras()
         {
-            Message message = Message.msgContent("msgContent");
+            Message message = Message.content("msgContent");
             message.AddExtras("key1", "value1");
             message.AddExtras("key2", 222);
             message.AddExtras("key3", false);

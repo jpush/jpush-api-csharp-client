@@ -31,19 +31,21 @@ namespace cn.jpush.api.report
         {
             return getReceiveds_common(msg_ids, REPORT_RECEIVE_PATH_V3);
         }
-       
         public  UsersResult    getUsers(TimeUnit timeUnit, String start, int duration)
         {
-            String startEncoded = null;
             String url = REPORT_HOST_NAME + REPORT_USER_PATH
                     + "?time_unit=" + timeUnit.ToString()
-                    + "&start=" + startEncoded + "&duration=" + duration;
+                    + "&start=" + start + "&duration=" + duration;
             String auth = Base64.getBase64Encode(this.appKey + ":" + this.masterSecret);
             ResponseWrapper response = this.sendGet(url, auth, null);
 
             return UsersResult.fromResponse(response);
         }
-        public  void checkMsgids(String msgIds)
+        public MessagesResult getReportMessages(params String[] msgIds)
+        {
+            return getReportMessages(StringUtil.arrayToString(msgIds));
+        }
+        public String checkMsgids(String msgIds)
         {
 
             if (string.IsNullOrEmpty(msgIds)) {
@@ -61,16 +63,21 @@ namespace cn.jpush.api.report
                 msgIds = msgIds.Substring(0, msgIds.Length - 1);
             }
             String[] splits = msgIds.Split(',');
+            List<string> list = new List<string>();
             try {
                 foreach (String s in splits) {
                     string trim = s.Trim();
-                    if (!string.IsNullOrEmpty(s)) {
+                    if (!string.IsNullOrEmpty(trim))
+                    {
                         int.Parse(trim);
+                        list.Add(trim);
                     }
                 }
+                return StringUtil.arrayToString(list.ToArray());
             } catch (Exception) {
                 throw new Exception("Every msg_id should be valid Integer number which splits by ','");
             }
+            
         }
 
         private ReceivedResult getReceiveds_common(String msg_ids, string path)
@@ -93,9 +100,8 @@ namespace cn.jpush.api.report
         }
         private MessagesResult getReportMessages(String msgIds)
         {
-            checkMsgids(msgIds);
-
-            String url = REPORT_HOST_NAME + REPORT_RECEIVE_PATH + "?msg_ids=" + msgIds;
+            String checkMsgId = checkMsgids(msgIds);
+            String url = REPORT_HOST_NAME + REPORT_RECEIVE_PATH + "?msg_ids=" + checkMsgId;
             String auth = Base64.getBase64Encode(this.appKey + ":" + this.masterSecret);
             ResponseWrapper response = this.sendGet(url, auth, null);
 

@@ -63,17 +63,24 @@ namespace cn.jpush.api.device
             if (null != alias) {
                 top.Add("alias", alias);
             }
-
+            
             JObject tagObject = new JObject();
-            JArray tagsAdd = JArray.FromObject(tagsToAdd);
-            if (tagsAdd.Count > 0) {
-                tagObject.Add("add", tagsAdd);
-            }
-
-            JArray tagsRemove = JArray.FromObject(tagsToRemove);
-            if (tagsRemove.Count > 0)
+            if (tagsToAdd!=null)
             {
-                tagObject.Add("remove", tagsRemove);
+                JArray tagsAdd = JArray.FromObject(tagsToAdd);
+                if (tagsAdd.Count > 0)
+                {
+                    tagObject.Add("add", tagsAdd);
+                }
+            }
+            if (tagsToRemove != null)
+            {
+
+                JArray tagsRemove = JArray.FromObject(tagsToRemove);
+                if (tagsRemove.Count > 0)
+                {
+                    tagObject.Add("remove", tagsRemove);
+                }
             }
         
             if (tagObject.Count > 0) {
@@ -116,14 +123,14 @@ namespace cn.jpush.api.device
             if (null != toRemoveUsers && toRemoveUsers.Count > 0) 
             {
                 JArray array = new JArray();
-                foreach (String user in toAddUsers) 
+                foreach (String user in toRemoveUsers) 
                 {
                     array.Add(JToken.FromObject(user));
                 }
                 registrationIds.Add("remove", array);
             }
             top.Add("registration_ids", registrationIds);
-            ResponseWrapper response = this.sendGet(url, Authorization(), top.ToString());
+            ResponseWrapper response = this.sendPost(url, Authorization(), top.ToString());
             return DefaultResult.fromResponse(response);
         }
          

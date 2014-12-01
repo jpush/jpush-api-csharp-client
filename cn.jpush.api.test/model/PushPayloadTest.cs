@@ -80,7 +80,8 @@ namespace cn.jpush.api.test.model
             payload.platform = Platform.all();
             payload.audience = Audience.all(); 
             payload.options = new Options() { sendno = number };
-            Notification notifcation = new Notification().setAlert("alert");
+            payload.notification = new Notification().setAlert("alert");
+            payload.Check();
 
             JObject json = new JObject();
             json.Add("platform", JToken.FromObject("all"));
@@ -111,7 +112,7 @@ namespace cn.jpush.api.test.model
             payload.platform = Platform.all();
             payload.audience = Audience.all();
             payload.options = new Options() { sendno = number };
-            payload.message = Message.msgContent("message");
+            payload.message = Message.content("message");
             payload.Check();
 
             JObject json = new JObject();
@@ -135,13 +136,13 @@ namespace cn.jpush.api.test.model
 
             Assert.AreEqual(jsonObject, jsonString);
         }
-         [TestMethod]
-         public void testGlobalExceed() 
+        [TestMethod]
+        public void testGlobalExceed() 
          {
              PushPayload payload = new PushPayload();
              payload.platform = Platform.all();
              payload.audience = Audience.all();
-             payload.message = Message.msgContent(LONG_TEXT_2);
+             payload.message = Message.content(LONG_TEXT_2);
              payload.Check();
 
              Debug.WriteLine("Size: " + UTF8Encoding.UTF8.GetBytes(LONG_TEXT_2).Length);
@@ -153,14 +154,14 @@ namespace cn.jpush.api.test.model
              PushPayload payload = new PushPayload();
              payload.platform = Platform.all();
              payload.audience = Audience.all();
-             Notification notifcation = new Notification().setAlert(LONG_TEXT_1);
-             payload.Check();
+             payload.notification = new Notification().setAlert(LONG_TEXT_1);
 
+             payload.Check();
              Debug.WriteLine("Size: " + UTF8Encoding.UTF8.GetBytes(LONG_TEXT_1).Length);
              Assert.IsTrue(payload.IsIosExceedLength(), "Should exceed - " + UTF8Encoding.UTF8.GetBytes(LONG_TEXT_1).Length); 
        }
-         [TestMethod]
-         public void testIosExceed2() 
+        [TestMethod]
+        public void testIosExceed2() 
          {
              PushPayload payload = new PushPayload();
              payload.platform = Platform.all();

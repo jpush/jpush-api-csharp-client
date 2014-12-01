@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.device
 {
-    class TagAliasResult:BaseResult
+  public  class TagAliasResult:BaseResult
     {
         public List<String> tags;
         public String alias;

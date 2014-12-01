@@ -42,31 +42,27 @@ namespace JpushApiClientExample
         }
         public static PushPayload PushObject_All_All_Alert()
         {
-            return PushPayload.AlertAll(ALERT);
-        }
-        public static PushPayload buildPushObject_all_alias_alert()
-        {
-            return new PushPayload(Platform.all(),
-                                  Audience.s_alias("alias1"),
-                                  new Notification().setAlert(ALERT),
-                                  null,
-                                  new Options());
-        }
-        public static PushPayload PushObject_All_All_Alias_Alert(string alert)
-        {
             PushPayload pushPayload = new PushPayload();
-            pushPayload.platform =  Platform.all();
-
-            pushPayload.audience = Audience.s_alias("alias1", "alias2");
-            pushPayload.notification = new Notification().setAlert(alert);
-
+            pushPayload.platform = Platform.all();
+            pushPayload.audience = Audience.all();
+            pushPayload.notification = new Notification().setAlert(ALERT);
             return pushPayload;
+        }
+        public static PushPayload PushObject_all_alias_alert()
+        {
+
+            PushPayload pushPayload = new PushPayload();
+            pushPayload.platform = Platform.android();
+            pushPayload.audience = Audience.s_alias("alias1");
+            pushPayload.notification = new Notification().setAlert(ALERT);
+            return pushPayload;
+           
         }
         public static PushPayload PushObject_Android_Tag_AlertWithTitle()
         {
             PushPayload pushPayload = new PushPayload();
-            pushPayload.platform = Platform.ios();
-           
+
+            pushPayload.platform = Platform.android();
             pushPayload.audience = Audience.s_tag("tag1"); 
             pushPayload.notification =  Notification.android(ALERT,TITLE);
 
@@ -75,11 +71,9 @@ namespace JpushApiClientExample
         public static PushPayload PushObject_android_and_ios()
         {
             PushPayload pushPayload = new PushPayload();
-
             pushPayload.platform = Platform.android_ios();
             var audience = Audience.s_tag("tag1");
             pushPayload.audience = audience;
-           
             var notification = new Notification().setAlert("alert content");
             notification.AndroidNotification = new AndroidNotification().setTitle("Android Title");
             notification.IosNotification = new IosNotification();
@@ -91,20 +85,26 @@ namespace JpushApiClientExample
 
             return pushPayload;
         }
-        public static PushPayload buildPushObject_ios_tagAnd_alertWithExtrasAndMessage()
+        public static PushPayload PushObject_ios_tagAnd_alertWithExtrasAndMessage()
         {
             PushPayload pushPayload = new PushPayload();
             pushPayload.platform = Platform.android_ios();
-            pushPayload.audience = Audience.s_tag("tag1", "tag2").alias("alias1", "alias2"); 
+            pushPayload.audience = Audience.s_tag_and("tag1", "tag_all");
             var notification = new Notification();
-            notification.IosNotification = new IosNotification();
-            notification.IosNotification.setAlert("alert");
-            notification.IosNotification.disableSound().setSound("");
+            notification.IosNotification = new IosNotification().setAlert(ALERT).setBadge(5).setSound("happy").AddExtra("from","JPush");
 
-            var winphone = new WinphoneNotification().setOpenPage("SettingPage.xaml").AddExtra("string","aaa");
+            pushPayload.notification = notification;
+            pushPayload.message = Message.content(MSG_CONTENT);
+            return pushPayload;
 
-            notification.WinphoneNotification = winphone;
-
+        }
+        public static PushPayload PushObject_ios_audienceMore_messageWithExtras()
+        {
+            
+            var pushPayload = new PushPayload();
+            pushPayload.platform = Platform.android_ios();
+            pushPayload.audience = Audience.s_tag("tag1","tag2");
+            pushPayload.message = Message.content(MSG_CONTENT).AddExtras("from", "JPush");
             return pushPayload;
 
         }

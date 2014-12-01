@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.report
 {
-    class UsersResult : BaseResult
+   public class UsersResult : BaseResult
     {
         public TimeUnit time_unit;
         public String start;

@@ -1,4 +1,6 @@
 ﻿using cn.jpush.api.common;
+using cn.jpush.api.common.resp;
+using cn.jpush.api.device;
 using cn.jpush.api.push;
 using cn.jpush.api.push.mode;
 using cn.jpush.api.report;
@@ -20,6 +22,7 @@ namespace cn.jpush.api
     {
         private PushClient _pushClient;
         private ReportClient _reportClient;
+        private DeviceClient _deviceClient;
         /// <summary>
         /// 带两个参数的构造函数，该状态下，ApnsProduction默认为true
         /// </summary>
@@ -27,8 +30,9 @@ namespace cn.jpush.api
         /// <param name="masterSecret">你的API MasterSecret</param>
         public JPushClient(String app_key, String masterSecret)
         {
-            _pushClient = new PushClient(masterSecret, app_key);
+            _pushClient = new PushClient(app_key, masterSecret);
             _reportClient = new ReportClient(app_key, masterSecret);
+            _deviceClient = new DeviceClient(app_key, masterSecret);
 
         }
         // ----------------------------- Push API
@@ -65,11 +69,62 @@ namespace cn.jpush.api
         {
             return _reportClient.getReceiveds_v3(msg_ids);
         }
-        //public MessagesResult getReportMessages(String msgIds)
-        //{
-        //    return _reportClient.getMessages(msgIds);
-        //}
+        public UsersResult getReportUsers(TimeUnit timeUnit, String start, int duration)
+        {
+            return _reportClient.getUsers(timeUnit, start, duration);
+        }
+        public MessagesResult getReportMessages(params String[] msgIds)
+        {
+            return _reportClient.getReportMessages(msgIds);
+        }
+
+        // ------------------------------- Device API
+        public TagAliasResult getDeviceTagAlias(String registrationId)
+        {
+            return _deviceClient.getDeviceTagAlias(registrationId);
+        }
         
+        public DefaultResult updateDeviceTagAlias(String registrationId, bool clearAlias, bool clearTag)
+        {
+            return _deviceClient.updateDeviceTagAlias(registrationId, clearAlias, clearTag);
+        }
+        public DefaultResult updateDeviceTagAlias(String registrationId,
+                                                   String alias,
+                                                   HashSet<String> tagsToAdd,
+                                                   HashSet<String> tagsToRemove)
+        {
+            return _deviceClient.updateDeviceTagAlias(registrationId, alias, tagsToAdd, tagsToRemove);
+        }
+        public TagListResult getTagList()
+        {
+            return _deviceClient.getTagList();
+        }
+
+        public BooleanResult isDeviceInTag(String theTag, String registrationID)
+        {
+            return _deviceClient.isDeviceInTag(theTag, registrationID);
+        }
+        public DefaultResult addRemoveDevicesFromTag(String theTag,
+                                                     HashSet<String> toAddUsers,
+                                                     HashSet<String> toRemoveUsers)
+        {
+            return _deviceClient.addRemoveDevicesFromTag(theTag, toAddUsers, toRemoveUsers);
+        }
+
+        public DefaultResult deleteTag(String theTag, String platform)
+        {
+            return _deviceClient.deleteTag(theTag, platform);
+
+        }
+        public AliasDeviceListResult getAliasDeviceList(String alias, String platform)
+        {
+            return _deviceClient.getAliasDeviceList(alias, platform);
+        }
+        public DefaultResult deleteAlias(String alias, String platform)
+        {
+            return _deviceClient.deleteAlias(alias, platform);
+        }
+
     }
    
 }

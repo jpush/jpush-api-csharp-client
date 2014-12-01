@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.report
 {
-    class MessagesResult : BaseResult
+  public  class MessagesResult : BaseResult
     {
         public List<Message> messages = new List<Message>();
         public static MessagesResult fromResponse(ResponseWrapper responseWrapper)
@@ -30,25 +30,48 @@ namespace cn.jpush.api.report
             }
             return false;
         }
+
+        public class Message
+        {
+            public Message()
+            {
+                msg_id = 0;
+                android = null;
+                ios = null;
+            }
+            public long msg_id;
+            public Android android;
+            public Ios ios;
+        }
+        public class Android
+        {
+
+            public Android()
+            {
+                received = 0;
+                target = 0;
+                online_push = 0;
+                click = 0;
+            }
+            public int received;
+            public int target;
+            public int online_push;
+            public int click;
+        }
+        public class Ios
+        {
+            public Ios()
+            {
+                apns_sent = 0;
+                apns_target = 0;
+                click = 0;
+            }
+            public int apns_sent;
+            public int apns_target;
+            public int click;
+        }
         
     }
    
-    public  class Message {
-	     public long msg_id;
-	     public Android android;
-	     public Ios ios;
-	}
-    public  class Android 
-     {
-         public int received;
-         public int target;
-         public int online_push;
-         public int click;
-    }
-    public  class Ios {
-         public int apns_sent;
-         public int apns_target;
-         public int click;
-    }
 
 }

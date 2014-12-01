@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.device
 {
-    class TagListResult:BaseResult
+   public class TagListResult:BaseResult
     {
         public List<String> tags ;
         public TagListResult()

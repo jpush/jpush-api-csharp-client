@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.device
 {
-    class AliasDeviceListResult:BaseResult
+    public  class AliasDeviceListResult:BaseResult
     {
         public List<String> registration_ids ;
         public AliasDeviceListResult()

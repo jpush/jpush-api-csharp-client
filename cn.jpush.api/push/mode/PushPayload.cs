@@ -81,7 +81,7 @@ namespace cn.jpush.api.push.mode
             return new PushPayload( Platform.all(),
                                    Audience.all(),
                                    null,
-                                   Message.msgContent(msgContent),
+                                   Message.content(msgContent),
                                    new Options());
         }
         public static PushPayload FromJSON(String payloadString)
