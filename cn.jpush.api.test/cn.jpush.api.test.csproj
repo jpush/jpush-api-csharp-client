@@ -68,7 +68,9 @@
     <Compile Include="PushClientTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseTest.cs" />
-    <Compile Include="Report\ReportFunctionTests.cs" />
+    <Compile Include="remote\BaseRemotePushTest.cs" />
+    <Compile Include="remote\AlertOverrideTest.cs" />
+    <Compile Include="report\ReportFunctionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cn.jpush.api\cn.jpush.api.csproj">

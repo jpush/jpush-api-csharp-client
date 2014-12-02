@@ -89,7 +89,6 @@ namespace cn.jpush.api.push.notification
         //        this.sound = null != sound ? sound : DEFAULT_SOUND;
         //    }
         //}
-
         public IosNotification disableSound()
         {
             this.soundDisabled = true;
@@ -145,7 +144,6 @@ namespace cn.jpush.api.push.notification
             }
             return this;
         }
-
         public IosNotification setAlert(String alert)
         {
             this.alert = alert;
@@ -161,7 +159,6 @@ namespace cn.jpush.api.push.notification
             this.category = category;
             return this;
         }
-
         public IosNotification AddExtra(string key, string value)
         {
             if (extras == null)

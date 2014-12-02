@@ -19,7 +19,7 @@ namespace cn.jpush.api.push
 
         private String appKey;
         private String masterSecret;
-        public PushClient(String masterSecret, String appKey)
+        public PushClient(String appKey,String masterSecret)
         {
             this.appKey = appKey;
             this.masterSecret = masterSecret;

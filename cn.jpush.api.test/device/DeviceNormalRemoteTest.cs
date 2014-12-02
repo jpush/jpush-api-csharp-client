@@ -12,7 +12,7 @@ namespace cn.jpush.api.test.device
 
         [TestMethod]
         [Priority(99)]
-        //[TestInitialize]
+        [TestInitialize]
         public void testUpdateDeviceTagAlias_add_tags()
         {
             HashSet<String> tagsToAdd = new HashSet<String>();
