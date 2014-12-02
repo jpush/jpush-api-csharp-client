@@ -28,12 +28,13 @@ namespace JpushApiClientExample
         {
             Console.WriteLine("*****开始发送******");
             JPushClient client = new JPushClient(app_key, master_secret);
-            PushPayload payloadMessage = PushObject_All_All_Alert();
+            PushPayload payload = PushObject_All_All_Alert();
             try
             {
-                var result = client.SendPush(payloadMessage);
-                var apiResult = client.getReceivedApi(result.msg_id.ToString());
-                var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
+                var result = client.SendPush(payload);
+                
+                //var apiResult = client.getReceivedApi(result.msg_id.ToString());
+                //var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
             }
             catch (APIRequestException)
             {
