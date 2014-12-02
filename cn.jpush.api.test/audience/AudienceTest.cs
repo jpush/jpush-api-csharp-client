@@ -23,7 +23,7 @@ namespace cn.jpush.api.test.audience
                 writer.Flush();
                 jsonText= sw.GetStringBuilder().ToString();
             }
-            var jsonString = JsonConvert.SerializeObject(audience, new AudienceConverter()).Replace("\r\n", "").Replace(" ", ""); ;
+            var jsonString = JsonConvert.SerializeObject(audience, new AudienceConverter());
 
             Assert.AreEqual(jsonText, jsonString);
         }

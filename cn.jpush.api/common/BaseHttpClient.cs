@@ -46,10 +46,10 @@ namespace cn.jpush.api.common
          */
         public ResponseWrapper sendRequest(String method, String url, String auth,String reqParams)
         {
-            Console.WriteLine("Send request - " + method.ToString()+ " " + url);
+            Console.WriteLine("Send request - " + method.ToString() + " " + url + DateTime.Now.ToString());
             if (null != reqParams)
             {
-                Console.WriteLine("Request Content - " + reqParams);
+                Console.WriteLine("Request Content - " + reqParams + DateTime.Now.ToString());
             }
             ResponseWrapper result = new ResponseWrapper();
             HttpWebRequest myReq = null;
@@ -86,8 +86,8 @@ namespace cn.jpush.api.common
                     String limitRemaining = response.GetResponseHeader(RATE_LIMIT_Remaining);
                     String limitReset = response.GetResponseHeader(RATE_LIMIT_Reset);
                     result.setRateLimit(limitQuota, limitRemaining, limitReset);
-                    Console.WriteLine("Succeed to get response - 200 OK");
-                    Console.WriteLine("Response Content - {0}", result.responseContent);
+                    Console.WriteLine("Succeed to get response - 200 OK,{0}", DateTime.Now);
+                    Console.WriteLine("Response Content - {0},{1}", result.responseContent, DateTime.Now);
                 }
             }
             catch (WebException e)
@@ -106,8 +106,8 @@ namespace cn.jpush.api.common
                 result.setRateLimit(limitQuota, limitRemaining, limitReset);
                 Debug.Print(e.Message);
                 result.setErrorObject();
-                Console.WriteLine("fail  to get response - {0}", errorCode);
-                Console.WriteLine("Response Content - {0}", result.responseContent);
+                Console.WriteLine("fail  to get response - {0},{1}", errorCode, DateTime.Now);
+                Console.WriteLine("Response Content - {0},{1}", result.responseContent, DateTime.Now);
                  
                 throw new APIRequestException(result);
             }

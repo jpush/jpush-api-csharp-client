@@ -45,14 +45,12 @@ namespace cn.jpush.api
         public MessageResult SendPush(string payloadString)
         {
              Preconditions.checkArgument(!string.IsNullOrEmpty(payloadString), "payloadString should not be empty");
-             
-
-             PushPayload payload = JsonConvert.DeserializeObject<PushPayload>(payloadString);
-             if (payload == null)
-             {
-                 Preconditions.checkArgument(false, "payloadString should be a valid JSON string.");
-             }
-             return _pushClient.sendPush(payload);
+             //PushPayload payload = JsonConvert.DeserializeObject<PushPayload>(payloadString);
+             //if (payload == null)
+             //{
+             //    Preconditions.checkArgument(false, "payloadString should be a valid JSON string.");
+             //}
+             return _pushClient.sendPush(payloadString);
         }
         // ------------------------------- Report API
         /**
