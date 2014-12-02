@@ -87,6 +87,7 @@ namespace cn.jpush.api.common
                     String limitReset = response.GetResponseHeader(RATE_LIMIT_Reset);
                     result.setRateLimit(limitQuota, limitRemaining, limitReset);
                     Console.WriteLine("Succeed to get response - 200 OK");
+                    Console.WriteLine("Response Content - {0}", result.responseContent);
                 }
             }
             catch (WebException e)

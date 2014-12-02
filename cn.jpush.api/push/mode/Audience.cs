@@ -142,7 +142,7 @@ namespace cn.jpush.api.push.mode
             {
                 allAudience = null;
             }
-            HashSet<string> list = new HashSet<string>();
+            HashSet<string> list = new HashSet<string>(values);
             return tag_and(list);
            
         }

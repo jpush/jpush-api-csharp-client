@@ -55,20 +55,47 @@ namespace cn.jpush.api.test.remote
         [TestMethod]
          public void sendByTagAnd() 
         {
-            //PushPayload payload = PushPayload.newBuilder()
-            //        .setPlatform(Platform.all())
-            //        .setAudience(Audience.tag_and(TAG1))
-            //        .setNotification(Notification.alert(ALERT))
-            //        .build();
-
             PushPayload payload = new PushPayload();
             payload.platform = Platform.all();
-            payload.audience = Audience.s_tag_and(TAG1);
+            payload.audience = Audience.s_tag_and(ALIAS1);
             payload.notification = new Notification().setAlert(ALERT);
 
             var result = _client.SendPush(payload);
             Assert.IsTrue(result.isResultOK());
         }
+        [TestMethod]
+        public void sendByAlias() 
+        {
+           
+            PushPayload payload = new PushPayload();
+            payload.platform = Platform.all();
+            payload.audience = Audience.s_alias(ALIAS1);
+            payload.notification = new Notification().setAlert(ALERT);
+
+            var result = _client.SendPush(payload);
+            Assert.IsTrue(result.isResultOK());
+         }
+        [TestMethod]
+         public void sendByRegistrationID() 
+        {
+            
+            PushPayload payload = new PushPayload();
+            payload.platform = Platform.all();
+            payload.audience = Audience.s_registrationId(REGISTRATION_ID1);
+            payload.notification = new Notification().setAlert(ALERT);
+            var result = _client.SendPush(payload);
+            Assert.IsTrue(result.isResultOK());
+        }
+       //  @Test
+    //public void sendByTagMore() throws Exception {
+    //    PushPayload payload = PushPayload.newBuilder()
+    //            .setPlatform(Platform.all())
+    //            .setAudience(Audience.tag(TAG1, TAG2))
+    //            .setNotification(Notification.alert(ALERT))
+    //            .build();
+    //    PushResult result = _client.sendPush(payload);
+    //    assertTrue(result.isResultOK());
+    //}
     
     }
 }
