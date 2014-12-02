@@ -71,7 +71,7 @@ namespace cn.jpush.api.push.mode
         {
             var platformNotification = new IosNotification();
             platformNotification.autoBadge();
-            var notificaiton = new Notification();
+            var notificaiton = new Notification().setAlert("");;
             notificaiton.IosNotification = platformNotification;
             return notificaiton;
         }

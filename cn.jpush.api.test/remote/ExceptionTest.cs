@@ -349,6 +349,8 @@ namespace cn.jpush.api.test.remote
            {
                Assert.AreEqual(LACK_OF_PARAMS, e.ErrorCode);
            }
+
+
         }
     }
 }

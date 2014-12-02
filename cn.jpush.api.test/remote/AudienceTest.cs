@@ -173,5 +173,6 @@ namespace cn.jpush.api.test.remote
             Assert.IsTrue(result.isResultOK());
          }
 
+
     }
 }

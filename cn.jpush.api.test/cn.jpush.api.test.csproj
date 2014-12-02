@@ -72,6 +72,9 @@
     <Compile Include="remote\AlertOverrideTest.cs" />
     <Compile Include="remote\AudienceTest.cs" />
     <Compile Include="remote\ExceptionTest.cs" />
+    <Compile Include="remote\BasicFunctionsTest.cs" />
+    <Compile Include="remote\MessageTest.cs" />
+    <Compile Include="remote\NotificationTest.cs" />
     <Compile Include="report\ReportFunctionTests.cs" />
   </ItemGroup>
   <ItemGroup>
