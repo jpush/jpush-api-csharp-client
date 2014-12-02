@@ -53,15 +53,7 @@ namespace cn.jpush.api.test.remote
        [TestMethod]
         public void sendNotification_android_buildId()
        {
-            //PushPayload payload = PushPayload.newBuilder()
-            //        .setAudience(Audience.all())
-            //        .setPlatform(Platform.all())
-            //        .setNotification(Notification.newBuilder()
-            //                .setAlert(ALERT)
-            //                .addPlatformNotification(AndroidNotification.newBuilder()
-            //                        .setBuilderId(100)
-            //                        .build()).build())
-            //        .build();
+           
             PushPayload payload = new PushPayload();
             payload.platform = Platform.all();
             payload.audience = Audience.all();
@@ -77,16 +69,7 @@ namespace cn.jpush.api.test.remote
        [TestMethod]
         public void sendNotification_android_extras()  
        {
-            //PushPayload payload = PushPayload.newBuilder()
-            //        .setAudience(Audience.all())
-            //        .setPlatform(Platform.all())
-            //        .setNotification(Notification.newBuilder()
-            //                .setAlert(ALERT)
-            //                .addPlatformNotification(AndroidNotification.newBuilder()
-            //                        .addExtra("key1", "value1")
-            //                        .addExtra("key2", 222)
-            //                        .build()).build())
-            //        .build();
+           
             PushPayload payload = new PushPayload();
             payload.platform = Platform.all();
             payload.audience = Audience.all();
@@ -106,11 +89,6 @@ namespace cn.jpush.api.test.remote
        [TestMethod]
         public void sendNotification_ios_badge() 
        {
-            //PushPayload payload = PushPayload.newBuilder()
-            //        .setAudience(Audience.all())
-            //        .setPlatform(Platform.ios())
-            //        .setNotification(Notification.ios_auto_badge())
-            //        .build();
             PushPayload payload = new PushPayload();
             payload.platform = Platform.ios();
             payload.audience = Audience.all();

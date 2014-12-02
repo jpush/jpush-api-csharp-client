@@ -75,6 +75,8 @@
     <Compile Include="remote\BasicFunctionsTest.cs" />
     <Compile Include="remote\MessageTest.cs" />
     <Compile Include="remote\NotificationTest.cs" />
+    <Compile Include="remote\SingleTest.cs" />
+    <Compile Include="remote\SpecialCharacterTest.cs" />
     <Compile Include="report\ReportFunctionTests.cs" />
   </ItemGroup>
   <ItemGroup>
