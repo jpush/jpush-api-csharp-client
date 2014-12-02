@@ -14,7 +14,7 @@ namespace cn.jpush.api.test
          public const  String MSG_CONTENT = "JPush Test - msgContent";
 
          public const String REGISTRATION_ID1 = "061c84f7bef";
-         public const String REGISTRATION_ID2 = "061c84f7bef";
+         public const String REGISTRATION_ID2 = "0619cfd4989";
 
          public const String LONG_TEXT_1 = ""
             + "鏋佸厜鎺ㄩ�侊紝浣垮緱寮�鍙戣�呭彲浠ュ嵆鏃跺湴鍚戝叾搴旂敤绋嬪簭鐨勭敤鎴锋帹閫侀�氱煡鎴栬�呮秷鎭紝"

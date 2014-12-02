@@ -70,6 +70,7 @@
     <Compile Include="BaseTest.cs" />
     <Compile Include="remote\BaseRemotePushTest.cs" />
     <Compile Include="remote\AlertOverrideTest.cs" />
+    <Compile Include="remote\AudienceTest.cs" />
     <Compile Include="report\ReportFunctionTests.cs" />
   </ItemGroup>
   <ItemGroup>

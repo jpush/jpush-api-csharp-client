@@ -32,7 +32,6 @@ namespace JpushApiClientExample
             try
             {
                 var result = client.SendPush(payload);
-                
                 //var apiResult = client.getReceivedApi(result.msg_id.ToString());
                 //var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
             }
