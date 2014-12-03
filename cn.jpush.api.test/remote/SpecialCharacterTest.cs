@@ -16,7 +16,7 @@ namespace cn.jpush.api.test.remote
         }
         public static  char[] SPECIAL_CHARS = new char[] {'`', '~', '!', '@', '#', '$', '%', 
 	    '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '{', '}', '[', ']', 
-	    '|', '\\', ':', ';', '"', '\'', '<', '>', ',', '.', '?', '/'};
+	    '|', '\\', ':', ';', '"', '\'', '<', '>', ',', '.', '?', '/','［'};
         
         public int sendMessage(String content)
         {
@@ -67,6 +67,7 @@ namespace cn.jpush.api.test.remote
 		        String msgContent = prefix + c;
 	            Assert.AreEqual(0, sendMessage(msgContent));
 		    }
+
 	    }
     }
 }

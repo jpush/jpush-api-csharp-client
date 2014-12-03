@@ -34,6 +34,7 @@ namespace cn.jpush.api.example
                  Console.WriteLine(e.Message);
              }
          }
+         /*用户统计vip专用接口*/
          public static void testGetUsers()
          {
              JPushClient jpushClient = new JPushClient(app_key, master_secret);
@@ -55,6 +56,7 @@ namespace cn.jpush.api.example
                  Console.WriteLine(e.Message);
              }
          }
+         /*消息统计vip专用接口*/
          public static void testGetMessages()
          {
              JPushClient jpushClient = new JPushClient(app_key, master_secret);

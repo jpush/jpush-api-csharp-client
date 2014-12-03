@@ -17,9 +17,9 @@ namespace JpushApiClientExample
 {
     class JPushApiExample
     {
-        public static String TITLE = "Test from API example";
-        public static String ALERT = "Test from API Example - alert";
-        public static String MSG_CONTENT = "Test from API Example - msgContent";
+        public static String TITLE = "Test from C# v3 sdk";
+        public static String ALERT = "Test from  C# v3 sdk - alert";
+        public static String MSG_CONTENT = "Test from C# v3 sdk - msgContent";
         public static String REGISTRATION_ID = "0900e8d85ef";
         public static String TAG = "tag_api";
         public static String app_key = "997f28c1cea5a9f17d82079a";
@@ -35,13 +35,12 @@ namespace JpushApiClientExample
                 var result = client.SendPush(payload);
                 //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
                 System.Threading.Thread.Sleep(10000);
-                //JPush普通用户调用专属接口获取当前推送记录的送达结果
+                /*如需查询上次推送结果执行下面的代码*/
                 var apiResult = client.getReceivedApi(result.msg_id.ToString());
-                // JPush VIP用户调用专属接口获取推送记录的送达结果
                 var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
                 /*如需查询某个messageid的推送结果执行下面的代码*/
-                var queryResultWithV2 = client.getReceivedApi("1739302794"); //普通JPush用户获取某记录送达结果的专用接口
-                var querResultWithV3 = client.getReceivedApi_v3("1739302794");// JPush VIP用户获取某推送记录送达结果的专用接口
+                var queryResultWithV2 = client.getReceivedApi("1739302794"); 
+                var querResultWithV3 = client.getReceivedApi_v3("1739302794");
 
             }
             catch (APIRequestException e)

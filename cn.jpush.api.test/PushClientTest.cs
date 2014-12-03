@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
 using cn.jpush.api.push.mode;
+using cn.jpush.api.common;
 
 
 namespace cn.jpush.api.test
@@ -10,7 +11,7 @@ namespace cn.jpush.api.test
     public class PushClientTest:BaseTest
     {
         [TestMethod]
-        [ExpectedException(typeof(Newtonsoft.Json.JsonReaderException))]
+        [ExpectedException(typeof(APIRequestException))]
         public void test_invalid_json()
         {
             JPushClient pushClient = new JPushClient(APP_KEY, MASTER_SECRET);

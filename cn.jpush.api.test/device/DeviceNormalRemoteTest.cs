@@ -44,6 +44,8 @@ namespace cn.jpush.api.test.device
         [Priority(110)]
         public void testGetDeviceTagAlias_1()
         {
+            testUpdateDeviceTagAlias_add_remove_tags();
+
             JPushClient pushClient = new JPushClient(APP_KEY, MASTER_SECRET);
             TagAliasResult result = pushClient.getDeviceTagAlias(REGISTRATION_ID1);
 
@@ -75,6 +77,7 @@ namespace cn.jpush.api.test.device
         [Priority(130)]
         public void testGetDeviceTagAlias_cleard() 
         {
+            testUpdateDeviceTagAlias_clear();
             JPushClient pushClient = new JPushClient(APP_KEY, MASTER_SECRET);
             TagAliasResult result = pushClient.getDeviceTagAlias(REGISTRATION_ID1);
 
@@ -100,11 +103,12 @@ namespace cn.jpush.api.test.device
         [Priority(210)]
         public void testIsDeviceInTag()  
         {
+            testAddRemoveDevicesFromTag();
             JPushClient pushClient = new JPushClient(APP_KEY, MASTER_SECRET);
             BooleanResult result = pushClient.isDeviceInTag("tag3", REGISTRATION_ID1);
             Assert.IsTrue( result.result);
             result = pushClient.isDeviceInTag("tag3", REGISTRATION_ID2);
-            Assert.IsTrue( result.result);
+            Assert.IsTrue( !result.result);
 	    }
         [TestMethod]
         [Priority(211)] 
