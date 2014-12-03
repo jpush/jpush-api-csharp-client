@@ -1,4 +1,5 @@
 ﻿using cn.jpush.api.common;
+using cn.jpush.api.common.resp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,10 @@ namespace cn.jpush.api.example
                  Console.WriteLine("Error Code: " + e.ErrorCode);
                  Console.WriteLine("Error Message: " + e.ErrorCode);
              }
+             catch (APIConnectionException e)
+             {
+                 Console.WriteLine(e.Message);
+             }
          }
          public static void testGetUsers()
          {
@@ -44,6 +49,10 @@ namespace cn.jpush.api.example
                  Console.WriteLine("HTTP Status: " + e.Status);
                  Console.WriteLine("Error Code: " + e.ErrorCode);
                  Console.WriteLine("Error Message: " + e.ErrorCode);
+             }
+             catch (APIConnectionException e)
+             {
+                 Console.WriteLine(e.Message);
              }
          }
          public static void testGetMessages()
@@ -62,6 +71,11 @@ namespace cn.jpush.api.example
                  Console.WriteLine("Error Code: " + e.ErrorCode);
                  Console.WriteLine("Error Message: " + e.ErrorCode);
              }
+             catch (APIConnectionException e)
+             {
+                 Console.WriteLine(e.Message);
+             }
+
          }
 
     }

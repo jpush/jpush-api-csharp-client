@@ -56,6 +56,7 @@
     <Compile Include="common\DeviceType.cs" />
     <Compile Include="common\PlatformConverter.cs" />
     <Compile Include="common\ResponseWrapper.cs" />
+    <Compile Include="common\resp\APIConnectionException.cs" />
     <Compile Include="common\resp\BooleanResult.cs" />
     <Compile Include="common\resp\DefaultResult.cs" />
     <Compile Include="common\ServiceHelper.cs" />

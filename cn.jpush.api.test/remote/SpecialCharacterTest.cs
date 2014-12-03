@@ -52,5 +52,21 @@ namespace cn.jpush.api.test.remote
             }
             return 0;
         }
+        [TestMethod]
+         public void testCharacters() 
+         {
+		    String prefix = "JPush Special Character tests - ";
+		
+		    foreach (char c in SPECIAL_CHARS)
+            {
+		        String msgContent = prefix + c;
+	            Assert.AreEqual(0, sendNotification(msgContent));
+		    }
+            foreach (char c in SPECIAL_CHARS)
+            {
+		        String msgContent = prefix + c;
+	            Assert.AreEqual(0, sendMessage(msgContent));
+		    }
+	    }
     }
 }

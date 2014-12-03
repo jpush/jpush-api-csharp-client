@@ -12,6 +12,7 @@ using cn.jpush.api.common;
 using cn.jpush.api.util;
 using cn.jpush.api.push.mode;
 using cn.jpush.api.push.notification;
+using cn.jpush.api.common.resp;
 namespace JpushApiClientExample
 {
     class JPushApiExample
@@ -32,11 +33,27 @@ namespace JpushApiClientExample
             try
             {
                 var result = client.SendPush(payload);
-                //var apiResult = client.getReceivedApi(result.msg_id.ToString());
-                //var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
+                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+                System.Threading.Thread.Sleep(10000);
+                //JPush普通用户调用专属接口获取当前推送记录的送达结果
+                var apiResult = client.getReceivedApi(result.msg_id.ToString());
+                // JPush VIP用户调用专属接口获取推送记录的送达结果
+                var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
+                /*如需查询某个messageid的推送结果执行下面的代码*/
+                var queryResultWithV2 = client.getReceivedApi("1739302794"); //普通JPush用户获取某记录送达结果的专用接口
+                var querResultWithV3 = client.getReceivedApi_v3("1739302794");// JPush VIP用户获取某推送记录送达结果的专用接口
+
             }
-            catch (APIRequestException)
+            catch (APIRequestException e)
             {
+                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+                Console.WriteLine("HTTP Status: " + e.Status);
+                Console.WriteLine("Error Code: " + e.ErrorCode);
+                Console.WriteLine("Error Message: " + e.ErrorCode);
+            }
+            catch (APIConnectionException e)
+            {
+                Console.WriteLine(e.Message);
             }
             Console.WriteLine("*****结束发送******");
         }

@@ -9,6 +9,7 @@ using System.Net.Sockets;
 using System.IO;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using cn.jpush.api.common.resp;
 
 namespace cn.jpush.api.common
 {
@@ -92,24 +93,32 @@ namespace cn.jpush.api.common
             }
             catch (WebException e)
             {
-                HttpStatusCode errorCode = ((HttpWebResponse)e.Response).StatusCode;
-                string statusDescription = ((HttpWebResponse)e.Response).StatusDescription;
-                using (StreamReader sr = new StreamReader(((HttpWebResponse)e.Response).GetResponseStream(), System.Text.Encoding.UTF8))
+                if (e.Status == WebExceptionStatus.ProtocolError)
                 {
-                    result.responseContent = sr.ReadToEnd();
+                    HttpStatusCode errorCode = ((HttpWebResponse)e.Response).StatusCode;
+                    string statusDescription = ((HttpWebResponse)e.Response).StatusDescription;
+                    using (StreamReader sr = new StreamReader(((HttpWebResponse)e.Response).GetResponseStream(), System.Text.Encoding.UTF8))
+                    {
+                        result.responseContent = sr.ReadToEnd();
+                    }
+                    result.responseCode = errorCode;
+                    result.exceptionString = e.Message;
+                    String limitQuota = ((HttpWebResponse)e.Response).GetResponseHeader(RATE_LIMIT_QUOTA);
+                    String limitRemaining = ((HttpWebResponse)e.Response).GetResponseHeader(RATE_LIMIT_Remaining);
+                    String limitReset = ((HttpWebResponse)e.Response).GetResponseHeader(RATE_LIMIT_Reset);
+                    result.setRateLimit(limitQuota, limitRemaining, limitReset);
+                    Debug.Print(e.Message);
+                    result.setErrorObject();
+                    Console.WriteLine("fail  to get response - {0},{1}", errorCode, string.Format("  {0:U}", DateTime.Now));
+                    Console.WriteLine("Response Content - {0},{1}", result.responseContent, string.Format("  {0:U}", DateTime.Now));
+
+                    throw new APIRequestException(result);
                 }
-                result.responseCode = errorCode;
-                result.exceptionString = e.Message;
-                String limitQuota = ((HttpWebResponse)e.Response).GetResponseHeader(RATE_LIMIT_QUOTA);
-                String limitRemaining = ((HttpWebResponse)e.Response).GetResponseHeader(RATE_LIMIT_Remaining);
-                String limitReset = ((HttpWebResponse)e.Response).GetResponseHeader(RATE_LIMIT_Reset);
-                result.setRateLimit(limitQuota, limitRemaining, limitReset);
-                Debug.Print(e.Message);
-                result.setErrorObject();
-                Console.WriteLine("fail  to get response - {0},{1}", errorCode, string.Format("  {0:U}", DateTime.Now));
-                Console.WriteLine("Response Content - {0},{1}", result.responseContent, string.Format("  {0:U}", DateTime.Now));
-                 
-                throw new APIRequestException(result);
+                else
+                {//
+                    throw new APIConnectionException(e.Message);
+                }
+               
             }
             //这里不再抓取非http的异常，如果异常抛出交给开发者自行处理
             //catch (System.Exception ex)
