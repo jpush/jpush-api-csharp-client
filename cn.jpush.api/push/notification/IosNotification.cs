@@ -52,43 +52,7 @@ namespace cn.jpush.api.push.notification
             this.badge = DEFAULT_BADGE;
             this.sound = DEFAULT_SOUND;
         }
-        //public iosNotification(string alert)
-        //{
-        //    this.alert = alert;
-        //    this.soundDisabled = false;
-        //    this.badgeDisabled = false;
-        //    this.contentAvailable = false;
-        //    this.category = null;
-        //    this.badge = null;
-        //    this.sound = null;
-        //    this.badge = null != badge ? badge : DEFAULT_BADGE;
-        //    this.sound = null != sound ? sound : DEFAULT_SOUND;
-        //}
-
-        //public iosNotification( String alert, 
-        //                                String sound=null, 
-        //                                String badge=null,
-        //                                bool contentAvailable=false,
-        //                                bool soundDisabled=false,
-        //                                bool badgeDisabled=false,
-        //                                String category=null
-        //                               )
-            
-        //{
-        //    base.alert = alert;
-        //    this.category = category;
-        //    this.contentAvailable = contentAvailable;
-        //    this.soundDisabled = soundDisabled;
-        //    this.badgeDisabled = badgeDisabled;
-        //    if (!badgeDisabled)
-        //    {
-        //        this.badge = null != badge ? badge : DEFAULT_BADGE;
-        //    }
-        //    if (!soundDisabled)
-        //    {
-        //        this.sound = null != sound ? sound : DEFAULT_SOUND;
-        //    }
-        //}
+       
         public IosNotification disableSound()
         {
             this.soundDisabled = true;

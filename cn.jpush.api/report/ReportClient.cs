@@ -25,10 +25,12 @@ namespace cn.jpush.api.report
         }
         public ReceivedResult getReceiveds(String msg_ids) 
         {
+            checkMsgids(msg_ids);
             return getReceiveds_common(msg_ids, REPORT_RECEIVE_PATH);
         }
         public ReceivedResult getReceiveds_v3(String msg_ids)
         {
+            checkMsgids(msg_ids);
             return getReceiveds_common(msg_ids, REPORT_RECEIVE_PATH_V3);
         }
         public  UsersResult    getUsers(TimeUnit timeUnit, String start, int duration)
