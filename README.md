@@ -53,6 +53,10 @@ JPush 当前支持Android,Ios,Windows Phone三个平台的推送
 
 推送设备对象，表示一条推送可以被推送到那些设备，确认推送设备的对象，JPush提供了多种方式，比如：别名，标签，注册id，分群，广播等。
 
+创建Audience使用`all`和`s_xxxx` 函数，再添加条件时使用不带`s_`的函数，
+
+s_表示是静态函数的意思，Audience中还有个tag的成员函数，为了避免命名冲突
+
 + 推送所有目标
 
 		Audience audience= Audience.all()
@@ -60,7 +64,7 @@ JPush 当前支持Android,Ios,Windows Phone三个平台的推送
 + 推送给多个标签（只要任意一个标签满足）：在深圳，广州或者北京
 
 		Audience audience= Audience.s_tag("深圳","广州","北京")；
-		你一定会问，tag函数前为什么要加个s_？s表示是静态函数的意思，Audience中还有个tag的成员函数，为了避免命名冲突
+		
 
 + 推送给多个标签（需要同时在多个标签范围之内）：在深圳并且是女的
 		
@@ -168,8 +172,9 @@ JPush 当前支持Android,Ios,Windows Phone三个平台的推送
 
 ###Notification 通知内容（可选）
 
-创建方式为 `var not = new Notification()`然后根据需要设置一下字段
+创建方式为 `var not = new Notification()`然后根据需要设置相关字段
 
+Notification字段简介如下：
 #### alert
 
 是一个快捷定义，各平台的 alert 信息如果都一样，则可不定义。如果各平台有定义，则覆盖这里的定义。
@@ -177,7 +182,6 @@ JPush 当前支持Android,Ios,Windows Phone三个平台的推送
 设置方法如下:
 		
 	Notification not = new Notification().setAlert("alert");
-
 #### ios
 	
 iOS 平台上 APNs 通知。
