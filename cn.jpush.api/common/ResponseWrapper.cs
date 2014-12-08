@@ -69,7 +69,7 @@ namespace cn.jpush.api.common
                 {
                     rateLimitReset = int.Parse(reset);
                 }
-                Console.WriteLine("JPush API Rate Limiting params - quota:{0}, remaining:{1}, reset:{2} {3}", quota, remaining, reset, DateTime.Now);
+                Console.WriteLine(string.Format("JPush API Rate Limiting params - quota:{0}, remaining:{1}, reset:{2} ", quota, remaining, reset) +" "+ DateTime.Now);
             }
             catch(Exception e)
             {

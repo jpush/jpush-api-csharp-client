@@ -47,10 +47,10 @@ namespace cn.jpush.api.common
          */
         public ResponseWrapper sendRequest(String method, String url, String auth,String reqParams)
         {
-            Console.WriteLine("Send request - " + method.ToString() + " " + url + string.Format("  {0:U}", DateTime.Now));
+            Console.WriteLine("Send request - " + method.ToString() + " " + url + " "+ DateTime.Now);
             if (null != reqParams)
             {
-                Console.WriteLine("Request Content - " + reqParams + string.Format("  {0:U}", DateTime.Now));
+                Console.WriteLine("Request Content - " + reqParams +" "+ DateTime.Now);
             }
             ResponseWrapper result = new ResponseWrapper();
             HttpWebRequest myReq = null;
@@ -87,8 +87,8 @@ namespace cn.jpush.api.common
                     String limitRemaining = response.GetResponseHeader(RATE_LIMIT_Remaining);
                     String limitReset = response.GetResponseHeader(RATE_LIMIT_Reset);
                     result.setRateLimit(limitQuota, limitRemaining, limitReset);
-                    Console.WriteLine("Succeed to get response - 200 OK,{0}" + string.Format("  {0:U}", DateTime.Now));
-                    Console.WriteLine("Response Content - {0},{1}", result.responseContent, string.Format("  {0:U}", DateTime.Now));
+                    Console.WriteLine("Succeed to get response - 200 OK" +" "+ DateTime.Now);
+                    Console.WriteLine("Response Content - {0}", result.responseContent +" "+ DateTime.Now);
                 }
             }
             catch (WebException e)
@@ -109,8 +109,8 @@ namespace cn.jpush.api.common
                     result.setRateLimit(limitQuota, limitRemaining, limitReset);
                     Debug.Print(e.Message);
                     result.setErrorObject();
-                    Console.WriteLine("fail  to get response - {0},{1}", errorCode, string.Format("  {0:U}", DateTime.Now));
-                    Console.WriteLine("Response Content - {0},{1}", result.responseContent, string.Format("  {0:U}", DateTime.Now));
+                    Console.WriteLine(string.Format("fail  to get response - {0}", errorCode) + " "+ DateTime.Now);
+                    Console.WriteLine(string.Format("Response Content - {0}", result.responseContent) + " "+ DateTime.Now);
 
                     throw new APIRequestException(result);
                 }
