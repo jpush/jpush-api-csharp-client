@@ -865,7 +865,7 @@ alias 用于查询/设置/删除设备的别名。
 
 ### Method - BooleanResult isDeviceInTag(String theTag, String registrationID)
 
-获取当前应用的所有标签列表
+查询某个设备是否在 tag 下。
 
 #### 支持版本
 
