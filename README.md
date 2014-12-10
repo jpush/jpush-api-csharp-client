@@ -1037,8 +1037,14 @@ alias 用于查询/设置/删除设备的别名。
 
 参考文档：<http://docs.jpush.cn/display/dev/HTTP-Status-Code>
 
+
 Push v3 API 状态码 参考文档　<http://docs.jpush.cn/display/dev/Push-API-v3>　拉到最后
+
+
 ReportAPI  状态码 参考文档　<http://docs.jpush.cn/display/dev/Report-API>　拉到最后
+
+
 Device API 状态码 参考文档　<http://docs.jpush.cn/display/dev/Device-API>　拉到最后
+
 
 [Release页面](https://github.com/jpush/jpush-api-php-client/releases/) 有详细的版本发布记录与下载。
