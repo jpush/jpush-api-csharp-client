@@ -13,7 +13,7 @@ namespace cn.jpush.api.common
     {
         [Description("android")] android,
         [Description("ios")]     ios,
-        [Description("wp")]      wp
+        [Description("winphone")]  winphone
 
     }
 }

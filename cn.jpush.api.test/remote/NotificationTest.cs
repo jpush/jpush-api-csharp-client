@@ -97,5 +97,16 @@ namespace cn.jpush.api.test.remote
             var result = _client.SendPush(payload);
             Assert.IsTrue(result.isResultOK());
         }
+       [TestMethod]
+       public void sendNotification_winphone()
+       {
+           PushPayload payload = new PushPayload();
+           payload.platform = Platform.winphone();
+           payload.audience = Audience.all();
+           payload.notification =new Notification().setAlert("alert");
+
+           var result = _client.SendPush(payload);
+           Assert.IsTrue(result.isResultOK());
+       }
     }
 }

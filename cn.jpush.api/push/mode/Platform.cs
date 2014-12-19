@@ -65,7 +65,7 @@ namespace cn.jpush.api.push.mode
         public static Platform winphone()
         {
             HashSet<string> types = new HashSet<string>();
-            types.Add(DeviceType.wp.ToString());
+            types.Add(DeviceType.winphone.ToString());
             return new Platform(false, types).Check();
         }
         public static Platform android_ios()
@@ -79,14 +79,14 @@ namespace cn.jpush.api.push.mode
         {
             HashSet<string> types = new HashSet<string>();
             types.Add(DeviceType.android.ToString());
-            types.Add(DeviceType.wp.ToString());
+            types.Add(DeviceType.winphone.ToString());
             return new Platform(false, types).Check();
         }
         public static Platform ios_winphone()
         {
             HashSet<string> types = new HashSet<string>();
             types.Add(DeviceType.ios.ToString());
-            types.Add(DeviceType.wp.ToString());
+            types.Add(DeviceType.winphone.ToString());
 
             return new Platform(false, types).Check();
         }
