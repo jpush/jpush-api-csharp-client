@@ -11,8 +11,8 @@ namespace cn.jpush.api.push
 {
     public class MessageResult : BaseResult
     {
-        public int msg_id{get;set;}
-        public int sendno{ get; set; }
+        public long msg_id{get;set;}
+        public long sendno{ get; set; }
 
         override public bool isResultOK()
         {
