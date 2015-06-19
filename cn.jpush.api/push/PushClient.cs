@@ -42,8 +42,8 @@ namespace cn.jpush.api.push
             messResult.ResponseResult = result;
            
             JpushSuccess jpushSuccess = JsonConvert.DeserializeObject<JpushSuccess>(result.responseContent);
-            messResult.sendno = int.Parse(jpushSuccess.sendno);
-            messResult.msg_id = int.Parse(jpushSuccess.msg_id);
+            messResult.sendno = long.Parse(jpushSuccess.sendno);
+            messResult.msg_id = long.Parse(jpushSuccess.msg_id);
            
             return messResult;
         }
