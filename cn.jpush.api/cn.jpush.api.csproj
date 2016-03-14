@@ -74,6 +74,7 @@
     <Compile Include="push\mode\Message.cs" />
     <Compile Include="push\mode\Options.cs" />
     <Compile Include="push\mode\Platform.cs" />
+    <Compile Include="push\mode\SmsMessage.cs" />
     <Compile Include="push\notification\AndroidNotification.cs" />
     <Compile Include="push\notification\IosNotification.cs" />
     <Compile Include="push\notification\PlatformNotification.cs" />
@@ -84,6 +85,13 @@
     <Compile Include="report\ReceivedResult.cs" />
     <Compile Include="report\ReportClient.cs" />
     <Compile Include="report\UsersResult.cs" />
+    <Compile Include="schedule\enabled\Enabled.cs" />
+    <Compile Include="schedule\name\Name.cs" />
+    <Compile Include="schedule\ScheduleClient.cs" />
+    <Compile Include="schedule\SchedulePayload.cs" />
+    <Compile Include="schedule\trigger\Periodical.cs" />
+    <Compile Include="schedule\trigger\Single.cs" />
+    <Compile Include="schedule\trigger\Trigger.cs" />
     <Compile Include="util\Base64.cs" />
     <Compile Include="util\JsonTool.cs" />
     <Compile Include="util\Md5.cs" />
@@ -91,7 +99,9 @@
     <Compile Include="util\StringUtil.cs" />
     <Compile Include="push\mode\Notification.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

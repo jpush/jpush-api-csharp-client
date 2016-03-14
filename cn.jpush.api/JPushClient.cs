@@ -139,10 +139,11 @@ namespace cn.jpush.api
         /// <see cref="http://docs.jpush.cn/display/dev/Device-API"/> 
         public DefaultResult updateDeviceTagAlias(String registrationId,
                                                    String alias,
+                                                   String mobile,
                                                    HashSet<String> tagsToAdd,
                                                    HashSet<String> tagsToRemove)
         {
-            return _deviceClient.updateDeviceTagAlias(registrationId, alias, tagsToAdd, tagsToRemove);
+            return _deviceClient.updateDeviceTagAlias(registrationId, alias, mobile, tagsToAdd, tagsToRemove);
         }
         /// <summary>
         /// 获取当前应用的所有标签

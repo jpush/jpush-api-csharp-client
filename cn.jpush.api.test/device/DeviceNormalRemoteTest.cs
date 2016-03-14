@@ -22,7 +22,7 @@ namespace cn.jpush.api.test.device
             tagsToAdd.Add("tag4");
             JPushClient pushClient = new JPushClient(APP_KEY, MASTER_SECRET);
 
-            DefaultResult result = pushClient.updateDeviceTagAlias(REGISTRATION_ID1, "alias1", tagsToAdd, null);
+            DefaultResult result = pushClient.updateDeviceTagAlias(REGISTRATION_ID1, "alias1", null, tagsToAdd, null);
             Assert.IsTrue(result.isResultOK());
         }
         [TestMethod]
@@ -37,7 +37,7 @@ namespace cn.jpush.api.test.device
             tagsToRemove.Add("tag4");
             JPushClient pushClient = new JPushClient(APP_KEY, MASTER_SECRET);
             
-            DefaultResult result = pushClient.updateDeviceTagAlias(REGISTRATION_ID1, "alias1", tagsToAdd, tagsToRemove);
+            DefaultResult result = pushClient.updateDeviceTagAlias(REGISTRATION_ID1, "alias1",null, tagsToAdd, tagsToRemove);
             Assert.IsTrue(result.isResultOK());
 	    }
         [TestMethod]

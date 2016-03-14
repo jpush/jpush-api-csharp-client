@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.device
 {
-     class DeviceClient : BaseHttpClient
+    public class DeviceClient : BaseHttpClient
     {
         public   const String HOST_NAME_SSL = "https://device.jpush.cn";
         public   const String DEVICES_PATH = "/v3/devices";
@@ -25,6 +25,8 @@ namespace cn.jpush.api.device
             this.appKey = appKey;
             this.masterSecret = masterSecret;        
         }
+
+        // GET /v3/devices/{registration_id}
         public TagAliasResult getDeviceTagAlias(String registrationId)
         {
             String url = HOST_NAME_SSL + DEVICES_PATH + "/" + registrationId;
@@ -35,7 +37,9 @@ namespace cn.jpush.api.device
             return TagAliasResult.fromResponse(response);
 
         }
-        public DefaultResult updateDeviceTagAlias(String registrationId, bool clearAlias, bool clearTag) 
+
+     //POST /v3/devices/{registration_id}
+    public DefaultResult updateDeviceTagAlias(String registrationId, bool clearAlias, bool clearTag) 
         {
             Preconditions.checkArgument(clearAlias || clearTag, "It is not meaningful to do nothing.");
     	
@@ -52,8 +56,11 @@ namespace cn.jpush.api.device
 
             return DefaultResult.fromResponse(result);
         }
+
+        //updateDeviceTagAlias and the phone number
         public DefaultResult updateDeviceTagAlias(String registrationId, 
-                                                   String alias,  
+                                                   String alias,
+                                                   string mobile,
                                                    HashSet<String> tagsToAdd,
                                                    HashSet<String> tagsToRemove) 
          {
@@ -63,7 +70,11 @@ namespace cn.jpush.api.device
             if (null != alias) {
                 top.Add("alias", alias);
             }
-            
+            if (null != alias)
+            {
+                top.Add("mobile", mobile);
+            }
+
             JObject tagObject = new JObject();
             if (tagsToAdd!=null)
             {
@@ -90,6 +101,8 @@ namespace cn.jpush.api.device
 
             return DefaultResult.fromResponse(result);
        }
+
+        //GET /v3/tags/
         public TagListResult getTagList() 
         {
             String url = HOST_NAME_SSL + TAGS_PATH + "/";
@@ -97,14 +110,16 @@ namespace cn.jpush.api.device
             ResponseWrapper response = this.sendGet(url, auth, null);
             return TagListResult.fromResponse(response);
         }
-
-         public BooleanResult isDeviceInTag(String theTag, String registrationID)
+        //GET /v3/tags/{tag_value}/registration_ids/{registration_id}
+        public BooleanResult isDeviceInTag(String theTag, String registrationID)
          {
             String url = HOST_NAME_SSL + TAGS_PATH + "/" + theTag + "/registration_ids/" + registrationID;
             ResponseWrapper response = this.sendGet(url, Authorization(), null);
             return BooleanResult.fromResponse(response);        
          }
-         public DefaultResult addRemoveDevicesFromTag(String theTag, 
+
+        //POST /v3/tags/{tag_value}
+        public DefaultResult addRemoveDevicesFromTag(String theTag, 
                                                       HashSet<String> toAddUsers, 
                                                       HashSet<String> toRemoveUsers) 
          {
@@ -133,7 +148,8 @@ namespace cn.jpush.api.device
             ResponseWrapper response = this.sendPost(url, Authorization(), top.ToString());
             return DefaultResult.fromResponse(response);
         }
-         
+
+        //DELETE /v3/tags/{tag_value}
         public DefaultResult deleteTag(String theTag, String platform) 
         {
             String url = HOST_NAME_SSL + TAGS_PATH + "/" + theTag;
@@ -144,9 +160,9 @@ namespace cn.jpush.api.device
             ResponseWrapper response = this.sendDelete(url, Authorization(), null);
             return DefaultResult.fromResponse(response);        
         }
-         // ------------- alias
-    
-       public AliasDeviceListResult getAliasDeviceList(String alias, String platform)
+        // ------------- alias
+        //GET /v3/aliases/{alias_value}
+        public AliasDeviceListResult getAliasDeviceList(String alias, String platform)
         {
             String url = HOST_NAME_SSL + ALIASES_PATH + "/" + alias;
             if (null != platform) {
@@ -156,7 +172,9 @@ namespace cn.jpush.api.device
         
             return AliasDeviceListResult.fromResponse(response);
         }
-       public DefaultResult deleteAlias(String alias, String platform)
+
+        //DELETE /v3/aliases/{alias_value}
+        public DefaultResult deleteAlias(String alias, String platform)
          {
             String url = HOST_NAME_SSL + ALIASES_PATH + "/" + alias;
             if (null != platform) {

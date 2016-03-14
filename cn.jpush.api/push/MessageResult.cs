@@ -28,11 +28,41 @@ namespace cn.jpush.api.push
         }
     }
     //"{\"sendno\":\"0\",\"msg_id\":\"1704649583\"}"
+
+    public class ScheduleResult : BaseResult
+    {
+        public String schedule_id { get; set; }
+        public String name { get; set; }
+
+        override public bool isResultOK()
+        {
+            if (Equals(ResponseResult.responseCode, HttpStatusCode.OK))
+            {
+                return true;
+            }
+            return false;
+        }
+        public override string ToString()
+        {
+            return string.Format("sendno:{0},message_id:{1}", schedule_id, name);
+        }
+    }
+
+//{"schedule_id":"some-id-aaaaaaaaaaaaaaaaa","name":"Test"}
+
     public class JpushSuccess
     {
         public string sendno;
         public string msg_id;
     }
+
+    public class ScheduleSuccess
+    {
+        public string schedule_id;
+        public string name;
+    }
+
+
     public class JpushError
     {
         public JpushErrorObject error;

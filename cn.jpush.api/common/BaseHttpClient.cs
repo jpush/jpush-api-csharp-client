@@ -13,7 +13,7 @@ using cn.jpush.api.common.resp;
 
 namespace cn.jpush.api.common
 {
-    class BaseHttpClient
+    public class BaseHttpClient
     {
         private const String CHARSET = "UTF-8";
 	    private const String RATE_LIMIT_QUOTA = "X-Rate-Limit-Limit";
@@ -52,20 +52,28 @@ namespace cn.jpush.api.common
             {
                 Console.WriteLine("Request Content - " + reqParams +" "+ DateTime.Now);
             }
+            //结果wrap
             ResponseWrapper result = new ResponseWrapper();
+            //创建httprequest
             HttpWebRequest myReq = null;
+            //创建httpresponse
             HttpWebResponse response = null;
             try
             {
+                //利用工厂机制（factory mechanism）通过Create()方法来创建的
                 myReq = (HttpWebRequest)WebRequest.Create(url);
+                //request类型
                 myReq.Method = method;
                 myReq.ContentType = "application/json";
+                //auth是否为null或者空
                 if ( !String.IsNullOrEmpty(auth) )
                 {
+                    //添加头auth
                     myReq.Headers.Add("Authorization", "Basic " + auth);    
                 }
                 if (method == "POST")
                 {
+                    //utf8编码
                     byte[] bs = UTF8Encoding.UTF8.GetBytes(reqParams);
                     myReq.ContentLength = bs.Length;
                     using (Stream reqStream = myReq.GetRequestStream())
@@ -74,7 +82,9 @@ namespace cn.jpush.api.common
                         reqStream.Close();
                     }
                 }
+                //response
                 response = (HttpWebResponse)myReq.GetResponse();
+                //http status code
                 HttpStatusCode statusCode = response.StatusCode;
                 result.responseCode = statusCode;
                 if (Equals(response.StatusCode, HttpStatusCode.OK))
@@ -91,6 +101,7 @@ namespace cn.jpush.api.common
                     Console.WriteLine("Response Content - {0}", result.responseContent +" "+ DateTime.Now);
                 }
             }
+            //异常处理
             catch (WebException e)
             {
                 if (e.Status == WebExceptionStatus.ProtocolError)

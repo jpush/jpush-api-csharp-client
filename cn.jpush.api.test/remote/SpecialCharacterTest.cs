@@ -11,7 +11,7 @@ namespace cn.jpush.api.test.remote
         public SpecialCharacterTest()
         {
             JPushClient jpushClient = new JPushClient(APP_KEY,MASTER_SECRET);
-    	    var result = jpushClient.updateDeviceTagAlias(REGISTRATION_ID1, "special_c", null, null);
+    	    var result = jpushClient.updateDeviceTagAlias(REGISTRATION_ID1, "special_c",null, null, null);
     	    Assert.IsTrue (result.isResultOK());
         }
         public static  char[] SPECIAL_CHARS = new char[] {'`', '~', '!', '@', '#', '$', '%', 

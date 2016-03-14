@@ -6,8 +6,8 @@ namespace cn.jpush.api.test
   
     public class BaseTest
     {
-        public static String APP_KEY = "997f28c1cea5a9f17d82079a";
-        public static String MASTER_SECRET = "47d264a3c02a6a5a4a256a45";
+        public static String APP_KEY = "6be9204c30b9473e87bad4dc";
+        public static String MASTER_SECRET = "8aae478411e89f7682ed5af6";
       
 
          public const  String ALERT = "JPush Test - alert";
@@ -15,6 +15,8 @@ namespace cn.jpush.api.test
 
          public const String REGISTRATION_ID1 = "061c84f7bef";
          public const String REGISTRATION_ID2 = "0619cfd4989";
+
+
 
          public const String LONG_TEXT_1 = ""
             + "鏋佸厜鎺ㄩ�侊紝浣垮緱寮�鍙戣�呭彲浠ュ嵆鏃跺湴鍚戝叾搴旂敤绋嬪簭鐨勭敤鎴锋帹閫侀�氱煡鎴栬�呮秷鎭紝"

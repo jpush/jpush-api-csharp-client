@@ -1,5 +1,6 @@
 ﻿using cn.jpush.api.common;
 using cn.jpush.api.push.notification;
+using cn.jpush.api.push.mode;
 using cn.jpush.api.util;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -22,10 +23,11 @@ namespace cn.jpush.api.push.mode
         private const String AUDIENCE = "audience";
         private const String NOTIFICATION = "notification";
         private const String MESSAGE = "message";
+        private const String SMS_MESSAGE = "sms_message";
         private const String OPTIONS = "options";
 
-        private const int MAX_GLOBAL_ENTITY_LENGTH = 1200;  // Definition acording to JPush Docs
-        private const int MAX_IOS_PAYLOAD_LENGTH = 220;  // Definition acording to JPush Docs
+        private const int MAX_GLOBAL_ENTITY_LENGTH = 1200;  // Definition according to JPush Docs
+        private const int MAX_IOS_PAYLOAD_LENGTH = 220;  // Definition according to JPush Docs
 
         //serializaiton property
         [JsonConverter(typeof(PlatformConverter))]
@@ -34,6 +36,7 @@ namespace cn.jpush.api.push.mode
         public Audience audience{get;set;}
         public Notification notification { get; set; }
         public Message message { get; set; }
+        public SmsMessage sms_message { get; set; }
         public Options options { get; set; }
         //construct
         public PushPayload()
@@ -42,12 +45,13 @@ namespace cn.jpush.api.push.mode
             audience = null;
             notification = null;
             message = null;
+            sms_message = null;
             options = new Options();
             jSetting = new JsonSerializerSettings();
             jSetting.NullValueHandling = NullValueHandling.Ignore;
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
         }
-        public PushPayload(Platform platform, Audience audience, Notification notification, Message message = null, Options options = null)
+        public PushPayload(Platform platform, Audience audience, Notification notification, Message message = null, SmsMessage sms_message = null ,Options options = null)
         {
             Debug.Assert(platform != null);
             Debug.Assert(audience != null);
@@ -57,6 +61,7 @@ namespace cn.jpush.api.push.mode
             this.audience = audience;
             this.notification = notification;
             this.message = message;
+            this.sms_message = sms_message;
             this.options = options;
 
             jSetting = new JsonSerializerSettings();
@@ -72,18 +77,37 @@ namespace cn.jpush.api.push.mode
                                    Audience.all(),
                                    new Notification().setAlert(alert),
                                    null,
+                                   null,
                                    new Options());
         }
         //* The shortcut of building a simple message object to all platforms and all audiences
         //*/
         public static PushPayload MessageAll(String msgContent)
         {
-            return new PushPayload( Platform.all(),
+            return new PushPayload(Platform.all(),
                                    Audience.all(),
                                    null,
                                    Message.content(msgContent),
+                                   null,
                                    new Options());
         }
+        /// <summary>
+        /// It need to have a notification or message.
+        /// </summary>
+        /// <param name="smsContent"></param>
+        /// <returns></returns>
+        /*
+        public static PushPayload SmsMessageAll(String smsContent)
+        {
+            return new PushPayload(Platform.all(),
+                                   Audience.all(),
+                                   null,
+                                   null,
+                                   SmsMessage.content(smsContent),
+                                   new Options());
+        }
+        */
+
         public static PushPayload FromJSON(String payloadString)
         {
             try

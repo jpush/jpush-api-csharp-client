@@ -13,32 +13,36 @@ using cn.jpush.api.util;
 using cn.jpush.api.push.mode;
 using cn.jpush.api.push.notification;
 using cn.jpush.api.common.resp;
-namespace JpushApiClientExample
+
+namespace cn.jpush.api.example
 {
-    class JPushApiExample
+    public class JPushApiExample
     {
         public static String TITLE = "Test from C# v3 sdk";
         public static String ALERT = "Test from  C# v3 sdk - alert";
         public static String MSG_CONTENT = "Test from C# v3 sdk - msgContent";
         public static String REGISTRATION_ID = "0900e8d85ef";
+        public static String SMSMESSAGE = "Test from C# v3 sdk - SMSMESSAGE";
+        public static int DELAY_TIME = 1;
         public static String TAG = "tag_api";
-        public static String app_key = "997f28c1cea5a9f17d82079a";
-        public static String master_secret = "47d264a3c02a6a5a4a256a45";
+        public static String app_key = "6be9204c30b9473e87bad4dc";
+        public static String master_secret = "8aae478411e89f7682ed5af6";
 
         static void Main(string[] args)
         {
             Console.WriteLine("*****开始发送******");
             JPushClient client = new JPushClient(app_key, master_secret);
+
             PushPayload payload = PushObject_All_All_Alert();
             try
             {
                 var result = client.SendPush(payload);
                 //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
                 System.Threading.Thread.Sleep(10000);
-                /*如需查询上次推送结果执行下面的代码*/
+                //如需查询上次推送结果执行下面的代码
                 var apiResult = client.getReceivedApi(result.msg_id.ToString());
                 var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
-                /*如需查询某个messageid的推送结果执行下面的代码*/
+                //如需查询某个messageid的推送结果执行下面的代码
                 var queryResultWithV2 = client.getReceivedApi("1739302794"); 
                 var querResultWithV3 = client.getReceivedApi_v3("1739302794");
 
@@ -54,8 +58,65 @@ namespace JpushApiClientExample
             {
                 Console.WriteLine(e.Message);
             }
+
+            //send   smsmessage
+            PushPayload pushsms = PushSendSmsMessage();
+            try
+            {
+                var result = client.SendPush(pushsms);
+                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+                System.Threading.Thread.Sleep(10000);
+                //如需查询上次推送结果执行下面的代码
+                var apiResult = client.getReceivedApi(result.msg_id.ToString());
+                var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
+                //如需查询某个messageid的推送结果执行下面的代码
+                var queryResultWithV2 = client.getReceivedApi("1739302794");
+                var querResultWithV3 = client.getReceivedApi_v3("1739302794");
+
+            }
+            catch (APIRequestException e)
+            {
+                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+                Console.WriteLine("HTTP Status: " + e.Status);
+                Console.WriteLine("Error Code: " + e.ErrorCode);
+                Console.WriteLine("Error Message: " + e.ErrorCode);
+            }
+            catch (APIConnectionException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            PushPayload payload_alias = PushObject_all_alias_alert();
+            try
+            {
+                var result = client.SendPush(payload_alias);
+                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+                System.Threading.Thread.Sleep(10000);
+                //如需查询上次推送结果执行下面的代码
+                var apiResult = client.getReceivedApi(result.msg_id.ToString());
+                var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
+                //如需查询某个messageid的推送结果执行下面的代码
+                var queryResultWithV2 = client.getReceivedApi("1739302794");
+                var querResultWithV3 = client.getReceivedApi_v3("1739302794");
+
+            }
+            catch (APIRequestException e)
+            {
+                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+                Console.WriteLine("HTTP Status: " + e.Status);
+                Console.WriteLine("Error Code: " + e.ErrorCode);
+                Console.WriteLine("Error Message: " + e.ErrorCode);
+            }
+            catch (APIConnectionException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+
+
             Console.WriteLine("*****结束发送******");
         }
+
         public static PushPayload PushObject_All_All_Alert()
         {
             PushPayload pushPayload = new PushPayload();
@@ -67,11 +128,11 @@ namespace JpushApiClientExample
         public static PushPayload PushObject_all_alias_alert()
         {
 
-            PushPayload pushPayload = new PushPayload();
-            pushPayload.platform = Platform.android();
-            pushPayload.audience = Audience.s_alias("alias1");
-            pushPayload.notification = new Notification().setAlert(ALERT);
-            return pushPayload;
+            PushPayload pushPayload_alias = new PushPayload();
+            pushPayload_alias.platform = Platform.android();
+            pushPayload_alias.audience = Audience.s_alias("alias1");
+            pushPayload_alias.notification = new Notification().setAlert(ALERT);
+            return pushPayload_alias;
            
         }
         public static PushPayload PushObject_Android_Tag_AlertWithTitle()
@@ -123,6 +184,19 @@ namespace JpushApiClientExample
             pushPayload.message = Message.content(MSG_CONTENT).AddExtras("from", "JPush");
             return pushPayload;
 
+        }
+
+        public static PushPayload PushSendSmsMessage()
+        {
+            var pushPayload = new PushPayload();
+            pushPayload.platform = Platform.all();
+            pushPayload.audience = Audience.all();
+            pushPayload.notification = new Notification().setAlert(ALERT);
+            SmsMessage sms_message = new SmsMessage();
+            sms_message.content = SMSMESSAGE;
+            sms_message.delay_time = DELAY_TIME;
+            pushPayload.sms_message = sms_message;
+            return pushPayload;
         }
 
     }
