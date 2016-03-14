@@ -26,12 +26,12 @@ namespace cn.jpush.api.example
         public static String REGISTRATION_ID = "1507bfd3f7c466c355c";
         public static String TAG = "tag_api";
         public static HashSet<String> TAG_HASHSET =new HashSet<string> { "tag_api" };
-        public static HashSet<String> TAG_HASHSET_REMOVE = new HashSet<string> { "wangfei", "tag" };
+        public static HashSet<String> TAG_HASHSET_REMOVE = new HashSet<string> { "tag1", "tag" };
         public static String ALIAS = "alias";
-        public static string MOBILE = "18588232140";
-        public static string INVALID_MOBILE = "18588232140";
-        public static String app_key = "6be9204c30b9473e87bad4dc";
-        public static String master_secret = "8aae478411e89f7682ed5af6";
+        public static string MOBILE = "18888888888";
+        public static string INVALID_MOBILE = "18888888888";
+        public static String app_key = "997f28c1cea5a9f17d82079a";
+        public static String master_secret = "47d264a3c02a6a5a4a256a45";
 
 
         static void Main(string[] args)

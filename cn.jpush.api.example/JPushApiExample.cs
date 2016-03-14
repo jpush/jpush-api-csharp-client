@@ -25,8 +25,8 @@ namespace cn.jpush.api.example
         public static String SMSMESSAGE = "Test from C# v3 sdk - SMSMESSAGE";
         public static int DELAY_TIME = 1;
         public static String TAG = "tag_api";
-        public static String app_key = "6be9204c30b9473e87bad4dc";
-        public static String master_secret = "8aae478411e89f7682ed5af6";
+        public static String app_key = "997f28c1cea5a9f17d82079a";
+        public static String master_secret = "47d264a3c02a6a5a4a256a45";
 
         static void Main(string[] args)
         {

@@ -38,8 +38,8 @@ namespace cn.jpush.api.example
         public static int FREQUENCY = 1;
         public static HashSet<string> POINT =new HashSet<string>() {};
 
-        public static String app_key = "6be9204c30b9473e87bad4dc";
-        public static String master_secret = "8aae478411e89f7682ed5af6";
+        public static String app_key = "997f28c1cea5a9f17d82079a";
+        public static String master_secret = "47d264a3c02a6a5a4a256a45";
 
         public JPushApiExample jpushExample;
 
