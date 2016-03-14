@@ -71,7 +71,7 @@ namespace cn.jpush.api.report
                     string trim = s.Trim();
                     if (!string.IsNullOrEmpty(trim))
                     {
-                        int.Parse(trim);
+                        long.Parse(trim);
                         list.Add(trim);
                     }
                 }
