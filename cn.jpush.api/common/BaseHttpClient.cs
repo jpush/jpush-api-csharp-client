@@ -39,6 +39,11 @@ namespace cn.jpush.api.common
         {
             return this.sendRequest("GET", url, auth, reqParams);
         }
+
+        public ResponseWrapper sendPut(String url, String auth, String reqParams)
+        {
+            return this.sendRequest("PUT", url, auth, reqParams);
+        }
         /**
          *
          * method "POST" or "GET"
@@ -82,6 +87,19 @@ namespace cn.jpush.api.common
                         reqStream.Close();
                     }
                 }
+
+                if (method == "PUT")
+                {
+                    //utf8编码
+                    byte[] bs = UTF8Encoding.UTF8.GetBytes(reqParams);
+                    myReq.ContentLength = bs.Length;
+                    using (Stream reqStream = myReq.GetRequestStream())
+                    {
+                        reqStream.Write(bs, 0, bs.Length);
+                        reqStream.Close();
+                    }
+                }
+
                 //response
                 response = (HttpWebResponse)myReq.GetResponse();
                 //http status code

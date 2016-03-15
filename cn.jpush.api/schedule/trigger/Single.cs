@@ -8,7 +8,7 @@ namespace cn.jpush.api.schedule
 {
     public class Single
     {
-        private string time;
+        public string time;
 
         public void setTime(string time)
         {

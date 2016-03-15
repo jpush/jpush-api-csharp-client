@@ -28,6 +28,7 @@ namespace cn.jpush.api.schedule
         public String name { get; set; }
         public bool enabled { get; set; }
         public Trigger trigger { get; set; }
+        public String schedule_id;
 
         public SchedulePayload()
         {
@@ -35,6 +36,7 @@ namespace cn.jpush.api.schedule
             enabled = true;
             trigger = null;
             push = null;
+            schedule_id = null;
             jSetting = new JsonSerializerSettings();
             jSetting.NullValueHandling = NullValueHandling.Ignore;
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
@@ -42,6 +44,7 @@ namespace cn.jpush.api.schedule
 
         public SchedulePayload(Name name, Enabled enabled, Trigger trigger, PushPayload push)
         {
+            schedule_id = null;
             Debug.Assert(name != null);
             Debug.Assert(enabled != null);
             Debug.Assert(trigger != null);
@@ -61,9 +64,9 @@ namespace cn.jpush.api.schedule
         }
         public SchedulePayload Check()
         {
-            Preconditions.checkArgument(!(null == push), "pushpayload should be set.");
-            Preconditions.checkArgument(!(null == name), "name should be set at least one.");
-            Preconditions.checkArgument(!(null == trigger), "trigger should be set.");
+            //Preconditions.checkArgument(!(null == push), "pushpayload should be set.");
+            //Preconditions.checkArgument(!(null == name), "name should be set at least one.");
+            //Preconditions.checkArgument(!(null == trigger), "trigger should be set.");
             return this;
         }
 

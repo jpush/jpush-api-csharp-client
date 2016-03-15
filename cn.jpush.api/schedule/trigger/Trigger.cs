@@ -30,7 +30,7 @@ namespace cn.jpush.api.schedule
         public Trigger(Single single)
         {
             this.single = single;
-            single = null;
+            this.periodical = null;
             throw new System.NotImplementedException();
         }
 

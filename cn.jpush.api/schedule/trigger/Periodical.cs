@@ -11,12 +11,12 @@ namespace cn.jpush.api.schedule
 {
     public class Periodical
     {
-        private string start;
-        private string end;
-        private string time;
-        private string time_unit;
-        private int frequency;
-        private HashSet<string> point;
+        public string start;
+        public string end;
+        public string time;
+        public string time_unit;
+        public int frequency;
+        public HashSet<string> point;
 
         public Periodical setStart(string start)
         {

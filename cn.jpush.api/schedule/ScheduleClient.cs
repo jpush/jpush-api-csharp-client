@@ -20,9 +20,13 @@ namespace cn.jpush.api.schedule
     {
         private const String HOST_NAME_SSL = "https://api.jpush.cn";
         private const String PUSH_PATH = "/v3/schedules";
-        
+        private const String DELETE_PATH = "/";
+        private const String PUT_PATH = "/";
+        private const String GET_PATH = "?page=";
+
         private String appKey;
         private String masterSecret;
+
         public ScheduleClient(String appKey, String masterSecret)
         {
             this.appKey = appKey;
@@ -36,6 +40,7 @@ namespace cn.jpush.api.schedule
             Console.WriteLine(schedulepayloadJson);
             return sendSchedule(schedulepayloadJson);
         }
+
         public ScheduleResult sendSchedule(string schedulepayload)
         {
             Preconditions.checkArgument(!string.IsNullOrEmpty(schedulepayload), "schedulepayload should not be empty");
@@ -47,11 +52,91 @@ namespace cn.jpush.api.schedule
             messResult.ResponseResult = result;
 
             ScheduleSuccess scheduleSuccess = JsonConvert.DeserializeObject<ScheduleSuccess>(result.responseContent);
-            messResult.schedule_id =scheduleSuccess.schedule_id;
+            messResult.schedule_id = scheduleSuccess.schedule_id;
             messResult.name = scheduleSuccess.name;
 
             return messResult;
         }
+
+
+        //GET /v3/schedules?page=
+        public getScheduleResult getSchedule(string pageid)
+        {
+            
+            Console.WriteLine(pageid);
+            String url = HOST_NAME_SSL;
+            url += PUSH_PATH;
+            url += GET_PATH;
+            if (pageid != null)
+            {
+                url += pageid;
+            }
+            ResponseWrapper result = sendGet(url, Authorization(), pageid);
+            getScheduleResult messResult = new getScheduleResult();
+            messResult.ResponseResult = result;
+
+            getScheduleSuccess getScheduleSuccess = JsonConvert.DeserializeObject<getScheduleSuccess>(result.responseContent);
+            
+            messResult.page = getScheduleSuccess.page;
+            messResult.total_pages = getScheduleSuccess.total_pages;
+            messResult.total_count = getScheduleSuccess.total_count;
+            messResult.schedules = getScheduleSuccess.schedules;
+            return messResult;
+        }
+
+
+        //PUT  https://api.jpush.cn/v3/schedules/{schedule_id}
+
+        public ScheduleResult putSchedule(SchedulePayload schedulepayload,String schedule_id)
+        {
+            Preconditions.checkArgument(schedulepayload != null, "schedulepayload should not be empty");
+            schedulepayload.Check();
+            String schedulepayloadJson = schedulepayload.ToJson();
+            Console.WriteLine(schedulepayloadJson);
+            return putSchedule(schedulepayloadJson,schedule_id);
+        }
+
+        public ScheduleResult putSchedule(string schedulepayload, String schedule_id)
+        {
+            Preconditions.checkArgument(!string.IsNullOrEmpty(schedulepayload), "schedulepayload should not be empty");
+            Console.WriteLine(schedulepayload);
+            String url = HOST_NAME_SSL;
+            url += PUSH_PATH;
+            url += PUT_PATH;
+            url += schedule_id;
+            ResponseWrapper result = sendPut(url, Authorization(), schedulepayload);
+            ScheduleResult messResult = new ScheduleResult();
+            messResult.ResponseResult = result;
+
+            ScheduleSuccess scheduleSuccess = JsonConvert.DeserializeObject<ScheduleSuccess>(result.responseContent);
+            messResult.schedule_id = scheduleSuccess.schedule_id;
+            messResult.name = scheduleSuccess.name;
+
+            return messResult;
+        }
+
+        //  DELETE https://api.jpush.cn/v3/schedules/{schedule_id} 
+
+        public ScheduleResult deleteSchedule(string schedule_id)
+        {
+
+            Console.WriteLine(schedule_id);
+            String url = HOST_NAME_SSL;
+            url += PUSH_PATH;
+            url += DELETE_PATH;
+            url += schedule_id;
+            ResponseWrapper result = sendDelete(url, Authorization(), schedule_id);
+            ScheduleResult messResult = new ScheduleResult();
+            messResult.ResponseResult = result;
+
+            ScheduleSuccess scheduleSuccess = JsonConvert.DeserializeObject<ScheduleSuccess>(result.responseContent);
+            //messResult.schedule_id = scheduleSuccess.schedule_id;
+            //messResult.name = scheduleSuccess.name;
+
+            return messResult;
+        }
+
+
         private String Authorization()
         {
 
