@@ -23,7 +23,7 @@ namespace cn.jpush.api.schedule
         private const String DELETE_PATH = "/";
         private const String PUT_PATH = "/";
         private const String GET_PATH = "?page=";
-
+        private JsonSerializerSettings jSetting;
         private String appKey;
         private String masterSecret;
 
@@ -35,7 +35,6 @@ namespace cn.jpush.api.schedule
         public ScheduleResult sendSchedule(SchedulePayload schedulepayload)
         { 
             Preconditions.checkArgument(schedulepayload != null, "schedulepayload should not be empty");
-            schedulepayload.Check();
             String schedulepayloadJson = schedulepayload.ToJson();
             Console.WriteLine(schedulepayloadJson);
             return sendSchedule(schedulepayloadJson);
@@ -54,7 +53,6 @@ namespace cn.jpush.api.schedule
             ScheduleSuccess scheduleSuccess = JsonConvert.DeserializeObject<ScheduleSuccess>(result.responseContent);
             messResult.schedule_id = scheduleSuccess.schedule_id;
             messResult.name = scheduleSuccess.name;
-
             return messResult;
         }
 
@@ -62,7 +60,9 @@ namespace cn.jpush.api.schedule
         //GET /v3/schedules?page=
         public getScheduleResult getSchedule(string pageid)
         {
-            
+            jSetting = new JsonSerializerSettings();
+            jSetting.NullValueHandling = NullValueHandling.Ignore;
+            jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
             Console.WriteLine(pageid);
             String url = HOST_NAME_SSL;
             url += PUSH_PATH;
@@ -75,7 +75,7 @@ namespace cn.jpush.api.schedule
             getScheduleResult messResult = new getScheduleResult();
             messResult.ResponseResult = result;
 
-            getScheduleSuccess getScheduleSuccess = JsonConvert.DeserializeObject<getScheduleSuccess>(result.responseContent);
+            getScheduleSuccess getScheduleSuccess = JsonConvert.DeserializeObject<getScheduleSuccess>(result.responseContent, jSetting);
             
             messResult.page = getScheduleSuccess.page;
             messResult.total_pages = getScheduleSuccess.total_pages;
@@ -90,7 +90,8 @@ namespace cn.jpush.api.schedule
         public ScheduleResult putSchedule(SchedulePayload schedulepayload,String schedule_id)
         {
             Preconditions.checkArgument(schedulepayload != null, "schedulepayload should not be empty");
-            schedulepayload.Check();
+            //schedulepaload has to be checked,but has not to have all the arg
+            //schedulepayload.Check();
             String schedulepayloadJson = schedulepayload.ToJson();
             Console.WriteLine(schedulepayloadJson);
             return putSchedule(schedulepayloadJson,schedule_id);
