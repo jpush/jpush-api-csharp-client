@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>cn.jpush.api</RootNamespace>
-    <AssemblyName>jpush-api</AssemblyName>
+    <AssemblyName>cn.jpush.api</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProductVersion>12.0.0</ProductVersion>
