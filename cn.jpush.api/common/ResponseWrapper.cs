@@ -16,8 +16,6 @@ namespace cn.jpush.api.common
     public class ResponseWrapper
     {
         private const int RESPONSE_CODE_NONE = -1;
-    
-        //private static Gson _gson = new Gson();
         public JpushError jpushError;
 
         public HttpStatusCode responseCode = HttpStatusCode.BadRequest;

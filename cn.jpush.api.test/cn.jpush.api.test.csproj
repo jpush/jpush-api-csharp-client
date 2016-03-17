@@ -80,6 +80,7 @@
     <Compile Include="remote\SingleTest.cs" />
     <Compile Include="remote\SpecialCharacterTest.cs" />
     <Compile Include="report\ReportFunctionTests.cs" />
+    <Compile Include="schedule\trigger\SingleTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cn.jpush.api\cn.jpush.api.csproj">

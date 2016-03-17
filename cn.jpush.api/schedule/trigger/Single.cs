@@ -12,6 +12,7 @@ namespace cn.jpush.api.schedule
 
         public void setTime(string time)
         {
+       
             this.time = time;
         }
 

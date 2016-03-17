@@ -33,7 +33,6 @@ namespace cn.jpush.api.device
             String auth = Base64.getBase64Encode(this.appKey + ":" + this.masterSecret);
 
             ResponseWrapper response = this.sendGet(url, auth, null);
-
             return TagAliasResult.fromResponse(response);
 
         }
@@ -98,7 +97,6 @@ namespace cn.jpush.api.device
                 top.Add("tags", tagObject);
             }
             ResponseWrapper result = sendPost(url, Authorization(), top.ToString());
-
             return DefaultResult.fromResponse(result);
        }
 

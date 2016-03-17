@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>cn.jpush.api.example</RootNamespace>
-    <AssemblyName>jpush-example</AssemblyName>
+    <AssemblyName>cn.jpush.api.example</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -47,7 +47,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>cn.jpush.api.example.ScheduleApiExample</StartupObject>
+    <StartupObject>cn.jpush.api.example.JPushApiExample</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

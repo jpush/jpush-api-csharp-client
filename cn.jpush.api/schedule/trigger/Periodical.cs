@@ -1,4 +1,5 @@
 ﻿using cn.jpush.api.util;
+using cn.jpush.api;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,28 @@ namespace cn.jpush.api.schedule
 {
     public class Periodical
     {
-        public string start;
-        public string end;
-        public string time;
-        public string time_unit;
+        public String start;
+        public String end;
+        public String time;
+        public String time_unit;
         public int frequency;
         public HashSet<string> point;
+
+        public Periodical(String start, String end, String time, String time_unit, int frequency, HashSet<string> point) {
+
+            Preconditions.checkArgument(String.IsNullOrEmpty(start), "The time must not be empty.");
+            Preconditions.checkArgument(String.IsNullOrEmpty(end), "The time must not be empty.");
+            Preconditions.checkArgument(String.IsNullOrEmpty(time), "The time must not be empty.");
+            Preconditions.checkArgument(StringUtil.IsNumber(frequency.ToString()), "The frequency must be number.");
+            Preconditions.checkArgument(StringUtil.IsNumber(frequency.ToString()), "The frequency must be number.");
+            Preconditions.checkArgument(String.IsNullOrEmpty(time_unit), "The time must not be empty.");
+            Preconditions.checkArgument(StringUtil.IsDateTime(start), "The time is not valid.");
+            Preconditions.checkArgument(StringUtil.IsDateTime(end), "The time is not valid.");
+        }
+
+        public Periodical() {
+
+        }
 
         public Periodical setStart(string start)
         {
@@ -84,5 +101,7 @@ namespace cn.jpush.api.schedule
         {
             return this.point;
         }
+
+        
     }
 }

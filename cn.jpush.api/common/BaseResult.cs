@@ -8,7 +8,7 @@ namespace cn.jpush.api.common
 {
     public abstract class BaseResult
     {
-        public const  int ERROR_CODE_NONE = -1;
+        public const int ERROR_CODE_NONE = -1;
         public const int ERROR_CODE_OK = 0;
         public const String ERROR_MESSAGE_NONE = "None error message.";
         

@@ -10,7 +10,7 @@ namespace cn.jpush.api.util
     class StringUtil
     {
 
-        public bool IsNumber(String strNumber)
+        public static bool IsNumber(String strNumber)
         {
                     Regex objNotNumberPattern=new Regex("[^0-9.-]");
                     Regex objTwoDotPattern=new Regex("[0-9]*[.][0-9]*[.][0-9]*");
@@ -51,6 +51,22 @@ namespace cn.jpush.api.util
                 return buffer.ToString().Substring(0, buffer.Length - 1);
             }
             return "";
+        }
+
+        public static Boolean  IsDateTime(String datetime) {
+            Boolean isdatetime = new Boolean();
+            try
+            {
+                Convert.ToDateTime(datetime);
+                isdatetime= true;
+            }
+            finally {
+                isdatetime = false;
+            }
+            return isdatetime;
+
+
+
         }
 
     }
