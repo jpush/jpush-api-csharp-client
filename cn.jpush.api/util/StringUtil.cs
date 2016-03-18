@@ -95,6 +95,27 @@ namespace cn.jpush.api.util
             return ismobile;
 
         }
+        public static Boolean IsTimeunit(String time_unit)
+        {
+            Boolean istime_unit = new Boolean();
+            if (time_unit.CompareTo("day") == 0)
+            {
+                istime_unit = true;
+            }
+
+            if (time_unit.CompareTo("week") == 0)
+            {
+                istime_unit = true;
+            }
+            if (time_unit.CompareTo("month") == 0)
+            {
+                istime_unit = true;
+            }
+
+            istime_unit = false;
+            return istime_unit;
+
+        }
 
 
     }
