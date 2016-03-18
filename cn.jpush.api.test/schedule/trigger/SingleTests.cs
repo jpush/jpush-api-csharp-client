@@ -13,6 +13,7 @@ namespace cn.jpush.api.schedule.Tests
     public class SingleTests
     {
         [TestMethod()]
+        [ExpectedException(typeof(System.ArgumentException))]
         public void setVoidTimeTest()
         {
             Single single = new Single();
@@ -21,6 +22,7 @@ namespace cn.jpush.api.schedule.Tests
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(System.ArgumentException))]
         public void setNullTimeTest()
         {
             Single single = new Single();
@@ -29,10 +31,20 @@ namespace cn.jpush.api.schedule.Tests
         }
 
         [TestMethod()]
-        public void getTimeTest()
+        [ExpectedException(typeof(System.ArgumentException))]
+        public void setWrongTimeTest()
         {
             Single single = new Single();
+            single.setTime("2016-0514:05:00");
+            
+        }
 
+        [TestMethod()]
+        public void setRightTimeTest()
+        {
+            Single single = new Single();
+            single.setTime("2016-05-25 14:05:00");
+            Assert.AreEqual("2016-05-25 14:05:00", single.getTime());
         }
     }
 }
