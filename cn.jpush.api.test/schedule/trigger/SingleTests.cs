@@ -17,7 +17,7 @@ namespace cn.jpush.api.schedule.Tests
         {
             Single single = new Single();
             single.setTime("");
-            Assert.IsInstanceOfType(single,typeof(Single));
+            
         }
 
         [TestMethod()]
@@ -25,7 +25,7 @@ namespace cn.jpush.api.schedule.Tests
         {
             Single single = new Single();
             single.setTime(null);
-            Assert.IsInstanceOfType(single, typeof(Single));
+            
         }
 
         [TestMethod()]
