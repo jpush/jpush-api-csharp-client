@@ -30,6 +30,12 @@ namespace cn.jpush.api.schedule
             Preconditions.checkArgument(StringUtil.IsDateTime(start), "The start is not valid.");
             Preconditions.checkArgument(StringUtil.IsDateTime(end), "The end is not valid.");
             Preconditions.checkArgument(StringUtil.IsTime(time), "The time must be the right format.");
+            this.start = start;
+            this.end = end;
+            this.time = time;
+            this.time_unit = time_unit;
+            this.frequency = frequency;
+            this.point = point;
         }
 
         public Periodical() {
