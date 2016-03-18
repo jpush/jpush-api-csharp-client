@@ -75,12 +75,12 @@ namespace cn.jpush.api.schedule
             getScheduleResult messResult = new getScheduleResult();
             messResult.ResponseResult = result;
 
-            getScheduleSuccess getScheduleSuccess = JsonConvert.DeserializeObject<getScheduleSuccess>(result.responseContent, jSetting);
+            ScheduleListResult scheduleListResult = JsonConvert.DeserializeObject<ScheduleListResult>(result.responseContent, jSetting);
             
-            messResult.page = getScheduleSuccess.page;
-            messResult.total_pages = getScheduleSuccess.total_pages;
-            messResult.total_count = getScheduleSuccess.total_count;
-            messResult.schedules = getScheduleSuccess.schedules;
+            messResult.page = scheduleListResult.page;
+            messResult.total_pages = scheduleListResult.total_pages;
+            messResult.total_count = scheduleListResult.total_count;
+            messResult.schedules = scheduleListResult.schedules;
             return messResult;
         }
 

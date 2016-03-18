@@ -88,6 +88,7 @@
     <Compile Include="schedule\enabled\Enabled.cs" />
     <Compile Include="schedule\name\Name.cs" />
     <Compile Include="schedule\ScheduleClient.cs" />
+    <Compile Include="schedule\ScheduleListResult.cs" />
     <Compile Include="schedule\SchedulePayload.cs" />
     <Compile Include="schedule\trigger\Periodical.cs" />
     <Compile Include="schedule\trigger\Single.cs" />

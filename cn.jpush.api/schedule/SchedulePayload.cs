@@ -66,7 +66,7 @@ namespace cn.jpush.api.schedule
         {
             Preconditions.checkArgument(!(null == push), "pushpayload should be set.");
             Preconditions.checkArgument(!(null == name), "name should be set at least one.");
-            Preconditions.checkArgument(!(enabled), "enabled should be true.");
+            Preconditions.checkArgument(enabled, "enabled should be true.");
             Preconditions.checkArgument(!(null == trigger), "trigger should be set.");
             return this;
         }
