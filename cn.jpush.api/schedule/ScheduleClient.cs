@@ -60,8 +60,9 @@ namespace cn.jpush.api.schedule
 
 
         //GET /v3/schedules?page=
-        public getScheduleResult getSchedule(string pageid)
+        public getScheduleResult getSchedule(int pageid)
         {
+            Preconditions.checkArgument(pageid > 0, "page should more than 0.");
             jSetting = new JsonSerializerSettings();
             jSetting.NullValueHandling = NullValueHandling.Ignore;
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
@@ -69,11 +70,8 @@ namespace cn.jpush.api.schedule
             String url = HOST_NAME_SSL;
             url += PUSH_PATH;
             url += GET_PATH;
-            if (pageid != null)
-            {
-                url += pageid;
-            }
-            ResponseWrapper result = sendGet(url, Authorization(), pageid);
+            url += pageid.ToString();
+            ResponseWrapper result = sendGet(url, Authorization(), pageid.ToString());
             getScheduleResult messResult = new getScheduleResult();
             messResult.ResponseResult = result;
 
@@ -92,8 +90,7 @@ namespace cn.jpush.api.schedule
         public ScheduleResult putSchedule(SchedulePayload schedulepayload,String schedule_id)
         {
             Preconditions.checkArgument(schedulepayload != null, "schedulepayload should not be empty");
-            //schedulepaload has to be checked,but has not to have all the arg
-            //schedulepayload.Check();
+            Preconditions.checkArgument(schedule_id != null, "schedule_id should not be empty");
             String schedulepayloadJson = schedulepayload.ToJson();
             Console.WriteLine(schedulepayloadJson);
             return putSchedule(schedulepayloadJson,schedule_id);
@@ -122,7 +119,7 @@ namespace cn.jpush.api.schedule
 
         public ScheduleResult deleteSchedule(string schedule_id)
         {
-
+            Preconditions.checkArgument(schedule_id != null, "schedule_id should not be empty");
             Console.WriteLine(schedule_id);
             String url = HOST_NAME_SSL;
             url += PUSH_PATH;

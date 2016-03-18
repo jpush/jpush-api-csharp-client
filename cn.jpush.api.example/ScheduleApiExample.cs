@@ -45,7 +45,7 @@ namespace cn.jpush.api.example
         public static int FREQUENCY = 1;
         public static HashSet<string> POINT =new HashSet<string>() {};
 
-        public static String PAGEID = "1";
+        public static int PAGEID = 1;
         public static String schedule_id ;
 
         public static String app_key = "6be9204c30b9473e87bad4dc";
