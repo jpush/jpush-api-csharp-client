@@ -60,6 +60,9 @@ namespace cn.jpush.api.schedule
 
         public string ToJson()
         {
+            jSetting = new JsonSerializerSettings();
+            jSetting.NullValueHandling = NullValueHandling.Ignore;
+            jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
             return JsonConvert.SerializeObject(this, jSetting);
         }
         public SchedulePayload Check()
