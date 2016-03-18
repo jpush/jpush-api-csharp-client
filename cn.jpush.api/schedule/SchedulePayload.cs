@@ -46,7 +46,7 @@ namespace cn.jpush.api.schedule
         {
             schedule_id = null;
             Debug.Assert(name != null);
-            Debug.Assert(enabled != null);
+            Debug.Assert(enabled.getEnable());
             Debug.Assert(trigger != null);
             this.name = name.getName();
             this.enabled = enabled.getEnable();
