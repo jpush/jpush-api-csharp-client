@@ -21,10 +21,10 @@ namespace cn.jpush.api.schedule
 
         public Periodical(String start, String end, String time, String time_unit, int frequency, HashSet<string> point) {
 
-            Preconditions.checkArgument(String.IsNullOrEmpty(start), "The time must not be empty.");
-            Preconditions.checkArgument(String.IsNullOrEmpty(end), "The time must not be empty.");
-            Preconditions.checkArgument(String.IsNullOrEmpty(time), "The time must not be empty.");
-            Preconditions.checkArgument(String.IsNullOrEmpty(time_unit), "The time_unit must not be empty.");
+            Preconditions.checkArgument(!String.IsNullOrEmpty(start), "The time must not be empty.");
+            Preconditions.checkArgument(!String.IsNullOrEmpty(end), "The time must not be empty.");
+            Preconditions.checkArgument(!String.IsNullOrEmpty(time), "The time must not be empty.");
+            Preconditions.checkArgument(!String.IsNullOrEmpty(time_unit), "The time_unit must not be empty.");
             Preconditions.checkArgument(StringUtil.IsNumber(frequency.ToString()), "The frequency must be number.");
 
             Preconditions.checkArgument(StringUtil.IsDateTime(start), "The start is not valid.");
@@ -42,8 +42,10 @@ namespace cn.jpush.api.schedule
 
         }
 
-        public Periodical setStart(string start)
+        public Periodical setStart(String start)
         {
+            Preconditions.checkArgument(!String.IsNullOrEmpty(start), "The time must not be empty.");
+            Preconditions.checkArgument(StringUtil.IsDateTime(start), "The start is not valid.");
             this.start = start;
             return this;
         }
@@ -55,6 +57,8 @@ namespace cn.jpush.api.schedule
 
         public Periodical setEnd(string end)
         {
+            Preconditions.checkArgument(!String.IsNullOrEmpty(end), "The time must not be empty.");
+            Preconditions.checkArgument(StringUtil.IsDateTime(end), "The end is not valid.");
             this.end = end;
             return this;
         }
@@ -67,6 +71,8 @@ namespace cn.jpush.api.schedule
 
         public Periodical setTime(string time)
         {
+            Preconditions.checkArgument(!String.IsNullOrEmpty(time), "The time must not be empty.");
+            Preconditions.checkArgument(StringUtil.IsTime(time), "The time must be the right format.");
             this.time = time;
             return this;
         }
@@ -85,6 +91,7 @@ namespace cn.jpush.api.schedule
         public string getTime_unit()
         {
             return this.time_unit;
+            Preconditions.checkArgument(!String.IsNullOrEmpty(time_unit), "The time_unit must not be empty.");
         }
 
         public Periodical setFrequency(int frequency)
@@ -95,6 +102,7 @@ namespace cn.jpush.api.schedule
 
         public int getFrequency()
         {
+            Preconditions.checkArgument(StringUtil.IsNumber(frequency.ToString()), "The frequency must be number.");
             return this.frequency;
         }
 

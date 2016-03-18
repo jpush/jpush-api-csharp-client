@@ -37,7 +37,7 @@ namespace cn.jpush.api.example
         //创建成功后，填入你的schedule_id
         public static String PUT_SCHEDULE_ID = "f0b61b2e-e682-11e5-beab-0021f652c102";
         
-        public static String START = "2016-03-11 12:30:00";
+        public static String START = "2016-03-20 12:30:00";
         public static String END = "2016-05-12 12:30:00";
         public static String TIME_PERIODICAL = "14:00:00";
         public static String INVALID_TIME_PERIODICAL = "4:00:00";
