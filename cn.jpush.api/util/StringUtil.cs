@@ -98,6 +98,7 @@ namespace cn.jpush.api.util
         public static Boolean IsTimeunit(String time_unit)
         {
             Boolean istime_unit = new Boolean();
+
             if (time_unit.CompareTo("day") == 0)
             {
                 istime_unit = true;
@@ -107,6 +108,7 @@ namespace cn.jpush.api.util
             {
                 istime_unit = true;
             }
+
             if (time_unit.CompareTo("month") == 0)
             {
                 istime_unit = true;

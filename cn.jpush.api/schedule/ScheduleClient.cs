@@ -33,8 +33,9 @@ namespace cn.jpush.api.schedule
             this.masterSecret = masterSecret;
         }
         public ScheduleResult sendSchedule(SchedulePayload schedulepayload)
-        { 
+        {       
             Preconditions.checkArgument(schedulepayload != null, "schedulepayload should not be empty");
+            schedulepayload.Check();
             String schedulepayloadJson = schedulepayload.ToJson();
             Console.WriteLine(schedulepayloadJson);
             return sendSchedule(schedulepayloadJson);
@@ -42,6 +43,7 @@ namespace cn.jpush.api.schedule
 
         public ScheduleResult sendSchedule(string schedulepayload)
         {
+            
             Preconditions.checkArgument(!string.IsNullOrEmpty(schedulepayload), "schedulepayload should not be empty");
             Console.WriteLine(schedulepayload);
             String url = HOST_NAME_SSL;
