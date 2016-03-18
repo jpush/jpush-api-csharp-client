@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.util
 {
-    class StringUtil
+    public class StringUtil
     {
 
         public static bool IsNumber(String strNumber)
@@ -55,17 +56,35 @@ namespace cn.jpush.api.util
 
         public static Boolean  IsDateTime(String datetime) {
             Boolean isdatetime = new Boolean();
+            DateTime dateTime;
             try
-            {
-                Convert.ToDateTime(datetime);
-                isdatetime= true;
+            {              
+                dateTime = DateTime.ParseExact(datetime, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+                isdatetime = true;
             }
-            finally {
+            catch
+            {
                 isdatetime = false;
             }
             return isdatetime;
 
+        }
 
+        public static Boolean IsTime(String time)
+        {
+            Boolean istime = new Boolean();
+            try
+            {
+                DateTime righttime;
+                righttime = DateTime.ParseExact(time,"HH:mm:ss", CultureInfo.InvariantCulture);
+                istime = true;
+            }
+    
+            catch
+            {
+                istime = false;
+            }
+            return istime;
 
         }
 

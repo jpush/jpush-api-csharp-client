@@ -15,6 +15,7 @@ using cn.jpush.api.push.notification;
 using cn.jpush.api.common.resp;
 using cn.jpush.api.example;
 using cn.jpush.api.schedule;
+using System.Globalization;
 
 namespace cn.jpush.api.example
 {
@@ -30,16 +31,16 @@ namespace cn.jpush.api.example
         public static String NAME = "Test";
         public static bool ENABLED = true;
         public static String TIME = "2016-03-25 14:05:00";
-
+        public static String INVALID_TIME = "2016-03-2514:05:00";
         public static String PUT_TIME = "2016-05-25 14:05:00";
         public static String PUT_NAME = "put_new_name";
         //创建成功后，填入你的schedule_id
         public static String PUT_SCHEDULE_ID = "f0b61b2e-e682-11e5-beab-0021f652c102";
-
         
         public static String START = "2016-03-11 12:30:00";
         public static String END = "2016-05-12 12:30:00";
         public static String TIME_PERIODICAL = "14:00:00";
+        public static String INVALID_TIME_PERIODICAL = "4:00:00";
         public static String TIME_UNIT = "day";
         public static int FREQUENCY = 1;
         public static HashSet<string> POINT =new HashSet<string>() {};
@@ -50,12 +51,8 @@ namespace cn.jpush.api.example
         public static String app_key = "6be9204c30b9473e87bad4dc";
         public static String master_secret = "8aae478411e89f7682ed5af6";
 
-        public JPushApiExample jpushExample;
-
-        static void Main(string[] args) { 
-            JPushApiExample jpushExample = new JPushApiExample();
+        static void Main(string[] args) {
             PushPayload pushPayload = JPushApiExample.PushObject_All_All_Alert();
-            Console.WriteLine(pushPayload);
 
             ScheduleClient scheduleclient = new ScheduleClient(app_key, master_secret);
 
@@ -71,8 +68,6 @@ namespace cn.jpush.api.example
 
             Trigger trigger = new Trigger();
             trigger.single = single;
-
-            
 
             schedulepayload.name = name.getName();
             schedulepayload.enabled = enabled.getEnable();
