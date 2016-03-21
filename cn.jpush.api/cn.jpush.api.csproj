@@ -93,6 +93,7 @@
     <Compile Include="schedule\trigger\Periodical.cs" />
     <Compile Include="schedule\trigger\Single.cs" />
     <Compile Include="schedule\trigger\Trigger.cs" />
+    <Compile Include="schedule\trigger\TriggerPayload.cs" />
     <Compile Include="util\Base64.cs" />
     <Compile Include="util\JsonTool.cs" />
     <Compile Include="util\Md5.cs" />

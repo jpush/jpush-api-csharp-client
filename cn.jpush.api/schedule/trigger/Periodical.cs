@@ -17,16 +17,15 @@ namespace cn.jpush.api.schedule
         public String time;
         public String time_unit;
         public int frequency;
-        public HashSet<string> point;
+        public String[] point;
 
-        public Periodical(String start, String end, String time, String time_unit, int frequency, HashSet<string> point) {
+        public Periodical(String start, String end, String time, String time_unit, int frequency, String[] point) {
 
             Preconditions.checkArgument(!String.IsNullOrEmpty(start), "The time must not be empty.");
             Preconditions.checkArgument(!String.IsNullOrEmpty(end), "The time must not be empty.");
             Preconditions.checkArgument(!String.IsNullOrEmpty(time), "The time must not be empty.");
             Preconditions.checkArgument(!String.IsNullOrEmpty(time_unit), "The time_unit must not be empty.");
             Preconditions.checkArgument(StringUtil.IsNumber(frequency.ToString()), "The frequency must be number.");
-
             Preconditions.checkArgument(StringUtil.IsDateTime(start), "The start is not valid.");
             Preconditions.checkArgument(StringUtil.IsDateTime(end), "The end is not valid.");
             Preconditions.checkArgument(StringUtil.IsTime(time), "The time must be the right format.");
@@ -38,6 +37,7 @@ namespace cn.jpush.api.schedule
             this.point = point;
         }
 
+        
         public Periodical() {
 
         }
@@ -91,7 +91,7 @@ namespace cn.jpush.api.schedule
         public string getTime_unit()
         {
             return this.time_unit;
-            Preconditions.checkArgument(!String.IsNullOrEmpty(time_unit), "The time_unit must not be empty.");
+            
         }
 
         public Periodical setFrequency(int frequency)
@@ -106,17 +106,17 @@ namespace cn.jpush.api.schedule
             return this.frequency;
         }
 
-        public Periodical setPoint(HashSet<string> point)
+        public Periodical setPoint(String[] point)
         {
             this.point = point;
             return this;
         }
 
-        public HashSet<string> getPoint()
+        public String[] getPoint()
         {
             return this.point;
         }
-
+        
         
     }
 }

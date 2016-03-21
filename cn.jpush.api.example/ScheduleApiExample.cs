@@ -43,7 +43,7 @@ namespace cn.jpush.api.example
         public static String INVALID_TIME_PERIODICAL = "4:00:00";
         public static String TIME_UNIT = "day";
         public static int FREQUENCY = 1;
-        public static HashSet<string> POINT =new HashSet<string>() {};
+        public static String[] POINT =new String[] { };
 
         public static int PAGEID = 1;
         public static String schedule_id ;
