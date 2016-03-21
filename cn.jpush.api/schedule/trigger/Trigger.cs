@@ -43,6 +43,7 @@ namespace cn.jpush.api.schedule
             Preconditions.checkArgument(StringUtil.IsDateTime(time), "the time is not valid");
             Single single = new Single();
             single.setTime(time);
+            this.single = single;
             this.single.time = single.getTime();
         }
 
