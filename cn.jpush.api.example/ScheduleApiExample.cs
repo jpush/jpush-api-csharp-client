@@ -208,6 +208,11 @@ namespace cn.jpush.api.example
                 //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
                 System.Threading.Thread.Sleep(10000);
                 Console.WriteLine(result.schedules[0].name);
+
+                //if the test Schedule is too much,delete it 
+                for (int counter = 0; counter <= 40; counter++) {
+                    scheduleclient.deleteSchedule(result.schedules[counter].schedule_id);
+                }
                 Console.WriteLine(result.schedules);
                 Console.WriteLine(result);
             }

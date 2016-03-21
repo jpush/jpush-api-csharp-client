@@ -44,7 +44,6 @@ namespace cn.jpush.api.schedule
             Single single = new Single();
             single.setTime(time);
             this.single = single;
-            this.single.time = single.getTime();
         }
 
         public Trigger(String start, String end, String time, String time_unit, int frequency, String[] point)
