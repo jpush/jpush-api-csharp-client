@@ -209,10 +209,12 @@ namespace cn.jpush.api.example
                 System.Threading.Thread.Sleep(10000);
                 Console.WriteLine(result.schedules[0].name);
 
-                //if the test Schedule is too much,delete it 
+                //if the test Schedule is too much,delete it
+                /*
                 for (int counter = 0; counter <= 40; counter++) {
                     scheduleclient.deleteSchedule(result.schedules[counter].schedule_id);
                 }
+                */
                 Console.WriteLine(result.schedules);
                 Console.WriteLine(result);
             }
