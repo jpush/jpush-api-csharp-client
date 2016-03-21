@@ -78,8 +78,7 @@ namespace cn.jpush.api.util
                 DateTime righttime;
                 righttime = DateTime.ParseExact(time,"HH:mm:ss", CultureInfo.InvariantCulture);
                 istime = true;
-            }
-    
+            } 
             catch
             {
                 istime = false;
