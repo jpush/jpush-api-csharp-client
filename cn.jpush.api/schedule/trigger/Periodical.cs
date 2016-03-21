@@ -19,6 +19,9 @@ namespace cn.jpush.api.schedule
         public int frequency;
         public String[] point;
 
+
+        //init the periodical by Constructor function
+        //通过构造函数来构造Periodical类，并传递参数。
         public Periodical(String start, String end, String time, String time_unit, int frequency, String[] point) {
 
             Preconditions.checkArgument(!String.IsNullOrEmpty(start), "The time must not be empty.");
@@ -37,9 +40,14 @@ namespace cn.jpush.api.schedule
             this.point = point;
         }
 
-        
+        //init the periodical 
         public Periodical() {
-
+            this.start = null;
+            this.end = null;
+            this.time = null;
+            this.time_unit = null;
+            this.frequency = 0;
+            this.point = null;
         }
 
         public Periodical setStart(String start)
