@@ -57,6 +57,7 @@ namespace cn.jpush.api.example
             ScheduleClient scheduleclient = new ScheduleClient(app_key, master_secret);
 
             SchedulePayload schedulepayload = new SchedulePayload();
+            
             Name name = new Name();
             name.setName(NAME);
 
@@ -96,7 +97,7 @@ namespace cn.jpush.api.example
                 Console.WriteLine(e.Message);
             }
 
-
+            
             SchedulePayload schedulepayloadperiodical = new SchedulePayload();
             Name nameperiodical = new Name();
             nameperiodical.setName(NAME);
@@ -137,7 +138,7 @@ namespace cn.jpush.api.example
                 Console.WriteLine(e.Message);
             }
 
-            //get 
+            //get schedule
             try
             {
                 var result = scheduleclient.getSchedule(PAGEID);
@@ -165,6 +166,7 @@ namespace cn.jpush.api.example
             Name putname = new Name();
             putname.setName(PUT_NAME);
             putschedulepayload.name = putname.getName();
+            putschedulepayload.enabled = false;
             try
             {
                 var result = scheduleclient.putSchedule(putschedulepayload,PUT_SCHEDULE_ID);
@@ -184,6 +186,8 @@ namespace cn.jpush.api.example
                 Console.WriteLine(e.Message);
             }
 
+
+            //deleteSchedule
             try
             {
                 //删除的是第一次创建的schedule_id，如果要保留第一次创建的，请重新传入schedule_id

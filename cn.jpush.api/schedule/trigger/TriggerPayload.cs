@@ -26,7 +26,7 @@ namespace cn.jpush.api.schedule.trigger
             single, periodical
         }
 
-
+        
         private TriggerPayload(String time)
         {
             this.type = Type.single;

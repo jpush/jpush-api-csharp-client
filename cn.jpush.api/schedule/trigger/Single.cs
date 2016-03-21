@@ -14,6 +14,7 @@ namespace cn.jpush.api.schedule
 
         public void setTime(string time)
         {
+            Preconditions.checkArgument(!String.IsNullOrEmpty(time), "The time must not be empty.");
             Preconditions.checkArgument(StringUtil.IsDateTime(time),"the time is not valid");
             this.time = time;
         }
