@@ -47,7 +47,7 @@ namespace cn.jpush.api.example
 
         public static int PAGEID = 1;
         public static String schedule_id ;
-
+        public static String schedule_id1;
         public static String app_key = "6be9204c30b9473e87bad4dc";
         public static String master_secret = "8aae478411e89f7682ed5af6";
 
@@ -77,7 +77,7 @@ namespace cn.jpush.api.example
                 System.Threading.Thread.Sleep(10000);
                 Console.WriteLine(result);
                 //保留这里获取的schedule_id，作为后面删除schedule的参数，如果不想删除这个可以删掉这一行，另外设置一个schedule_id
-                schedule_id = result.schedule_id;
+                schedule_id1 = result.schedule_id;
 
             }
             catch (APIRequestException e)
@@ -95,10 +95,10 @@ namespace cn.jpush.api.example
             SchedulePayload schedulepayloadsingle = new SchedulePayload();
             Trigger triggersingle = new Trigger(TIME);
             
-            schedulepayloadsingle.push = pushPayload;
-            schedulepayloadsingle.trigger = triggersingle;
-            schedulepayloadsingle.name = NAME;
-            schedulepayloadsingle.enabled = ENABLED;
+            schedulepayloadsingle.setPushPayload(pushPayload);
+            schedulepayloadsingle.setTrigger(triggersingle);
+            schedulepayloadsingle.setName(NAME);
+            schedulepayloadsingle.setEnabled(ENABLED);
 
             try
             {
@@ -128,10 +128,10 @@ namespace cn.jpush.api.example
 
             Trigger triggerConstructor = new Trigger(START,END, TIME_PERIODICAL, TIME_UNIT,FREQUENCY,POINT);
 
-            schedulepayloadperiodical.push = pushPayload;
-            schedulepayloadperiodical.trigger = triggerConstructor;
-            schedulepayloadperiodical.name = NAME;
-            schedulepayloadperiodical.enabled = ENABLED;
+            schedulepayloadperiodical.setPushPayload(pushPayload);
+            schedulepayloadperiodical.setTrigger(triggerConstructor);
+            schedulepayloadperiodical.setName(NAME);
+            schedulepayloadperiodical.setEnabled(ENABLED);
 
             try
             {
@@ -155,16 +155,47 @@ namespace cn.jpush.api.example
                 Console.WriteLine(e.Message);
             }
 
+
+            //get schedule
+            try
+            {
+                var result = scheduleclient.getSchedule(PAGEID);
+                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+                System.Threading.Thread.Sleep(10000);
+                Console.WriteLine(result.schedules[0].name);
+
+                //if the test Schedule is too much,delete it
+                /*
+                for (int counter = 0; counter <= 40; counter++) {
+                    scheduleclient.deleteSchedule(result.schedules[counter].schedule_id);
+                }
+                */
+                Console.WriteLine(result.schedules);
+                Console.WriteLine(result);
+            }
+            catch (APIRequestException e)
+            {
+                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+                Console.WriteLine("HTTP Status: " + e.Status);
+                Console.WriteLine("Error Code: " + e.ErrorCode);
+                Console.WriteLine("Error Message: " + e.ErrorCode);
+            }
+            catch (APIConnectionException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+
             //put the name
 
             SchedulePayload putschedulepayload = new SchedulePayload();
 
-            putschedulepayload.name = PUT_NAME;
+            putschedulepayload.setName(PUT_NAME);
             //the default enabled is true,if you want to change it,you have to set it to false
-            putschedulepayload.enabled = false;
+            putschedulepayload.setEnabled(false);
             try
             {
-                var result = scheduleclient.putSchedule(putschedulepayload,PUT_SCHEDULE_ID);
+                var result = scheduleclient.putSchedule(putschedulepayload, schedule_id);
                 //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
                 System.Threading.Thread.Sleep(10000);
                 Console.WriteLine(result);

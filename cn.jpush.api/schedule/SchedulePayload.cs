@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace cn.jpush.api.schedule
 {
+
     public class SchedulePayload
     {
         private JsonSerializerSettings jSetting;

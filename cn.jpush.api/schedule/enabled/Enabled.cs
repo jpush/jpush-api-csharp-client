@@ -9,7 +9,7 @@ namespace cn.jpush.api.schedule
 {
     public class Enabled
     {
-        private bool enable;
+        public bool enable;
 
         public void setEnable(bool enable) { 
             this.enable = enable;  

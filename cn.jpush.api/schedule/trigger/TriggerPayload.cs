@@ -13,13 +13,13 @@ namespace cn.jpush.api.schedule.trigger
 {
     class TriggerPayload
     {
-        private Type type;
-        private String start;
-        private String end;
-        private String time;
-        private TimeUnit time_unit;
-        private int frequency;
-        private String[] point;
+        public Type type;
+        public String start;
+        public String end;
+        public String time;
+        public TimeUnit time_unit;
+        public int frequency;
+        public String[] point;
 
         public enum Type
         {

@@ -15,7 +15,6 @@ namespace cn.jpush.api.schedule
         public Periodical periodical;
         public Single single;
         
-
         public Trigger()
         {
             Periodical periodical = new Periodical();

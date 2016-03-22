@@ -12,12 +12,12 @@ namespace cn.jpush.api.schedule
 {
     public class Periodical
     {
-        private String start;
-        private String end;
-        private String time;
-        private String time_unit;
-        private int frequency;
-        private String[] point;
+        public String start;
+        public String end;
+        public String time;
+        public String time_unit;
+        public int frequency;
+        public String[] point;
 
 
         //init the periodical by Constructor function
