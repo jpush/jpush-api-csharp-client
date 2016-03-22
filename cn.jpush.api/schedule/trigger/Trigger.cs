@@ -63,11 +63,11 @@ namespace cn.jpush.api.schedule
         }
 
 
-
+        // "time": "2014-09-17 12:00:00"  //YYYY-MM-DD HH:MM:SS
         public Trigger setSingleTime(string time)
         {
             Preconditions.checkArgument(!String.IsNullOrEmpty(time), "The time must not be empty.");
-            Preconditions.checkArgument(StringUtil.IsTime(time), "The time must be the right format.");
+            Preconditions.checkArgument(!StringUtil.IsTime(time), "The time must be the right format.");
             this.single.setTime(time);
             return this;
         }

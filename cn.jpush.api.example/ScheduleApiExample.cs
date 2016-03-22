@@ -30,7 +30,7 @@ namespace cn.jpush.api.example
 
         public static String NAME = "Test";
         public static bool ENABLED = true;
-        public static String TIME = "2016-03-25 14:05:00";
+        public static String TIME = "2016-04-25 14:05:00";
         public static String INVALID_TIME = "2016-03-2514:05:00";
         public static String PUT_TIME = "2016-05-25 14:05:00";
         public static String PUT_NAME = "put_new_name";
@@ -93,8 +93,8 @@ namespace cn.jpush.api.example
             }
 
             SchedulePayload schedulepayloadsingle = new SchedulePayload();
-            Trigger triggersingle = new Trigger(TIME);
-            
+            Trigger triggersingle = new Trigger();
+            triggersingle.setSingleTime(TIME);
             schedulepayloadsingle.setPushPayload(pushPayload);
             schedulepayloadsingle.setTrigger(triggersingle);
             schedulepayloadsingle.setName(NAME);
@@ -190,7 +190,9 @@ namespace cn.jpush.api.example
 
             SchedulePayload putschedulepayload = new SchedulePayload();
 
-            putschedulepayload.setName(PUT_NAME);
+            putschedulepayload.setName(NAME);
+            putschedulepayload.setPushPayload(null);
+            putschedulepayload.setTrigger(null);
             //the default enabled is true,if you want to change it,you have to set it to false
             putschedulepayload.setEnabled(false);
             try
