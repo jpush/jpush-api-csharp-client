@@ -32,10 +32,10 @@ namespace cn.jpush.api.schedule
 
         public SchedulePayload()
         {
-            name = null;
-            enabled = true;
-            trigger = null;
-            push = null;
+            this.name = null;
+            this.enabled = true;
+            this.trigger = new Trigger();
+            this.push = new PushPayload();
             schedule_id = null;
             jSetting = new JsonSerializerSettings();
             jSetting.NullValueHandling = NullValueHandling.Ignore;
@@ -74,6 +74,28 @@ namespace cn.jpush.api.schedule
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
         }
 
+        public SchedulePayload setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public SchedulePayload setEnabled(Boolean enabled)
+        {
+            this.enabled = enabled;
+            return this;
+        }
+
+        public SchedulePayload setTrigger(Trigger trigger)
+        {
+            this.trigger = trigger;
+            return this;
+        }
+
+        public SchedulePayload setPushPayload(PushPayload push)
+        {
+            this.push = push;
+            return this;
+        }
 
         public string ToJson()
         {

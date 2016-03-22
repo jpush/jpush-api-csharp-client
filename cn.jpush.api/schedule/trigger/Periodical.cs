@@ -50,7 +50,7 @@ namespace cn.jpush.api.schedule
             this.point = null;
         }
 
-        public Periodical setStart(String start)
+        public Periodical  setStart(String start)
         {
             Preconditions.checkArgument(!String.IsNullOrEmpty(start), "The time must not be empty.");
             Preconditions.checkArgument(StringUtil.IsDateTime(start), "The start is not valid.");
