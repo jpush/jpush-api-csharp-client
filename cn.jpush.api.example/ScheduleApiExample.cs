@@ -65,11 +65,10 @@ namespace cn.jpush.api.example
             triggerSet.setFrequency(FREQUENCY);
             triggerSet.setPoint(POINT);
 
-
-            schedulepayloadSet.push = pushPayload;
-            schedulepayloadSet.trigger = triggerSet;
-            schedulepayloadSet.name = NAME;
-            schedulepayloadSet.enabled = ENABLED;
+            schedulepayloadSet.setPushPayload(pushPayload);
+            schedulepayloadSet.setTrigger(triggerSet);
+            schedulepayloadSet.setName(NAME);
+            schedulepayloadSet.setEnabled(ENABLED) ;
 
             try
             {
@@ -95,7 +94,7 @@ namespace cn.jpush.api.example
 
             SchedulePayload schedulepayloadsingle = new SchedulePayload();
             Trigger triggersingle = new Trigger(TIME);
-
+            
             schedulepayloadsingle.push = pushPayload;
             schedulepayloadsingle.trigger = triggersingle;
             schedulepayloadsingle.name = NAME;
@@ -126,6 +125,7 @@ namespace cn.jpush.api.example
 
 
             SchedulePayload schedulepayloadperiodical = new SchedulePayload();
+
             Trigger triggerConstructor = new Trigger(START,END, TIME_PERIODICAL, TIME_UNIT,FREQUENCY,POINT);
 
             schedulepayloadperiodical.push = pushPayload;

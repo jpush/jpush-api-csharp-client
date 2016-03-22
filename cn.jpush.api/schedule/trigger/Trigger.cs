@@ -68,75 +68,75 @@ namespace cn.jpush.api.schedule
         {
             Preconditions.checkArgument(!String.IsNullOrEmpty(start), "The time must not be empty.");
             Preconditions.checkArgument(StringUtil.IsDateTime(start), "The start is not valid.");
-            this.periodical.start = start;
+            this.periodical.setStart(start);
         }
 
         public string getStart()
         {
-            return this.periodical.start;
+            return this.periodical.getStart();
         }
 
         public Trigger setEnd(string end)
         {
             Preconditions.checkArgument(!String.IsNullOrEmpty(end), "The time must not be empty.");
             Preconditions.checkArgument(StringUtil.IsDateTime(end), "The end is not valid.");
-            this.periodical.end = end;
+            this.periodical.setEnd(end);
             return this;
         }
 
         public string getEnd()
         {
 
-            return this.periodical.end;
+            return this.periodical.getEnd();
         }
 
         public Trigger setTime(string time)
         {
             Preconditions.checkArgument(!String.IsNullOrEmpty(time), "The time must not be empty.");
             Preconditions.checkArgument(StringUtil.IsTime(time), "The time must be the right format.");
-            this.periodical.time = time;
+            this.periodical.setTime(time) ;
             return this;
         }
 
         public string getTime()
         {
-            return this.periodical.time;
+            return this.periodical.getTime();
         }
 
         public Trigger setTime_unit(string time_unit)
         {
-            this.periodical.time_unit = time_unit;
+            this.periodical.setTime_unit(time_unit);
             return this;
         }
 
         public string getTime_unit()
         {
-            return this.periodical.time_unit;
+            return this.periodical.getTime_unit();
 
         }
 
         public Trigger setFrequency(int frequency)
         {
             Preconditions.checkArgument(StringUtil.IsNumber(frequency.ToString()), "The frequency must be number.");
-            this.periodical.frequency = frequency;
+            this.periodical.setFrequency(frequency);
             return this;
         }
 
         public int getFrequency()
         {
             
-            return this.periodical.frequency;
+            return this.periodical.getFrequency();
         }
 
         public Trigger setPoint(String[] point)
         {
-            this.periodical.point = point;
+            this.periodical.setPoint(point);
             return this;
         }
 
         public String[] getPoint()
         {
-            return this.periodical.point;
+            return this.periodical.getPoint();
         }
 
     }
