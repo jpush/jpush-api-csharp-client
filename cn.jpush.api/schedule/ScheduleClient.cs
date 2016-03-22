@@ -91,6 +91,16 @@ namespace cn.jpush.api.schedule
         {
             Preconditions.checkArgument(schedulepayload != null, "schedulepayload should not be empty");
             Preconditions.checkArgument(schedule_id != null, "schedule_id should not be empty");
+
+            if (schedulepayload.push.audience == null || schedulepayload.push.platform == null) {
+                schedulepayload.push = null;
+            }
+            
+            if(schedulepayload.trigger.periodical.time==null && schedulepayload.trigger.single.time == null)
+            {
+                schedulepayload.trigger = null;
+            }
+
             String schedulepayloadJson = schedulepayload.ToJson();
             Console.WriteLine(schedulepayloadJson);
             return putSchedule(schedulepayloadJson,schedule_id);

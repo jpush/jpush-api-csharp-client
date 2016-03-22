@@ -57,6 +57,7 @@ namespace cn.jpush.api.schedule
             jSetting = new JsonSerializerSettings();
             jSetting.NullValueHandling = NullValueHandling.Ignore;
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
+            
         }
 
         public SchedulePayload(String name, Boolean enabled, Trigger trigger, PushPayload push)

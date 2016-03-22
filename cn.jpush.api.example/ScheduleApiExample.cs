@@ -189,12 +189,13 @@ namespace cn.jpush.api.example
             //put the name
 
             SchedulePayload putschedulepayload = new SchedulePayload();
-
+            
             putschedulepayload.setName(NAME);
+            /*
             putschedulepayload.setPushPayload(null);
             putschedulepayload.setTrigger(null);
+            */
             //the default enabled is true,if you want to change it,you have to set it to false
-            putschedulepayload.setEnabled(false);
             try
             {
                 var result = scheduleclient.putSchedule(putschedulepayload, schedule_id);
