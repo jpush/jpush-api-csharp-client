@@ -63,6 +63,35 @@ namespace cn.jpush.api.schedule
         }
 
 
+
+        public Trigger setSingleTime(string time)
+        {
+            Preconditions.checkArgument(!String.IsNullOrEmpty(time), "The time must not be empty.");
+            Preconditions.checkArgument(StringUtil.IsTime(time), "The time must be the right format.");
+            this.single.setTime(time);
+            return this;
+        }
+
+        public string getSingleTime()
+        {
+            return this.single.getTime();
+        }
+
+
+
+        public Trigger setTime(string time)
+        {
+            Preconditions.checkArgument(!String.IsNullOrEmpty(time), "The time must not be empty.");
+            Preconditions.checkArgument(StringUtil.IsTime(time), "The time must be the right format.");
+            this.periodical.setTime(time);
+            return this;
+        }
+
+        public string getTime()
+        {
+            return this.periodical.getTime();
+        }
+
         public void setStart(String start)
         {
             Preconditions.checkArgument(!String.IsNullOrEmpty(start), "The time must not be empty.");
@@ -87,19 +116,6 @@ namespace cn.jpush.api.schedule
         {
 
             return this.periodical.getEnd();
-        }
-
-        public Trigger setTime(string time)
-        {
-            Preconditions.checkArgument(!String.IsNullOrEmpty(time), "The time must not be empty.");
-            Preconditions.checkArgument(StringUtil.IsTime(time), "The time must be the right format.");
-            this.periodical.setTime(time) ;
-            return this;
-        }
-
-        public string getTime()
-        {
-            return this.periodical.getTime();
         }
 
         public Trigger setTime_unit(string time_unit)
