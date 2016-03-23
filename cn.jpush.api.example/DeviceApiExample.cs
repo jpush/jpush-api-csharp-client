@@ -28,8 +28,9 @@ namespace cn.jpush.api.example
         public static HashSet<String> TAG_HASHSET =new HashSet<string> { "tag_api" };
         public static HashSet<String> TAG_HASHSET_REMOVE = new HashSet<string> { "tag1", "tag" };
         public static String ALIAS = "alias";
-        public static string MOBILE = "18888888888";
-        public static string INVALID_MOBILE = "18888888888";
+        //your test phone number
+        public static string MOBILE = "18588232140";
+        public static string INVALID_MOBILE = "18588232140";
         public static String app_key = "6be9204c30b9473e87bad4dc";
         public static String master_secret = "8aae478411e89f7682ed5af6";
 

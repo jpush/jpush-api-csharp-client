@@ -96,17 +96,6 @@ namespace cn.jpush.api.push.mode
         /// </summary>
         /// <param name="smsContent"></param>
         /// <returns></returns>
-        /*
-        public static PushPayload SmsMessageAll(String smsContent)
-        {
-            return new PushPayload(Platform.all(),
-                                   Audience.all(),
-                                   null,
-                                   null,
-                                   SmsMessage.content(smsContent),
-                                   new Options());
-        }
-        */
 
         public static PushPayload FromJSON(String payloadString)
         {
