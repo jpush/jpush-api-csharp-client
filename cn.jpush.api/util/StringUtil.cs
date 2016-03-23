@@ -98,22 +98,24 @@ namespace cn.jpush.api.util
         {
             Boolean istime_unit = new Boolean();
 
-            if (time_unit.CompareTo("day") == 0)
+            if (String.Equals(time_unit, "day", StringComparison.CurrentCultureIgnoreCase))
+            {
+                istime_unit = true;
+            }
+            else if (String.Equals(time_unit, "week", StringComparison.CurrentCultureIgnoreCase))
+            {
+                istime_unit = true;
+            }
+            else if (String.Equals(time_unit, "month", StringComparison.CurrentCultureIgnoreCase))
             {
                 istime_unit = true;
             }
 
-            if (time_unit.CompareTo("week") == 0)
+            else
             {
-                istime_unit = true;
-            }
+                istime_unit = false;
+            } 
 
-            if (time_unit.CompareTo("month") == 0)
-            {
-                istime_unit = true;
-            }
-
-            istime_unit = false;
             return istime_unit;
 
         }

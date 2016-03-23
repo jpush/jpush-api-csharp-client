@@ -21,9 +21,7 @@ namespace cn.jpush.api.schedule
         }
         public String getName()
         {
-
           return name;
-
         }
     }
 }

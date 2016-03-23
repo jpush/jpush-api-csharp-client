@@ -61,6 +61,8 @@ namespace cn.jpush.api.schedule
             Preconditions.checkArgument(StringUtil.IsDateTime(start), "The start is not valid.");
             Preconditions.checkArgument(StringUtil.IsDateTime(end), "The end is not valid.");
             Preconditions.checkArgument(StringUtil.IsTime(time), "The time must be the right format.");
+            Preconditions.checkArgument((0<frequency && frequency< 101), "The frequency must be less than 100.");
+            Preconditions.checkArgument(StringUtil.IsTimeunit(time_unit), "The time_unit must be the right format.");
             this.single = null;
             this.periodical = new Periodical(start, end, time, time_unit, frequency, point);
 
@@ -142,6 +144,7 @@ namespace cn.jpush.api.schedule
         public TriggerPayload setFrequency(int frequency)
         {
             Preconditions.checkArgument(StringUtil.IsNumber(frequency.ToString()), "The frequency must be number.");
+            Preconditions.checkArgument((0 < frequency && frequency < 101), "The name must be the right format.");
             this.periodical.setFrequency(frequency);
             this.single = null;
             return this;
@@ -149,7 +152,6 @@ namespace cn.jpush.api.schedule
 
         public int getFrequency()
         {
-
             return this.periodical.getFrequency();
         }
 

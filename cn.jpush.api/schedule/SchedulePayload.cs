@@ -51,7 +51,7 @@ namespace cn.jpush.api.schedule
             Debug.Assert(trigger != null);
             Debug.Assert(push != null);
             this.name = name.getName();
-            this.enabled = enabled.getEnable();
+            this.enabled = true;
             this.trigger = trigger;
             this.push = push;
             jSetting = new JsonSerializerSettings();
@@ -77,6 +77,7 @@ namespace cn.jpush.api.schedule
         }
 
         public SchedulePayload setName(String name) {
+            Preconditions.checkArgument(StringUtil.IsValidName(name), "The name must be the right format.");
             this.name = name;
             return this;
         }
@@ -103,17 +104,16 @@ namespace cn.jpush.api.schedule
         {
             jSetting = new JsonSerializerSettings();
             jSetting.NullValueHandling = NullValueHandling.Ignore;
-            jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
-            
+            jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;       
             return JsonConvert.SerializeObject(this, jSetting);
         }
         public SchedulePayload Check()
         {
-            
             Preconditions.checkArgument(!(null == push), "pushpayload should be set.");
-            Preconditions.checkArgument(!(null == name), "name should be set at least one.");
+            Preconditions.checkArgument(!(null == name), "name should be set.");
             Preconditions.checkArgument(enabled, "enabled should be true.");
             Preconditions.checkArgument(!(null == trigger), "trigger should be set.");
+            Preconditions.checkArgument(StringUtil.IsValidName(name), "The name must be the right format.");
             return this;
         }
 
