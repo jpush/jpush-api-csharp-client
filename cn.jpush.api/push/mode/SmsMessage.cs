@@ -23,6 +23,7 @@ namespace cn.jpush.api.push.mode
         private SmsMessage(String content)
         {
             Preconditions.checkArgument(!(content == null), "sms_message Content should be set");
+            Preconditions.checkArgument((this.content.Length <= 480), "sms_message's length should be less than 480 bytes");
             this.content = content;
         }
         private SmsMessage(String content, String title)
@@ -46,6 +47,7 @@ namespace cn.jpush.api.push.mode
         public SmsMessage Check()
         {
             Preconditions.checkArgument(!(content == null), "sms_message Content should be set");
+            Preconditions.checkArgument((this.content.Length<=480), "sms_message's length should be less than 480 bytes");
             return this;
         }
     }
