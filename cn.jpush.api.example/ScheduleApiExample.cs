@@ -43,7 +43,7 @@ namespace cn.jpush.api.example
         public static String INVALID_TIME_PERIODICAL = "4:00:00";
         public static String TIME_UNIT = "WEEK";
         public static int FREQUENCY = 1;
-        public static String[] POINT =new String[] { "WED", "FRI" };
+        public static String[] POINT =new String[]{ "WED", "FRI"};
 
         public static int PAGEID = 1;
         public static String schedule_id ;
@@ -52,7 +52,12 @@ namespace cn.jpush.api.example
         public static String master_secret = "8aae478411e89f7682ed5af6";
 
         static void Main(string[] args) {
-            PushPayload pushPayload = JPushApiExample.PushObject_All_All_Alert();
+            //init a pushpayload
+            PushPayload pushPayload = new PushPayload();
+            pushPayload.platform = Platform.all();
+            pushPayload.audience = Audience.all();
+            pushPayload.notification = new Notification().setAlert(ALERT);
+
             ScheduleClient scheduleclient = new ScheduleClient(app_key, master_secret);
 
             SchedulePayload schedulepayloadSet = new SchedulePayload();
