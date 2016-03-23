@@ -62,7 +62,6 @@ namespace cn.jpush.api.example
 
             SchedulePayload schedulepayloadSet = new SchedulePayload();
             TriggerPayload triggerSet = new TriggerPayload();
-
             triggerSet.setStart(START);
             triggerSet.setEnd(END);
             triggerSet.setTime(TIME_PERIODICAL);

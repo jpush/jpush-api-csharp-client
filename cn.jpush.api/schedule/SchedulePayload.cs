@@ -114,6 +114,7 @@ namespace cn.jpush.api.schedule
             Preconditions.checkArgument(enabled, "enabled should be true.");
             Preconditions.checkArgument(!(null == trigger), "trigger should be set.");
             Preconditions.checkArgument(StringUtil.IsValidName(name), "The name must be the right format.");
+            Preconditions.checkArgument((name.Length < 255), "The name must be less than 255 bytes.");
             return this;
         }
 
