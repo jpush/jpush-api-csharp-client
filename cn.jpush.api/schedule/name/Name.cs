@@ -16,6 +16,7 @@ namespace cn.jpush.api.schedule
 
         public void setName(String name)
         {
+            Preconditions.checkArgument(!String.IsNullOrEmpty(name), "The name must not be empty.");
             Preconditions.checkArgument(StringUtil.IsValidName(name), "The name must be the right format.");
             this.name = name;
         }

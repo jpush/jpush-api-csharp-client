@@ -127,7 +127,5 @@ namespace cn.jpush.api.util
             return isname;
 
         }
-
-
     }
 }

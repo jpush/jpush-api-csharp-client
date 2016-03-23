@@ -98,6 +98,8 @@ namespace cn.jpush.api.schedule
 
         public Periodical setTime_unit(string time_unit)
         {
+            Preconditions.checkArgument(!String.IsNullOrEmpty(time_unit), "The time_unit must not be empty.");
+            Preconditions.checkArgument(StringUtil.IsTimeunit(time_unit), "The time_unit must be the right format.");
             this.time_unit = time_unit;
             return this;
         }
@@ -110,13 +112,16 @@ namespace cn.jpush.api.schedule
 
         public Periodical setFrequency(int frequency)
         {
+
+            Preconditions.checkArgument(StringUtil.IsNumber(frequency.ToString()), "The frequency must be number.");
+            Preconditions.checkArgument((0 < frequency && frequency < 101), "The frequency must be less than 100.");       
             this.frequency = frequency;
             return this;
         }
 
         public int getFrequency()
         {
-            Preconditions.checkArgument(StringUtil.IsNumber(frequency.ToString()), "The frequency must be number.");
+            
             return this.frequency;
         }
 

@@ -53,8 +53,8 @@ namespace cn.jpush.api.schedule
         public TriggerPayload(String start, String end, String time, String time_unit, int frequency, String[] point)
         {
 
-            Preconditions.checkArgument(!String.IsNullOrEmpty(start), "The time must not be empty.");
-            Preconditions.checkArgument(!String.IsNullOrEmpty(end), "The time must not be empty.");
+            Preconditions.checkArgument(!String.IsNullOrEmpty(start), "The start must not be empty.");
+            Preconditions.checkArgument(!String.IsNullOrEmpty(end), "The end must not be empty.");
             Preconditions.checkArgument(!String.IsNullOrEmpty(time), "The time must not be empty.");
             Preconditions.checkArgument(!String.IsNullOrEmpty(time_unit), "The time_unit must not be empty.");
             Preconditions.checkArgument(StringUtil.IsNumber(frequency.ToString()), "The frequency must be number.");

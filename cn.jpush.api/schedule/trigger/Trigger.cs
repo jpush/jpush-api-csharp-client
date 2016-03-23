@@ -33,7 +33,6 @@ namespace cn.jpush.api.schedule
 
         public Trigger(Periodical periodical)
         {
-
             this.periodical = periodical;
             single = null;
             throw new System.NotImplementedException();
@@ -51,13 +50,13 @@ namespace cn.jpush.api.schedule
         public Trigger(String start, String end, String time, String time_unit, int frequency, String[] point)
         {
 
-            Preconditions.checkArgument(!String.IsNullOrEmpty(start), "The time must not be empty.");
-            Preconditions.checkArgument(!String.IsNullOrEmpty(end), "The time must not be empty.");
+            Preconditions.checkArgument(!String.IsNullOrEmpty(start), "The start time must not be empty.");
+            Preconditions.checkArgument(!String.IsNullOrEmpty(end), "The end time must not be empty.");
             Preconditions.checkArgument(!String.IsNullOrEmpty(time), "The time must not be empty.");
             Preconditions.checkArgument(!String.IsNullOrEmpty(time_unit), "The time_unit must not be empty.");
             Preconditions.checkArgument(StringUtil.IsNumber(frequency.ToString()), "The frequency must be number.");
-            Preconditions.checkArgument(StringUtil.IsDateTime(start), "The start is not valid.");
-            Preconditions.checkArgument(StringUtil.IsDateTime(end), "The end is not valid.");
+            Preconditions.checkArgument(StringUtil.IsDateTime(start), "The start time is not valid.");
+            Preconditions.checkArgument(StringUtil.IsDateTime(end), "The end time is not valid.");
             Preconditions.checkArgument(StringUtil.IsTime(time), "The time must be the right format.");
             this.periodical = new Periodical(start, end, time, time_unit, frequency, point);
         }
@@ -76,8 +75,6 @@ namespace cn.jpush.api.schedule
         {
             return this.single.getTime();
         }
-
-
 
         public Trigger setTime(string time)
         {
@@ -120,6 +117,8 @@ namespace cn.jpush.api.schedule
 
         public Trigger setTime_unit(string time_unit)
         {
+            Preconditions.checkArgument(!String.IsNullOrEmpty(time_unit), "The time_unit must not be empty.");
+            Preconditions.checkArgument(StringUtil.IsTimeunit(time_unit), "The time_unit must be the right format.");
             this.periodical.setTime_unit(time_unit);
             return this;
         }
@@ -133,13 +132,13 @@ namespace cn.jpush.api.schedule
         public Trigger setFrequency(int frequency)
         {
             Preconditions.checkArgument(StringUtil.IsNumber(frequency.ToString()), "The frequency must be number.");
+            Preconditions.checkArgument((0 < frequency && frequency < 101), "The frequency must be less than 100.");
             this.periodical.setFrequency(frequency);
             return this;
         }
 
         public int getFrequency()
-        {
-            
+        {      
             return this.periodical.getFrequency();
         }
 
