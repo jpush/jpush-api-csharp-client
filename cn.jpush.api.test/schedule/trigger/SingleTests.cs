@@ -17,8 +17,7 @@ namespace cn.jpush.api.schedule.Tests
         public void setVoidTimeTest()
         {
             Single single = new Single();
-            single.setTime(" ");
-            
+            single.setTime("");
         }
 
         [TestMethod()]

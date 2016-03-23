@@ -118,6 +118,14 @@ namespace cn.jpush.api.util
 
         }
 
+        public static Boolean IsValidName(String name)
+        {
+            Boolean isname = new Boolean();
+            isname = System.Text.RegularExpressions.Regex.IsMatch(name, @"^[a-zA-Z0-9_\u4e00-\u9fa5]+$");
+            return isname;
+
+        }
+
 
     }
 }
