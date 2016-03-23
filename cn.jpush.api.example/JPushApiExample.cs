@@ -193,8 +193,8 @@ namespace cn.jpush.api.example
             pushPayload.audience = Audience.all();
             pushPayload.notification = new Notification().setAlert(ALERT);
             SmsMessage sms_message = new SmsMessage();
-            sms_message.content = SMSMESSAGE;
-            sms_message.delay_time = DELAY_TIME;
+            sms_message.setContent(SMSMESSAGE);
+            sms_message.setDelayTime(DELAY_TIME);
             pushPayload.sms_message = sms_message;
             return pushPayload;
         }
