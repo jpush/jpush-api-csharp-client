@@ -56,8 +56,8 @@ namespace cn.jpush.api.example
             ScheduleClient scheduleclient = new ScheduleClient(app_key, master_secret);
 
             SchedulePayload schedulepayloadSet = new SchedulePayload();
-            Trigger triggerSet = new Trigger();
-            
+            TriggerPayload triggerSet = new TriggerPayload();
+
             triggerSet.setStart(START);
             triggerSet.setEnd(END);
             triggerSet.setTime(TIME_PERIODICAL);
@@ -93,7 +93,7 @@ namespace cn.jpush.api.example
             }
 
             SchedulePayload schedulepayloadsingle = new SchedulePayload();
-            Trigger triggersingle = new Trigger();
+            TriggerPayload triggersingle = new TriggerPayload();
             triggersingle.setSingleTime(TIME);
             schedulepayloadsingle.setPushPayload(pushPayload);
             schedulepayloadsingle.setTrigger(triggersingle);
@@ -126,7 +126,7 @@ namespace cn.jpush.api.example
 
             SchedulePayload schedulepayloadperiodical = new SchedulePayload();
 
-            Trigger triggerConstructor = new Trigger(START,END, TIME_PERIODICAL, TIME_UNIT,FREQUENCY,POINT);
+            TriggerPayload triggerConstructor = new TriggerPayload(START,END, TIME_PERIODICAL, TIME_UNIT,FREQUENCY,POINT);
 
             schedulepayloadperiodical.setPushPayload(pushPayload);
             schedulepayloadperiodical.setTrigger(triggerConstructor);
@@ -239,7 +239,6 @@ namespace cn.jpush.api.example
 
 
         }
-
 
     }
 }

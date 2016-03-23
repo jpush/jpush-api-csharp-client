@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 using cn.jpush.api.util;
+using Newtonsoft.Json;
 
 namespace cn.jpush.api.schedule
 {
     public class Single
     {
-        public string time;
+        [JsonProperty]
+        private string time;
 
         public void setTime(string time)
         {
@@ -23,5 +25,8 @@ namespace cn.jpush.api.schedule
         {
             return this.time;
         }
+
+
+
     }
 }

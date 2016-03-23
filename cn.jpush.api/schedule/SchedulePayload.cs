@@ -28,14 +28,14 @@ namespace cn.jpush.api.schedule
         public PushPayload push { get; set; }
         public String name { get; set; }
         public bool enabled { get; set; }
-        public Trigger trigger { get; set; }
+        public TriggerPayload trigger { get; set; }
         public String schedule_id;
 
         public SchedulePayload()
         {
             this.name = null;
             this.enabled = true;
-            this.trigger = new Trigger();
+            this.trigger = new TriggerPayload();
             this.push = new PushPayload();
             schedule_id = null;
             jSetting = new JsonSerializerSettings();
@@ -43,7 +43,7 @@ namespace cn.jpush.api.schedule
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
         }
 
-        public SchedulePayload(Name name, Enabled enabled, Trigger trigger, PushPayload push)
+        public SchedulePayload(Name name, Enabled enabled, TriggerPayload trigger, PushPayload push)
         {
             schedule_id = null;
             Debug.Assert(name != null);
@@ -60,7 +60,7 @@ namespace cn.jpush.api.schedule
             
         }
 
-        public SchedulePayload(String name, Boolean enabled, Trigger trigger, PushPayload push)
+        public SchedulePayload(String name, Boolean enabled, TriggerPayload trigger, PushPayload push)
         {
             schedule_id = null;
             Debug.Assert(name != null);
@@ -87,7 +87,7 @@ namespace cn.jpush.api.schedule
             return this;
         }
 
-        public SchedulePayload setTrigger(Trigger trigger)
+        public SchedulePayload setTrigger(TriggerPayload trigger)
         {
             this.trigger = trigger;
             return this;
@@ -104,10 +104,12 @@ namespace cn.jpush.api.schedule
             jSetting = new JsonSerializerSettings();
             jSetting.NullValueHandling = NullValueHandling.Ignore;
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
+            
             return JsonConvert.SerializeObject(this, jSetting);
         }
         public SchedulePayload Check()
         {
+            
             Preconditions.checkArgument(!(null == push), "pushpayload should be set.");
             Preconditions.checkArgument(!(null == name), "name should be set at least one.");
             Preconditions.checkArgument(enabled, "enabled should be true.");

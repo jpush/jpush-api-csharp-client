@@ -12,12 +12,18 @@ namespace cn.jpush.api.schedule
 {
     public class Periodical
     {
-        public String start;
-        public String end;
-        public String time;
-        public String time_unit;
-        public int frequency;
-        public String[] point;
+        [JsonProperty]
+        private String start;
+        [JsonProperty]
+        private String end;
+        [JsonProperty]
+        private String time;
+        [JsonProperty]
+        private String time_unit;
+        [JsonProperty]
+        private int frequency;
+        [JsonProperty]
+        private String[] point;
 
 
         //init the periodical by Constructor function

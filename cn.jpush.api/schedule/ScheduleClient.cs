@@ -96,7 +96,7 @@ namespace cn.jpush.api.schedule
                 schedulepayload.push = null;
             }
             
-            if(schedulepayload.trigger.periodical.time==null && schedulepayload.trigger.single.time == null)
+            if(schedulepayload.trigger.getTime()==null && schedulepayload.trigger.getSingleTime() == null)
             {
                 schedulepayload.trigger = null;
             }
