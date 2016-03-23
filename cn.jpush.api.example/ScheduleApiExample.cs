@@ -41,9 +41,9 @@ namespace cn.jpush.api.example
         public static String END = "2016-05-12 12:30:00";
         public static String TIME_PERIODICAL = "14:00:00";
         public static String INVALID_TIME_PERIODICAL = "4:00:00";
-        public static String TIME_UNIT = "day";
+        public static String TIME_UNIT = "WEEK";
         public static int FREQUENCY = 1;
-        public static String[] POINT =new String[] { };
+        public static String[] POINT =new String[] { "WED", "FRI" };
 
         public static int PAGEID = 1;
         public static String schedule_id ;
