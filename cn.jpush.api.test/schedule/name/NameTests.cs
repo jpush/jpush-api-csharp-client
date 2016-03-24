@@ -29,12 +29,11 @@ namespace cn.jpush.api.schedule.Tests
 
 
         [TestMethod()]
-        [ExpectedException(typeof(System.ArgumentException))]
         public void getValidNameTest()
         {
             Name name = new Name();
             name.setName("test");
-            Assert.AreEqual(name.getName(), "test");
+            Assert.AreEqual(name.getName(),"test");
         }
     }
 }

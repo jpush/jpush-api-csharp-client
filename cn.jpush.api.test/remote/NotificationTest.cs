@@ -76,8 +76,8 @@ namespace cn.jpush.api.test.remote
             payload.notification = new Notification()
                                    .setAlert(ALERT)
                                    .setAndroid(new AndroidNotification()
-                                                 .AddExtra("key1", "value1")
-                                                 .AddExtra("key2", 222));
+                                    .AddExtra("key1", "value1")
+                                    .AddExtra("key2", 222));
                                                   
             var result = _client.SendPush(payload);
             Assert.IsTrue(result.isResultOK());

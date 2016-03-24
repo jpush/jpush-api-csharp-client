@@ -13,8 +13,10 @@ namespace cn.jpush.api.test
          public const  String ALERT = "JPush Test - alert";
          public const  String MSG_CONTENT = "JPush Test - msgContent";
 
-         public const String REGISTRATION_ID1 = "061c84f7bef";
-         public const String REGISTRATION_ID2 = "0619cfd4989";
+         public const String MOBILE = "18588232140";
+
+         public const String REGISTRATION_ID1 = "1507bfd3f7c466c355c";
+         public const String REGISTRATION_ID2 = "1a0018970aa5d80f3b8";
 
 
 

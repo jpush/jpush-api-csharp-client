@@ -100,6 +100,49 @@ namespace cn.jpush.api.device
             return DefaultResult.fromResponse(result);
        }
 
+
+        //updateDeviceTagAlias and the phone number
+        public DefaultResult updateDeviceTagAlias(String registrationId,
+                                                   String alias,
+                                                   HashSet<String> tagsToAdd,
+                                                   HashSet<String> tagsToRemove)
+        {
+            String url = HOST_NAME_SSL + DEVICES_PATH + "/" + registrationId;
+
+            JObject top = new JObject();
+            if (null != alias)
+            {
+                top.Add("alias", alias);
+            }
+
+            JObject tagObject = new JObject();
+            if (tagsToAdd != null)
+            {
+                JArray tagsAdd = JArray.FromObject(tagsToAdd);
+                if (tagsAdd.Count > 0)
+                {
+                    tagObject.Add("add", tagsAdd);
+                }
+            }
+            if (tagsToRemove != null)
+            {
+
+                JArray tagsRemove = JArray.FromObject(tagsToRemove);
+                if (tagsRemove.Count > 0)
+                {
+                    tagObject.Add("remove", tagsRemove);
+                }
+            }
+
+            if (tagObject.Count > 0)
+            {
+                top.Add("tags", tagObject);
+            }
+            ResponseWrapper result = sendPost(url, Authorization(), top.ToString());
+            return DefaultResult.fromResponse(result);
+        }
+
+
         //GET /v3/tags/
         public TagListResult getTagList() 
         {

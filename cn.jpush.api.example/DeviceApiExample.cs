@@ -25,15 +25,26 @@ namespace cn.jpush.api.example
         
         public static String REGISTRATION_ID = "1507bfd3f7c466c355c";
         public static String TAG = "tag_api";
-        public static HashSet<String> TAG_HASHSET =new HashSet<string> { "tag_api" };
-        public static HashSet<String> TAG_HASHSET_REMOVE = new HashSet<string> { "tag1", "tag" };
-        public static String ALIAS = "alias";
+        public static HashSet<String> TAG_HASHSET =new HashSet<string> { TAG1, TAG2, TAG_ALL, TAG_NO };
+        public static HashSet<String> TAG_HASHSET_REMOVE = new HashSet<string> { TAG_NO };
+        public static String ALIAS = ALIAS1;
         //your test phone number
         public static string MOBILE = "18888888888";
         public static string INVALID_MOBILE = "18888888888";
         public static String app_key = "6be9204c30b9473e87bad4dc";
         public static String master_secret = "8aae478411e89f7682ed5af6";
 
+
+        public const String TAG1 = "audience_tag1";
+        public const String TAG2 = "audience_tag2";
+        public const String TAG_ALL = "audience_tag_all";
+        public const String TAG_NO = "audience_tag_no";
+        public const String ALIAS1 = "audience_alias1";
+        public const String ALIAS2 = "audience_alias2";
+        public const String ALIAS_NO = "audience_alias_no";
+
+        public const String REGISTRATION_ID1 = "1507bfd3f7c466c355c";
+        public const String REGISTRATION_ID2 = "1a0018970aa5d80f3b8";
 
         static void Main(string[] args)
                 {
@@ -96,8 +107,6 @@ namespace cn.jpush.api.example
                         //如需查询上次推送结果执行下面的代码
                         Console.WriteLine(result);
                         //如需查询某个messageid的推送结果执行下面的代码
-
-
                     }
                     catch (APIRequestException e)
                     {
@@ -110,14 +119,15 @@ namespace cn.jpush.api.example
                     {
                         Console.WriteLine(e.Message);
                     }
-
+                
                     try
                     {
                     var result = client.updateDeviceTagAlias(REGISTRATION_ID,
                                                            ALIAS,
                                                            MOBILE,
                                                            TAG_HASHSET,
-                                                           TAG_HASHSET);
+                                                           TAG_HASHSET_REMOVE
+                                                           );
                         //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
                         System.Threading.Thread.Sleep(10000);
                         //如需查询上次推送结果执行下面的代码
@@ -168,6 +178,32 @@ namespace cn.jpush.api.example
                                                        ALIAS,
                                                        MOBILE,
                                                        TAG_HASHSET,
+                                                       TAG_HASHSET_REMOVE);
+                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+                System.Threading.Thread.Sleep(10000);
+                //如需查询上次推送结果执行下面的代码
+                Console.WriteLine(result);
+                //如需查询某个messageid的推送结果执行下面的代码
+
+            }
+            catch (APIRequestException e)
+            {
+                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+                Console.WriteLine("HTTP Status: " + e.Status);
+                Console.WriteLine("Error Code: " + e.ErrorCode);
+                Console.WriteLine("Error Message: " + e.ErrorCode);
+            }
+            catch (APIConnectionException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            try
+            {
+                var result = client.updateDeviceTagAlias(REGISTRATION_ID2,
+                                                       ALIAS,
+                                                       MOBILE,
+                                                       TAG_HASHSET,
                                                        TAG_HASHSET);
                 //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
                 System.Threading.Thread.Sleep(10000);
@@ -188,6 +224,7 @@ namespace cn.jpush.api.example
             {
                 Console.WriteLine(e.Message);
             }
+
             //get the device tag alias mobile
             try
             {

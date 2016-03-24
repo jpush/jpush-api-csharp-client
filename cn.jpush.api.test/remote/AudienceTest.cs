@@ -28,10 +28,10 @@ namespace cn.jpush.api.test.remote
             tags2.Add(TAG_ALL);
     	
     	    JPushClient jpushClient = new JPushClient(APP_KEY,MASTER_SECRET);
-    	    var result = jpushClient.updateDeviceTagAlias(REGISTRATION_ID1, ALIAS1, null,tags1, null);
+    	    var result = jpushClient.updateDeviceTagAlias(REGISTRATION_ID1, ALIAS1, MOBILE, tags1, null);
     	    Assert.IsTrue(result.isResultOK());
     	
-    	    result = jpushClient.updateDeviceTagAlias(REGISTRATION_ID2, ALIAS2,null, tags2, null);
+    	    result = jpushClient.updateDeviceTagAlias(REGISTRATION_ID2, ALIAS2, MOBILE, tags2, null);
     	    Assert.IsTrue(result.isResultOK());
 
         }
@@ -71,7 +71,7 @@ namespace cn.jpush.api.test.remote
             payload.platform = Platform.all();
             payload.audience = Audience.s_alias(ALIAS1);
             payload.notification = new Notification().setAlert(ALERT);
-
+            
             var result = _client.SendPush(payload);
             Assert.IsTrue(result.isResultOK());
          }

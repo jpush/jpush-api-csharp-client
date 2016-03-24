@@ -12,7 +12,7 @@ namespace cn.jpush.api.schedule.Tests
     public class TriggerPayloadTests
     {
         [TestMethod()]
-        [ExpectedException(typeof(System.ArgumentException))]
+        [ExpectedException(typeof(System.NotImplementedException))]
         public void TriggerPayloadSingleTimeNullTest()
         {
             Single single = new Single();
@@ -50,7 +50,7 @@ namespace cn.jpush.api.schedule.Tests
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(System.ArgumentException))]
+        [ExpectedException(typeof(System.NotImplementedException))]
         public void TriggerPayloadPeriodicalNullTest()
         {
             Periodical periodical = new Periodical();

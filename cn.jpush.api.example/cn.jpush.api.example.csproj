@@ -47,7 +47,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>cn.jpush.api.example.JPushApiExample</StartupObject>
+    <StartupObject>cn.jpush.api.example.DeviceApiExample</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
