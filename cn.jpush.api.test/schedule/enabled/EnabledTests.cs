@@ -13,7 +13,6 @@ namespace cn.jpush.api.schedule.Tests
     {
 
         [TestMethod()]
-        [ExpectedException(typeof(System.ArgumentException))]
         public void setNullEnableTest()
         {
             Enabled enabled = new Enabled();

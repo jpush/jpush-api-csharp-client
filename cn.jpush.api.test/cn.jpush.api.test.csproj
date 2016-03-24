@@ -83,6 +83,7 @@
     <Compile Include="schedule\enabled\EnabledTests.cs" />
     <Compile Include="schedule\name\NameTests.cs" />
     <Compile Include="schedule\trigger\SingleTests.cs" />
+    <Compile Include="schedule\trigger\TriggerPayloadTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\cn.jpush.api\cn.jpush.api.csproj">
