@@ -27,6 +27,7 @@ namespace cn.jpush.api.device
         }
 
         // GET /v3/devices/{registration_id}
+
         public TagAliasResult getDeviceTagAlias(String registrationId)
         {
             String url = HOST_NAME_SSL + DEVICES_PATH + "/" + registrationId;
@@ -37,45 +38,27 @@ namespace cn.jpush.api.device
 
         }
 
-     //POST /v3/devices/{registration_id}
-    public DefaultResult updateDeviceTagAlias(String registrationId, bool clearAlias, bool clearTag) 
-        {
-            Preconditions.checkArgument(clearAlias || clearTag, "It is not meaningful to do nothing.");
-    	
-            String url = HOST_NAME_SSL + DEVICES_PATH + "/" + registrationId;
-
-            JObject top = new JObject();
-            if (clearAlias) {
-                top.Add("alias", "");
-            }
-            if (clearTag) {
-                top.Add("tags", "");
-            }
-            ResponseWrapper result = sendPost(url, Authorization(), top.ToString());
-
-            return DefaultResult.fromResponse(result);
-        }
-
         //updateDeviceTagAlias and the phone number
-        public DefaultResult updateDeviceTagAlias(String registrationId, 
+        public DefaultResult updateDevice(String registrationId,
                                                    String alias,
-                                                   string mobile,
+                                                   String mobile,
                                                    HashSet<String> tagsToAdd,
-                                                   HashSet<String> tagsToRemove) 
-         {
+                                                   HashSet<String> tagsToRemove)
+        {
             String url = HOST_NAME_SSL + DEVICES_PATH + "/" + registrationId;
 
             JObject top = new JObject();
-            if (null != alias) {
+            if (null != alias)
+            {
                 top.Add("alias", alias);
             }
-            if (null != alias)
+            if (null != mobile)
             {
                 top.Add("mobile", mobile);
             }
 
             JObject tagObject = new JObject();
-            if (tagsToAdd!=null)
+            if (tagsToAdd != null)
             {
                 JArray tagsAdd = JArray.FromObject(tagsToAdd);
                 if (tagsAdd.Count > 0)
@@ -92,20 +75,20 @@ namespace cn.jpush.api.device
                     tagObject.Add("remove", tagsRemove);
                 }
             }
-        
-            if (tagObject.Count > 0) {
+
+            if (tagObject.Count > 0)
+            {
                 top.Add("tags", tagObject);
             }
             ResponseWrapper result = sendPost(url, Authorization(), top.ToString());
             return DefaultResult.fromResponse(result);
-       }
-
+        }
 
         //updateDeviceTagAlias and the phone number
         public DefaultResult updateDeviceTagAlias(String registrationId,
-                                                   String alias,
-                                                   HashSet<String> tagsToAdd,
-                                                   HashSet<String> tagsToRemove)
+                                                  String alias,
+                                                  HashSet<String> tagsToAdd,
+                                                  HashSet<String> tagsToRemove)
         {
             String url = HOST_NAME_SSL + DEVICES_PATH + "/" + registrationId;
 
@@ -139,9 +122,123 @@ namespace cn.jpush.api.device
                 top.Add("tags", tagObject);
             }
             ResponseWrapper result = sendPost(url, Authorization(), top.ToString());
+
             return DefaultResult.fromResponse(result);
         }
 
+        public DefaultResult addDeviceAlias(String registrationId,String alias)
+        {
+            String mobile = null;
+            HashSet<String> tagsToAdd = null;
+            HashSet<String> tagsToRemove = null;
+            return updateDevice(registrationId,alias, mobile, tagsToAdd, tagsToRemove);
+        }
+
+        public DefaultResult addDeviceMobile(String registrationId, String mobile)
+        {
+            String alias = null;
+            HashSet<String> tagsToAdd = null;
+            HashSet<String> tagsToRemove = null;
+            return updateDevice(registrationId, alias, mobile, tagsToAdd, tagsToRemove);
+        }
+
+        public DefaultResult addDeviceTags(String registrationId, HashSet<String> tags)
+        {
+            String alias = null;
+            String mobile = null;
+            HashSet<String> tagsToAdd = tags;
+            HashSet<String> tagsToRemove = null;
+            return updateDevice(registrationId, alias, mobile, tagsToAdd, tagsToRemove);
+        }
+
+        public DefaultResult removeDeviceTags(String registrationId, HashSet<String> tags)
+        {
+            String alias = null;
+            String mobile = null;
+            HashSet<String> tagsToAdd = null;
+            HashSet<String> tagsToRemove = tags;
+            return updateDevice(registrationId, alias, mobile, tagsToAdd, tagsToRemove);
+        }
+
+
+        //update DeviceTag,add ,remove
+        public DefaultResult updateDeviceTags(String registrationId, HashSet<String> tagsToAdd, HashSet<String> tagsToRemove)
+        {
+            String url = HOST_NAME_SSL + DEVICES_PATH + "/" + registrationId;
+
+            JObject top = new JObject();
+            JObject tagObject = new JObject();
+            if (tagsToAdd != null)
+            {
+                JArray tagsAdd = JArray.FromObject(tagsToAdd);
+                if (tagsAdd.Count > 0)
+                {
+                    tagObject.Add("add", tagsAdd);
+                }
+            }
+            if (tagsToRemove != null)
+            {
+
+                JArray tagsRemove = JArray.FromObject(tagsToRemove);
+                if (tagsRemove.Count > 0)
+                {
+                    tagObject.Add("remove", tagsRemove);
+                }
+            }
+
+            if (tagObject.Count > 0)
+            {
+                top.Add("tags", tagObject);
+            }
+            ResponseWrapper result = sendPost(url, Authorization(), top.ToString());
+            return DefaultResult.fromResponse(result);
+        }
+
+
+
+        //POST /v3/devices/{registration_id}  clear the tags ,alias
+
+        public DefaultResult deleteDeviceTagAlias(String registrationId, bool clearAlias, bool clearTag)
+        {
+            Preconditions.checkArgument(clearAlias || clearTag, "It is not meaningful to do nothing.");
+
+            String url = HOST_NAME_SSL + DEVICES_PATH + "/" + registrationId;
+
+            JObject top = new JObject();
+            if (clearAlias)
+            {
+                top.Add("alias", "");
+            }
+            if (clearTag)
+            {
+                top.Add("tags", "");
+            }
+            ResponseWrapper result = sendPost(url, Authorization(), top.ToString());
+
+            return DefaultResult.fromResponse(result);
+        }
+
+        //POST /v3/devices/{registration_id}  clear the tags ,alias
+
+        public DefaultResult updateDeviceTagAlias(String registrationId, bool clearAlias, bool clearTag)
+        {
+            Preconditions.checkArgument(clearAlias || clearTag, "It is not meaningful to do nothing.");
+
+            String url = HOST_NAME_SSL + DEVICES_PATH + "/" + registrationId;
+
+            JObject top = new JObject();
+            if (clearAlias)
+            {
+                top.Add("alias", "");
+            }
+            if (clearTag)
+            {
+                top.Add("tags", "");
+            }
+            ResponseWrapper result = sendPost(url, Authorization(), top.ToString());
+
+            return DefaultResult.fromResponse(result);
+        }
 
         //GET /v3/tags/
         public TagListResult getTagList() 
