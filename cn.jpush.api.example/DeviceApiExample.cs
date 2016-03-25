@@ -50,9 +50,58 @@ namespace cn.jpush.api.example
                 {
                     Console.WriteLine("*****开始获取设备信息******");
                     DeviceClient client = new DeviceClient(app_key, master_secret);
-                    //get tag list demo
-                    try
-                    {
+
+            try
+            {
+                var result = client.addDeviceAlias(REGISTRATION_ID2, ALIAS_NO);
+                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+                System.Threading.Thread.Sleep(10000);
+                //如需查询上次推送结果执行下面的代码
+                Console.WriteLine(result);
+                //如需查询某个messageid的推送结果执行下面的代码
+
+
+            }
+            catch (APIRequestException e)
+            {
+                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+                Console.WriteLine("HTTP Status: " + e.Status);
+                Console.WriteLine("Error Code: " + e.ErrorCode);
+                Console.WriteLine("Error Message: " + e.ErrorCode);
+            }
+            catch (APIConnectionException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            //get device tag alias
+            try
+            {
+                var result = client.getDeviceTagAlias(REGISTRATION_ID);
+                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+                System.Threading.Thread.Sleep(10000);
+                //如需查询上次推送结果执行下面的代码
+                Console.WriteLine(result);
+                //如需查询某个messageid的推送结果执行下面的代码
+
+
+            }
+            catch (APIRequestException e)
+            {
+                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+                Console.WriteLine("HTTP Status: " + e.Status);
+                Console.WriteLine("Error Code: " + e.ErrorCode);
+                Console.WriteLine("Error Message: " + e.ErrorCode);
+            }
+            catch (APIConnectionException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+
+            //get tag list demo
+            try
+            {
                         var result = client.getTagList();
                         //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
                         System.Threading.Thread.Sleep(10000);
