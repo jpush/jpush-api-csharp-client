@@ -42,14 +42,6 @@ namespace cn.jpush.api.schedule.Tests
         }
 
         [TestMethod()]
-        [ExpectedException(typeof(System.ArgumentException))]
-        //test the time that is gone
-        public void TriggerPayloadSingleTimeTimeoutTest()
-        {
-            TriggerPayload single = new TriggerPayload("2015-04-25 14:05:00");
-        }
-
-        [TestMethod()]
         [ExpectedException(typeof(System.NotImplementedException))]
         public void TriggerPayloadPeriodicalNullTest()
         {

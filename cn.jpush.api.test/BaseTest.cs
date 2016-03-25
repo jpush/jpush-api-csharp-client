@@ -13,14 +13,12 @@ namespace cn.jpush.api.test
          public const  String ALERT = "JPush Test - alert";
          public const  String MSG_CONTENT = "JPush Test - msgContent";
 
-         public const String MOBILE = "18588232140";
-
          public const String REGISTRATION_ID1 = "1507bfd3f7c466c355c";
          public const String REGISTRATION_ID2 = "1a0018970aa5d80f3b8";
 
+        public const String MOBILE = "18888888888";
 
-
-         public const String LONG_TEXT_1 = ""
+        public const String LONG_TEXT_1 = ""
             + "鏋佸厜鎺ㄩ�侊紝浣垮緱寮�鍙戣�呭彲浠ュ嵆鏃跺湴鍚戝叾搴旂敤绋嬪簭鐨勭敤鎴锋帹閫侀�氱煡鎴栬�呮秷鎭紝"
             + "涓庣敤鎴蜂繚鎸佷簰鍔紝浠庤�屾湁鏁堝湴鎻愰珮鐣欏瓨鐜囷紝鎻愬崌鐢ㄦ埛浣撻獙銆傚钩鍙版彁渚涙暣鍚堜簡Android鎺ㄩ�併�乮OS鎺ㄩ�佺殑缁熶竴鎺ㄩ�佹湇鍔°��";
          public const String LONG_TEXT_2 = ""
