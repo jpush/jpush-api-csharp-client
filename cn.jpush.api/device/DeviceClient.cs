@@ -2,6 +2,7 @@
 using cn.jpush.api.common.resp;
 using cn.jpush.api.util;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,6 +22,8 @@ namespace cn.jpush.api.device
 
         private String appKey;
         private String masterSecret;
+        private JsonSerializerSettings jSetting;
+
         public DeviceClient(String appKey, String masterSecret) 
         {
             this.appKey = appKey;
@@ -347,10 +350,19 @@ namespace cn.jpush.api.device
         public DefaultResult getDeviceStatus(String[] registrationId)
         {
             String url = HOST_NAME_SSL + DEVICES_PATH + STATUS_PATH;
-            ResponseWrapper result = sendPost(url, Authorization(), registrationId.ToString());
+            Dictionary<String, String[]> registration = new Dictionary<String, String[]>();
+            registration.Add("registration_ids", registrationId);
+            ResponseWrapper result = sendPost(url, Authorization(), ToJson(registration));
             return DefaultResult.fromResponse(result);
         }
 
+        public string ToJson(Dictionary<String, String[]> registration)
+        {
+            jSetting = new JsonSerializerSettings();
+            jSetting.NullValueHandling = NullValueHandling.Ignore;
+            jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
+            return JsonConvert.SerializeObject(registration, jSetting);
+        }
 
         private String Authorization()
        {

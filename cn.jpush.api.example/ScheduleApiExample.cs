@@ -130,7 +130,7 @@ namespace cn.jpush.api.example
 
             SchedulePayload schedulepayloadperiodical = new SchedulePayload();
 
-            TriggerPayload triggerConstructor = new TriggerPayload(START,END, TIME_PERIODICAL, TIME_UNIT,FREQUENCY,POINT);
+            TriggerPayload triggerConstructor = new TriggerPayload(START,END,TIME_PERIODICAL, TIME_UNIT,FREQUENCY,POINT);
 
             schedulepayloadperiodical.setPushPayload(pushPayload);
             schedulepayloadperiodical.setTrigger(triggerConstructor);
