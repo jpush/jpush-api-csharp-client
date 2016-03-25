@@ -17,6 +17,7 @@ namespace cn.jpush.api.device
         public   const String DEVICES_PATH = "/v3/devices";
         public   const String TAGS_PATH = "/v3/tags";
         public   const String ALIASES_PATH = "/v3/aliases";
+        public   const String STATUS_PATH = "/status/";
 
         private String appKey;
         private String masterSecret;
@@ -341,7 +342,17 @@ namespace cn.jpush.api.device
             ResponseWrapper response = this.sendDelete(url, Authorization(), null);
             return DefaultResult.fromResponse(response);
         }
-       private String Authorization()
+
+        //  POST /v3/devices/status/ vip
+        public DefaultResult getDeviceStatus(String[] registrationId)
+        {
+            String url = HOST_NAME_SSL + DEVICES_PATH + STATUS_PATH;
+            ResponseWrapper result = sendPost(url, Authorization(), registrationId.ToString());
+            return DefaultResult.fromResponse(result);
+        }
+
+
+        private String Authorization()
        {
             Debug.Assert(!string.IsNullOrEmpty(this.appKey));
             Debug.Assert(!string.IsNullOrEmpty(this.masterSecret));
