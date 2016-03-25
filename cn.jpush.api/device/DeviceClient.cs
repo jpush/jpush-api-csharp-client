@@ -315,6 +315,8 @@ namespace cn.jpush.api.device
             ResponseWrapper response = this.sendDelete(url, Authorization(), null);
             return DefaultResult.fromResponse(response);        
         }
+
+
         // ------------- alias
         //GET /v3/aliases/{alias_value}
         public AliasDeviceListResult getAliasDeviceList(String alias, String platform)
@@ -327,6 +329,7 @@ namespace cn.jpush.api.device
         
             return AliasDeviceListResult.fromResponse(response);
         }
+
 
         //DELETE /v3/aliases/{alias_value}
         public DefaultResult deleteAlias(String alias, String platform)

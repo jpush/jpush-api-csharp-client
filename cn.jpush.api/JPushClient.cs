@@ -143,7 +143,7 @@ namespace cn.jpush.api
                                                    HashSet<String> tagsToAdd,
                                                    HashSet<String> tagsToRemove)
         {
-            return _deviceClient.updateDeviceTagAlias(registrationId, alias, mobile, tagsToAdd, tagsToRemove);
+            return _deviceClient.updateDevice(registrationId, alias, mobile, tagsToAdd, tagsToRemove);
         }
         /// <summary>
         /// 获取当前应用的所有标签

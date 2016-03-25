@@ -122,7 +122,7 @@ namespace cn.jpush.api.example
                 
                     try
                     {
-                    var result = client.updateDeviceTagAlias(REGISTRATION_ID,
+                    var result = client.updateDevice(REGISTRATION_ID,
                                                            ALIAS,
                                                            MOBILE,
                                                            TAG_HASHSET,
@@ -174,7 +174,7 @@ namespace cn.jpush.api.example
             //update the device  set the alias,mobile
             try
             {
-                var result = client.updateDeviceTagAlias(REGISTRATION_ID,
+                var result = client.updateDevice(REGISTRATION_ID,
                                                        ALIAS,
                                                        MOBILE,
                                                        TAG_HASHSET,
@@ -200,7 +200,7 @@ namespace cn.jpush.api.example
 
             try
             {
-                var result = client.updateDeviceTagAlias(REGISTRATION_ID2,
+                var result = client.updateDevice(REGISTRATION_ID2,
                                                        ALIAS,
                                                        MOBILE,
                                                        TAG_HASHSET,
