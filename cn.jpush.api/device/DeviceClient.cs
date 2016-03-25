@@ -248,6 +248,8 @@ namespace cn.jpush.api.device
             ResponseWrapper response = this.sendGet(url, auth, null);
             return TagListResult.fromResponse(response);
         }
+
+
         //GET /v3/tags/{tag_value}/registration_ids/{registration_id}
         public BooleanResult isDeviceInTag(String theTag, String registrationID)
          {
@@ -285,6 +287,21 @@ namespace cn.jpush.api.device
             top.Add("registration_ids", registrationIds);
             ResponseWrapper response = this.sendPost(url, Authorization(), top.ToString());
             return DefaultResult.fromResponse(response);
+        }
+
+        //POST /v3/tags/{tag_value}
+        public DefaultResult addDevicesFromTag(String theTag, HashSet<String> toAddUsers)
+        {
+            HashSet<String> toRemoveUsers = null;
+            return addRemoveDevicesFromTag(theTag, toAddUsers, toRemoveUsers);
+        }
+
+
+        //POST /v3/tags/{tag_value}
+        public DefaultResult removeDevicesFromTag(String theTag, HashSet<String> toRemoveUsers)
+        {
+            HashSet<String> toAddUsers = null;
+            return addRemoveDevicesFromTag(theTag, toAddUsers, toRemoveUsers);
         }
 
         //DELETE /v3/tags/{tag_value}
