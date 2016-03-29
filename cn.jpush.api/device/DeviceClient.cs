@@ -143,6 +143,7 @@ namespace cn.jpush.api.device
             HashSet<String> tagsToRemove = null;
             return updateDevice(registrationId,alias, mobile, tagsToAdd, tagsToRemove);
         }
+
         //only add Device Mobile,the function will set others to null
         public DefaultResult addDeviceMobile(String registrationId, String mobile)
         {
@@ -151,6 +152,7 @@ namespace cn.jpush.api.device
             HashSet<String> tagsToRemove = null;
             return updateDevice(registrationId, alias, mobile, tagsToAdd, tagsToRemove);
         }
+
         //only add Device Tags,the function will set others to null
         public DefaultResult addDeviceTags(String registrationId, HashSet<String> tags)
         {
@@ -302,6 +304,7 @@ namespace cn.jpush.api.device
         public DefaultResult deleteTag(String theTag, String platform) 
         {
             Preconditions.checkArgument(!String.IsNullOrEmpty(theTag), "theTag should be set");
+            Preconditions.checkArgument(StringUtil.IsValidTag(theTag), "theTag should be the right format");
             String url = HOST_NAME_SSL + TAGS_PATH + "/" + theTag;
             if (null != platform) {
         	    url += "?platform=" + platform; 
@@ -318,6 +321,7 @@ namespace cn.jpush.api.device
         public AliasDeviceListResult getAliasDeviceList(String alias, String platform)
         {
             Preconditions.checkArgument(!String.IsNullOrEmpty(alias), "alias should be set");
+            Preconditions.checkArgument(StringUtil.IsValidAlias(alias), "the alias should be the right format");
             String url = HOST_NAME_SSL + ALIASES_PATH + "/" + alias;
             if (null != platform) {
         	    url += "?platform=" + platform; 
@@ -332,6 +336,7 @@ namespace cn.jpush.api.device
         //删除一个别名，以及该别名与设备的绑定关系。
         public DefaultResult deleteAlias(String alias, String platform)
          {
+            Preconditions.checkArgument(StringUtil.IsValidAlias(alias), "the alias should be the right format");
             Preconditions.checkArgument(!String.IsNullOrEmpty(alias), "alias should be set");
             String url = HOST_NAME_SSL + ALIASES_PATH + "/" + alias;
             if (null != platform) {
