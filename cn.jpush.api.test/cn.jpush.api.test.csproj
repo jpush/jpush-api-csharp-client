@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="audience\AudienceTest.cs" />
     <Compile Include="audience\AudienceTargetTest.cs" />
+    <Compile Include="device\DeviceClientTests.cs" />
     <Compile Include="device\DeviceNormalRemoteTest.cs" />
     <Compile Include="model\OptionsTest.cs" />
     <Compile Include="model\PlatformTest.cs" />

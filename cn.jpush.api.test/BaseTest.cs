@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace cn.jpush.api.test
 {
@@ -16,6 +17,8 @@ namespace cn.jpush.api.test
          public const String REGISTRATION_ID1 = "1507bfd3f7c466c355c";
          public const String REGISTRATION_ID2 = "1a0018970aa5d80f3b8";
 
+        public static HashSet<String> TAG_HASHSET = new HashSet<string> {"tag"};
+        public static HashSet<String> TAG_HASHSET_EMPTY = new HashSet<string> { };
         public const String MOBILE = "18888888888";
 
         public const String LONG_TEXT_1 = ""

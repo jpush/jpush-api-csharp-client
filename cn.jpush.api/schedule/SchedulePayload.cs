@@ -1,17 +1,8 @@
-﻿using cn.jpush.api.common;
-using cn.jpush.api.push.notification;
-using cn.jpush.api.push.mode;
+﻿using cn.jpush.api.push.mode;
 using cn.jpush.api.util;
-using cn.jpush.api.schedule;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace cn.jpush.api.schedule
 {
@@ -23,7 +14,6 @@ namespace cn.jpush.api.schedule
         private const String ENABLED = "enabled";
         private const String TRIGGER = "trigger";
         private const String PUSH = "push";
-
 
         public PushPayload push { get; set; }
         public String name { get; set; }
