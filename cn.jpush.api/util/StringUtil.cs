@@ -90,7 +90,7 @@ namespace cn.jpush.api.util
         public static Boolean IsMobile(String mobile)
         {
             Boolean ismobile = new Boolean();
-            ismobile = System.Text.RegularExpressions.Regex.IsMatch(mobile, @"^(1[34578][0-9])(\\d{4})(\\d{4})$");
+            ismobile =Regex.IsMatch(mobile, @"^(1[34578][0-9])(\\d{4})(\\d{4})$");
             return ismobile;
 
         }

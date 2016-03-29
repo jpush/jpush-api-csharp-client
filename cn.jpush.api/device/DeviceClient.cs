@@ -150,7 +150,6 @@ namespace cn.jpush.api.device
             String alias = null;
             HashSet<String> tagsToAdd = null;
             HashSet<String> tagsToRemove = null;
-            Preconditions.checkArgument((StringUtil.IsMobile(mobile)),"the mobile is not valid!");
             return updateDevice(registrationId, alias, mobile, tagsToAdd, tagsToRemove);
         }
 
