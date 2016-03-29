@@ -102,7 +102,6 @@ namespace cn.jpush.api.push
         public int total_pages;
         public int page;
         public SchedulePayload[] schedules;
-
     }
 
     public class JpushError

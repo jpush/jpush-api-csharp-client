@@ -34,6 +34,9 @@ namespace cn.jpush.api.schedule
             this.appKey = appKey;
             this.masterSecret = masterSecret;
         }
+
+        //POST https://api.jpush.cn/v3/schedules
+        //创建一个新的定时任务。
         public ScheduleResult sendSchedule(SchedulePayload schedulepayload)
         {       
             Preconditions.checkArgument(schedulepayload != null, "schedulepayload should not be empty");
@@ -62,6 +65,7 @@ namespace cn.jpush.api.schedule
 
 
         //GET /v3/schedules?page=
+        //获取有效的schedule列表
         public getScheduleResult getSchedule(int pageid)
         {
             Preconditions.checkArgument(pageid > 0, "page should more than 0.");
@@ -86,9 +90,29 @@ namespace cn.jpush.api.schedule
             return messResult;
         }
 
+        //获取指定的定时任务
+        //GET https://api.jpush.cn/v3/schedules/{schedule_id}
+
+        public SchedulePayload getScheduleById(String id)
+        {
+            Preconditions.checkArgument(!String.IsNullOrEmpty(id), "id should be set.");
+            jSetting = new JsonSerializerSettings();
+            jSetting.NullValueHandling = NullValueHandling.Ignore;
+            jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
+            String url = HOST_NAME_SSL;
+            url += PUSH_PATH;
+            url += "/";
+            url += id;
+            ResponseWrapper result = sendGet(url, Authorization(),id);
+
+            String schedule = result.responseContent;
+            SchedulePayload schedulepayload = JsonConvert.DeserializeObject<SchedulePayload>(schedule, jSetting);
+            return schedulepayload;
+        }
+
 
         //PUT  https://api.jpush.cn/v3/schedules/{schedule_id}
-
+        //修改指定的Schedule
         public ScheduleResult putSchedule(SchedulePayload schedulepayload,String schedule_id)
         {
             Preconditions.checkArgument(schedulepayload != null, "schedulepayload should not be empty");
@@ -128,7 +152,7 @@ namespace cn.jpush.api.schedule
         }
 
         //  DELETE https://api.jpush.cn/v3/schedules/{schedule_id} 
-
+        //删除指定的Schedule任务
         public ScheduleResult deleteSchedule(string schedule_id)
         {
             Preconditions.checkArgument(schedule_id != null, "schedule_id should not be empty");

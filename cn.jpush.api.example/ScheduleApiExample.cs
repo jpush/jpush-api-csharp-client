@@ -35,7 +35,7 @@ namespace cn.jpush.api.example
         public static String PUT_TIME = "2016-05-25 14:05:00";
         public static String PUT_NAME = "put_new_name";
         //创建成功后，填入你的schedule_id
-        public static String PUT_SCHEDULE_ID = "f0b61b2e-e682-11e5-beab-0021f652c102";
+        public static String PUT_SCHEDULE_ID = "d5ba84b2-f55b-11e5-8496-0021f653c902";
         
         public static String START = "2016-03-31 12:30:00";
         public static String END = "2016-05-12 12:30:00";
@@ -189,6 +189,27 @@ namespace cn.jpush.api.example
                 Console.WriteLine(e.Message);
             }
 
+
+            //get schedule by id 
+            try
+            {
+                var result = scheduleclient.getScheduleById(PUT_SCHEDULE_ID);
+                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+                System.Threading.Thread.Sleep(10000);
+                Console.WriteLine(result.name);
+                Console.WriteLine(result);
+            }
+            catch (APIRequestException e)
+            {
+                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+                Console.WriteLine("HTTP Status: " + e.Status);
+                Console.WriteLine("Error Code: " + e.ErrorCode);
+                Console.WriteLine("Error Message: " + e.ErrorCode);
+            }
+            catch (APIConnectionException e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
             //put the name
 
