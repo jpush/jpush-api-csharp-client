@@ -32,8 +32,8 @@ namespace cn.jpush.api.device
             this.masterSecret = masterSecret;        
         }
 
-        // GET /v3/devices/{registration_id}
-
+        //GET /v3/devices/{registration_id}
+        //获取当前设备的所有属性，包含tags, alias，手机号码mobile。
         public TagAliasResult getDeviceTagAlias(String registrationId)
         {
             Preconditions.checkArgument(!String.IsNullOrEmpty(registrationId), "registrationId should be set");
@@ -45,7 +45,9 @@ namespace cn.jpush.api.device
 
         }
 
+        //POST /v3/devices/{registration_id}
         //update   Device  Tag   Alias and the phone number
+        //更新当前设备的指定属性，当前支持tags, alias，手机号码mobile。
         public DefaultResult updateDevice(String registrationId,
                                                    String alias,
                                                    String mobile,
@@ -203,30 +205,6 @@ namespace cn.jpush.api.device
             return DefaultResult.fromResponse(result);
         }
 
-
-
-        //POST /v3/devices/{registration_id}  clear the tags ,alias
-
-        public DefaultResult clearDeviceTagAlias(String registrationId, bool clearAlias, bool clearTag)
-        {
-            Preconditions.checkArgument(clearAlias || clearTag, "It is not meaningful to do nothing.");
-
-            String url = HOST_NAME_SSL + DEVICES_PATH + "/" + registrationId;
-
-            JObject top = new JObject();
-            if (clearAlias)
-            {
-                top.Add("alias", "");
-            }
-            if (clearTag)
-            {
-                top.Add("tags", "");
-            }
-            ResponseWrapper result = sendPost(url, Authorization(), top.ToString());
-
-            return DefaultResult.fromResponse(result);
-        }
-
         //POST /v3/devices/{registration_id}  clear the tags ,alias
 
         public DefaultResult updateDeviceTagAlias(String registrationId, bool clearAlias, bool clearTag)
@@ -250,6 +228,8 @@ namespace cn.jpush.api.device
         }
 
         //GET /v3/tags/
+        //获取当前应用的所有标签列表。
+ 
         public TagListResult getTagList() 
         {
             String url = HOST_NAME_SSL + TAGS_PATH + "/";
@@ -260,6 +240,7 @@ namespace cn.jpush.api.device
 
 
         //GET /v3/tags/{tag_value}/registration_ids/{registration_id}
+        //查询某个设备是否在 tag 下。
         public BooleanResult isDeviceInTag(String theTag, String registrationID)
          {
             Preconditions.checkArgument(!String.IsNullOrEmpty(theTag), "theTag should be set");
@@ -270,6 +251,7 @@ namespace cn.jpush.api.device
          }
 
         //POST /v3/tags/{tag_value}
+        //为一个标签添加或者删除设备。
         public DefaultResult addRemoveDevicesFromTag(String theTag, 
                                                       HashSet<String> toAddUsers, 
                                                       HashSet<String> toRemoveUsers) 
@@ -316,6 +298,7 @@ namespace cn.jpush.api.device
         }
 
         //DELETE /v3/tags/{tag_value}
+        //删除一个标签，以及标签与设备之间的关联关系。
         public DefaultResult deleteTag(String theTag, String platform) 
         {
             Preconditions.checkArgument(!String.IsNullOrEmpty(theTag), "theTag should be set");
@@ -331,6 +314,7 @@ namespace cn.jpush.api.device
 
         // ------------- alias
         //GET /v3/aliases/{alias_value}
+        //查询别名 （与设备的绑定关系）
         public AliasDeviceListResult getAliasDeviceList(String alias, String platform)
         {
             Preconditions.checkArgument(!String.IsNullOrEmpty(alias), "alias should be set");
@@ -345,6 +329,7 @@ namespace cn.jpush.api.device
 
 
         //DELETE /v3/aliases/{alias_value}
+        //删除一个别名，以及该别名与设备的绑定关系。
         public DefaultResult deleteAlias(String alias, String platform)
          {
             Preconditions.checkArgument(!String.IsNullOrEmpty(alias), "alias should be set");
@@ -357,6 +342,8 @@ namespace cn.jpush.api.device
         }
 
         //  POST /v3/devices/status/ vip
+        //获取用户在线状态（VIP专属接口）
+        //如需要开通此接口，请联系：商务客服
         public DefaultResult getDeviceStatus(String[] registrationId)
         {
             String url = HOST_NAME_SSL + DEVICES_PATH + STATUS_PATH;
