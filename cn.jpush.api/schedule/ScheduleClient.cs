@@ -151,7 +151,7 @@ namespace cn.jpush.api.schedule
             return messResult;
         }
 
-        //  DELETE https://api.jpush.cn/v3/schedules/{schedule_id} 
+        //DELETE https://api.jpush.cn/v3/schedules/{schedule_id} 
         //删除指定的Schedule任务
         public ScheduleResult deleteSchedule(string schedule_id)
         {

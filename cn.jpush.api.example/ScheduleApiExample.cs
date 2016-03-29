@@ -60,6 +60,34 @@ namespace cn.jpush.api.example
 
             ScheduleClient scheduleclient = new ScheduleClient(app_key, master_secret);
 
+            //init a TriggerPayload
+            TriggerPayload triggerConstructor = new TriggerPayload(START, END, TIME_PERIODICAL, TIME_UNIT, FREQUENCY, POINT);
+            //init a SchedulePayload
+            SchedulePayload schedulepayloadperiodical = new SchedulePayload(NAME, ENABLED,triggerConstructor,pushPayload);
+
+            try
+            {
+                var result = scheduleclient.sendSchedule(schedulepayloadperiodical);
+                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+                System.Threading.Thread.Sleep(10000);
+                Console.WriteLine(result);
+                //保留这里获取的schedule_id，作为后面删除schedule的参数，如果不想删除这个可以删掉这一行，另外设置一个schedule_id
+                schedule_id = result.schedule_id;
+
+            }
+            catch (APIRequestException e)
+            {
+                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+                Console.WriteLine("HTTP Status: " + e.Status);
+                Console.WriteLine("Error Code: " + e.ErrorCode);
+                Console.WriteLine("Error Message: " + e.ErrorCode);
+            }
+            catch (APIConnectionException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+
             SchedulePayload schedulepayloadSet = new SchedulePayload();
             TriggerPayload triggerSet = new TriggerPayload();
             triggerSet.setStart(START);
@@ -107,39 +135,6 @@ namespace cn.jpush.api.example
             try
             {
                 var result = scheduleclient.sendSchedule(schedulepayloadsingle);
-                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
-                System.Threading.Thread.Sleep(10000);
-                Console.WriteLine(result);
-                //保留这里获取的schedule_id，作为后面删除schedule的参数，如果不想删除这个可以删掉这一行，另外设置一个schedule_id
-                schedule_id = result.schedule_id;
-
-            }
-            catch (APIRequestException e)
-            {
-                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
-                Console.WriteLine("HTTP Status: " + e.Status);
-                Console.WriteLine("Error Code: " + e.ErrorCode);
-                Console.WriteLine("Error Message: " + e.ErrorCode);
-            }
-            catch (APIConnectionException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-
-
-            SchedulePayload schedulepayloadperiodical = new SchedulePayload();
-
-            TriggerPayload triggerConstructor = new TriggerPayload(START,END,TIME_PERIODICAL, TIME_UNIT,FREQUENCY,POINT);
-
-            schedulepayloadperiodical.setPushPayload(pushPayload);
-            schedulepayloadperiodical.setTrigger(triggerConstructor);
-            schedulepayloadperiodical.setName(NAME);
-            schedulepayloadperiodical.setEnabled(ENABLED);
-
-            try
-            {
-                var result = scheduleclient.sendSchedule(schedulepayloadperiodical);
                 //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
                 System.Threading.Thread.Sleep(10000);
                 Console.WriteLine(result);
