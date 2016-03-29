@@ -1,24 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
-
-using cn.jpush.api;
-using cn.jpush.api.push;
 using cn.jpush.api.device;
-using cn.jpush.api.report;
 using cn.jpush.api.common;
-using cn.jpush.api.util;
-using cn.jpush.api.push.mode;
-using cn.jpush.api.push.notification;
 using cn.jpush.api.common.resp;
 
 namespace cn.jpush.api.example
 {
     class DeviceApiExample
     {
+
+        //run the DeviceApiExample first,it will add mobile,tags,alias to the device:
+        //首先运行DeviceApiExample，为设备添加手机号码，标签别名，再运行JPushApiExample,ScheduleApiExample。
+        //步骤如下：
+        //1.设置cn.jpush.api.example为启动项
+        //2.在cn.jpush.api.example项目，右键选择属性，然后选择应用程序，最后在启动对象下拉框中选择DeviceApiExample
+        //3.按照2的步骤设置，运行JPushApiExample,ScheduleApiExample.
+
         public static String TITLE = "Test from C# v3 sdk";
         public static String ALERT = "Test from  C# v3 sdk - alert";
         public static String MSG_CONTENT = "Test from C# v3 sdk - msgContent";
