@@ -52,7 +52,6 @@ namespace cn.jpush.api.example
          {
              Console.WriteLine("*****开始获取设备信息******");
              DeviceClient client = new DeviceClient(app_key, master_secret);
-
             //get device tag alias
             try
             {

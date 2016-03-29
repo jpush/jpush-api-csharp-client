@@ -29,6 +29,8 @@ namespace cn.jpush.api.schedule
 
         public ScheduleClient(String appKey, String masterSecret)
         {
+            Preconditions.checkArgument(!String.IsNullOrEmpty(appKey), "appKey should be set");
+            Preconditions.checkArgument(!String.IsNullOrEmpty(masterSecret), "masterSecret should be set");
             this.appKey = appKey;
             this.masterSecret = masterSecret;
         }

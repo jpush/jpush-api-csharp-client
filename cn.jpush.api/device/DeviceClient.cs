@@ -26,6 +26,8 @@ namespace cn.jpush.api.device
 
         public DeviceClient(String appKey, String masterSecret) 
         {
+            Preconditions.checkArgument(!String.IsNullOrEmpty(appKey), "appKey should be set");
+            Preconditions.checkArgument(!String.IsNullOrEmpty(masterSecret), "masterSecret should be set");
             this.appKey = appKey;
             this.masterSecret = masterSecret;        
         }
@@ -34,6 +36,7 @@ namespace cn.jpush.api.device
 
         public TagAliasResult getDeviceTagAlias(String registrationId)
         {
+            Preconditions.checkArgument(!String.IsNullOrEmpty(registrationId), "registrationId should be set");
             String url = HOST_NAME_SSL + DEVICES_PATH + "/" + registrationId;
             String auth = Base64.getBase64Encode(this.appKey + ":" + this.masterSecret);
 
@@ -42,7 +45,7 @@ namespace cn.jpush.api.device
 
         }
 
-        //updateDeviceTagAlias and the phone number
+        //update   Device  Tag   Alias and the phone number
         public DefaultResult updateDevice(String registrationId,
                                                    String alias,
                                                    String mobile,
@@ -88,7 +91,7 @@ namespace cn.jpush.api.device
             return DefaultResult.fromResponse(result);
         }
 
-        //updateDeviceTagAlias and the phone number
+        //update    Device   Tag   Alias
         public DefaultResult updateDeviceTagAlias(String registrationId,
                                                   String alias,
                                                   HashSet<String> tagsToAdd,
@@ -130,6 +133,7 @@ namespace cn.jpush.api.device
             return DefaultResult.fromResponse(result);
         }
 
+        //only add Device Alias,the function will set others to null
         public DefaultResult addDeviceAlias(String registrationId,String alias)
         {
             String mobile = null;
@@ -137,7 +141,7 @@ namespace cn.jpush.api.device
             HashSet<String> tagsToRemove = null;
             return updateDevice(registrationId,alias, mobile, tagsToAdd, tagsToRemove);
         }
-
+        //only add Device Mobile,the function will set others to null
         public DefaultResult addDeviceMobile(String registrationId, String mobile)
         {
             String alias = null;
@@ -145,7 +149,7 @@ namespace cn.jpush.api.device
             HashSet<String> tagsToRemove = null;
             return updateDevice(registrationId, alias, mobile, tagsToAdd, tagsToRemove);
         }
-
+        //only add Device Tags,the function will set others to null
         public DefaultResult addDeviceTags(String registrationId, HashSet<String> tags)
         {
             String alias = null;
@@ -155,6 +159,7 @@ namespace cn.jpush.api.device
             return updateDevice(registrationId, alias, mobile, tagsToAdd, tagsToRemove);
         }
 
+        //only remove Device Tags,the function will set others to null
         public DefaultResult removeDeviceTags(String registrationId, HashSet<String> tags)
         {
             String alias = null;
@@ -202,7 +207,7 @@ namespace cn.jpush.api.device
 
         //POST /v3/devices/{registration_id}  clear the tags ,alias
 
-        public DefaultResult deleteDeviceTagAlias(String registrationId, bool clearAlias, bool clearTag)
+        public DefaultResult clearDeviceTagAlias(String registrationId, bool clearAlias, bool clearTag)
         {
             Preconditions.checkArgument(clearAlias || clearTag, "It is not meaningful to do nothing.");
 
@@ -257,6 +262,8 @@ namespace cn.jpush.api.device
         //GET /v3/tags/{tag_value}/registration_ids/{registration_id}
         public BooleanResult isDeviceInTag(String theTag, String registrationID)
          {
+            Preconditions.checkArgument(!String.IsNullOrEmpty(theTag), "theTag should be set");
+            Preconditions.checkArgument(!String.IsNullOrEmpty(registrationID), "registrationID should be set");
             String url = HOST_NAME_SSL + TAGS_PATH + "/" + theTag + "/registration_ids/" + registrationID;
             ResponseWrapper response = this.sendGet(url, Authorization(), null);
             return BooleanResult.fromResponse(response);        
@@ -311,6 +318,7 @@ namespace cn.jpush.api.device
         //DELETE /v3/tags/{tag_value}
         public DefaultResult deleteTag(String theTag, String platform) 
         {
+            Preconditions.checkArgument(!String.IsNullOrEmpty(theTag), "theTag should be set");
             String url = HOST_NAME_SSL + TAGS_PATH + "/" + theTag;
             if (null != platform) {
         	    url += "?platform=" + platform; 
@@ -325,6 +333,7 @@ namespace cn.jpush.api.device
         //GET /v3/aliases/{alias_value}
         public AliasDeviceListResult getAliasDeviceList(String alias, String platform)
         {
+            Preconditions.checkArgument(!String.IsNullOrEmpty(alias), "alias should be set");
             String url = HOST_NAME_SSL + ALIASES_PATH + "/" + alias;
             if (null != platform) {
         	    url += "?platform=" + platform; 
@@ -338,6 +347,7 @@ namespace cn.jpush.api.device
         //DELETE /v3/aliases/{alias_value}
         public DefaultResult deleteAlias(String alias, String platform)
          {
+            Preconditions.checkArgument(!String.IsNullOrEmpty(alias), "alias should be set");
             String url = HOST_NAME_SSL + ALIASES_PATH + "/" + alias;
             if (null != platform) {
         	    url += "?platform=" + platform; 
