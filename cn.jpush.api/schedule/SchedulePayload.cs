@@ -33,23 +33,6 @@ namespace cn.jpush.api.schedule
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
         }
 
-        public SchedulePayload(Name name, Enabled enabled, TriggerPayload trigger, PushPayload push)
-        {
-            schedule_id = null;
-            Debug.Assert(name != null);
-            Debug.Assert(enabled.getEnable());
-            Debug.Assert(trigger != null);
-            Debug.Assert(push != null);
-            this.name = name.getName();
-            this.enabled = true;
-            this.trigger = trigger;
-            this.push = push;
-            jSetting = new JsonSerializerSettings();
-            jSetting.NullValueHandling = NullValueHandling.Ignore;
-            jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
-            
-        }
-
         public SchedulePayload(String name, Boolean enabled, TriggerPayload trigger, PushPayload push)
         {
             schedule_id = null;
@@ -64,6 +47,23 @@ namespace cn.jpush.api.schedule
             jSetting = new JsonSerializerSettings();
             jSetting.NullValueHandling = NullValueHandling.Ignore;
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
+        }
+
+        public SchedulePayload(Name name, Enabled enabled, TriggerPayload trigger, PushPayload push)
+        {
+            schedule_id = null;
+            Debug.Assert(name != null);
+            Debug.Assert(enabled.getEnable());
+            Debug.Assert(trigger != null);
+            Debug.Assert(push != null);
+            this.name = name.getName();
+            this.enabled = true;
+            this.trigger = trigger;
+            this.push = push;
+            jSetting = new JsonSerializerSettings();
+            jSetting.NullValueHandling = NullValueHandling.Ignore;
+            jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
+
         }
 
         public SchedulePayload setName(String name) {

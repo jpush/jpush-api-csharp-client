@@ -8,9 +8,9 @@ namespace cn.jpush.api.example
 {
     class DeviceApiExample
     {
-
+        //
         //run the DeviceApiExample first,it will add mobile,tags,alias to the device:
-        //首先运行DeviceApiExample，为设备添加手机号码，标签别名，再运行JPushApiExample,ScheduleApiExample。
+        //首先运行DeviceApiExample，为设备添加手机号码，标签，别名，再运行JPushApiExample,ScheduleApiExample。
         //步骤如下：
         //1.设置cn.jpush.api.example为启动项
         //2.在cn.jpush.api.example项目，右键选择属性，然后选择应用程序，最后在启动对象下拉框中选择DeviceApiExample
@@ -28,6 +28,7 @@ namespace cn.jpush.api.example
         //your test phone number
         public static string MOBILE = "18688888888";
         public static string INVALID_MOBILE = "1868888888888";
+
         public static String app_key = "6be9204c30b9473e87bad4dc";
         public static String master_secret = "8aae478411e89f7682ed5af6";
 
@@ -100,76 +101,6 @@ namespace cn.jpush.api.example
                 Console.WriteLine(e.Message);
             }
 
-            try
-            {
-                var result = client.addDeviceAlias(REGISTRATION_ID2, ALIAS_NO);
-                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
-                System.Threading.Thread.Sleep(10000);
-                //如需查询上次推送结果执行下面的代码
-                Console.WriteLine(result);
-                //如需查询某个messageid的推送结果执行下面的代码
-
-
-            }
-            catch (APIRequestException e)
-            {
-                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
-                Console.WriteLine("HTTP Status: " + e.Status);
-                Console.WriteLine("Error Code: " + e.ErrorCode);
-                Console.WriteLine("Error Message: " + e.ErrorCode);
-            }
-            catch (APIConnectionException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            try
-            {
-                var result = client.addDeviceMobile(REGISTRATION_ID2, MOBILE);
-                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
-                System.Threading.Thread.Sleep(10000);
-                //如需查询上次推送结果执行下面的代码
-                Console.WriteLine(result);
-                //如需查询某个messageid的推送结果执行下面的代码
-
-
-            }
-            catch (APIRequestException e)
-            {
-                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
-                Console.WriteLine("HTTP Status: " + e.Status);
-                Console.WriteLine("Error Code: " + e.ErrorCode);
-                Console.WriteLine("Error Message: " + e.ErrorCode);
-            }
-            catch (APIConnectionException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            try
-            {
-                var result = client.addDeviceTags(REGISTRATION_ID2, TAG_HASHSET);
-                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
-                System.Threading.Thread.Sleep(10000);
-                //如需查询上次推送结果执行下面的代码
-                Console.WriteLine(result);
-                //如需查询某个messageid的推送结果执行下面的代码
-
-
-            }
-            catch (APIRequestException e)
-            {
-                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
-                Console.WriteLine("HTTP Status: " + e.Status);
-                Console.WriteLine("Error Code: " + e.ErrorCode);
-                Console.WriteLine("Error Message: " + e.ErrorCode);
-            }
-            catch (APIConnectionException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-
             //get tag list demo
             try
             {
@@ -239,60 +170,6 @@ namespace cn.jpush.api.example
                     {
                         Console.WriteLine(e.Message);
                     }
-                
-            //update the device  set the alias,mobile
-            try
-            {
-                var result = client.updateDevice(REGISTRATION_ID,
-                                                       ALIAS,
-                                                       MOBILE,
-                                                       TAG_HASHSET,
-                                                       TAG_HASHSET_REMOVE);
-                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
-                System.Threading.Thread.Sleep(10000);
-                //如需查询上次推送结果执行下面的代码
-                Console.WriteLine(result);
-                //如需查询某个messageid的推送结果执行下面的代码
-
-            }
-            catch (APIRequestException e)
-            {
-                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
-                Console.WriteLine("HTTP Status: " + e.Status);
-                Console.WriteLine("Error Code: " + e.ErrorCode);
-                Console.WriteLine("Error Message: " + e.ErrorCode);
-            }
-            catch (APIConnectionException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            try
-            {
-                var result = client.updateDevice(REGISTRATION_ID2,
-                                                       ALIAS,
-                                                       MOBILE,
-                                                       TAG_HASHSET,
-                                                       TAG_HASHSET);
-                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
-                System.Threading.Thread.Sleep(10000);
-                //如需查询上次推送结果执行下面的代码
-                Console.WriteLine(result);
-                //如需查询某个messageid的推送结果执行下面的代码
-
-
-            }
-            catch (APIRequestException e)
-            {
-                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
-                Console.WriteLine("HTTP Status: " + e.Status);
-                Console.WriteLine("Error Code: " + e.ErrorCode);
-                Console.WriteLine("Error Message: " + e.ErrorCode);
-            }
-            catch (APIConnectionException e)
-            {
-                Console.WriteLine(e.Message);
-            }
 
             //get the device tag alias mobile
             try
@@ -344,8 +221,6 @@ namespace cn.jpush.api.example
 
             //TagAliasResult getDeviceTagAlias(String registrationId)
             Console.WriteLine("*****结束获取设备信息******");
-
-
         }
     }
 }
