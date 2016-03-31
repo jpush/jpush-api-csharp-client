@@ -155,7 +155,7 @@ public static PushPayload PushObject_ios_tagAnd_alertWithExtrasAndMessage()
 ##Device-API
 ####Device API 用于在服务器端查询、设置、更新、删除设备的 tag,alias信息，使用时需要注意不要让服务端设置的标签又被客户端给覆盖了。
 
->>以下片断来自项目代码里的文件：cn.jpush.api.examples 中的 DeviceApiExample.cs
+>以下片断来自项目代码里的文件：cn.jpush.api.examples 中的 DeviceApiExample.cs
 
 ```
             try
@@ -186,6 +186,7 @@ public static PushPayload PushObject_ios_tagAnd_alertWithExtrasAndMessage()
 ####API 层面支持定时功能。
 
 >以下片断来自项目代码里的文件：cn.jpush.api.examples 中的 ScheduleApiExample.cs
+
 ```
             TriggerPayload triggerConstructor = new TriggerPayload(START, END, TIME_PERIODICAL, TIME_UNIT, FREQUENCY, POINT);
             SchedulePayload schedulepayloadperiodical = new SchedulePayload(NAME,ENABLED,triggerConstructor,pushPayload);
@@ -225,10 +226,12 @@ public static PushPayload PushObject_ios_tagAnd_alertWithExtrasAndMessage()
 
 参考文档：<http://docs.jpush.cn/display/dev/HTTP-Status-Code>
 
-Push v3 API 状态码 参考文档　<http://docs.jpush.cn/display/dev/Push-API-v3>　拉到最后
+Push v3 API 状态码 参考文档　<http://docs.jpush.io/server/rest_api_v3_push/>　拉到最后
 
-ReportAPI  状态码 参考文档　<http://docs.jpush.cn/display/dev/Report-API>　拉到最后
+ReportAPI  状态码 参考文档　<http://docs.jpush.io/server/rest_api_v3_report/>　拉到最后
 
-Device API 状态码 参考文档　<http://docs.jpush.cn/display/dev/Device-API>　拉到最后
+Device API 状态码 参考文档　<http://docs.jpush.io/server/rest_api_v3_device/>　拉到最后
+
+Push Schedule API 状态码 参考文档　<http://docs.jpush.io/server/rest_api_push_schedule/>　拉到最后
 
 [Release页面](https://github.com/jpush/jpush-api-csharp-client/releases/) 有详细的版本发布记录与下载。
