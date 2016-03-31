@@ -8,8 +8,10 @@
 对应的 REST API 文档：<http://docs.jpush.io/server/rest_api_v3_push/>
 
 ## 环境配置
-在项目引用中添加依赖包：Newtonsoft.Json.dll
-在项目引用中添加cn.jpush.api.dll
+
+*   在项目引用中添加依赖包：Newtonsoft.Json.dll
+
+*   在项目引用中添加cn.jpush.api.dll
 
 ## Push-API-v3
 
