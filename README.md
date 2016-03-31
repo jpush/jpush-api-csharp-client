@@ -15,14 +15,13 @@
 
 ## 推送的载体：类PushPayload
 
-对应REST API中Push-API-v3的json格式说明文档<http://docs.jpush.cn/display/dev/Push-API-v3>
-
+对应REST API中Push-API-v3的json格式说明文档<http://docs.jpush.io/server/rest_api_v3_push/>
 
 ##使用样例
 
 ###推送样例
 
->以下片断来自项目代码里的文件：cn.jpush.api.example
+>以下片断来自项目代码里的文件：cn.jpush.api.example 中的 JPushApiExample.cs
 
 ```
         PushPayload payload = PushObject_All_All_Alert();
@@ -126,6 +125,91 @@ public static PushPayload PushObject_ios_tagAnd_alertWithExtrasAndMessage()
             return pushPayload;
         }
 ```
+
+##Report API V3
+####JPush Report API V3 提供各类统计数据查询功能。
+>以下片断来自项目代码里的文件：cn.jpush.api.examples 中的 ReportsExample.cs
+
+```
+             try
+             {
+                 var result = jpushClient.getReceivedApi("1942377665");
+                 Console.WriteLine("Got result - " + result.ToString());
+
+             }
+             catch (APIRequestException e)
+             {
+                 Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+                 Console.WriteLine("HTTP Status: " + e.Status);
+                 Console.WriteLine("Error Code: " + e.ErrorCode);
+                 Console.WriteLine("Error Message: " + e.ErrorCode);
+             }
+             catch (APIConnectionException e)
+             {
+                 Console.WriteLine(e.Message);
+             }
+         }
+
+```
+
+##Device-API
+####Device API 用于在服务器端查询、设置、更新、删除设备的 tag,alias信息，使用时需要注意不要让服务端设置的标签又被客户端给覆盖了。
+
+>>以下片断来自项目代码里的文件：cn.jpush.api.examples 中的 DeviceApiExample.cs
+
+```
+            try
+            {
+                var result = client.updateDevice(REGISTRATION_ID,
+                                                       ALIAS,
+                                                       MOBILE,
+                                                       TAG_HASHSET,
+                                                       TAG_HASHSET_REMOVE
+                                                       );
+                System.Threading.Thread.Sleep(10000);
+                Console.WriteLine(result);
+            }
+            catch (APIRequestException e)
+            {
+                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+                Console.WriteLine("HTTP Status: " + e.Status);
+                Console.WriteLine("Error Code: " + e.ErrorCode);
+                Console.WriteLine("Error Message: " + e.ErrorCode);
+            }
+            catch (APIConnectionException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+```
+
+##API Push Schedule
+####API 层面支持定时功能。
+
+>以下片断来自项目代码里的文件：cn.jpush.api.examples 中的 ScheduleApiExample.cs
+```
+            TriggerPayload triggerConstructor = new TriggerPayload(START, END, TIME_PERIODICAL, TIME_UNIT, FREQUENCY, POINT);
+            SchedulePayload schedulepayloadperiodical = new SchedulePayload(NAME,ENABLED,triggerConstructor,pushPayload);
+            try
+            {
+                var result = scheduleclient.sendSchedule(schedulepayloadperiodical);
+                System.Threading.Thread.Sleep(10000);
+                Console.WriteLine(result);
+                schedule_id = result.schedule_id;
+            }
+            catch (APIRequestException e)
+            {
+                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+                Console.WriteLine("HTTP Status: " + e.Status);
+                Console.WriteLine("Error Code: " + e.ErrorCode);
+                Console.WriteLine("Error Message: " + e.ErrorCode);
+            }
+            catch (APIConnectionException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+```
+
 
 #### 异常
 
