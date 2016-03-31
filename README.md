@@ -19,46 +19,46 @@
 
 推送的载体：PushPayload
 
-对应 REST API 中 Push-API-v3 的 json 格式说明文档<http://docs.jpush.io/server/rest_api_v3_push/>
+对应 REST API 中 Push-API-v3 的 json 格式说明文档 <http://docs.jpush.io/server/rest_api_v3_push/>
 
 推送样例
 
 >以下片断来自项目代码里的文件：cn.jpush.api.example 中的 JPushApiExample.cs
 
 ```
-        PushPayload payload = PushObject_All_All_Alert();
-              try
-            {
-                var result = client.SendPush(payload);
-                System.Threading.Thread.Sleep(10000);
-                var apiResult = client.getReceivedApi(result.msg_id.ToString());
-                var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
-                var queryResultWithV2 = client.getReceivedApi("1739302794"); 
-                var querResultWithV3 = client.getReceivedApi_v3("1739302794");
-            }
-            catch (APIRequestException e)
-            {
-                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
-                Console.WriteLine("HTTP Status: " + e.Status);
-                Console.WriteLine("Error Code: " + e.ErrorCode);
-                Console.WriteLine("Error Message: " + e.ErrorCode);
-            }
-            catch (APIConnectionException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+PushPayload payload = PushObject_All_All_Alert();
+    try
+    {
+    var result = client.SendPush(payload);
+    System.Threading.Thread.Sleep(10000);
+    var apiResult = client.getReceivedApi(result.msg_id.ToString());
+    var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
+    var queryResultWithV2 = client.getReceivedApi("1739302794"); 
+    var querResultWithV3 = client.getReceivedApi_v3("1739302794");
+    }
+    catch (APIRequestException e)
+    {
+    Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+    Console.WriteLine("HTTP Status: " + e.Status);
+    Console.WriteLine("Error Code: " + e.ErrorCode);
+    Console.WriteLine("Error Message: " + e.ErrorCode);
+    }
+    catch (APIConnectionException e)
+    {
+    Console.WriteLine(e.Message);
+    }
 ```
 进行推送的关键在于构建一个 PushPayload 对象。以下示例一般的构建对象的用法。
 * 快捷地构建推送对象：所有平台，所有设备，内容为 ALERT 的通知。
 ```
 public static PushPayload PushObject_All_All_Alert()
-        {
-            PushPayload pushPayload = new PushPayload();
-            pushPayload.platform = Platform.all();
-            pushPayload.audience = Audience.all();
-            pushPayload.notification = new Notification().setAlert(ALERT);
-            return pushPayload;
-        }
+    {
+    PushPayload pushPayload = new PushPayload();
+    pushPayload.platform = Platform.all();
+    pushPayload.audience = Audience.all();
+    pushPayload.notification = new Notification().setAlert(ALERT);
+    return pushPayload;
+    }
 ```
 
 * 构建推送对象：所有平台，推送目标是别名为 "alias1"，通知内容为 ALERT。
@@ -76,56 +76,60 @@ public static PushPayload PushObject_all_alias_alert()
 * 构建推送对象：平台是 Android，目标是 tag 为 "tag1" 的设备，内容是 Android 通知 ALERT，并且标题为 TITLE。
 ```
 public static PushPayload PushObject_Android_Tag_AlertWithTitle()
-       {
-            PushPayload pushPayload = new PushPayload();
-            pushPayload.platform = Platform.android();
-            pushPayload.audience = Audience.s_tag("tag1"); 
-            pushPayload.notification =  Notification.android(ALERT,TITLE);
-            return pushPayload;
-        }
+{
+    PushPayload pushPayload = new PushPayload();
+    pushPayload.platform = Platform.android();
+    pushPayload.audience = Audience.s_tag("tag1"); 
+    pushPayload.notification =  Notification.android(ALERT,TITLE);
+    return pushPayload;
+}
+
 ```
+
 * 构建推送对象：平台是 iOS，推送目标是 "tag1", "tag_all" 的并集，推送内容同时包括通知与消息 - 通知信息是 ALERT，角标数字为 5，通知声音为 "happy"，并且附加字段 from = "JPush"；消息内容是 MSG_CONTENT。通知是 APNs 推送通道的，消息是 JPush 应用内消息通道的。APNs 的推送环境是“生产”（如果不显式设置的话，Library 会默认指定为开发）
 
 ```
 public static PushPayload PushObject_ios_tagAnd_alertWithExtrasAndMessage()
-        {
-            PushPayload pushPayload = new PushPayload();
-            pushPayload.platform = Platform.android_ios();
-            pushPayload.audience = Audience.s_tag_and("tag1", "tag_all");
-            var notification = new Notification();
-            notification.IosNotification = new IosNotification().setAlert(ALERT).setBadge(5).setSound("happy").AddExtra("from","JPush");
-            pushPayload.notification = notification;
-            pushPayload.message = Message.content(MSG_CONTENT);
-            return pushPayload;
-        }
+{
+    PushPayload pushPayload = new PushPayload();
+    pushPayload.platform = Platform.android_ios();
+    pushPayload.audience = Audience.s_tag_and("tag1", "tag_all");
+    var notification = new Notification();
+    notification.IosNotification = new IosNotification().setAlert(ALERT).setBadge(5).setSound("happy").AddExtra("from","JPush");
+    pushPayload.notification = notification;
+    pushPayload.message = Message.content(MSG_CONTENT);
+    return pushPayload;
+}
 ```
 * 构建推送对象：平台是 Andorid 与 iOS，推送目标是 （"tag1" 与 "tag2" 的交集）并（"alias1" 与 "alias2" 的交集），推送内容是 - 内容为 MSG_CONTENT 的消息，并且附加字段 from = JPush。
 ```
- public static PushPayload PushObject_ios_audienceMore_messageWithExtras()
-        {         
-            var pushPayload = new PushPayload();
-            pushPayload.platform = Platform.android_ios();
-            pushPayload.audience = Audience.s_tag("tag1","tag2");
-            pushPayload.message = Message.content(MSG_CONTENT).AddExtras("from", "JPush");
-            return pushPayload;
-        }
+public static PushPayload PushObject_ios_audienceMore_messageWithExtras()
+{         
+    var pushPayload = new PushPayload();
+    pushPayload.platform = Platform.android_ios();
+    pushPayload.audience = Audience.s_tag("tag1","tag2");
+    pushPayload.message = Message.content(MSG_CONTENT).AddExtras("from", "JPush");
+    return pushPayload;
+}
+
 ```
 
 * 构建推送对象：推送内容包含 SMS 信息
 
 ```
-        public static PushPayload PushSendSmsMessage()
-        {
-            var pushPayload = new PushPayload();
-            pushPayload.platform = Platform.all();
-            pushPayload.audience = Audience.all();
-            pushPayload.notification = new Notification().setAlert(ALERT);
-            SmsMessage sms_message = new SmsMessage();
-            sms_message.setContent(SMSMESSAGE);
-            sms_message.setDelayTime(DELAY_TIME);
-            pushPayload.sms_message = sms_message;
-            return pushPayload;
-        }
+public static PushPayload PushSendSmsMessage()
+{
+    var pushPayload = new PushPayload();
+    pushPayload.platform = Platform.all();
+    pushPayload.audience = Audience.all();
+    pushPayload.notification = new Notification().setAlert(ALERT);
+    SmsMessage sms_message = new SmsMessage();
+    sms_message.setContent(SMSMESSAGE);
+    sms_message.setDelayTime(DELAY_TIME);
+    pushPayload.sms_message = sms_message;
+    return pushPayload;
+}
+
 ```
 
 ##Report API V3
@@ -133,23 +137,22 @@ JPush Report API V3 提供各类统计数据查询功能。
 >以下片断来自项目代码里的文件：cn.jpush.api.examples 中的 ReportsExample.cs
 
 ```
-             try
-             {
-                 var result = jpushClient.getReceivedApi("1942377665");
-                 Console.WriteLine("Got result - " + result.ToString());
-
-             }
-             catch (APIRequestException e)
-             {
-                 Console.WriteLine("Error response from JPush server. Should review and fix it. ");
-                 Console.WriteLine("HTTP Status: " + e.Status);
-                 Console.WriteLine("Error Code: " + e.ErrorCode);
-                 Console.WriteLine("Error Message: " + e.ErrorCode);
-             }
-             catch (APIConnectionException e)
-             {
-                 Console.WriteLine(e.Message);
-             }
+try
+{
+    var result = jpushClient.getReceivedApi("1942377665");
+    Console.WriteLine("Got result - " + result.ToString());
+}
+catch (APIRequestException e)
+{
+    Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+    Console.WriteLine("HTTP Status: " + e.Status);
+    Console.WriteLine("Error Code: " + e.ErrorCode);
+    Console.WriteLine("Error Message: " + e.ErrorCode);
+}
+catch (APIConnectionException e)
+{
+    Console.WriteLine(e.Message);
+}
 
 ```
 
@@ -159,28 +162,23 @@ Device API 用于在服务器端查询、设置、更新、删除设备的 tag, 
 >以下片断来自项目代码里的文件：cn.jpush.api.examples 中的 DeviceApiExample.cs
 
 ```
-            try
-            {
-                var result = client.updateDevice(REGISTRATION_ID,
-                                                       ALIAS,
-                                                       MOBILE,
-                                                       TAG_HASHSET,
-                                                       TAG_HASHSET_REMOVE
-                                                       );
-                System.Threading.Thread.Sleep(10000);
-                Console.WriteLine(result);
-            }
-            catch (APIRequestException e)
-            {
-                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
-                Console.WriteLine("HTTP Status: " + e.Status);
-                Console.WriteLine("Error Code: " + e.ErrorCode);
-                Console.WriteLine("Error Message: " + e.ErrorCode);
-            }
-            catch (APIConnectionException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+try
+{
+    var result = client.updateDevice(REGISTRATION_ID,ALIAS,MOBILE,TAG_HASHSET,TAG_HASHSET_REMOVE);
+    System.Threading.Thread.Sleep(10000);
+    Console.WriteLine(result);
+}
+catch (APIRequestException e)
+{
+    Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+    Console.WriteLine("HTTP Status: " + e.Status);
+    Console.WriteLine("Error Code: " + e.ErrorCode);
+    Console.WriteLine("Error Message: " + e.ErrorCode);
+}
+catch (APIConnectionException e)
+{
+    Console.WriteLine(e.Message);
+}
 ```
 
 ##API Push Schedule
@@ -189,27 +187,26 @@ API 层面支持定时功能。
 >以下片断来自项目代码里的文件：cn.jpush.api.examples 中的 ScheduleApiExample.cs
 
 ```
-            TriggerPayload triggerConstructor = new TriggerPayload(START, END, TIME_PERIODICAL, TIME_UNIT, FREQUENCY, POINT);
-            SchedulePayload schedulepayloadperiodical = new SchedulePayload(NAME,ENABLED,triggerConstructor,pushPayload);
-            try
-            {
-                var result = scheduleclient.sendSchedule(schedulepayloadperiodical);
-                System.Threading.Thread.Sleep(10000);
-                Console.WriteLine(result);
-                schedule_id = result.schedule_id;
-            }
-            catch (APIRequestException e)
-            {
-                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
-                Console.WriteLine("HTTP Status: " + e.Status);
-                Console.WriteLine("Error Code: " + e.ErrorCode);
-                Console.WriteLine("Error Message: " + e.ErrorCode);
-            }
-            catch (APIConnectionException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
+TriggerPayload triggerConstructor = new TriggerPayload(START, END, TIME_PERIODICAL, TIME_UNIT, FREQUENCY, POINT);
+SchedulePayload schedulepayloadperiodical = new SchedulePayload(NAME,ENABLED,triggerConstructor,pushPayload);
+try
+{
+    var result = scheduleclient.sendSchedule(schedulepayloadperiodical);
+    System.Threading.Thread.Sleep(10000);
+    Console.WriteLine(result);
+    schedule_id = result.schedule_id;
+}
+catch (APIRequestException e)
+{
+    Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+    Console.WriteLine("HTTP Status: " + e.Status);
+    Console.WriteLine("Error Code: " + e.ErrorCode);
+    Console.WriteLine("Error Message: " + e.ErrorCode);
+}
+catch (APIConnectionException e)
+{
+    Console.WriteLine(e.Message);
+}
 ```
 
 
