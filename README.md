@@ -17,12 +17,13 @@
 
 对应REST API中Push-API-v3的json格式说明文档<http://docs.jpush.cn/display/dev/Push-API-v3>
 
+
 ##使用样例
 
 ###推送样例
 >以下片断来自项目代码里的文件：cn.jpush.api.example
-
-`        PushPayload payload = PushObject_All_All_Alert();
+```
+        PushPayload payload = PushObject_All_All_Alert();
               try
             {
                 var result = client.SendPush(payload);
@@ -43,11 +44,11 @@
             {
                 Console.WriteLine(e.Message);
             }
-`
+```
 ####进行推送的关键在于构建一个 PushPayload 对象。以下示例一般的构建对象的用法。
 * 快捷地构建推送对象：所有平台，所有设备，内容为 ALERT 的通知。
-
-`public static PushPayload PushObject_All_All_Alert()
+```
+public static PushPayload PushObject_All_All_Alert()
         {
             PushPayload pushPayload = new PushPayload();
             pushPayload.platform = Platform.all();
@@ -55,11 +56,11 @@
             pushPayload.notification = new Notification().setAlert(ALERT);
             return pushPayload;
         }
-`
+```
 
 * 构建推送对象：所有平台，推送目标是别名为 "alias1"，通知内容为 ALERT。
-
-`public static PushPayload PushObject_all_alias_alert()
+```
+public static PushPayload PushObject_all_alias_alert()
         {
             PushPayload pushPayload_alias = new PushPayload();
             pushPayload_alias.platform = Platform.android();
@@ -67,11 +68,11 @@
             pushPayload_alias.notification = new Notification().setAlert(ALERT);
             return pushPayload_alias;
         }
-`
+```
 
 * 构建推送对象：平台是 Android，目标是 tag 为 "tag1" 的设备，内容是 Android 通知 ALERT，并且标题为 TITLE。
-
-` public static PushPayload PushObject_Android_Tag_AlertWithTitle()
+```
+public static PushPayload PushObject_Android_Tag_AlertWithTitle()
        {
             PushPayload pushPayload = new PushPayload();
             pushPayload.platform = Platform.android();
@@ -79,11 +80,11 @@
             pushPayload.notification =  Notification.android(ALERT,TITLE);
             return pushPayload;
         }
-`
+```
 * 构建推送对象：平台是 iOS，推送目标是 "tag1", "tag_all" 的并集，推送内容同时包括通知与消息 - 通知信息是 ALERT，角标数字为 5，通知声音为 "happy"，并且附加字段 from = "JPush"；消息内容是 MSG_CONTENT。通知是 APNs 推送通道的，消息是 JPush 应用内消息通道的。APNs 的推送环境是“生产”（如果不显式设置的话，Library 会默认指定为开发）
 
-
-` public static PushPayload PushObject_ios_tagAnd_alertWithExtrasAndMessage()
+```
+public static PushPayload PushObject_ios_tagAnd_alertWithExtrasAndMessage()
         {
             PushPayload pushPayload = new PushPayload();
             pushPayload.platform = Platform.android_ios();
@@ -94,10 +95,10 @@
             pushPayload.message = Message.content(MSG_CONTENT);
             return pushPayload;
         }
-`
+```
 * 构建推送对象：平台是 Andorid 与 iOS，推送目标是 （"tag1" 与 "tag2" 的交集）并（"alias1" 与 "alias2" 的交集），推送内容是 - 内容为 MSG_CONTENT 的消息，并且附加字段 from = JPush。
-
-` public static PushPayload PushObject_ios_audienceMore_messageWithExtras()
+```
+ public static PushPayload PushObject_ios_audienceMore_messageWithExtras()
         {         
             var pushPayload = new PushPayload();
             pushPayload.platform = Platform.android_ios();
@@ -105,11 +106,11 @@
             pushPayload.message = Message.content(MSG_CONTENT).AddExtras("from", "JPush");
             return pushPayload;
         }
-`
+```
 
 * 构建推送对象：推送内容包含SMS信息
 
-`
+```
         public static PushPayload PushSendSmsMessage()
         {
             var pushPayload = new PushPayload();
@@ -122,7 +123,7 @@
             pushPayload.sms_message = sms_message;
             return pushPayload;
         }
-`
+```
 
 #### 异常
 
