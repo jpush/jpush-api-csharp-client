@@ -129,7 +129,6 @@ namespace cn.jpush.api.example
             pushPayload_alias.audience = Audience.s_alias("alias1");
             pushPayload_alias.notification = new Notification().setAlert(ALERT);
             return pushPayload_alias;
-           
         }
         public static PushPayload PushObject_Android_Tag_AlertWithTitle()
         {
@@ -138,7 +137,6 @@ namespace cn.jpush.api.example
             pushPayload.platform = Platform.android();
             pushPayload.audience = Audience.s_tag("tag1"); 
             pushPayload.notification =  Notification.android(ALERT,TITLE);
-
             return pushPayload;
         }
         public static PushPayload PushObject_android_and_ios()

@@ -5,21 +5,21 @@
 
 所有的接口都在cn.jpush.api.JPushClient中
 
-对应的 REST API 文档：<http://docs.jpush.cn/display/dev/REST+API>
+对应的 REST API 文档：<http://docs.jpush.io/server/rest_api_v3_push/>
 
 ## 环境配置
+在项目引用中添加依赖包：Newtonsoft.Json.dll
+在项目引用中添加cn.jpush.api.dll
 
 ## Push-API-v3
 
 向某单个设备或者某设备列表推送一条通知或者消息
 
-## 推送的载体：类PushPayload
+推送的载体：PushPayload
 
 对应REST API中Push-API-v3的json格式说明文档<http://docs.jpush.io/server/rest_api_v3_push/>
 
-##使用样例
-
-###推送样例
+推送样例
 
 >以下片断来自项目代码里的文件：cn.jpush.api.example 中的 JPushApiExample.cs
 
@@ -46,7 +46,7 @@
                 Console.WriteLine(e.Message);
             }
 ```
-####进行推送的关键在于构建一个 PushPayload 对象。以下示例一般的构建对象的用法。
+进行推送的关键在于构建一个 PushPayload 对象。以下示例一般的构建对象的用法。
 * 快捷地构建推送对象：所有平台，所有设备，内容为 ALERT 的通知。
 ```
 public static PushPayload PushObject_All_All_Alert()
@@ -127,7 +127,7 @@ public static PushPayload PushObject_ios_tagAnd_alertWithExtrasAndMessage()
 ```
 
 ##Report API V3
-####JPush Report API V3 提供各类统计数据查询功能。
+JPush Report API V3 提供各类统计数据查询功能。
 >以下片断来自项目代码里的文件：cn.jpush.api.examples 中的 ReportsExample.cs
 
 ```
@@ -153,7 +153,7 @@ public static PushPayload PushObject_ios_tagAnd_alertWithExtrasAndMessage()
 ```
 
 ##Device-API
-####Device API 用于在服务器端查询、设置、更新、删除设备的 tag,alias信息，使用时需要注意不要让服务端设置的标签又被客户端给覆盖了。
+Device API 用于在服务器端查询、设置、更新、删除设备的 tag,alias信息，使用时需要注意不要让服务端设置的标签又被客户端给覆盖了。
 
 >以下片断来自项目代码里的文件：cn.jpush.api.examples 中的 DeviceApiExample.cs
 
@@ -183,7 +183,7 @@ public static PushPayload PushObject_ios_tagAnd_alertWithExtrasAndMessage()
 ```
 
 ##API Push Schedule
-####API 层面支持定时功能。
+API 层面支持定时功能。
 
 >以下片断来自项目代码里的文件：cn.jpush.api.examples 中的 ScheduleApiExample.cs
 
@@ -212,15 +212,15 @@ public static PushPayload PushObject_ios_tagAnd_alertWithExtrasAndMessage()
 ```
 
 
-#### 异常
+##异常
 
 + APIRequestException
 
-	+ 包含http错误码：如401,404等，http错误信息
-	+ JPush returen code和JPush returen mssage
-	
+    + 包含http错误码：如401,404等，http错误信息
+    + JPush returen code和JPush returen mssage
+    
 + APIConnectionException
-	+ 包含错误的信息：比如超时，无网络等情况
+    + 包含错误的信息：比如超时，无网络等情况
 
 ## HTTP 状态码
 
