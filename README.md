@@ -21,7 +21,9 @@
 ##使用样例
 
 ###推送样例
+
 >以下片断来自项目代码里的文件：cn.jpush.api.example
+
 ```
         PushPayload payload = PushObject_All_All_Alert();
               try
