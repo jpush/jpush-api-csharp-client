@@ -19,7 +19,7 @@
 
 推送的载体：PushPayload
 
-对应REST API中Push-API-v3的json格式说明文档<http://docs.jpush.io/server/rest_api_v3_push/>
+对应 REST API 中 Push-API-v3 的 json 格式说明文档<http://docs.jpush.io/server/rest_api_v3_push/>
 
 推送样例
 
@@ -111,7 +111,7 @@ public static PushPayload PushObject_ios_tagAnd_alertWithExtrasAndMessage()
         }
 ```
 
-* 构建推送对象：推送内容包含SMS信息
+* 构建推送对象：推送内容包含 SMS 信息
 
 ```
         public static PushPayload PushSendSmsMessage()
@@ -150,12 +150,11 @@ JPush Report API V3 提供各类统计数据查询功能。
              {
                  Console.WriteLine(e.Message);
              }
-         }
 
 ```
 
 ##Device-API
-Device API 用于在服务器端查询、设置、更新、删除设备的 tag,alias信息，使用时需要注意不要让服务端设置的标签又被客户端给覆盖了。
+Device API 用于在服务器端查询、设置、更新、删除设备的 tag, alias信息，使用时需要注意不要让服务端设置的标签又被客户端给覆盖了。
 
 >以下片断来自项目代码里的文件：cn.jpush.api.examples 中的 DeviceApiExample.cs
 
@@ -230,7 +229,7 @@ API 层面支持定时功能。
 
 Push v3 API 状态码 参考文档　<http://docs.jpush.io/server/rest_api_v3_push/>　拉到最后
 
-ReportAPI  状态码 参考文档　<http://docs.jpush.io/server/rest_api_v3_report/>　拉到最后
+Report API  状态码 参考文档　<http://docs.jpush.io/server/rest_api_v3_report/>　拉到最后
 
 Device API 状态码 参考文档　<http://docs.jpush.io/server/rest_api_v3_device/>　拉到最后
 
