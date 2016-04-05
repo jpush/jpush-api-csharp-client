@@ -6,11 +6,11 @@
 对应的 REST API 文档：<http://docs.jpush.io/server/rest_api_v3_push/>
 
 ## 环境配置
-在 jpush-api-java-client 项目根目录可以下载下面的两个文件。
+在 [jpush-api-csharp-client](https://github.com/jpush/jpush-api-csharp-client) 项目根目录可以下载下面的两个文件。
 
-*   在项目引用中添加依赖包：Newtonsoft.Json.dll
+*   在项目引用中添加依赖包： Newtonsoft.Json.dll
 
-*   在项目引用中添加:cn.jpush.api.dll
+*   在项目引用中添加： cn.jpush.api.dll
 
 ## Push API v3
 
@@ -25,27 +25,27 @@
 >以下片断来自项目代码里的文件：cn.jpush.api.example 中的 JPushApiExample.cs
 
 ```
-    PushPayload payload = PushObject_All_All_Alert();
-    try
-    {
+PushPayload payload = PushObject_All_All_Alert();
+try
+{
     var result = client.SendPush(payload);
     System.Threading.Thread.Sleep(10000);
     var apiResult = client.getReceivedApi(result.msg_id.ToString());
     var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
     var queryResultWithV2 = client.getReceivedApi("1739302794");
     var querResultWithV3 = client.getReceivedApi_v3("1739302794");
-    }
-    catch (APIRequestException e)
-    {
+}
+catch (APIRequestException e)
+{
     Console.WriteLine("Error response from JPush server. Should review and fix it. ");
     Console.WriteLine("HTTP Status: " + e.Status);
     Console.WriteLine("Error Code: " + e.ErrorCode);
     Console.WriteLine("Error Message: " + e.ErrorCode);
-    }
-    catch (APIConnectionException e)
-    {
+}
+catch (APIConnectionException e)
+{
     Console.WriteLine(e.Message);
-    }
+}
 ```
 进行推送的关键在于构建一个 PushPayload 对象。以下示例一般的构建对象的用法。
 * 快捷地构建推送对象：所有平台，所有设备，内容为 ALERT 的通知。
@@ -229,14 +229,14 @@ catch (APIConnectionException e)
 
 ## HTTP 状态码
 
-参考文档：<http://docs.jpush.cn/display/dev/HTTP-Status-Code>
+参考文档：<http://docs.jpush.io/server/http_status_code/>
 
-Push v3 API 状态码 参考文档　<http://docs.jpush.io/server/rest_api_v3_push/>　拉到最后
+Push v3 API 状态码 参考文档：<http://docs.jpush.io/server/rest_api_v3_push/>　
 
-Report API  状态码 参考文档　<http://docs.jpush.io/server/rest_api_v3_report/>　拉到最后
+Report API  状态码 参考文档：<http://docs.jpush.io/server/rest_api_v3_report/>
 
-Device API 状态码 参考文档　<http://docs.jpush.io/server/rest_api_v3_device/>　拉到最后
+Device API 状态码 参考文档：<http://docs.jpush.io/server/rest_api_v3_device/>
 
-Push Schedule API 状态码 参考文档　<http://docs.jpush.io/server/rest_api_push_schedule/>　拉到最后
+Push Schedule API 状态码 参考文档：<http://docs.jpush.io/server/rest_api_push_schedule/>　
 
 [Release页面](https://github.com/jpush/jpush-api-csharp-client/releases/) 有详细的版本发布记录与下载。
