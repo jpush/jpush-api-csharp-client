@@ -4,6 +4,7 @@
 这是 JPush REST API 的 C# 版本封装开发包，是由极光推送官方提供的，一般支持最新的 API 功能。
 
 对应的 REST API 文档：<http://docs.jpush.io/server/rest_api_v3_push/>
+
 jpush-api-csharp-client v3.1.0 文档：<http://jpush.github.io/apidocs/jpush-api-client-csharp/>
 
 ## 环境配置
