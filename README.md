@@ -14,6 +14,11 @@ jpush-api-csharp-client v3.1.0 文档：<http://jpush.github.io/apidocs/jpush-ap
 
 *   在项目引用中添加： cn.jpush.api.dll
 
+在线方式配置：
+
+*   在项目->引用->管理 NuGet 程序包中搜索 cn.jpush.api 
+*   NuGet包管理工具会下载 jpush-api-csharp-client 和 Newtonsoft依赖。
+
 ## Push API v3
 
 向某单个设备或者某设备列表推送一条通知或者消息
