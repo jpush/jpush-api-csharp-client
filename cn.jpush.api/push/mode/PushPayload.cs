@@ -19,21 +19,22 @@ namespace cn.jpush.api.push.mode
     {
 
         private JsonSerializerSettings jSetting;
-        private const  String PLATFORM = "platform";
+        private const String PLATFORM = "platform";
         private const String AUDIENCE = "audience";
         private const String NOTIFICATION = "notification";
         private const String MESSAGE = "message";
         private const String SMS_MESSAGE = "sms_message";
         private const String OPTIONS = "options";
 
-        private const int MAX_GLOBAL_ENTITY_LENGTH = 1200;  // Definition according to JPush Docs
-        private const int MAX_IOS_PAYLOAD_LENGTH = 220;  // Definition according to JPush Docs
+        private const int MAX_IOS_ENTITY_LENGTH = 6144;  // Definition according to JPush Docs
+        private const int MAX_IOS_PAYLOAD_LENGTH = 2048;  // Definition according to JPush Docs
+        private const int MAX_ANDROID_ENTITY_LENGTH = 4096;
 
         //serializaiton property
         [JsonConverter(typeof(PlatformConverter))]
-        public Platform platform{get;set;}
+        public Platform platform { get; set; }
         [JsonConverter(typeof(AudienceConverter))]
-        public Audience audience{get;set;}
+        public Audience audience { get; set; }
         public Notification notification { get; set; }
         public Message message { get; set; }
         public SmsMessage sms_message { get; set; }
@@ -51,7 +52,7 @@ namespace cn.jpush.api.push.mode
             jSetting.NullValueHandling = NullValueHandling.Ignore;
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
         }
-        public PushPayload(Platform platform, Audience audience, Notification notification, Message message = null, SmsMessage sms_message = null ,Options options = null)
+        public PushPayload(Platform platform, Audience audience, Notification notification, Message message = null, SmsMessage sms_message = null, Options options = null)
         {
             Debug.Assert(platform != null);
             Debug.Assert(audience != null);
@@ -130,35 +131,85 @@ namespace cn.jpush.api.push.mode
             }
             this.options.time_to_live = timeToLive;
         }
-        public int  GetSendno()
+        public int GetSendno()
         {
             if (this.options != null)
                 return this.options.sendno;
             return 0;
         }
+
+
         public bool IsGlobalExceedLength()
         {
+            return IsAndroidExceedLength() && IsiOSExceedLength();
+        }
+
+        public bool IsiOSExceedLength()
+        {
             int messageLength = 0;
-            if (message!= null)
+            if (message != null)
             {
-               var messageJson = JsonConvert.SerializeObject(this.message, jSetting);
-               messageLength += UTF8Encoding.UTF8.GetBytes(messageJson).Length;
+                var messageJson = JsonConvert.SerializeObject(this.message, jSetting);
+                messageLength += UTF8Encoding.UTF8.GetBytes(messageJson).Length;
             }
             if (this.notification == null)
             {
-                return messageLength > MAX_GLOBAL_ENTITY_LENGTH;
+                return messageLength > MAX_IOS_ENTITY_LENGTH;
             }
             else
             {
                 var notificationJson = JsonConvert.SerializeObject(this.notification);
                 if (notificationJson != null)
                 {
+                    int iosJsonLength = 0;
+                    if (this.notification.IosNotification != null)
+                    {
+                        var iosJson = JsonConvert.SerializeObject(this.notification.IosNotification, jSetting);
+                        if (iosJson != null)
+                        {
+                            iosJsonLength = UTF8Encoding.UTF8.GetBytes(iosJson).Length;
+                        }
+                    }
                     messageLength += UTF8Encoding.UTF8.GetBytes(notificationJson).Length;
+                    messageLength -= iosJsonLength;
                 }
-                return messageLength > MAX_GLOBAL_ENTITY_LENGTH;
+                return messageLength > MAX_IOS_ENTITY_LENGTH;
             }
-           
         }
+
+        public bool IsAndroidExceedLength()
+        {
+            int messageLength = 0;
+            if (message != null)
+            {
+                var messageJson = JsonConvert.SerializeObject(this.message, jSetting);
+                messageLength += UTF8Encoding.UTF8.GetBytes(messageJson).Length;
+            }
+            if (this.notification == null)
+            {
+                return messageLength > MAX_ANDROID_ENTITY_LENGTH;
+            }
+            else
+            {
+                var notificationJson = JsonConvert.SerializeObject(this.notification.AndroidNotification);
+                if (notificationJson != null)
+                {
+                    int androidJsonLength = 0;
+                    if (this.notification.AndroidNotification != null)
+                    {
+                        var androidJson = JsonConvert.SerializeObject(this.notification.AndroidNotification, jSetting);
+                        if (androidJson != null)
+                        {
+                            androidJsonLength = UTF8Encoding.UTF8.GetBytes(androidJson).Length;
+                        }
+                    }
+                    messageLength += UTF8Encoding.UTF8.GetBytes(notificationJson).Length;
+                    messageLength -= androidJsonLength;
+                }
+                return messageLength > MAX_ANDROID_ENTITY_LENGTH;
+            }
+        }
+
         public bool IsIosExceedLength()
         {
             if (this.notification != null)
@@ -173,7 +224,7 @@ namespace cn.jpush.api.push.mode
                 }
                 else
                 {
-                    if (!(this.notification.alert==null))
+                    if (!(this.notification.alert == null))
                     {
                         string jsonText;
                         using (StringWriter sw = new StringWriter())
@@ -189,13 +240,12 @@ namespace cn.jpush.api.push.mode
                     {
                         // No iOS Payload
                     }
-                   
-
                 }
-                
+
             }
             return false;
         }
+
         public string ToJson()
         {
             return JsonConvert.SerializeObject(this, jSetting);
@@ -204,7 +254,7 @@ namespace cn.jpush.api.push.mode
         {
             Preconditions.checkArgument(!(null == audience || null == platform), "audience and platform both should be set.");
             Preconditions.checkArgument(!(null == notification && null == message), "notification or message should be set at least one.");
-            if (audience!=null)
+            if (audience != null)
             {
                 audience.Check();
             }
