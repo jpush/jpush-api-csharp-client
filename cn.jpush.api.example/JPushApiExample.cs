@@ -24,7 +24,7 @@ namespace cn.jpush.api.example
         public static String app_key = "6be9204c30b9473e87bad4dc";
         public static String master_secret = "8aae478411e89f7682ed5af6";
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine("*****开始发送******");
             JPushClient client = new JPushClient(app_key, master_secret);

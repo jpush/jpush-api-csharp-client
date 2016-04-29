@@ -47,7 +47,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>cn.jpush.api.example.JPushApiExample</StartupObject>
+    <StartupObject>cn.jpush.api.example.Schedule.DeleteSchedule</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -68,6 +68,12 @@
     </Compile>
     <Compile Include="ReportsExample.cs" />
     <Compile Include="ScheduleApiExample.cs" />
+    <Compile Include="ScheduleExample\BaseExample.cs" />
+    <Compile Include="ScheduleExample\CreateSchedule.cs" />
+    <Compile Include="ScheduleExample\DeleteSchedule.cs" />
+    <Compile Include="ScheduleExample\GetSchedule.cs" />
+    <Compile Include="ScheduleExample\GetScheduleList.cs" />
+    <Compile Include="ScheduleExample\UpdateSchedule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

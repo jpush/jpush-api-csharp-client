@@ -174,6 +174,18 @@ namespace cn.jpush.api.test.model
              Assert.IsTrue(payload.IsIosExceedLength(), "Should exceed - " + UTF8Encoding.UTF8.GetBytes(LONG_TEXT_1).Length); 
        }
 
-    
+        [TestMethod]
+        public void testAndroidExceed2()
+        {
+            PushPayload payload = new PushPayload();
+            payload.platform = Platform.all();
+            payload.audience = Audience.all();
+            payload.notification = new Notification();
+            payload.notification.AndroidNotification = new AndroidNotification().setAlert(LONG_TEXT_3);
+            payload.Check();
+            Debug.WriteLine("Size: " + UTF8Encoding.UTF8.GetBytes(LONG_TEXT_3).Length);
+            Assert.IsTrue(payload.IsAndroidExceedLength(), "Should exceed - " + UTF8Encoding.UTF8.GetBytes(LONG_TEXT_3).Length);
+        }
+
     }
 }

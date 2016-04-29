@@ -46,7 +46,7 @@ namespace cn.jpush.api.example
 
         public static String[] REGISTRATION_IDS = { REGISTRATION_ID1, REGISTRATION_ID2};
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
          {
              Console.WriteLine("*****开始获取设备信息******");
              DeviceClient client = new DeviceClient(app_key, master_secret);
