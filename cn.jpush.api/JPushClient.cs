@@ -37,7 +37,7 @@ namespace cn.jpush.api
         }
         // ----------------------------- Push API
         /// <summary>
-        /// 想某个设备或者某设别列表推送一条通知，或者消息
+        /// 向某个设备或者某设别列表推送一条通知，或者消息
         /// </summary>
         /// <param name="PushPayload">推送的数据结构，包含平台信息推送目标，通知内容，消息内容与可选参数</param>
         /// <returns>成功时返回sendno和messageid，失败时有异常抛出</returns>
@@ -50,7 +50,7 @@ namespace cn.jpush.api
             return _pushClient.sendPush(payload);
         }
         /// <summary>
-        /// 想某个设备或者某设别列表推送一条通知，或者消息
+        /// 向某个设备或者某设别列表推送一条通知，或者消息
         /// </summary>
         /// <param name="PushPayload">推送的json结构，包含平台信息推送目标，通知内容，消息内容与可选参数</param>
         /// <returns>成功时返回sendno和messageid，失败时有异常抛出</returns>
