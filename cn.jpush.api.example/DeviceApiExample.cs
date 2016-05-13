@@ -65,7 +65,7 @@ namespace cn.jpush.api.example
                 Console.WriteLine("Error response from JPush server. Should review and fix it. ");
                 Console.WriteLine("HTTP Status: " + e.Status);
                 Console.WriteLine("Error Code: " + e.ErrorCode);
-                Console.WriteLine("Error Message: " + e.ErrorCode);
+                Console.WriteLine("Error Message: " + e.ErrorMessage);
             }
             catch (APIConnectionException e)
             {
@@ -94,7 +94,7 @@ namespace cn.jpush.api.example
                 Console.WriteLine("Error response from JPush server. Should review and fix it. ");
                 Console.WriteLine("HTTP Status: " + e.Status);
                 Console.WriteLine("Error Code: " + e.ErrorCode);
-                Console.WriteLine("Error Message: " + e.ErrorCode);
+                Console.WriteLine("Error Message: " + e.ErrorMessage);
             }
             catch (APIConnectionException e)
             {
@@ -118,7 +118,7 @@ namespace cn.jpush.api.example
                         Console.WriteLine("Error response from JPush server. Should review and fix it. ");
                         Console.WriteLine("HTTP Status: " + e.Status);
                         Console.WriteLine("Error Code: " + e.ErrorCode);
-                        Console.WriteLine("Error Message: " + e.ErrorCode);
+                        Console.WriteLine("Error Message: " + e.ErrorMessage);
                     }
                     catch (APIConnectionException e)
                     {
@@ -142,7 +142,7 @@ namespace cn.jpush.api.example
                         Console.WriteLine("Error response from JPush server. Should review and fix it. ");
                         Console.WriteLine("HTTP Status: " + e.Status);
                         Console.WriteLine("Error Code: " + e.ErrorCode);
-                        Console.WriteLine("Error Message: " + e.ErrorCode);
+                        Console.WriteLine("Error Message: " + e.ErrorMessage);
                     }
                     catch (APIConnectionException e)
                     {
@@ -164,7 +164,7 @@ namespace cn.jpush.api.example
                         Console.WriteLine("Error response from JPush server. Should review and fix it. ");
                         Console.WriteLine("HTTP Status: " + e.Status);
                         Console.WriteLine("Error Code: " + e.ErrorCode);
-                        Console.WriteLine("Error Message: " + e.ErrorCode);
+                        Console.WriteLine("Error Message: " + e.ErrorMessage);
                     }
                     catch (APIConnectionException e)
                     {
@@ -186,7 +186,7 @@ namespace cn.jpush.api.example
                 Console.WriteLine("Error response from JPush server. Should review and fix it. ");
                 Console.WriteLine("HTTP Status: " + e.Status);
                 Console.WriteLine("Error Code: " + e.ErrorCode);
-                Console.WriteLine("Error Message: " + e.ErrorCode);
+                Console.WriteLine("Error Message: " + e.ErrorMessage);
             }
             catch (APIConnectionException e)
             {
@@ -212,7 +212,7 @@ namespace cn.jpush.api.example
                 Console.WriteLine("Error response from JPush server. Should review and fix it. ");
                 Console.WriteLine("HTTP Status: " + e.Status);
                 Console.WriteLine("Error Code: " + e.ErrorCode);
-                Console.WriteLine("Error Message: " + e.ErrorCode);
+                Console.WriteLine("Error Message: " + e.ErrorMessage);
             }
             catch (APIConnectionException e)
             {
