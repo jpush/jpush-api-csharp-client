@@ -6,7 +6,7 @@
 对应的 REST API 文档：<http://docs.jpush.io/server/rest_api_v3_push/>
 
 ## 支持版本
-Microsoft. NET Framework 4.0 以上版本
+Microsoft. NET Framework 4.0 （包括）以上版本
 
 ## 环境配置
 在 [jpush-api-csharp-client](https://github.com/jpush/jpush-api-csharp-client) 项目根目录可以下载下面的两个文件。
