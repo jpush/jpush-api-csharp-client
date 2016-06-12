@@ -48,7 +48,7 @@ catch (APIRequestException e)
     Console.WriteLine("Error response from JPush server. Should review and fix it. ");
     Console.WriteLine("HTTP Status: " + e.Status);
     Console.WriteLine("Error Code: " + e.ErrorCode);
-    Console.WriteLine("Error Message: " + e.ErrorCode);
+    Console.WriteLine("Error Message: " + e.ErrorMessage);
 }
 catch (APIConnectionException e)
 {
@@ -160,7 +160,7 @@ catch (APIRequestException e)
     Console.WriteLine("Error response from JPush server. Should review and fix it.");
     Console.WriteLine("HTTP Status: " + e.Status);
     Console.WriteLine("Error Code: " + e.ErrorCode);
-    Console.WriteLine("Error Message: " + e.ErrorCode);
+    Console.WriteLine("Error Message: " + e.ErrorMessage);
 }
 catch (APIConnectionException e)
 {
@@ -187,7 +187,7 @@ catch (APIRequestException e)
     Console.WriteLine("Error response from JPush server. Should review and fix it.");
     Console.WriteLine("HTTP Status: " + e.Status);
     Console.WriteLine("Error Code: " + e.ErrorCode);
-    Console.WriteLine("Error Message: " + e.ErrorCode);
+    Console.WriteLine("Error Message: " + e.ErrorMessage);
 }
 catch (APIConnectionException e)
 {
@@ -217,7 +217,7 @@ catch (APIRequestException e)
     Console.WriteLine("Error response from JPush server. Should review and fix it.");
     Console.WriteLine("HTTP Status: " + e.Status);
     Console.WriteLine("Error Code: " + e.ErrorCode);
-    Console.WriteLine("Error Message: " + e.ErrorCode);
+    Console.WriteLine("Error Message: " + e.ErrorMessage);
 }
 catch (APIConnectionException e)
 {
