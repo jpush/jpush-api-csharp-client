@@ -17,7 +17,8 @@ namespace cn.jpush.api.report
             MessagesResult receivedsResult = new MessagesResult();
             if (responseWrapper.responseCode==HttpStatusCode.OK)
             {
-                receivedsResult.messages = JsonConvert.DeserializeObject<List<Message>>(responseWrapper.responseContent);
+               receivedsResult.messages = JsonConvert.DeserializeObject<List<Message>>(responseWrapper.responseContent);
+               //[{"android":{"received":null,"target":null,"online_push":null,"click":null,"msg_click":null},"ios":{"apns_sent":1,"apns_target":1,"click":null,"target":null,"received":null,"msg_click":null},"winphone":{"mpns_target":null,"mpns_sent":null,"click":null},"msg_id":991969761}]
             }
             receivedsResult.ResponseResult = responseWrapper;
             return receivedsResult;
@@ -39,7 +40,7 @@ namespace cn.jpush.api.report
                 android = null;
                 ios = null;
             }
-            public long msg_id;
+            public long? msg_id;
             public Android android;
             public Ios ios;
         }
@@ -53,10 +54,10 @@ namespace cn.jpush.api.report
                 online_push = 0;
                 click = 0;
             }
-            public int received;
-            public int target;
-            public int online_push;
-            public int click;
+            public int? received;
+            public int? target;
+            public int? online_push;
+            public int? click;
         }
         public class Ios
         {
@@ -66,9 +67,9 @@ namespace cn.jpush.api.report
                 apns_target = 0;
                 click = 0;
             }
-            public int apns_sent;
-            public int apns_target;
-            public int click;
+            public int? apns_sent;
+            public int? apns_target;
+            public int? click;
         }
         
     }

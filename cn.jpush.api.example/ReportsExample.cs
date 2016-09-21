@@ -10,15 +10,15 @@ namespace cn.jpush.api.example
 {
     class ReportsExample
     {
-         public static String app_key = "997f28c1cea5a9f17d82079a";
-         public static String master_secret = "47d264a3c02a6a5a4a256a45";
+         public static String app_key = "cb5029879e49566e2bb30e8a";
+         public static String master_secret = "0aec091b50bea4970e2650c4";
 
          public static void testGetReport()
          {
              JPushClient jpushClient = new JPushClient(app_key, master_secret);
              try
              {
-                 var result = jpushClient.getReceivedApi("1942377665");
+                 var result = jpushClient.getReceivedApi("991969761");
                  Console.WriteLine("Got result - " + result.ToString());
 
              }
@@ -40,7 +40,7 @@ namespace cn.jpush.api.example
              JPushClient jpushClient = new JPushClient(app_key, master_secret);
              try
              {
-                 var result = jpushClient.getReportUsers(TimeUnit.DAY, "2014-06-10", 3);
+                 var result = jpushClient.getReportUsers(TimeUnit.DAY, "2016-06-10", 3);
                  Console.WriteLine("Got result - " + result.ToString());
 
              }
@@ -62,10 +62,11 @@ namespace cn.jpush.api.example
              JPushClient jpushClient = new JPushClient(app_key, master_secret);
              try
              {
-                 var result = jpushClient.getReportMessages("269978303");
+                 var result = jpushClient.getReportMessages("991969761");
                  Console.WriteLine("Got result - " + result.ToString());
+                 Console.WriteLine("Got messages - " + result.messages[0].msg_id);
 
-             }
+            }
              catch (APIRequestException e)
              {
                  Console.WriteLine("Error response from JPush server. Should review and fix it. ");
@@ -79,6 +80,12 @@ namespace cn.jpush.api.example
              }
 
          }
+        public static void Main(string[] args)
+        {
+            ReportsExample.testGetReport();
+            ReportsExample.testGetMessages();
+            ReportsExample.testGetUsers();
+        }
 
     }
 }

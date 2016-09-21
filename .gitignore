@@ -2,3 +2,5 @@ Rlease/
 Debug/
 obj/
 bin/
+packages/
+packages.config
