@@ -64,7 +64,6 @@ namespace cn.jpush.api.example
              {
                  var result = jpushClient.getReportMessages("991969761");
                  Console.WriteLine("Got result - " + result.ToString());
-                 Console.WriteLine("Got messages - " + result.messages[0].msg_id);
 
             }
              catch (APIRequestException e)
