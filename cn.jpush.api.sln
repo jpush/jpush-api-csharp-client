@@ -1,55 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cn.jpush.api", "cn.jpush.api\cn.jpush.api.csproj", "{E281D457-F259-4F0B-8608-16C81D8AE97B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cn.jpush.api.example", "cn.jpush.api.example\cn.jpush.api.example.csproj", "{F0575C50-114F-4CB6-889A-53FBA68D2BA4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cn.jpush.api.test", "cn.jpush.api.test\cn.jpush.api.test.csproj", "{DA7D243F-378F-414A-913A-38065D0E9BE8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cn.jpush.api.example", "..\..\CSharp\cn.jpush.api.example\cn.jpush.api.example.csproj", "{F0575C50-114F-4CB6-889A-53FBA68D2BA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Debug|Mixed Platforms = Debug|Mixed Platforms
-		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
-		Release|Mixed Platforms = Release|Mixed Platforms
-		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E281D457-F259-4F0B-8608-16C81D8AE97B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E281D457-F259-4F0B-8608-16C81D8AE97B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E281D457-F259-4F0B-8608-16C81D8AE97B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{E281D457-F259-4F0B-8608-16C81D8AE97B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{E281D457-F259-4F0B-8608-16C81D8AE97B}.Debug|Mixed Platforms.Deploy.0 = Debug|Any CPU
-		{E281D457-F259-4F0B-8608-16C81D8AE97B}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E281D457-F259-4F0B-8608-16C81D8AE97B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E281D457-F259-4F0B-8608-16C81D8AE97B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E281D457-F259-4F0B-8608-16C81D8AE97B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{E281D457-F259-4F0B-8608-16C81D8AE97B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{E281D457-F259-4F0B-8608-16C81D8AE97B}.Release|x86.ActiveCfg = Release|Any CPU
 		{F0575C50-114F-4CB6-889A-53FBA68D2BA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F0575C50-114F-4CB6-889A-53FBA68D2BA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F0575C50-114F-4CB6-889A-53FBA68D2BA4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{F0575C50-114F-4CB6-889A-53FBA68D2BA4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{F0575C50-114F-4CB6-889A-53FBA68D2BA4}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{F0575C50-114F-4CB6-889A-53FBA68D2BA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0575C50-114F-4CB6-889A-53FBA68D2BA4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F0575C50-114F-4CB6-889A-53FBA68D2BA4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{F0575C50-114F-4CB6-889A-53FBA68D2BA4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{F0575C50-114F-4CB6-889A-53FBA68D2BA4}.Release|x86.ActiveCfg = Release|Any CPU
-		{DA7D243F-378F-414A-913A-38065D0E9BE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA7D243F-378F-414A-913A-38065D0E9BE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA7D243F-378F-414A-913A-38065D0E9BE8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{DA7D243F-378F-414A-913A-38065D0E9BE8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{DA7D243F-378F-414A-913A-38065D0E9BE8}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DA7D243F-378F-414A-913A-38065D0E9BE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA7D243F-378F-414A-913A-38065D0E9BE8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DA7D243F-378F-414A-913A-38065D0E9BE8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{DA7D243F-378F-414A-913A-38065D0E9BE8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{DA7D243F-378F-414A-913A-38065D0E9BE8}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

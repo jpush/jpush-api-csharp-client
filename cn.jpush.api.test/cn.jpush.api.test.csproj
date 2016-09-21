@@ -38,9 +38,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="cn.jpush.api">
-      <HintPath>..\cn.jpush.api\bin\Debug\cn.jpush.api.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\cn.jpush.api\bin\Debug\Newtonsoft.Json.dll</HintPath>
     </Reference>
