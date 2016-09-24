@@ -6,5 +6,4 @@ bin/
 *.nupkg
 
 packages/
-packages.config
 .vs/
