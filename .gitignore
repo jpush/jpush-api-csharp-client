@@ -7,3 +7,4 @@ bin/
 
 packages/
 packages.config
+.vs/
