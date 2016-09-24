@@ -12,6 +12,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{84996A73-E2A9-4381-8548-54A472927275}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		nuget-push.bat = nuget-push.bat
+		nuget-push.ps1 = nuget-push.ps1
 	EndProjectSection
 EndProject
 Global
