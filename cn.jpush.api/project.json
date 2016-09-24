@@ -1,7 +1,8 @@
 {
   "version": "1.0.0-*",
   "buildOptions": {
-    "debugType": "portable"
+    "debugType": "portable",
+    "define": [ "DOTNETCORE" ]
   },
   "dependencies": {
     "Newtonsoft.Json": "9.0.1",

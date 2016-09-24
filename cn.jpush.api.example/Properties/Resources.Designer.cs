@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Reflection;
+
 namespace cn.jpush.api.example.Properties {
     using System;
     
@@ -39,7 +41,11 @@ namespace cn.jpush.api.example.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
+#if DOTNETCORE
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("cn.jpush.api.example.Properties.Resources", typeof(Resources).GetTypeInfo().Assembly);
+#else
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("cn.jpush.api.example.Properties.Resources", typeof(Resources).Assembly);
+#endif
                     resourceMan = temp;
                 }
                 return resourceMan;

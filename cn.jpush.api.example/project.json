@@ -2,9 +2,13 @@
   "version": "1.0.0-*",
   "buildOptions": {
     "debugType": "portable",
-    "emitEntryPoint": true
+    "emitEntryPoint": true,
+    "define": [ "DOTNETCORE" ],
+    "additionalArguments": [ "/main:cn.jpush.api.example.JPushApiExample" ]
   },
-  "dependencies": {},
+  "dependencies": {
+    "cn.jpush.api": "1.0.*"
+  },
   "frameworks": {
     "netcoreapp1.0": {
       "dependencies": {

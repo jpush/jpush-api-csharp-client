@@ -71,7 +71,12 @@ namespace cn.jpush.api.common
             }
             catch(Exception e)
             {
+
+#if DOTNETCORE
+                Debug.WriteLine(e.Message);
+#else
                 Debug.Print(e.Message);
+#endif
             }
         }
 
