@@ -1,4 +1,4 @@
-{
+ï»¿{
   "name": "binbin.cn.jpush.api",
   "version": "1.0.0-*",
   "buildOptions": {
@@ -19,8 +19,8 @@
     }
   },
   "packOptions": {
-    "tags": [ "jpush", "dotnet", ".net", "dotnetcore", "c#", "csharp", "¼«¹â", "ÍÆËÍ" ],
-    "summary": "JPush's  supported dotnetcore client library for accessing JPush APIs. ¼«¹âÍÆËÍ¹Ù·½Ö§³ÖµÄ C# °æ±¾·şÎñÆ÷¶Ë SDK",
+    "tags": [ "jpush", "dotnet", ".net", "dotnetcore", "c#", "csharp", "æå…‰", "æ¨é€" ],
+    "summary": "JPush's  supported dotnetcore client library for accessing JPush APIs. æå…‰æ¨é€å®˜æ–¹æ”¯æŒçš„ C# ç‰ˆæœ¬æœåŠ¡å™¨ç«¯ SDK",
     "projectUrl": "https://github.com/lotosbin/jpush-api-csharp-client/"
   }
 }
