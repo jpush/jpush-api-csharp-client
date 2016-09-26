@@ -1,4 +1,5 @@
-﻿using cn.jpush.api.common;
+﻿#if !DOTNETCORE
+using cn.jpush.api.common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Diagnostics;
+using System.Net.Http;
 using Newtonsoft.Json;
 using cn.jpush.api.common.resp;
 
@@ -19,17 +21,17 @@ namespace cn.jpush.api.common
 	    private const String RATE_LIMIT_QUOTA = "X-Rate-Limit-Limit";
 	    private const String RATE_LIMIT_Remaining = "X-Rate-Limit-Remaining";
 	    private const String RATE_LIMIT_Reset = "X-Rate-Limit-Reset";
-	
+
 	    protected const int RESPONSE_OK = 200;
-	
+
 	    //设置连接超时时间
 	    private const int DEFAULT_CONNECTION_TIMEOUT = (20 * 1000); // milliseconds
 	    //设置读取超时时间
 	    private const int DEFAULT_SOCKET_TIMEOUT = (30 * 1000); // milliseconds
 
-        public ResponseWrapper sendPost(String url, String auth, String reqParams) 
-        { 
-            return this.sendRequest( "POST",  url,  auth, reqParams);        
+        public ResponseWrapper sendPost(String url, String auth, String reqParams)
+        {
+            return this.sendRequest( "POST",  url,  auth, reqParams);
         }
         public ResponseWrapper sendDelete(String url, String auth, String reqParams)
         {
@@ -74,7 +76,7 @@ namespace cn.jpush.api.common
                 if ( !String.IsNullOrEmpty(auth) )
                 {
                     //添加头auth
-                    myReq.Headers.Add("Authorization", "Basic " + auth);    
+                    myReq.Headers.Add("Authorization", "Basic " + auth);
                 }
                 if (method == "POST")
                 {
@@ -147,7 +149,7 @@ namespace cn.jpush.api.common
                 {//
                     throw new APIConnectionException(e.Message);
                 }
-               
+
             }
             //这里不再抓取非http的异常，如果异常抛出交给开发者自行处理
             //catch (System.Exception ex)
@@ -155,19 +157,20 @@ namespace cn.jpush.api.common
             //     String errorMsg = ex.Message;
             //     Debug.Print(errorMsg);
             //}
-            finally 
+            finally
             {
                 if (response != null)
                 {
-                    response.Close();                
+                    response.Close();
                 }
                 if(myReq != null)
                 {
                     myReq.Abort();
-                }            
+                }
             }
             return result;
         }
 
     }
 }
+#endif

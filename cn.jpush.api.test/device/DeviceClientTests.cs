@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using cn.jpush.api.test;
 using cn.jpush.api.common;
-
 namespace cn.jpush.api.device.Tests
 {
     [TestClass()]

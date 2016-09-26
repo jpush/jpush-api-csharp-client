@@ -10,7 +10,11 @@ namespace cn.jpush.api.util
     {
         public static String getBase64Encode(String str)
         {
+#if DOTNETCORE
+            byte[] bytes = Encoding.UTF8.GetBytes(str);
+#else
             byte[] bytes = Encoding.Default.GetBytes(str);
+#endif
             //
             return Convert.ToBase64String(bytes);
         }

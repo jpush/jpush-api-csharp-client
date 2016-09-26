@@ -88,6 +88,12 @@
     <Compile Include="schedule\trigger\SingleTests.cs" />
     <Compile Include="schedule\trigger\TriggerPayloadTests.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\cn.jpush.api\cn.jpush.api.csproj">
+      <Project>{E281D457-F259-4F0B-8608-16C81D8AE97B}</Project>
+      <Name>cn.jpush.api</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

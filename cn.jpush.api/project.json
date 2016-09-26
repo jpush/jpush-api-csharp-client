@@ -1,0 +1,26 @@
+﻿{
+  "name": "binbin.cn.jpush.api",
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "debugType": "portable",
+    "define": [ "DOTNETCORE" ]
+  },
+  "dependencies": {
+    "Newtonsoft.Json": "9.0.1",
+    "System.ComponentModel.Primitives": "4.1.0",
+    "System.Private.DataContractSerialization": "4.1.1",
+    "System.Runtime.Serialization.Json": "4.0.2"
+  },
+  "frameworks": {
+    "netstandard1.6": {
+      "dependencies": {
+        "NETStandard.Library": "1.6.0"
+      }
+    }
+  },
+  "packOptions": {
+    "tags": [ "jpush", "dotnet", ".net", "dotnetcore", "c#", "csharp", "极光", "推送" ],
+    "summary": "JPush's  supported dotnetcore client library for accessing JPush APIs. 极光推送官方支持的 C# 版本服务器端 SDK",
+    "projectUrl": "https://github.com/lotosbin/jpush-api-csharp-client/"
+  }
+}
