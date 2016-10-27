@@ -3,7 +3,7 @@
 ## 概述
 这是 JPush REST API 的 C# 版本封装开发包，是由极光推送官方提供的，一般支持最新的 API 功能。
 
-对应的 REST API 文档：<http://docs.jpush.io/server/rest_api_v3_push/>
+对应的 REST API 文档：<http://docs.jiguang.cn/jpush/server/push/server_overview/>
 
 ## 支持版本
 Microsoft. NET Framework 4.0 （包括）以上版本
@@ -237,14 +237,14 @@ catch (APIConnectionException e)
 
 ## HTTP 状态码
 
-参考文档：<http://docs.jpush.io/server/http_status_code/>
+参考文档：<http://docs.jiguang.cn/jpush/server/push/http_status_code/>
 
-Push v3 API 状态码 参考文档：<http://docs.jpush.io/server/rest_api_v3_push/>　
+Push v3 API 状态码 参考文档：<http://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/>　
 
-Report API  状态码 参考文档：<http://docs.jpush.io/server/rest_api_v3_report/>
+Report API  状态码 参考文档：<http://docs.jiguang.cn/jpush/server/push/rest_api_v3_report/>
 
-Device API 状态码 参考文档：<http://docs.jpush.io/server/rest_api_v3_device/>
+Device API 状态码 参考文档：<http://docs.jiguang.cn/jpush/server/push/rest_api_v3_device/>
 
-Push Schedule API 状态码 参考文档：<http://docs.jpush.io/server/rest_api_push_schedule/>　
+Push Schedule API 状态码 参考文档：<http://docs.jiguang.cn/jpush/server/push/rest_api_push_schedule/>　
 
 [Release页面](https://github.com/jpush/jpush-api-csharp-client/releases/) 有详细的版本发布记录与下载。
