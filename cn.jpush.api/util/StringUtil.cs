@@ -123,7 +123,8 @@ namespace cn.jpush.api.util
         public static Boolean IsValidName(String name)
         {
             Boolean isname = new Boolean();
-            isname = System.Text.RegularExpressions.Regex.IsMatch(name, @"^[a-zA-Z0-9_\u4e00-\u9fa5]+$");
+            isname = true;
+            //isname = System.Text.RegularExpressions.Regex.IsMatch(name, @"^[a-zA-Z0-9_\u4e00-\u9fa5]+$");
             isname= isname&&(name.Length<256);
             return isname;
         }
@@ -131,7 +132,8 @@ namespace cn.jpush.api.util
         public static Boolean IsValidTag(String tag)
         {
             Boolean isname = new Boolean();
-            isname = System.Text.RegularExpressions.Regex.IsMatch(tag, @"^[a-zA-Z0-9_\u4e00-\u9fa5]+$");
+            isname = true;
+            //isname = System.Text.RegularExpressions.Regex.IsMatch(tag, @"^[a-zA-Z0-9_\u4e00-\u9fa5]+$");
             //最多 40个字节
             isname = isname && (tag.Length < 41);
             return isname;
@@ -140,7 +142,8 @@ namespace cn.jpush.api.util
         public static Boolean IsValidAlias(String alias)
         {
             Boolean isname = new Boolean();
-            isname = System.Text.RegularExpressions.Regex.IsMatch(alias, @"^[a-zA-Z0-9_\u4e00-\u9fa5]+$");
+            isname = true;
+            //isname = System.Text.RegularExpressions.Regex.IsMatch(alias, @"^[a-zA-Z0-9_\u4e00-\u9fa5]+$");
             //最多 40个字节
             isname = isname&&(alias.Length < 41);
             return isname;
