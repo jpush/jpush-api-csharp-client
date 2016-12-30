@@ -22,7 +22,7 @@ namespace cn.jpush.api.example
         public static int DELAY_TIME = 1;
         public static String TAG = "tag_api";
         public static String app_key = "6be9204c30b9473e87bad4dc";
-        public static String master_secret = "8aae478411e89f7682ed5af6";
+        public static String master_secret = "a564b268ba23631a8a34e687";
 
         public static void Main(string[] args)
         {
@@ -121,7 +121,7 @@ namespace cn.jpush.api.example
             pushPayload.notification = new Notification().setAlert(ALERT);
             return pushPayload;
         }
-        public static PushPayload PushObject_all_alias_alert()
+        public static PushPayload PushObject_all_alia_alert()
         {
 
             PushPayload pushPayload_alias = new PushPayload();
@@ -130,6 +130,19 @@ namespace cn.jpush.api.example
             pushPayload_alias.notification = new Notification().setAlert(ALERT);
             return pushPayload_alias;
         }
+
+        public static PushPayload PushObject_all_alias_alert()
+        {
+
+            PushPayload pushPayload_alias = new PushPayload();
+            pushPayload_alias.platform = Platform.android();
+            string[] alias = new string[] { "alias1" , "alias2", "alias3"};
+            Console.WriteLine(alias);
+            pushPayload_alias.audience = Audience.s_alias(alias);
+            pushPayload_alias.notification = new Notification().setAlert(ALERT);
+            return pushPayload_alias;
+        }
+
         public static PushPayload PushObject_Android_Tag_AlertWithTitle()
         {
             PushPayload pushPayload = new PushPayload();
