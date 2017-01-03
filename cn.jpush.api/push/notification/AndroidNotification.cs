@@ -19,6 +19,20 @@ namespace cn.jpush.api.push.notification
         public String title{get;private set;}
         [JsonProperty]
         public int builder_id { get; private set; }
+        [JsonProperty]
+        public int priority { get; private set; }
+        [JsonProperty]
+        public String category { get; private set; }
+        [JsonProperty]
+        public int style { get; private set; }
+        [JsonProperty]
+        public String big_text { get; private set; }
+        [JsonProperty]
+        public String inbox { get; private set; }
+        [JsonProperty]
+        public String big_pic_path { get; private set; }
+
+
         public AndroidNotification():base()
         {
             this.title = null;
@@ -39,6 +53,41 @@ namespace cn.jpush.api.push.notification
             this.alert = alert;
             return this;
         }
+
+        public AndroidNotification setPriority(int priority)
+        {
+            this.priority = priority;
+            return this;
+        }
+        public AndroidNotification setCategory(String category)
+        {
+            this.category = category;
+            return this;
+        }
+
+        public AndroidNotification setStyle(int style)
+        {
+            this.style = style;
+            return this;
+        }
+        public AndroidNotification setBig_text(String big_text)
+        {
+            this.big_text = big_text;
+            return this;
+        }
+
+        public AndroidNotification setInbox(String inbox)
+        {
+            this.inbox = inbox;
+            return this;
+        }
+        public AndroidNotification setBig_pic_patht(String big_pic_path)
+        {
+            this.big_pic_path = big_pic_path;
+            return this;
+        }
+
+
         public AndroidNotification AddExtra(string key, string value)
         {
             if (extras == null)
