@@ -107,11 +107,42 @@ namespace cn.jpush.api.example
             {
                 Console.WriteLine(e.Message);
             }
-
-
-
             Console.WriteLine("*****结束发送******");
+
+
+            //Android 平台上的通知，JPush SDK 按照一定的通知栏样式展示。
+            PushPayload payload_options = PushObject_android_with_options();
+            try
+            {
+                var result = client.SendPush(payload_options);
+                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+                System.Threading.Thread.Sleep(10000);
+                //如需查询上次推送结果执行下面的代码
+                var apiResult = client.getReceivedApi(result.msg_id.ToString());
+                var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
+                //如需查询某个messageid的推送结果执行下面的代码
+                var queryResultWithV2 = client.getReceivedApi("1739302794");
+                var querResultWithV3 = client.getReceivedApi_v3("1739302794");
+
+            }
+            catch (APIRequestException e)
+            {
+                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+                Console.WriteLine("HTTP Status: " + e.Status);
+                Console.WriteLine("Error Code: " + e.ErrorCode);
+                Console.WriteLine("Error Message: " + e.ErrorMessage);
+            }
+            catch (APIConnectionException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            Console.WriteLine("*****结束发送******");
+
         }
+
+
+
+        
 
         public static PushPayload PushObject_All_All_Alert()
         {
@@ -163,12 +194,35 @@ namespace cn.jpush.api.example
             notification.IosNotification = new IosNotification();
             notification.IosNotification.incrBadge(1);
             notification.IosNotification.AddExtra("extra_key", "extra_value");
-
             pushPayload.notification = notification.Check(); 
-      
-
             return pushPayload;
         }
+
+
+        public static PushPayload PushObject_android_with_options()
+        {
+            PushPayload pushPayload = new PushPayload();
+            pushPayload.platform = Platform.android_ios();
+            var audience = Audience.all();
+            pushPayload.audience = audience;
+            var notification = new Notification().setAlert("alert content");
+            AndroidNotification androidnotification = new AndroidNotification();
+            androidnotification.setAlert("Push Object android with options");
+            androidnotification.setBuilderID(3);
+            androidnotification.setStyle(1);
+            androidnotification.setBig_text("big text content");
+            androidnotification.setInbox("JSONObject");
+            androidnotification.setBig_pic_patht("picture url");
+            androidnotification.setPriority(0);
+            androidnotification.setCategory("category str");
+            notification.AndroidNotification =androidnotification;
+            notification.IosNotification = new IosNotification();
+            notification.IosNotification.incrBadge(1);
+            notification.IosNotification.AddExtra("extra_key", "extra_value");
+            pushPayload.notification = notification.Check();
+            return pushPayload;
+        }
+
         public static PushPayload PushObject_ios_tagAnd_alertWithExtrasAndMessage()
         {
             PushPayload pushPayload = new PushPayload();
@@ -205,6 +259,8 @@ namespace cn.jpush.api.example
             pushPayload.sms_message = sms_message;
             return pushPayload;
         }
+
+
 
     }
 }
