@@ -41,7 +41,7 @@ namespace cn.jpush.api.example
         public static String schedule_id ;
         public static String schedule_id1;
         public static String app_key = "6be9204c30b9473e87bad4dc";
-        public static String master_secret = "9349ad7c90292a603c512e92";
+        public static String master_secret = "a19bef7870c55d7e51f4c4f0";
 
         public static void Main(string[] args) {
             //init a pushpayload

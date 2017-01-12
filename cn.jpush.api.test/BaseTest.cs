@@ -8,7 +8,7 @@ namespace cn.jpush.api.test
     public class BaseTest
     {
         public static String APP_KEY = "6be9204c30b9473e87bad4dc";
-        public static String MASTER_SECRET = "9349ad7c90292a603c512e92";
+        public static String MASTER_SECRET = "a19bef7870c55d7e51f4c4f0";
       
 
          public const  String ALERT = "JPush Test - alert";

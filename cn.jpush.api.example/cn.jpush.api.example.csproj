@@ -48,13 +48,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>cn.jpush.api.example.JPushApiExample</StartupObject>
+    <StartupObject>cn.jpush.api.example.DeviceApiExample</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="cn.jpush.api, Version=1.2.1.28010, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\cn.jpush.api\bin\Debug\cn.jpush.api.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

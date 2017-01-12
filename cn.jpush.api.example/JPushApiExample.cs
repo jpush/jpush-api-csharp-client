@@ -1,5 +1,5 @@
 ﻿using System;
-using cn.jpush.api.common;
+using cn.jpush.api.common;      
 using cn.jpush.api.push.mode;
 using cn.jpush.api.push.notification;
 using cn.jpush.api.common.resp;
@@ -22,7 +22,7 @@ namespace cn.jpush.api.example
         public static int DELAY_TIME = 1;
         public static String TAG = "tag_api";
         public static String app_key = "6be9204c30b9473e87bad4dc";
-        public static String master_secret = "a564b268ba23631a8a34e687";
+        public static String master_secret = "a19bef7870c55d7e51f4c4f0";
 
         public static void Main(string[] args)
         {
