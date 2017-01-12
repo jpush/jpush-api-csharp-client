@@ -23,9 +23,9 @@ namespace cn.jpush.api.common
 	    protected const int RESPONSE_OK = 200;
 	
 	    //设置连接超时时间
-	    private const int DEFAULT_CONNECTION_TIMEOUT = (20 * 1000); // milliseconds
+	    private const int DEFAULT_CONNECTION_TIMEOUT = (100 * 1000); // milliseconds
 	    //设置读取超时时间
-	    private const int DEFAULT_SOCKET_TIMEOUT = (30 * 1000); // milliseconds
+	    private const int DEFAULT_SOCKET_TIMEOUT = (100 * 1000); // milliseconds
 
         public ResponseWrapper sendPost(String url, String auth, String reqParams) 
         { 
@@ -61,6 +61,7 @@ namespace cn.jpush.api.common
             ResponseWrapper result = new ResponseWrapper();
             //创建httprequest
             HttpWebRequest myReq = null;
+            myReq.KeepAlive = false;
             //创建httpresponse
             HttpWebResponse response = null;
             try
@@ -144,8 +145,10 @@ namespace cn.jpush.api.common
                     throw new APIRequestException(result);
                 }
                 else
-                {//
-                    throw new APIConnectionException(e.Message);
+                {
+                    String info = method + url + auth + reqParams;
+                    Console.WriteLine(info);
+                    throw new APIConnectionException(e.Message, info);
                 }
                
             }

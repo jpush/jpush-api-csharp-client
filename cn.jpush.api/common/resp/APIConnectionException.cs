@@ -8,9 +8,12 @@ namespace cn.jpush.api.common.resp
 {
    public class APIConnectionException:Exception
     {
-        public APIConnectionException(String message):base(message)
+        public String message;
+        public String info;
+        public APIConnectionException(String message,String info):base(message)
         {
-            
+            this.message = message;
+            this.info = info;
         }
     }
 }
