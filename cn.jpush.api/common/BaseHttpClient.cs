@@ -61,7 +61,6 @@ namespace cn.jpush.api.common
             ResponseWrapper result = new ResponseWrapper();
             //创建httprequest
             HttpWebRequest myReq = null;
-            myReq.KeepAlive = false;
             //创建httpresponse
             HttpWebResponse response = null;
             try
@@ -71,6 +70,7 @@ namespace cn.jpush.api.common
                 //request类型
                 myReq.Method = method;
                 myReq.ContentType = "application/json";
+                myReq.KeepAlive = false;
                 //auth是否为null或者空
                 if ( !String.IsNullOrEmpty(auth) )
                 {
