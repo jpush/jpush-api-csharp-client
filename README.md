@@ -17,7 +17,7 @@ Microsoft. NET Framework 4.0 （包括）以上版本
 
 在线方式配置：
 
-*   在项目->引用->管理 NuGet 程序包中搜索 cn.jpush.api
+*   在项目->引用->管理 NuGet 程序包中搜索 cn.jpush.api。（如果已经安装了 Newtonsoft 需要先卸载一下。）
 *   NuGet 包管理工具会下载 jpush-api-csharp-client 和 Newtonsoft 依赖。
 
 ## Push API v3
