@@ -108,7 +108,7 @@ namespace cn.jpush.api.push.notification
             }
             return this;
         }
-        public IosNotification setAlert(String alert)
+        public IosNotification setAlert(object alert)
         {
             this.alert = alert;
             return this;

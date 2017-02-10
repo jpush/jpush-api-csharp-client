@@ -1,5 +1,8 @@
 ﻿using System;
-using cn.jpush.api.common;      
+using System.Collections;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using cn.jpush.api.common;
 using cn.jpush.api.push.mode;
 using cn.jpush.api.push.notification;
 using cn.jpush.api.common.resp;
@@ -172,10 +175,28 @@ namespace cn.jpush.api.example
                 Console.WriteLine(e.Message);
             }
             Console.WriteLine("*****结束发送******");
+
+
+            PushPayload payload_ios_alert_json = PushObject_ios_alert_json();
+            try
+            {
+                var result = client.SendPush(payload_ios_alert_json);
+                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+                System.Threading.Thread.Sleep(10000);
+            }
+            catch (APIRequestException e)
+            {
+                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+                Console.WriteLine("HTTP Status: " + e.Status);
+                Console.WriteLine("Error Code: " + e.ErrorCode);
+                Console.WriteLine("Error Message: " + e.ErrorMessage);
+            }
+            catch (APIConnectionException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            Console.WriteLine("*****结束发送******");
         }
-
-
-
         
 
         public static PushPayload PushObject_All_All_Alert()
@@ -264,12 +285,28 @@ namespace cn.jpush.api.example
             pushPayload.audience = Audience.s_tag_and("tag1", "tag_all");
             var notification = new Notification();
             notification.IosNotification = new IosNotification().setAlert(ALERT).setBadge(5).setSound("happy").AddExtra("from","JPush");
-
             pushPayload.notification = notification;
             pushPayload.message = Message.content(MSG_CONTENT);
             return pushPayload;
-
         }
+
+
+        public static PushPayload PushObject_ios_alert_json()
+        {
+            PushPayload pushPayload = new PushPayload();
+            pushPayload.platform = Platform.all();
+            pushPayload.audience = Audience.all();
+            var notification = new Notification();
+            Hashtable alert = new Hashtable();
+            alert["title"] = "JPush Title";
+            alert["subtitle"] = "JPush Subtitle";
+            alert["body"] = "JPush Body";
+            notification.IosNotification = new IosNotification().setAlert(alert).setBadge(5).setSound("happy").AddExtra("from", "JPush");
+            pushPayload.notification = notification;
+            pushPayload.message = Message.content(MSG_CONTENT);
+            return pushPayload;
+        }
+
         public static PushPayload PushObject_ios_audienceMore_messageWithExtras()
         {
             
@@ -306,8 +343,5 @@ namespace cn.jpush.api.example
             pushPayload.sms_message = sms_message;
             return pushPayload;
         }
-
-
-
     }
 }
