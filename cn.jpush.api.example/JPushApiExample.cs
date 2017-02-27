@@ -24,8 +24,8 @@ namespace cn.jpush.api.example
         public static String SMSMESSAGE = "Test from C# v3 sdk - SMSMESSAGE";
         public static int DELAY_TIME = 1;
         public static String TAG = "tag_api";
-        public static String app_key = "6be9204c30b9473e87bad4dc";
-        public static String master_secret = "a19bef7870c55d7e51f4c4f0";
+        public static String app_key = "a1703c14b186a68a66ef86c1";
+        public static String master_secret = "9dabdf8bb704b421759cb49c";
 
         public static void Main(string[] args)
         {
@@ -196,6 +196,27 @@ namespace cn.jpush.api.example
                 Console.WriteLine(e.Message);
             }
             Console.WriteLine("*****结束发送******");
+
+            PushPayload PushObject = PushObjectWithExtrasAndMessage();
+            try
+            {
+                var result = client.SendPush(PushObject);
+                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+                System.Threading.Thread.Sleep(10000);
+            }
+            catch (APIRequestException e)
+            {
+                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+                Console.WriteLine("HTTP Status: " + e.Status);
+                Console.WriteLine("Error Code: " + e.ErrorCode);
+                Console.WriteLine("Error Message: " + e.ErrorMessage);
+            }
+            catch (APIConnectionException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            Console.WriteLine("*****结束发送******");
+
         }
         
 
@@ -278,13 +299,13 @@ namespace cn.jpush.api.example
             return pushPayload;
         }
 
-        public static PushPayload PushObject_ios_tagAnd_alertWithExtrasAndMessage()
+        public static PushPayload PushObjectWithExtrasAndMessage()
         {
             PushPayload pushPayload = new PushPayload();
             pushPayload.platform = Platform.android_ios();
-            pushPayload.audience = Audience.s_tag_and("tag1", "tag_all");
+            pushPayload.audience = Audience.all();
             var notification = new Notification();
-            notification.IosNotification = new IosNotification().setAlert(ALERT).setBadge(5).setSound("happy").AddExtra("from","JPush");
+            notification.IosNotification = new IosNotification().setAlert("sound default").setBadge(5).setSound("default").AddExtra("from","JPush");
             pushPayload.notification = notification;
             pushPayload.message = Message.content(MSG_CONTENT);
             return pushPayload;
