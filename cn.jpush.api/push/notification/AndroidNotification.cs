@@ -26,6 +26,8 @@ namespace cn.jpush.api.push.notification
         [JsonProperty]
         public int style { get; private set; }
         [JsonProperty]
+        public int alert_type { get; private set; }
+        [JsonProperty]
         public String big_text { get; private set; }
         [JsonProperty]
         public String inbox { get; private set; }
@@ -70,6 +72,13 @@ namespace cn.jpush.api.push.notification
             this.style = style;
             return this;
         }
+
+        public AndroidNotification setAlert_type(int alert_type)
+        {
+            this.alert_type = alert_type;
+            return this;
+        }
+
         public AndroidNotification setBig_text(String big_text)
         {
             this.big_text = big_text;

@@ -32,10 +32,16 @@ namespace cn.jpush.api.example
             Console.WriteLine("*****开始发送******");
             JPushClient client = new JPushClient(app_key, master_secret);
 
+            DateTime dt1 = System.DateTime.Now;
+            
             PushPayload payload = PushObject_All_All_Alert();
             try
             {
                 var result = client.SendPush(payload);
+                DateTime dt2 = System.DateTime.Now;
+
+                TimeSpan ts = dt2.Subtract(dt1);
+                Console.WriteLine("example1 time {0}", ts.TotalMilliseconds);
                 //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
                 System.Threading.Thread.Sleep(10000);
                 //如需查询上次推送结果执行下面的代码
@@ -286,6 +292,7 @@ namespace cn.jpush.api.example
             androidnotification.setAlert("Push Object android with options");
             androidnotification.setBuilderID(3);
             androidnotification.setStyle(1);
+            androidnotification.setAlert_type(1);
             androidnotification.setBig_text("big text content");
             androidnotification.setInbox("JSONObject");
             androidnotification.setBig_pic_patht("picture url");
