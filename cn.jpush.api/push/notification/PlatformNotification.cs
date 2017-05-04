@@ -10,11 +10,12 @@ namespace cn.jpush.api.push.notification
 {
     public abstract class PlatformNotification
     {
-        
         public const String ALERT = "alert";
         private const String EXTRAS = "extras";
+
         [JsonProperty]
         public object alert{get;protected set;}
+
         [JsonProperty]
         public Dictionary<String, object> extras { get; protected set; }
 
@@ -23,7 +24,5 @@ namespace cn.jpush.api.push.notification
             this.alert = null;
             this.extras = null;
         }
-      
-
     }
 }
