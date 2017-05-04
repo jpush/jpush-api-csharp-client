@@ -34,7 +34,6 @@ namespace cn.jpush.api.push.notification
         [JsonProperty]
         public String big_pic_path { get; private set; }
 
-
         public AndroidNotification():base()
         {
             this.title = null;
@@ -61,6 +60,7 @@ namespace cn.jpush.api.push.notification
             this.priority = priority;
             return this;
         }
+
         public AndroidNotification setCategory(String category)
         {
             this.category = category;
@@ -90,12 +90,12 @@ namespace cn.jpush.api.push.notification
             this.inbox = inbox;
             return this;
         }
-        public AndroidNotification setBig_pic_patht(String big_pic_path)
+
+        public AndroidNotification setBig_pic_path(String big_pic_path)
         {
             this.big_pic_path = big_pic_path;
             return this;
         }
-
 
         public AndroidNotification AddExtra(string key, string value)
         {
@@ -109,6 +109,7 @@ namespace cn.jpush.api.push.notification
             }
             return this;
         }
+
         public AndroidNotification AddExtra(string key, int value)
         {
             if (extras == null)
@@ -118,6 +119,7 @@ namespace cn.jpush.api.push.notification
             extras.Add(key, value);
             return this;
         }
+
         public AndroidNotification AddExtra(string key, bool value)
         {
             if (extras == null)
@@ -126,9 +128,6 @@ namespace cn.jpush.api.push.notification
             }
             extras.Add(key, value);
             return this;
-
         }
-       
-        
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using Newtonsoft.Json;
 using cn.jpush.api.common;
 using cn.jpush.api.push.mode;
 using cn.jpush.api.push.notification;
@@ -14,8 +12,8 @@ namespace cn.jpush.api.example
         //run the DeviceApiExample first,it will add mobile,tags,alias to the device:
         //首先运行DeviceApiExample，为设备添加手机号码，标签别名，再运行JPushApiExample,ScheduleApiExample，步骤如下：
         //1.设置cn.jpush.api.example为启动项
-        //2.在cn.jpush.api.example项目，右键选择属性，然后选择应用程序，最后在启动对象下拉框中选择DeviceApiExample
-        //3.按照2的步骤设置，运行JPushApiExample,ScheduleApiExample.
+        //2.在cn.jpush.api.example项目，右键选择属性，然后选择应用程序，最后在启动对象下拉框中选择 DeviceApiExample
+        //3.按照2的步骤设置，运行 JPushApiExample,ScheduleApiExample.
 
         public static String TITLE = "Test from C# v3 sdk";
         public static String ALERT = "Test from  C# v3 sdk - alert";
@@ -24,8 +22,8 @@ namespace cn.jpush.api.example
         public static String SMSMESSAGE = "Test from C# v3 sdk - SMSMESSAGE";
         public static int DELAY_TIME = 1;
         public static String TAG = "tag_api";
-        public static String app_key = "a1703c14b186a68a66ef86c1";
-        public static String master_secret = "9dabdf8bb704b421759cb49c";
+        public static String app_key = "e0eb67483f04f4425667d817";  // JPush Cordova Demo
+        public static String master_secret = "1ea950a19875a6e2693ae312";
 
         public static void Main(string[] args)
         {
@@ -33,7 +31,7 @@ namespace cn.jpush.api.example
             JPushClient client = new JPushClient(app_key, master_secret);
 
             DateTime dt1 = System.DateTime.Now;
-            
+
             PushPayload payload = PushObject_All_All_Alert();
             try
             {
@@ -42,15 +40,17 @@ namespace cn.jpush.api.example
 
                 TimeSpan ts = dt2.Subtract(dt1);
                 Console.WriteLine("example1 time {0}", ts.TotalMilliseconds);
-                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+
+                //由于统计数据并非即时的，所以等待一小段时间再执行下面的获取结果方法
                 System.Threading.Thread.Sleep(10000);
+
                 //如需查询上次推送结果执行下面的代码
                 var apiResult = client.getReceivedApi(result.msg_id.ToString());
                 var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
-                //如需查询某个messageid的推送结果执行下面的代码
-                var queryResultWithV2 = client.getReceivedApi("1739302794"); 
-                var querResultWithV3 = client.getReceivedApi_v3("1739302794");
 
+                //如需查询某个 messageId 的推送结果执行下面的代码
+                var queryResultWithV2 = client.getReceivedApi("1739302794");
+                var querResultWithV3 = client.getReceivedApi_v3("1739302794");
             }
             catch (APIRequestException e)
             {
@@ -64,13 +64,15 @@ namespace cn.jpush.api.example
                 Console.WriteLine(e.Message);
             }
 
-            //send   smsmessage
+            // Send sms message
             PushPayload pushsms = PushSendSmsMessage();
             try
             {
                 var result = client.SendPush(pushsms);
-                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+
+                //由于统计数据并非即时的，所以等待一小段时间再执行下面的获取结果方法
                 System.Threading.Thread.Sleep(10000);
+
                 //如需查询上次推送结果执行下面的代码
                 var apiResult = client.getReceivedApi(result.msg_id.ToString());
                 var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
@@ -91,8 +93,10 @@ namespace cn.jpush.api.example
             try
             {
                 var result = client.SendPush(payload_alias);
-                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+
+                //由于统计数据并非即时的，所以等待一小段时间再执行下面的获取结果方法
                 System.Threading.Thread.Sleep(10000);
+
                 //如需查询上次推送结果执行下面的代码
                 var apiResult = client.getReceivedApi(result.msg_id.ToString());
                 var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
@@ -112,17 +116,18 @@ namespace cn.jpush.api.example
             Console.WriteLine("*****结束发送******");
 
 
-            //Android 平台上的通知，JPush SDK 按照一定的通知栏样式展示。
+            // Android 平台上的通知，JPush SDK 按照一定的通知栏样式展示。
             PushPayload payload_options = PushObject_android_with_options();
             try
             {
                 var result = client.SendPush(payload_options);
-                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+
+                //由于统计数据并非即时的，所以等待一小段时间再执行下面的获取结果方法
                 System.Threading.Thread.Sleep(10000);
+
                 //如需查询上次推送结果执行下面的代码
                 var apiResult = client.getReceivedApi(result.msg_id.ToString());
                 var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
-
             }
             catch (APIRequestException e)
             {
@@ -141,12 +146,13 @@ namespace cn.jpush.api.example
             try
             {
                 var result = client.SendPush(payload_alias);
-                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+
+                // 由于统计数据并非即时的，所以等待一小段时间再执行下面的获取结果方法
                 System.Threading.Thread.Sleep(10000);
-                //如需查询上次推送结果执行下面的代码
+
+                // 如需查询上次推送结果执行下面的代码
                 var apiResult = client.getReceivedApi(result.msg_id.ToString());
                 var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
-
             }
             catch (APIRequestException e)
             {
@@ -160,13 +166,13 @@ namespace cn.jpush.api.example
                 Console.WriteLine(e.Message);
             }
             Console.WriteLine("*****结束发送******");
-
 
             PushPayload payload_apns_production_options = PushObject_apns_production_options();
             try
             {
                 var result = client.SendPush(payload_apns_production_options);
-                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+
+                // 由于统计数据并非非是即时的，所以等待一小段时间再执行下面的获取结果方法
                 System.Threading.Thread.Sleep(10000);
             }
             catch (APIRequestException e)
@@ -182,12 +188,11 @@ namespace cn.jpush.api.example
             }
             Console.WriteLine("*****结束发送******");
 
-
             PushPayload payload_ios_alert_json = PushObject_ios_alert_json();
             try
             {
                 var result = client.SendPush(payload_ios_alert_json);
-                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+                // 由于统计数据并非非是即时的，所以等待一小段时间再执行下面的获取结果方法
                 System.Threading.Thread.Sleep(10000);
             }
             catch (APIRequestException e)
@@ -207,7 +212,7 @@ namespace cn.jpush.api.example
             try
             {
                 var result = client.SendPush(PushObject);
-                //由于统计数据并非非是即时的,所以等待一小段时间再执行下面的获取结果方法
+                // 由于统计数据并非即时的，所以等待一小段时间再执行下面的获取结果方法
                 System.Threading.Thread.Sleep(10000);
             }
             catch (APIRequestException e)
@@ -222,9 +227,7 @@ namespace cn.jpush.api.example
                 Console.WriteLine(e.Message);
             }
             Console.WriteLine("*****结束发送******");
-
         }
-        
 
         public static PushPayload PushObject_All_All_Alert()
         {
@@ -249,7 +252,7 @@ namespace cn.jpush.api.example
 
             PushPayload pushPayload_alias = new PushPayload();
             pushPayload_alias.platform = Platform.android();
-            string[] alias = new string[] { "alias1" , "alias2", "alias3"};
+            string[] alias = new string[] { "alias1", "alias2", "alias3" };
             Console.WriteLine(alias);
             pushPayload_alias.audience = Audience.s_alias(alias);
             pushPayload_alias.notification = new Notification().setAlert(ALERT);
@@ -261,8 +264,8 @@ namespace cn.jpush.api.example
             PushPayload pushPayload = new PushPayload();
 
             pushPayload.platform = Platform.android();
-            pushPayload.audience = Audience.s_tag("tag1"); 
-            pushPayload.notification =  Notification.android(ALERT,TITLE);
+            pushPayload.audience = Audience.s_tag("tag1");
+            pushPayload.notification = Notification.android(ALERT, TITLE);
             return pushPayload;
         }
         public static PushPayload PushObject_android_and_ios()
@@ -275,8 +278,9 @@ namespace cn.jpush.api.example
             notification.AndroidNotification = new AndroidNotification().setTitle("Android Title");
             notification.IosNotification = new IosNotification();
             notification.IosNotification.incrBadge(1);
+            notification.IosNotification.setMutableContent(true);
             notification.IosNotification.AddExtra("extra_key", "extra_value");
-            pushPayload.notification = notification.Check(); 
+            pushPayload.notification = notification.Check();
             return pushPayload;
         }
 
@@ -288,6 +292,7 @@ namespace cn.jpush.api.example
             var audience = Audience.all();
             pushPayload.audience = audience;
             var notification = new Notification().setAlert("alert content");
+
             AndroidNotification androidnotification = new AndroidNotification();
             androidnotification.setAlert("Push Object android with options");
             androidnotification.setBuilderID(3);
@@ -295,10 +300,11 @@ namespace cn.jpush.api.example
             androidnotification.setAlert_type(1);
             androidnotification.setBig_text("big text content");
             androidnotification.setInbox("JSONObject");
-            androidnotification.setBig_pic_patht("picture url");
+            androidnotification.setBig_pic_path("picture url");
             androidnotification.setPriority(0);
             androidnotification.setCategory("category str");
-            notification.AndroidNotification =androidnotification;
+
+            notification.AndroidNotification = androidnotification;
             notification.IosNotification = new IosNotification();
             notification.IosNotification.incrBadge(1);
             notification.IosNotification.AddExtra("extra_key", "extra_value");
@@ -312,12 +318,15 @@ namespace cn.jpush.api.example
             pushPayload.platform = Platform.android_ios();
             pushPayload.audience = Audience.all();
             var notification = new Notification();
-            notification.IosNotification = new IosNotification().setAlert("sound default").setBadge(5).setSound("default").AddExtra("from","JPush");
+            notification.IosNotification = new IosNotification()
+                .setAlert("sound default")
+                .setBadge(5)
+                .setSound("default")
+                .AddExtra("from", "JPush");
             pushPayload.notification = notification;
             pushPayload.message = Message.content(MSG_CONTENT);
             return pushPayload;
         }
-
 
         public static PushPayload PushObject_ios_alert_json()
         {
@@ -329,7 +338,11 @@ namespace cn.jpush.api.example
             alert["title"] = "JPush Title";
             alert["subtitle"] = "JPush Subtitle";
             alert["body"] = "JPush Body";
-            notification.IosNotification = new IosNotification().setAlert(alert).setBadge(5).setSound("happy").AddExtra("from", "JPush");
+            notification.IosNotification = new IosNotification()
+                .setAlert(alert)
+                .setBadge(5)
+                .setSound("happy")
+                .AddExtra("from", "JPush");
             pushPayload.notification = notification;
             pushPayload.message = Message.content(MSG_CONTENT);
             return pushPayload;
@@ -337,26 +350,21 @@ namespace cn.jpush.api.example
 
         public static PushPayload PushObject_ios_audienceMore_messageWithExtras()
         {
-            
             var pushPayload = new PushPayload();
             pushPayload.platform = Platform.android_ios();
-            pushPayload.audience = Audience.s_tag("tag1","tag2");
+            pushPayload.audience = Audience.s_tag("tag1", "tag2");
             pushPayload.message = Message.content(MSG_CONTENT).AddExtras("from", "JPush");
             return pushPayload;
-
         }
-
 
         public static PushPayload PushObject_apns_production_options()
         {
-
             var pushPayload = new PushPayload();
             pushPayload.platform = Platform.android_ios();
             pushPayload.audience = Audience.s_tag("tag1", "tag2");
             pushPayload.message = Message.content(MSG_CONTENT).AddExtras("from", "JPush");
             pushPayload.options.apns_production = false;
             return pushPayload;
-
         }
 
         public static PushPayload PushSendSmsMessage()
