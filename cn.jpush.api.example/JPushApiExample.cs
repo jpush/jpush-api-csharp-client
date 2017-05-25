@@ -16,13 +16,13 @@ namespace cn.jpush.api.example
         //3.按照2的步骤设置，运行 JPushApiExample,ScheduleApiExample.
 
         public static String TITLE = "Test from C# v3 sdk";
-        public static String ALERT = "Test from  C# v3 sdk - alert";
+        public static String ALERT = "Test from C# v3 sdk - alert";
         public static String MSG_CONTENT = "Test from C# v3 sdk - msgContent";
         public static String REGISTRATION_ID = "0900e8d85ef";
         public static String SMSMESSAGE = "Test from C# v3 sdk - SMSMESSAGE";
         public static int DELAY_TIME = 1;
         public static String TAG = "tag_api";
-        public static String app_key = "e0eb67483f04f4425667d817";  // JPush Cordova Demo
+        public static String app_key = "e0eb67483f04f4425667d817";
         public static String master_secret = "1ea950a19875a6e2693ae312";
 
         public static void Main(string[] args)
@@ -99,12 +99,10 @@ namespace cn.jpush.api.example
 
                 //如需查询上次推送结果执行下面的代码
                 var apiResult = client.getReceivedApi(result.msg_id.ToString());
-                var apiResultv3 = client.getReceivedApi_v3(result.msg_id.ToString());
-
             }
             catch (APIRequestException e)
             {
-                Console.WriteLine("Error response from JPush server. Should review and fix it. ");
+                Console.WriteLine("Error response from JPush server. Should review and fix it.");
                 Console.WriteLine("HTTP Status: " + e.Status);
                 Console.WriteLine("Error Code: " + e.ErrorCode);
                 Console.WriteLine("Error Message: " + e.ErrorMessage);
@@ -114,7 +112,6 @@ namespace cn.jpush.api.example
                 Console.WriteLine(e.Message);
             }
             Console.WriteLine("*****结束发送******");
-
 
             // Android 平台上的通知，JPush SDK 按照一定的通知栏样式展示。
             PushPayload payload_options = PushObject_android_with_options();
@@ -172,7 +169,7 @@ namespace cn.jpush.api.example
             {
                 var result = client.SendPush(payload_apns_production_options);
 
-                // 由于统计数据并非非是即时的，所以等待一小段时间再执行下面的获取结果方法
+                // 由于统计数据并非即时的，所以等待一小段时间再执行下面的获取结果方法
                 System.Threading.Thread.Sleep(10000);
             }
             catch (APIRequestException e)
@@ -192,7 +189,7 @@ namespace cn.jpush.api.example
             try
             {
                 var result = client.SendPush(payload_ios_alert_json);
-                // 由于统计数据并非非是即时的，所以等待一小段时间再执行下面的获取结果方法
+                // 由于统计数据并非即时的，所以等待一小段时间再执行下面的获取结果方法
                 System.Threading.Thread.Sleep(10000);
             }
             catch (APIRequestException e)
@@ -237,6 +234,7 @@ namespace cn.jpush.api.example
             pushPayload.notification = new Notification().setAlert(ALERT);
             return pushPayload;
         }
+
         public static PushPayload PushObject_all_alia_alert()
         {
 
@@ -253,10 +251,19 @@ namespace cn.jpush.api.example
             PushPayload pushPayload_alias = new PushPayload();
             pushPayload_alias.platform = Platform.android();
             string[] alias = new string[] { "alias1", "alias2", "alias3" };
-            Console.WriteLine(alias);
             pushPayload_alias.audience = Audience.s_alias(alias);
             pushPayload_alias.notification = new Notification().setAlert(ALERT);
             return pushPayload_alias;
+        }
+
+        public static PushPayload PushObject_registrationId()
+        {
+            PushPayload pushPayload = new PushPayload();
+            pushPayload.platform = Platform.all();
+            string[] rId = new string[] { "registrationId1" };
+            pushPayload.audience = Audience.s_registrationId(rId);
+            pushPayload.notification = new Notification().setAlert(ALERT);
+            return pushPayload;
         }
 
         public static PushPayload PushObject_Android_Tag_AlertWithTitle()
@@ -268,6 +275,7 @@ namespace cn.jpush.api.example
             pushPayload.notification = Notification.android(ALERT, TITLE);
             return pushPayload;
         }
+
         public static PushPayload PushObject_android_and_ios()
         {
             PushPayload pushPayload = new PushPayload();
@@ -284,14 +292,12 @@ namespace cn.jpush.api.example
             return pushPayload;
         }
 
-
         public static PushPayload PushObject_android_with_options()
         {
             PushPayload pushPayload = new PushPayload();
             pushPayload.platform = Platform.android_ios();
-            var audience = Audience.all();
+            var audience = Audience.s_registrationId();
             pushPayload.audience = audience;
-            var notification = new Notification().setAlert("alert content");
 
             AndroidNotification androidnotification = new AndroidNotification();
             androidnotification.setAlert("Push Object android with options");
@@ -304,6 +310,7 @@ namespace cn.jpush.api.example
             androidnotification.setPriority(0);
             androidnotification.setCategory("category str");
 
+            var notification = new Notification().setAlert("alert content");
             notification.AndroidNotification = androidnotification;
             notification.IosNotification = new IosNotification();
             notification.IosNotification.incrBadge(1);
@@ -333,16 +340,19 @@ namespace cn.jpush.api.example
             PushPayload pushPayload = new PushPayload();
             pushPayload.platform = Platform.all();
             pushPayload.audience = Audience.all();
-            var notification = new Notification();
+
             Hashtable alert = new Hashtable();
             alert["title"] = "JPush Title";
             alert["subtitle"] = "JPush Subtitle";
             alert["body"] = "JPush Body";
+
+            var notification = new Notification();
             notification.IosNotification = new IosNotification()
                 .setAlert(alert)
                 .setBadge(5)
                 .setSound("happy")
                 .AddExtra("from", "JPush");
+
             pushPayload.notification = notification;
             pushPayload.message = Message.content(MSG_CONTENT);
             return pushPayload;
