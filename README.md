@@ -1,14 +1,12 @@
 # JPush API client library for CSharp
 
-## 概述
 这是 JPush REST API 的 C# 版本封装开发包，是由极光推送官方提供的，一般支持最新的 API 功能。
 
 对应的 REST API 文档：<http://docs.jiguang.cn/jpush/server/push/server_overview/>
 
-## 支持版本
-Microsoft. NET Framework 4.0 （包括）以上版本。
+> 支持 Microsoft. NET Framework 4.0 （包括）以上版本。
 
-## 环境配置
+## Install
 在 [jpush-api-csharp-client](https://github.com/jpush/jpush-api-csharp-client) 项目根目录可以下载下面的两个文件。
 
 * 在项目引用中添加依赖包： Newtonsoft.Json.dll
@@ -20,7 +18,7 @@ Microsoft. NET Framework 4.0 （包括）以上版本。
 * 在项目->引用->管理 NuGet 程序包中搜索 `cn.jpush.api`（如果已经安装了 Newtonsoft 需要先卸载一下）。
 * NuGet 包管理工具会下载 jpush-api-csharp-client 和 Newtonsoft 依赖。
 
-## 示例
+## Example
 ### Push API v3
 向某单个设备或者某设备列表推送一条通知或者消息：
 >以下片断来自项目代码里的文件：cn.jpush.api.example 中的 JPushApiExample.cs。
@@ -209,12 +207,12 @@ catch (APIConnectionException e)
 }
 ```
 
-## 异常
+## Exception
 - APIRequestException
-  - http 错误码和错误信息
+  - 请求错误，提供 http 错误码等信息。
 
 - APIConnectionException
-  - 诸如超时、无网络等情况
+  - 诸如超时、无网络等情况。
 
 ## Support
 - [HTTP 状态码](http://docs.jiguang.cn/jpush/server/push/http_status_code/)
