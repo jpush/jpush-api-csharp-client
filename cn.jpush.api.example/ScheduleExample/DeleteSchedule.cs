@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using cn.jpush.api.common;
 using cn.jpush.api.push.mode;
 using cn.jpush.api.common.resp;
 using cn.jpush.api.schedule;
-
 
 namespace cn.jpush.api.example.Schedule
 {
@@ -22,7 +17,6 @@ namespace cn.jpush.api.example.Schedule
             pushPayload.notification = new Notification().setAlert(ALERT);
 
             ScheduleClient scheduleclient = new ScheduleClient(app_key, master_secret);
-
 
             //delete Schedule
             try

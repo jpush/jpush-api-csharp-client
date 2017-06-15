@@ -7,6 +7,7 @@ using cn.jpush.api.common;
 using cn.jpush.api.push.mode;
 using cn.jpush.api.common.resp;
 using cn.jpush.api.schedule;
+
 namespace cn.jpush.api.example.Schedule
 {
     public class GetScheduleList : BaseExample
