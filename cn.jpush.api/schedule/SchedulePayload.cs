@@ -6,7 +6,6 @@ using System.Diagnostics;
 
 namespace cn.jpush.api.schedule
 {
-
     public class SchedulePayload
     {
         private JsonSerializerSettings jSetting;
@@ -17,9 +16,12 @@ namespace cn.jpush.api.schedule
 
         public PushPayload push { get; set; }
         public String name { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Include)]
         public bool enabled { get; set; }
+
         public TriggerPayload trigger { get; set; }
-        public String schedule_id;
+        public string schedule_id;
 
         public SchedulePayload()
         {
@@ -63,7 +65,6 @@ namespace cn.jpush.api.schedule
             jSetting = new JsonSerializerSettings();
             jSetting.NullValueHandling = NullValueHandling.Ignore;
             jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
-
         }
 
         public SchedulePayload setName(String name) {
@@ -94,9 +95,10 @@ namespace cn.jpush.api.schedule
         {
             jSetting = new JsonSerializerSettings();
             jSetting.NullValueHandling = NullValueHandling.Ignore;
-            jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;       
+            jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
             return JsonConvert.SerializeObject(this, jSetting);
         }
+
         public SchedulePayload Check()
         {
             Preconditions.checkArgument(!(null == push), "pushpayload should be set.");
@@ -107,6 +109,5 @@ namespace cn.jpush.api.schedule
             Preconditions.checkArgument((name.Length < 255), "The name must be less than 255 bytes.");
             return this;
         }
-
     }
 }
