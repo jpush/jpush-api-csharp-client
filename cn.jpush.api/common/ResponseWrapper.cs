@@ -1,26 +1,20 @@
 ﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.Serialization.Json;
 using System.Net;
-using cn.jpush.api.util;
 using System.Diagnostics;
-using cn.jpush.api.push;
 using Newtonsoft.Json;
+using cn.jpush.api.util;
+using cn.jpush.api.push;
 
 namespace cn.jpush.api.common
 {
     public class ResponseWrapper
     {
         private const int RESPONSE_CODE_NONE = -1;
-        public JpushError jpushError;
+        private string _responseContent;
 
+        public JpushError jpushError;
         public HttpStatusCode responseCode = HttpStatusCode.BadRequest;
-        private String _responseContent;
-        public String responseContent
+        public string responseContent
         {
             get
             {
@@ -31,11 +25,12 @@ namespace cn.jpush.api.common
                 _responseContent = value;
             }
         }
+
         public void setErrorObject()
         {
-            if(!string.IsNullOrEmpty(_responseContent))
+            if (!string.IsNullOrEmpty(_responseContent))
             {
-                 jpushError = JsonConvert.DeserializeObject<JpushError>(_responseContent);
+                jpushError = JsonConvert.DeserializeObject<JpushError>(_responseContent);
             }
         }
 
@@ -47,33 +42,38 @@ namespace cn.jpush.api.common
         {
             return responseCode == HttpStatusCode.OK;
         }
-        public String exceptionString;
 
-	    public ResponseWrapper() {
-	    }
-        public void setRateLimit(String quota, String remaining, String reset) {
+        public string exceptionString;
+
+        public ResponseWrapper()
+        {
+
+        }
+
+        public void setRateLimit(string quota, string remaining, string reset)
+        {
             if (null == quota) return;
+
             try
             {
                 if (quota != "" && StringUtil.IsInt(quota))
                 {
                     rateLimitQuota = int.Parse(quota);
                 }
-                if (remaining!="" && StringUtil.IsInt(remaining))
+                if (remaining != "" && StringUtil.IsInt(remaining))
                 {
                     rateLimitRemaining = int.Parse(remaining);
                 }
-                if (reset!="" && StringUtil.IsInt(reset))
+                if (reset != "" && StringUtil.IsInt(reset))
                 {
                     rateLimitReset = int.Parse(reset);
                 }
-                Console.WriteLine(string.Format("JPush API Rate Limiting params - quota:{0}, remaining:{1}, reset:{2} ", quota, remaining, reset) +" "+ DateTime.Now);
+                Console.WriteLine(string.Format("JPush API Rate Limiting params - quota:{0}, remaining:{1}, reset:{2} ", quota, remaining, reset) + " " + DateTime.Now);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.Print(e.Message);
             }
         }
-
     }
 }

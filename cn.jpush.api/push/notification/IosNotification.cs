@@ -2,38 +2,34 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace cn.jpush.api.push.notification
 {
     public class IosNotification : PlatformNotification
     {
-        public const String NOTIFICATION_IOS = "ios";
+        public const string NOTIFICATION_IOS = "ios";
 
-        private const String DEFAULT_SOUND = "";
-        private const String DEFAULT_BADGE = "+1";
+        private const string DEFAULT_SOUND = "";
+        private const string DEFAULT_BADGE = "+1";
 
-        private const String BADGE = "badge";
-        private const String SOUND = "sound";
-        private const String CONTENT_AVAILABLE = "content-available";
-        private const String CATEGORY = "category";
+        private const string BADGE = "badge";
+        private const string SOUND = "sound";
+        private const string CONTENT_AVAILABLE = "content-available";
+        private const string CATEGORY = "category";
 
-        private const String ALERT_VALID_BADGE = "Badge number should be 0~99999, "
+        private const string ALERT_VALID_BADGE = "Badge number should be 0~99999, "
                 + "and badgeDisabled property must be false";
-        private const String SOUNd_VALID_BADGE = "Sound should not be null or empty, "
+        private const string SOUND_VALID_BADGE = "Sound should not be null or empty, "
                 + "and disableSound property must be false";
 
         private bool soundDisabled;
         private bool badgeDisabled;
 
         [JsonProperty]
-        public String sound { get; private set; }
+        public string sound { get; private set; }
 
         [JsonProperty]
-        public String badge { get; private set; }
+        public string badge { get; private set; }
 
         [JsonProperty(PropertyName = "content-available")]
         public bool contentAvailable { get; private set; }
@@ -42,39 +38,39 @@ namespace cn.jpush.api.push.notification
         public bool mutableContent { get; private set; }
 
         [JsonProperty]
-        public String category { get; private set; }
+        public string category { get; private set; }
 
         public IosNotification()
         {
-            base.alert = null;
-            base.extras = null;
-            this.soundDisabled = false;
-            this.badgeDisabled = false;
-            this.contentAvailable = false;
-            this.category = null;
-            this.badge = DEFAULT_BADGE;
-            this.sound = DEFAULT_SOUND;
+            alert = null;
+            extras = null;
+            soundDisabled = false;
+            badgeDisabled = false;
+            contentAvailable = false;
+            category = null;
+            badge = DEFAULT_BADGE;
+            sound = DEFAULT_SOUND;
         }
 
         public IosNotification disableSound()
         {
-            this.soundDisabled = true;
-            this.sound = null;
+            soundDisabled = true;
+            sound = null;
             return this;
         }
 
         public IosNotification disableBadge()
         {
-            this.badgeDisabled = true;
-            this.badge = null;
+            badgeDisabled = true;
+            badge = null;
             return this;
         }
 
-        public IosNotification setSound(String sound)
+        public IosNotification setSound(string sound)
         {
             if ((sound == null) || soundDisabled)
             {
-                Console.WriteLine(SOUNd_VALID_BADGE);
+                Console.WriteLine(SOUND_VALID_BADGE);
                 return this;
             }
             this.sound = sound;
@@ -133,7 +129,7 @@ namespace cn.jpush.api.push.notification
             return this;
         }
 
-        public IosNotification setCategory(String category)
+        public IosNotification setCategory(string category)
         {
             this.category = category;
             return this;

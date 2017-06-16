@@ -1,28 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using cn.jpush.api;
 using cn.jpush.api.common;
 using cn.jpush.api.push.mode;
 using cn.jpush.api.common.resp;
 using cn.jpush.api.schedule;
+
 namespace cn.jpush.api.example.Schedule
 {
     public class CreateSchedule : BaseExample
     {
         public static void Main(string[] args)
         {
-            PushPayload pushPayload = new PushPayload();
-            pushPayload.platform = Platform.all();
-            pushPayload.audience = Audience.all();
-            pushPayload.notification = new Notification().setAlert(ALERT);
-            ScheduleClient scheduleclient = new ScheduleClient(app_key, master_secret);
+            PushPayload pushPayload = new PushPayload()
+            {
+                platform = Platform.all(),
+                audience = Audience.all(),
+                notification = new Notification().setAlert(ALERT)
+            };
 
-            //init a TriggerPayload
+            ScheduleClient scheduleclient = new ScheduleClient(app_key, master_secret);
             TriggerPayload triggerConstructor = new TriggerPayload(START, END, TIME_PERIODICAL, TIME_UNIT, FREQUENCY, POINT);
-            //init a SchedulePayload
             SchedulePayload schedulepayloadperiodical = new SchedulePayload(NAME, ENABLED, triggerConstructor, pushPayload);
 
             try

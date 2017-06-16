@@ -1,28 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using cn.jpush.api.push.audience;
 using System.Diagnostics;
 using cn.jpush.api.util;
+
 namespace cn.jpush.api.push.mode
 {
     public class Audience
     {
-        private const String ALL = "all";
+        private const string ALL = "all";
+
         public string allAudience;
+        public Dictionary<string, HashSet<string>> dictionary;
 
         private void AddWithAudienceTarget(AudienceTarget target)
         {
             Debug.Assert(target != null && target.valueBuilder != null);
+
             if (target != null && target.valueBuilder != null)
             {
-                this.allAudience = null;
+                allAudience = null;
                 if (dictionary == null)
                 {
                     dictionary = new Dictionary<string, HashSet<string>>();
                 }
+
                 if (dictionary.ContainsKey(target.audienceType.ToString()))
                 {
                     HashSet<string> origin = dictionary[target.audienceType.ToString()];
@@ -38,8 +40,6 @@ namespace cn.jpush.api.push.mode
             }
         }
 
-        public Dictionary<string, HashSet<string>> dictionary;
-
         private Audience()
         {
             allAudience = ALL;
@@ -48,12 +48,12 @@ namespace cn.jpush.api.push.mode
 
         public static Audience all()
         {
-           return  new Audience() { allAudience = ALL, dictionary = null }.Check();
+            return new Audience() { allAudience = ALL, dictionary = null }.Check();
         }
 
         public static Audience s_tag(HashSet<string> values)
         {
-           return new Audience().tag(values);
+            return new Audience().tag(values);
         }
 
         public static Audience s_tag(params string[] values)
@@ -109,8 +109,8 @@ namespace cn.jpush.api.push.mode
             }
             AudienceTarget target = AudienceTarget.tag(values);
             AddWithAudienceTarget(target);
-            return this.Check();
-		}
+            return Check();
+        }
 
         public Audience tag(params string[] values)
         {
@@ -129,11 +129,13 @@ namespace cn.jpush.api.push.mode
                 allAudience = null;
             }
             AudienceTarget target = AudienceTarget.tag_and(values);
-            this.allAudience = null;
+            allAudience = null;
+
             if (dictionary == null)
             {
                 dictionary = new Dictionary<string, HashSet<string>>();
             }
+
             if (dictionary.ContainsKey(target.audienceType.ToString()))
             {
                 HashSet<string> origin = dictionary[target.audienceType.ToString()];
@@ -146,8 +148,8 @@ namespace cn.jpush.api.push.mode
             {
                 dictionary.Add(target.audienceType.ToString(), values);
             }
-            return this.Check();
-		}
+            return Check();
+        }
 
         public Audience tag_and(params string[] values)
         {
@@ -157,7 +159,6 @@ namespace cn.jpush.api.push.mode
             }
             HashSet<string> list = new HashSet<string>(values);
             return tag_and(list);
-           
         }
 
         public Audience alias(HashSet<string> values)
@@ -166,9 +167,9 @@ namespace cn.jpush.api.push.mode
             {
                 allAudience = null;
             }
-            AddWithAudienceTarget( AudienceTarget.alias(values));
-            return this.Check();
-		}
+            AddWithAudienceTarget(AudienceTarget.alias(values));
+            return Check();
+        }
 
         public Audience alias(params string[] values)
         {
@@ -176,8 +177,7 @@ namespace cn.jpush.api.push.mode
             {
                 allAudience = null;
             }
-           return alias(new HashSet<string>(values));
-            
+            return alias(new HashSet<string>(values));
         }
 
         public Audience segment(HashSet<string> values)
@@ -187,8 +187,8 @@ namespace cn.jpush.api.push.mode
                 allAudience = null;
             }
             AddWithAudienceTarget(AudienceTarget.segment(values));
-            return this.Check();
-		}
+            return Check();
+        }
 
         public Audience segment(params string[] values)
         {
@@ -197,7 +197,6 @@ namespace cn.jpush.api.push.mode
                 allAudience = null;
             }
             return segment(new HashSet<string>(values));
-            
         }
 
         public Audience registrationId(HashSet<string> values)
@@ -207,8 +206,8 @@ namespace cn.jpush.api.push.mode
                 allAudience = null;
             }
             AddWithAudienceTarget(AudienceTarget.registrationId(values));
-            return this.Check();
-		}
+            return Check();
+        }
 
         public Audience registrationId(params string[] values)
         {
@@ -216,13 +215,13 @@ namespace cn.jpush.api.push.mode
             {
                 allAudience = null;
             }
-           return registrationId(new HashSet<string>(values));
+            return registrationId(new HashSet<string>(values));
         }
 
-		public bool isAll()
+        public bool isAll()
         {
             return allAudience != null;
-		}
+        }
 
         public Audience Check()
         {

@@ -3,13 +3,10 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace cn.jpush.api.common
 {
-   public  class AudienceConverter : JsonConverter
+    public class AudienceConverter : JsonConverter
     {
         /// <summary>
         /// Platform whether this instance can convert the specified object type.
@@ -20,10 +17,9 @@ namespace cn.jpush.api.common
         /// </returns>
         public override bool CanConvert(Type objectType)
         {
-            if (objectType == typeof(Audience))
-                return true;
-            return false;
+            return objectType == typeof(Audience) ? true : false;
         }
+
         /// <summary>
         /// Writes the JSON representation of the object.
         /// </summary>
@@ -41,14 +37,14 @@ namespace cn.jpush.api.common
             if (audience.isAll())
             {
                 writer.WriteValue(audience.allAudience);
-                //writer.WriteValue("alll");
             }
             else
             {
-               var json = JsonConvert.SerializeObject(audience.dictionary);
-               writer.WriteRawValue(json);
+                var json = JsonConvert.SerializeObject(audience.dictionary);
+                writer.WriteRawValue(json);
             }
         }
+
         /// <summary>
         /// Reads the JSON representation of the object.
         /// </summary>
@@ -71,9 +67,9 @@ namespace cn.jpush.api.common
             else if (reader.TokenType == JsonToken.StartObject)
             {
                 audience.allAudience = null;
-                Dictionary<string, HashSet<string>> dictionary=new Dictionary<string,HashSet<string>>();
-                string key="key";
-                HashSet<string> value=null;
+                Dictionary<string, HashSet<string>> dictionary = new Dictionary<string, HashSet<string>>();
+                string key = "key";
+                HashSet<string> value = null;
                 while (reader.Read())
                 {
                     Debug.WriteLine("Type:{0},Path:{1}", reader.TokenType, reader.Path);
@@ -88,11 +84,11 @@ namespace cn.jpush.api.common
                             value = new HashSet<string>();
                             break;
                         case JsonToken.String:
-                            value.Add(reader.Value.ToString()); 
+                            value.Add(reader.Value.ToString());
                             break;
                         case JsonToken.EndArray:
                             {
-                                dictionary.Add(key,value);
+                                dictionary.Add(key, value);
                             }
                             break;
                         case JsonToken.EndObject:

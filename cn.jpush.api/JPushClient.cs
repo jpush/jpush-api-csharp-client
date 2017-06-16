@@ -5,13 +5,8 @@ using cn.jpush.api.push;
 using cn.jpush.api.push.mode;
 using cn.jpush.api.report;
 using cn.jpush.api.util;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace cn.jpush.api
 {
@@ -23,6 +18,7 @@ namespace cn.jpush.api
         private PushClient _pushClient;
         private ReportClient _reportClient;
         private DeviceClient _deviceClient;
+
         /// <summary>
         /// 带两个参数的构造函数，该状态下，ApnsProduction默认为false
         /// </summary>
@@ -33,8 +29,8 @@ namespace cn.jpush.api
             _pushClient = new PushClient(app_key, masterSecret);
             _reportClient = new ReportClient(app_key, masterSecret);
             _deviceClient = new DeviceClient(app_key, masterSecret);
-
         }
+
         // ----------------------------- Push API
         /// <summary>
         /// 向某个设备或者某设别列表推送一条通知，或者消息
@@ -46,9 +42,10 @@ namespace cn.jpush.api
         /// <see cref="http://docs.jpush.cn/display/dev/Push-API-v3"/>
         public MessageResult SendPush(PushPayload payload)
         {
-            Preconditions.checkArgument(payload!=null, "pushPayload should not be empty");
+            Preconditions.checkArgument(payload != null, "pushPayload should not be empty");
             return _pushClient.sendPush(payload);
         }
+
         /// <summary>
         /// 向某个设备或者某设别列表推送一条通知，或者消息
         /// </summary>
@@ -59,9 +56,10 @@ namespace cn.jpush.api
         /// <see cref="http://docs.jpush.cn/display/dev/Push-API-v3"/>
         public MessageResult SendPush(string payloadString)
         {
-             Preconditions.checkArgument(!string.IsNullOrEmpty(payloadString), "payloadString should not be empty");
-             return _pushClient.sendPush(payloadString);
+            Preconditions.checkArgument(!string.IsNullOrEmpty(payloadString), "payloadString should not be empty");
+            return _pushClient.sendPush(payloadString);
         }
+
         // ------------------------------- Report API
         /// <summary>
         /// Get received report. 
@@ -75,15 +73,17 @@ namespace cn.jpush.api
         {
             return _reportClient.getReceiveds(msg_ids);
         }
+
         /// <summary>
-       /// Get received report v3. 
-       /// </summary>
-       /// <param name="msgIds">100 msgids to batch getting is supported.</param>
-       /// 
+        /// Get received report v3. 
+        /// </summary>
+        /// <param name="msgIds">100 msgids to batch getting is supported.</param>
+        /// 
         public ReceivedResult getReceivedApi_v3(String msg_ids)
         {
             return _reportClient.getReceiveds_v3(msg_ids);
         }
+
         /// <summary>
         /// 用户统计查询接口，这个接口是vip用户专用
         /// </summary>
@@ -95,6 +95,7 @@ namespace cn.jpush.api
         {
             return _reportClient.getUsers(timeUnit, start, duration);
         }
+
         /// <summary>
         /// 消息统计查询接口，这个接口是vip用户专用
         /// </summary>
@@ -104,6 +105,7 @@ namespace cn.jpush.api
         {
             return _reportClient.getReportMessages(msgIds);
         }
+
         // ------------------------------- Device API
         /// <summary>
         /// 获取当前设备的所有属性，包含tags,alias
@@ -114,6 +116,7 @@ namespace cn.jpush.api
         {
             return _deviceClient.getDeviceTagAlias(registrationId);
         }
+
         /// <summary>
         /// 清理当前设备指定的属性，当前支持tags,alias
         /// </summary>
@@ -127,6 +130,7 @@ namespace cn.jpush.api
         {
             return _deviceClient.updateDeviceTagAlias(registrationId, clearAlias, clearTag);
         }
+
         /// <summary>
         /// 更新当前设备指定的属性，当前支持tags,alias
         /// </summary>
@@ -145,6 +149,7 @@ namespace cn.jpush.api
         {
             return _deviceClient.updateDevice(registrationId, alias, mobile, tagsToAdd, tagsToRemove);
         }
+
         /// <summary>
         /// 获取当前应用的所有标签
         /// </summary>
@@ -156,6 +161,7 @@ namespace cn.jpush.api
         {
             return _deviceClient.getTagList();
         }
+
         /// <summary>
         /// 查询某个设备是否在tag下
         /// </summary>
@@ -169,6 +175,7 @@ namespace cn.jpush.api
         {
             return _deviceClient.isDeviceInTag(theTag, registrationID);
         }
+
         /// <summary>
         /// 为一个标签添加或者删除设备
         /// </summary>
@@ -185,6 +192,7 @@ namespace cn.jpush.api
         {
             return _deviceClient.addRemoveDevicesFromTag(theTag, toAddUsers, toRemoveUsers);
         }
+
         /// <summary>
         /// 删除一个标签，以及标签与设备之间的关联关系
         /// </summary>
@@ -199,6 +207,7 @@ namespace cn.jpush.api
             return _deviceClient.deleteTag(theTag, platform);
 
         }
+
         /// <summary>
         /// 查询别名
         /// </summary>
@@ -212,6 +221,7 @@ namespace cn.jpush.api
         {
             return _deviceClient.getAliasDeviceList(alias, platform);
         }
+
         /// <summary>
         /// 删除别名，以及该别名与设别之间的绑定关系
         /// </summary>
@@ -225,7 +235,5 @@ namespace cn.jpush.api
         {
             return _deviceClient.deleteAlias(alias, platform);
         }
-
     }
-   
 }

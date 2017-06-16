@@ -7,9 +7,11 @@ namespace cn.jpush.api.schedule
         [JsonProperty]
         private bool enable;
 
-        public void setEnable(bool enable) { 
-            this.enable = enable;  
+        public void setEnable(bool enable)
+        {
+            this.enable = enable;
         }
+
         public bool getEnable()
         {
             return enable;

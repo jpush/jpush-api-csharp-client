@@ -1,12 +1,6 @@
 ﻿using cn.jpush.api.util;
-using cn.jpush.api;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace cn.jpush.api.schedule
 {
@@ -14,22 +8,26 @@ namespace cn.jpush.api.schedule
     {
         [JsonProperty]
         private String start;
+
         [JsonProperty]
         private String end;
+
         [JsonProperty]
         private String time;
+
         [JsonProperty]
         private String time_unit;
+
         [JsonProperty]
         private int frequency;
+
         [JsonProperty]
         private String[] point;
 
-
         //init the periodical by Constructor function
         //通过构造函数来构造Periodical类，并传递参数。
-        public Periodical(String start, String end, String time, String time_unit, int frequency, String[] point) {
-
+        public Periodical(String start, String end, String time, String time_unit, int frequency, String[] point)
+        {
             Preconditions.checkArgument(!String.IsNullOrEmpty(start), "The time must not be empty.");
             Preconditions.checkArgument(!String.IsNullOrEmpty(end), "The time must not be empty.");
             Preconditions.checkArgument(!String.IsNullOrEmpty(time), "The time must not be empty.");
@@ -47,16 +45,17 @@ namespace cn.jpush.api.schedule
         }
 
         //init the periodical 
-        public Periodical() {
-            this.start = null;
-            this.end = null;
-            this.time = null;
-            this.time_unit = null;
-            this.frequency = 0;
-            this.point = null;
+        public Periodical()
+        {
+            start = null;
+            end = null;
+            time = null;
+            time_unit = null;
+            frequency = 0;
+            point = null;
         }
 
-        public Periodical  setStart(String start)
+        public Periodical setStart(String start)
         {
             Preconditions.checkArgument(!String.IsNullOrEmpty(start), "The time must not be empty.");
             Preconditions.checkArgument(StringUtil.IsDateTime(start), "The start is not valid.");
@@ -66,7 +65,7 @@ namespace cn.jpush.api.schedule
 
         public string getStart()
         {
-            return this.start;
+            return start;
         }
 
         public Periodical setEnd(string end)
@@ -79,8 +78,7 @@ namespace cn.jpush.api.schedule
 
         public string getEnd()
         {
-
-            return this.end;
+            return end;
         }
 
         public Periodical setTime(string time)
@@ -93,7 +91,7 @@ namespace cn.jpush.api.schedule
 
         public string getTime()
         {
-            return this.time;
+            return time;
         }
 
         public Periodical setTime_unit(string time_unit)
@@ -106,23 +104,20 @@ namespace cn.jpush.api.schedule
 
         public string getTime_unit()
         {
-            return this.time_unit;
-            
+            return time_unit;
         }
 
         public Periodical setFrequency(int frequency)
         {
-
             Preconditions.checkArgument(StringUtil.IsNumber(frequency.ToString()), "The frequency must be number.");
-            Preconditions.checkArgument((0 < frequency && frequency < 101), "The frequency must be less than 100.");       
+            Preconditions.checkArgument((0 < frequency && frequency < 101), "The frequency must be less than 100.");
             this.frequency = frequency;
             return this;
         }
 
         public int getFrequency()
         {
-            
-            return this.frequency;
+            return frequency;
         }
 
         public Periodical setPoint(String[] point)
@@ -133,9 +128,7 @@ namespace cn.jpush.api.schedule
 
         public String[] getPoint()
         {
-            return this.point;
+            return point;
         }
-        
-        
     }
 }

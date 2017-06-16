@@ -10,18 +10,17 @@ namespace cn.jpush.api.example.Schedule
     {
         public static void Main(string[] args)
         {
-            //init a pushpayload
-            PushPayload pushPayload = new PushPayload();
-            pushPayload.platform = Platform.all();
-            pushPayload.audience = Audience.all();
-            pushPayload.notification = new Notification().setAlert(ALERT);
+            PushPayload pushPayload = new PushPayload()
+            {
+                platform = Platform.all(),
+                audience = Audience.all(),
+                notification = new Notification().setAlert(ALERT)
+            };
 
             ScheduleClient scheduleclient = new ScheduleClient(app_key, master_secret);
 
-            //delete Schedule
             try
             {
-                // add the right  
                 var result = scheduleclient.deleteSchedule(SCHEDULE_ID);
                 Console.WriteLine(result);
             }
