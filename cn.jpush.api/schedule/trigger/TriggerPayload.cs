@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using cn.jpush.api.util;
 using Newtonsoft.Json;
 
@@ -12,32 +8,30 @@ namespace cn.jpush.api.schedule
     {
         [JsonProperty]
         private Periodical periodical;
+
         [JsonProperty]
         private Single single;
 
         private JsonSerializerSettings jSetting;
+
         public TriggerPayload()
         {
-            Periodical periodical = new Periodical();
-            this.periodical = periodical;
-            Single single = new Single();
-            this.single = single;
+            periodical = new Periodical();
+            single = new Single();
         }
 
         public TriggerPayload(Single single)
         {
             this.single = single;
-            this.periodical = null;
-            throw new System.NotImplementedException();
+            periodical = null;
+            throw new NotImplementedException();
         }
-
 
         public TriggerPayload(Periodical periodical)
         {
-
             this.periodical = periodical;
-            this.single = null;
-            throw new System.NotImplementedException();
+            single = null;
+            throw new NotImplementedException();
         }
 
         public TriggerPayload(String time)
@@ -46,13 +40,12 @@ namespace cn.jpush.api.schedule
             Preconditions.checkArgument(StringUtil.IsDateTime(time), "the time is not valid");
             Single single = new Single();
             single.setTime(time);
-            this.periodical = null;
             this.single = single;
+            periodical = null;
         }
 
         public TriggerPayload(String start, String end, String time, String time_unit, int frequency, String[] point)
         {
-
             Preconditions.checkArgument(!String.IsNullOrEmpty(start), "The start must not be empty.");
             Preconditions.checkArgument(!String.IsNullOrEmpty(end), "The end must not be empty.");
             Preconditions.checkArgument(!String.IsNullOrEmpty(time), "The time must not be empty.");
@@ -63,119 +56,113 @@ namespace cn.jpush.api.schedule
             Preconditions.checkArgument(StringUtil.IsTime(time), "The time must be the right format.");
             Preconditions.checkArgument((0 < frequency && frequency < 101), "The frequency must be less than 100.");
             Preconditions.checkArgument(StringUtil.IsTimeunit(time_unit), "The time_unit must be the right format.");
-            this.single = null;
-            this.periodical = new Periodical(start, end, time, time_unit, frequency, point);
-
+            single = null;
+            periodical = new Periodical(start, end, time, time_unit, frequency, point);
         }
 
-
-        // "time": "2014-09-17 12:00:00"  //YYYY-MM-DD HH:MM:SS
+        // "time": "2014-09-17 12:00:00" : YYYY-MM-DD HH:MM:SS
         public TriggerPayload setSingleTime(string time)
         {
             Preconditions.checkArgument(!String.IsNullOrEmpty(time), "The time must not be empty.");
-            Preconditions.checkArgument(!StringUtil.IsTime(time), "The time must be the right format.");
-            this.single.setTime(time);
-            this.periodical = null;
+            Preconditions.checkArgument(!StringUtil.IsDateTime(time), "The time must be the right format.");
+            single.setTime(time);
+            periodical = null;
             return this;
         }
 
         public string getSingleTime()
         {
-            return this.single.getTime();
+            return single.getTime();
         }
-
-
 
         public TriggerPayload setTime(string time)
         {
             Preconditions.checkArgument(!String.IsNullOrEmpty(time), "The time must not be empty.");
             Preconditions.checkArgument(StringUtil.IsTime(time), "The time must be the right format.");
-            this.periodical.setTime(time);
-            this.single = null;
+            periodical.setTime(time);
+            single = null;
             return this;
         }
 
         public string getTime()
         {
-            return this.periodical.getTime();
+            return periodical.getTime();
         }
 
         public void setStart(String start)
         {
-            Preconditions.checkArgument(!String.IsNullOrEmpty(start), "The time must not be empty.");
+            Preconditions.checkArgument(!String.IsNullOrEmpty(start), "The time could not be empty.");
             Preconditions.checkArgument(StringUtil.IsDateTime(start), "The start is not valid.");
-            this.single = null;
-            this.periodical.setStart(start);
+            single = null;
+            periodical.setStart(start);
         }
 
         public string getStart()
         {
-            return this.periodical.getStart();
+            return periodical.getStart();
         }
 
         public TriggerPayload setEnd(string end)
         {
-            Preconditions.checkArgument(!String.IsNullOrEmpty(end), "The time must not be empty.");
+            Preconditions.checkArgument(!String.IsNullOrEmpty(end), "The time could not be empty.");
             Preconditions.checkArgument(StringUtil.IsDateTime(end), "The end is not valid.");
-            this.periodical.setEnd(end);
-            this.single = null;
+            periodical.setEnd(end);
+            single = null;
             return this;
         }
 
         public string getEnd()
         {
-
-            return this.periodical.getEnd();
+            return periodical.getEnd();
         }
 
         public TriggerPayload setTime_unit(string time_unit)
         {
-            this.periodical.setTime_unit(time_unit);
-            this.single = null;
+            periodical.setTime_unit(time_unit);
+            single = null;
             return this;
         }
 
         public string getTime_unit()
         {
-            return this.periodical.getTime_unit();
-
+            return periodical.getTime_unit();
         }
 
         public TriggerPayload setFrequency(int frequency)
         {
             Preconditions.checkArgument(StringUtil.IsNumber(frequency.ToString()), "The frequency must be number.");
             Preconditions.checkArgument((0 < frequency && frequency < 101), "The name must be the right format.");
-            this.periodical.setFrequency(frequency);
-            this.single = null;
+            periodical.setFrequency(frequency);
+            single = null;
             return this;
         }
 
         public int getFrequency()
         {
-            return this.periodical.getFrequency();
+            return periodical.getFrequency();
         }
 
         public TriggerPayload setPoint(String[] point)
         {
-            this.periodical.setPoint(point);
-            this.single = null;
+            periodical.setPoint(point);
+            single = null;
             return this;
         }
 
         public String[] getPoint()
         {
-            return this.periodical.getPoint();
+            return periodical.getPoint();
         }
-
 
         public string ToJson()
         {
-            jSetting = new JsonSerializerSettings();
-            jSetting.NullValueHandling = NullValueHandling.Ignore;
-            jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
+            jSetting = new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                DefaultValueHandling = DefaultValueHandling.Ignore
+            };
             return JsonConvert.SerializeObject(this, jSetting);
         }
-
     }
 }
 
