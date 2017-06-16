@@ -1,17 +1,12 @@
 ﻿using cn.jpush.api.push.mode;
-using cn.jpush.api.util;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace cn.jpush.api.common
 {
-  public  class PlatformConverter:JsonConverter
+    public class PlatformConverter : JsonConverter
     {
         /// <summary>
         /// Platform whether this instance can convert the specified object type.
@@ -22,11 +17,9 @@ namespace cn.jpush.api.common
         /// </returns>
         public override bool CanConvert(Type objectType)
         {
-            if (objectType == typeof(Platform))
-                return true;
-
-            return false;
+            return objectType == typeof(Platform) ? true : false;
         }
+
         /// <summary>
         /// Writes the JSON representation of the object.
         /// </summary>
@@ -41,6 +34,7 @@ namespace cn.jpush.api.common
                 return;
             }
             platform.Check();
+
             if (platform.isAll())
             {
                 writer.WriteValue(platform.allPlatform);
@@ -53,8 +47,9 @@ namespace cn.jpush.api.common
                     writer.WriteValue(item);
                 }
                 writer.WriteEndArray();
-            } 
+            }
         }
+
         /// <summary>
         /// Reads the JSON representation of the object.
         /// </summary>
@@ -65,17 +60,17 @@ namespace cn.jpush.api.common
         /// <returns>The object value.</returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            Platform platform =  Platform.all();
+            Platform platform = Platform.all();
             if (reader.TokenType == JsonToken.Null)
             {
                 return null;
             }
-            else if(reader.TokenType==JsonToken.StartArray)
+            else if (reader.TokenType == JsonToken.StartArray)
             {
                 platform.allPlatform = null;
                 platform.deviceTypes = ReadArray(reader);
             }
-            else if (reader.TokenType==JsonToken.String)
+            else if (reader.TokenType == JsonToken.String)
             {
                 platform.allPlatform = reader.Value.ToString();
             }
@@ -99,7 +94,6 @@ namespace cn.jpush.api.common
                     case JsonToken.EndArray:
                         return list;
                     case JsonToken.Comment:
-                        // skip
                         break;
                     default:
                         return null;
@@ -107,6 +101,5 @@ namespace cn.jpush.api.common
             }
             return null;
         }
-       
     }
 }
