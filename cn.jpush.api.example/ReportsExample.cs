@@ -1,13 +1,13 @@
-﻿using cn.jpush.api.common;
+﻿using System;
+using cn.jpush.api.common;
 using cn.jpush.api.common.resp;
-using System;
 
 namespace cn.jpush.api.example
 {
     class ReportsExample
     {
-        public static String app_key = "cb5029879e49566e2bb30e8a";
-        public static String master_secret = "0aec091b50bea4970e2650c4";
+        public static string app_key = "cb5029879e49566e2bb30e8a";
+        public static string master_secret = "0aec091b50bea4970e2650c4";
 
         public static void testGetReport()
         {
@@ -16,7 +16,6 @@ namespace cn.jpush.api.example
             {
                 var result = jpushClient.getReceivedApi("991969761");
                 Console.WriteLine("Got result - " + result.ToString());
-
             }
             catch (APIRequestException e)
             {
@@ -53,7 +52,7 @@ namespace cn.jpush.api.example
             }
         }
 
-        // 消息统计vip专用接口
+        // 消息统计 VIP 专用接口
         public static void testGetMessages()
         {
             JPushClient jpushClient = new JPushClient(app_key, master_secret);

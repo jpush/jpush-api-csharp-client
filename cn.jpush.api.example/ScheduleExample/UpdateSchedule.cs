@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using cn.jpush.api.common;
 using cn.jpush.api.push.mode;
 using cn.jpush.api.common.resp;
@@ -13,28 +8,21 @@ namespace cn.jpush.api.example.Schedule
 {
     public class UpdateSchedule : BaseExample
     {
-
         public static void Main(string[] args)
         {
-            //init a pushpayload
-            PushPayload pushPayload = new PushPayload();
-            pushPayload.platform = Platform.all();
-            pushPayload.audience = Audience.all();
-            pushPayload.notification = new Notification().setAlert(ALERT);
+            PushPayload pushPayload = new PushPayload()
+            {
+                platform = Platform.all(),
+                audience = Audience.all(),
+                notification = new Notification().setAlert(ALERT)
+            };
 
             ScheduleClient scheduleclient = new ScheduleClient(app_key, master_secret);
-
-            //init a TriggerPayload
             TriggerPayload triggerConstructor = new TriggerPayload(START, END, TIME_PERIODICAL, TIME_UNIT, FREQUENCY, POINT);
-            //init a SchedulePayload
             SchedulePayload schedulepayloadperiodical = new SchedulePayload(NAME, ENABLED, triggerConstructor, pushPayload);
-
-            //PUT the name
             SchedulePayload putschedulepayload = new SchedulePayload();
-
             putschedulepayload.setName(NAME);
 
-            //the default enabled is true,if you want to change it,you have to set it to false
             try
             {
                 var result = scheduleclient.putSchedule(putschedulepayload, SCHEDULE_ID);

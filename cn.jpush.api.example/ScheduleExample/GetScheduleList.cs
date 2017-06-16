@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using cn.jpush.api.common;
 using cn.jpush.api.push.mode;
 using cn.jpush.api.common.resp;
@@ -14,21 +10,19 @@ namespace cn.jpush.api.example.Schedule
     {
         public static void Main(string[] args)
         {
-            //init a pushpayload
-            PushPayload pushPayload = new PushPayload();
-            pushPayload.platform = Platform.all();
-            pushPayload.audience = Audience.all();
-            pushPayload.notification = new Notification().setAlert(ALERT);
+            PushPayload pushPayload = new PushPayload()
+            {
+                platform = Platform.all(),
+                audience = Audience.all(),
+                notification = new Notification().setAlert(ALERT)
+            };
 
             ScheduleClient scheduleclient = new ScheduleClient(app_key, master_secret);
 
-
-            //get schedule
             try
             {
                 var result = scheduleclient.getSchedule(PAGEID);
                 Console.WriteLine(result.schedules[0].name);
-
                 Console.WriteLine(result.schedules);
                 Console.WriteLine(result);
             }
@@ -43,8 +37,6 @@ namespace cn.jpush.api.example.Schedule
             {
                 Console.WriteLine(e.Message);
             }
-
-
         }
     }
 }
