@@ -4,18 +4,18 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace cn.jpush.api.push.mode
 {
-   public class Platform 
+    public class Platform
     {
-        private  const String ALL = "all";
+        private const string ALL = "all";
+
         [JsonProperty(PropertyName = "winphone")]
-        public string allPlatform{get;set;}
+        public string allPlatform { get; set; }
+
         private HashSet<string> _deviceTypes;
+
         public HashSet<string> deviceTypes
         {
             get
@@ -31,14 +31,16 @@ namespace cn.jpush.api.push.mode
                 _deviceTypes = value;
             }
         }
+
         private Platform()
         {
             allPlatform = ALL;
             deviceTypes = null;
         }
+
         private Platform(bool all, HashSet<string> deviceTypes)
         {
-            //用来判断all=true时deviceTypes必须为空，反之当all=false时deviceTypes有值，不然json序列化会出错
+            // 用来判断 all = true 时 deviceTypes 必须为空，反之当 all = false 时 deviceTypes 有值，不然 JSON 序列化会出错。
             Debug.Assert(all && deviceTypes == null || !all && deviceTypes != null);
             if (all)
             {
@@ -46,28 +48,33 @@ namespace cn.jpush.api.push.mode
             }
             this.deviceTypes = deviceTypes;
         }
+
         public static Platform all()
         {
             return new Platform(true, null).Check();
         }
+
         public static Platform ios()
         {
             HashSet<string> types = new HashSet<string>();
             types.Add(DeviceType.ios.ToString());
-            return new Platform(false,types).Check();
+            return new Platform(false, types).Check();
         }
+
         public static Platform android()
         {
             HashSet<string> types = new HashSet<string>();
             types.Add(DeviceType.android.ToString());
             return new Platform(false, types).Check();
         }
+
         public static Platform winphone()
         {
             HashSet<string> types = new HashSet<string>();
             types.Add(DeviceType.winphone.ToString());
             return new Platform(false, types).Check();
         }
+
         public static Platform android_ios()
         {
             HashSet<string> types = new HashSet<string>();
@@ -75,6 +82,7 @@ namespace cn.jpush.api.push.mode
             types.Add(DeviceType.ios.ToString());
             return new Platform(false, types).Check();
         }
+
         public static Platform android_winphone()
         {
             HashSet<string> types = new HashSet<string>();
@@ -82,18 +90,20 @@ namespace cn.jpush.api.push.mode
             types.Add(DeviceType.winphone.ToString());
             return new Platform(false, types).Check();
         }
+
         public static Platform ios_winphone()
         {
             HashSet<string> types = new HashSet<string>();
             types.Add(DeviceType.ios.ToString());
             types.Add(DeviceType.winphone.ToString());
-
             return new Platform(false, types).Check();
         }
+
         public bool isAll()
         {
             return allPlatform != null;
         }
+
         public void setAll(bool all)
         {
             if (all)
@@ -105,13 +115,12 @@ namespace cn.jpush.api.push.mode
                 allPlatform = null;
             }
         }
+
         public Platform Check()
         {
             Preconditions.checkArgument(!(isAll() && null != deviceTypes), "Since all is enabled, any platform should not be set.");
             Preconditions.checkArgument(!(!isAll() && null == deviceTypes), "No any deviceType is set.");
             return this;
         }
-
-
     }
 }

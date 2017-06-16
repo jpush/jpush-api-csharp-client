@@ -1,53 +1,53 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace cn.jpush.api.push.notification
 {
     public class WinphoneNotification : PlatformNotification
     {
         [JsonProperty]
-        private  String title;
-        [JsonProperty(PropertyName = "_open_page")]
-        public  String openPage;
+        private string title;
 
-        public WinphoneNotification():base()
+        [JsonProperty(PropertyName = "_open_page")]
+        public string openPage;
+
+        public WinphoneNotification() : base()
         {
-            this.title = null;
-            this.openPage = null;
+            title = null;
+            openPage = null;
         }
-       
-        public WinphoneNotification setAlert(String alert)
+
+        public WinphoneNotification setAlert(string alert)
         {
             this.alert = alert;
             return this;
         }
-        public WinphoneNotification setOpenPage(String openPage)
+        
+        public WinphoneNotification setOpenPage(string openPage)
         {
             this.openPage = openPage;
             return this;
         }
-        public WinphoneNotification setTitle(String title)
+
+        public WinphoneNotification setTitle(string title)
         {
             this.title = title;
             return this;
         }
+
         public WinphoneNotification AddExtra(string key, string value)
         {
             if (extras == null)
             {
                 extras = new Dictionary<string, object>();
             }
-            if (value!=null)
+            if (value != null)
             {
                 extras.Add(key, value);
             }
-           
             return this;
         }
+
         public WinphoneNotification AddExtra(string key, int value)
         {
             if (extras == null)
@@ -57,6 +57,7 @@ namespace cn.jpush.api.push.notification
             extras.Add(key, value);
             return this;
         }
+
         public WinphoneNotification AddExtra(string key, bool value)
         {
             if (extras == null)
@@ -66,6 +67,5 @@ namespace cn.jpush.api.push.notification
             extras.Add(key, value);
             return this;
         }
-       
     }
 }

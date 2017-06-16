@@ -1,55 +1,62 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace cn.jpush.api.push.notification
 {
-   public class AndroidNotification:PlatformNotification
+    public class AndroidNotification : PlatformNotification
     {
-        public const String NOTIFICATION_ANDROID = "android";
-    
-        private const String TITLE = "title";
-        private const String BUILDER_ID = "builder_id";
+        public const string NOTIFICATION_ANDROID = "android";
+
+        private const string TITLE = "title";
+        private const string BUILDER_ID = "builder_id";
 
         [JsonProperty]
-        public String title{get;private set;}
+        public string title { get; private set; }
+
         [JsonProperty]
         public int builder_id { get; private set; }
+
         [JsonProperty]
         public int priority { get; private set; }
+
         [JsonProperty]
-        public String category { get; private set; }
+        public string category { get; private set; }
+
         [JsonProperty]
         public int style { get; private set; }
+
         [JsonProperty]
         public int alert_type { get; private set; }
-        [JsonProperty]
-        public String big_text { get; private set; }
-        [JsonProperty]
-        public String inbox { get; private set; }
-        [JsonProperty]
-        public String big_pic_path { get; private set; }
 
-        public AndroidNotification():base()
+        [JsonProperty]
+        public string big_text { get; private set; }
+
+        [JsonProperty]
+        public string inbox { get; private set; }
+
+        [JsonProperty]
+        public string big_pic_path { get; private set; }
+
+        public AndroidNotification() : base()
         {
-            this.title = null;
-            this.builder_id = 0;
+            title = null;
+            builder_id = 0;
         }
+
         public AndroidNotification setTitle(string title)
         {
             this.title = title;
             return this;
         }
+
         public AndroidNotification setBuilderID(int builder_id)
         {
             this.builder_id = builder_id;
             return this;
         }
-        public AndroidNotification setAlert(String alert)
+
+        public AndroidNotification setAlert(string alert)
         {
             this.alert = alert;
             return this;
@@ -61,7 +68,7 @@ namespace cn.jpush.api.push.notification
             return this;
         }
 
-        public AndroidNotification setCategory(String category)
+        public AndroidNotification setCategory(string category)
         {
             this.category = category;
             return this;
@@ -79,19 +86,19 @@ namespace cn.jpush.api.push.notification
             return this;
         }
 
-        public AndroidNotification setBig_text(String big_text)
+        public AndroidNotification setBig_text(string big_text)
         {
             this.big_text = big_text;
             return this;
         }
 
-        public AndroidNotification setInbox(String inbox)
+        public AndroidNotification setInbox(string inbox)
         {
             this.inbox = inbox;
             return this;
         }
 
-        public AndroidNotification setBig_pic_path(String big_pic_path)
+        public AndroidNotification setBig_pic_path(string big_pic_path)
         {
             this.big_pic_path = big_pic_path;
             return this;

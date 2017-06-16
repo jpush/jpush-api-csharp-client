@@ -1,29 +1,25 @@
 ﻿using cn.jpush.api.util;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace cn.jpush.api.push.mode
 {
     public class SmsMessage
     {
-        public String content { get; set; }
+        public string content { get; set; }
         public int delay_time { get; set; }
 
-        public SmsMessage() {
+        public SmsMessage()
+        {
 
         }
 
-        public SmsMessage(String content, int delay_time)
+        public SmsMessage(string content, int delay_time)
         {
             Preconditions.checkArgument(!(content == null), "sms_message Content should be set");
             Preconditions.checkArgument((this.content.Length <= 480), "sms_message's length should be less than 480 bytes");
-            this.Check();
-            this.setContent(content);
-            this.setDelayTime(delay_time);
+
+            Check();
+            setContent(content);
+            setDelayTime(delay_time);
         }
 
         public SmsMessage setDelayTime(int delay_time)
@@ -41,7 +37,7 @@ namespace cn.jpush.api.push.mode
         public SmsMessage Check()
         {
             Preconditions.checkArgument(!(content == null), "sms_message Content should be set");
-            Preconditions.checkArgument((this.content.Length<=480), "sms_message's length should be less than 480 bytes");
+            Preconditions.checkArgument((this.content.Length <= 480), "sms_message's length should be less than 480 bytes");
             return this;
         }
     }
