@@ -1,16 +1,12 @@
 ﻿using cn.jpush.api.common;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace cn.jpush.api.report
 {
     public class ReceivedResult : BaseResult
     {
-
         private List<Received> receivedList = new List<Received>();
 
         public List<Received> ReceivedList
@@ -18,12 +14,13 @@ namespace cn.jpush.api.report
             get { return receivedList; }
             set { receivedList = value; }
         }
-	
-	    public class Received {
-	        public long msg_id;
-	        public String android_received;
-	        public String ios_apns_sent;
-	    }
+
+        public class Received
+        {
+            public long msg_id;
+            public String android_received;
+            public String ios_apns_sent;
+        }
 
         public override bool isResultOK()
         {
@@ -43,7 +40,7 @@ namespace cn.jpush.api.report
             return 0;
         }
 
-        public  string getErrorMessage()
+        public string getErrorMessage()
         {
             if (null != ResponseResult)
             {
