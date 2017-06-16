@@ -25,14 +25,16 @@ namespace cn.jpush.api.schedule
 
         public SchedulePayload()
         {
-            this.name = null;
-            this.enabled = true;
-            this.trigger = new TriggerPayload();
-            this.push = new PushPayload();
+            name = null;
+            enabled = true;
+            trigger = new TriggerPayload();
+            push = new PushPayload();
             schedule_id = null;
-            jSetting = new JsonSerializerSettings();
-            jSetting.NullValueHandling = NullValueHandling.Ignore;
-            jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
+            jSetting = new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                DefaultValueHandling = DefaultValueHandling.Ignore
+            };
         }
 
         public SchedulePayload(String name, Boolean enabled, TriggerPayload trigger, PushPayload push)
@@ -46,9 +48,11 @@ namespace cn.jpush.api.schedule
             this.enabled = enabled;
             this.trigger = trigger;
             this.push = push;
-            jSetting = new JsonSerializerSettings();
-            jSetting.NullValueHandling = NullValueHandling.Ignore;
-            jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
+            jSetting = new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                DefaultValueHandling = DefaultValueHandling.Ignore
+            };
         }
 
         public SchedulePayload(Name name, Enabled enabled, TriggerPayload trigger, PushPayload push)
@@ -62,12 +66,15 @@ namespace cn.jpush.api.schedule
             this.enabled = true;
             this.trigger = trigger;
             this.push = push;
-            jSetting = new JsonSerializerSettings();
-            jSetting.NullValueHandling = NullValueHandling.Ignore;
-            jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
+            jSetting = new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                DefaultValueHandling = DefaultValueHandling.Ignore
+            };
         }
 
-        public SchedulePayload setName(String name) {
+        public SchedulePayload setName(String name)
+        {
             Preconditions.checkArgument(StringUtil.IsValidName(name), "The name must be the right format.");
             this.name = name;
             return this;
@@ -93,9 +100,11 @@ namespace cn.jpush.api.schedule
 
         public string ToJson()
         {
-            jSetting = new JsonSerializerSettings();
-            jSetting.NullValueHandling = NullValueHandling.Ignore;
-            jSetting.DefaultValueHandling = DefaultValueHandling.Ignore;
+            jSetting = new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                DefaultValueHandling = DefaultValueHandling.Ignore
+            };
             return JsonConvert.SerializeObject(this, jSetting);
         }
 

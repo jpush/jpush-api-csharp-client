@@ -14,6 +14,7 @@ namespace cn.jpush.api.schedule
         private const String DELETE_PATH = "/";
         private const String PUT_PATH = "/";
         private const String GET_PATH = "?page=";
+
         private JsonSerializerSettings jSetting;
         private String appKey;
         private String masterSecret;
@@ -29,7 +30,7 @@ namespace cn.jpush.api.schedule
         //POST https://api.jpush.cn/v3/schedules
         //创建一个新的定时任务。
         public ScheduleResult sendSchedule(SchedulePayload schedulepayload)
-        {       
+        {
             Preconditions.checkArgument(schedulepayload != null, "schedulepayload should not be empty");
             schedulepayload.Check();
             String schedulepayloadJson = schedulepayload.ToJson();
@@ -39,7 +40,6 @@ namespace cn.jpush.api.schedule
 
         public ScheduleResult sendSchedule(string schedulepayload)
         {
-            
             Preconditions.checkArgument(!string.IsNullOrEmpty(schedulepayload), "schedulepayload should not be empty");
             Console.WriteLine(schedulepayload);
             String url = HOST_NAME_SSL;
@@ -53,7 +53,6 @@ namespace cn.jpush.api.schedule
             messResult.name = scheduleSuccess.name;
             return messResult;
         }
-
 
         //GET /v3/schedules?page=
         //获取有效的schedule列表
@@ -73,7 +72,7 @@ namespace cn.jpush.api.schedule
             messResult.ResponseResult = result;
 
             ScheduleListResult scheduleListResult = JsonConvert.DeserializeObject<ScheduleListResult>(result.responseContent, jSetting);
-            
+
             messResult.page = scheduleListResult.page;
             messResult.total_pages = scheduleListResult.total_pages;
             messResult.total_count = scheduleListResult.total_count;
@@ -83,7 +82,6 @@ namespace cn.jpush.api.schedule
 
         //获取指定的定时任务
         //GET https://api.jpush.cn/v3/schedules/{schedule_id}
-
         public SchedulePayload getScheduleById(String id)
         {
             Preconditions.checkArgument(!String.IsNullOrEmpty(id), "id should be set.");
@@ -94,13 +92,12 @@ namespace cn.jpush.api.schedule
             url += PUSH_PATH;
             url += "/";
             url += id;
-            ResponseWrapper result = sendGet(url, Authorization(),id);
+            ResponseWrapper result = sendGet(url, Authorization(), id);
 
             String schedule = result.responseContent;
             SchedulePayload schedulepayload = JsonConvert.DeserializeObject<SchedulePayload>(schedule, jSetting);
             return schedulepayload;
         }
-
 
         //PUT  https://api.jpush.cn/v3/schedules/{schedule_id}
         //修改指定的Schedule
@@ -109,10 +106,11 @@ namespace cn.jpush.api.schedule
             Preconditions.checkArgument(schedulepayload != null, "schedulepayload should not be empty");
             Preconditions.checkArgument(schedule_id != null, "schedule_id should not be empty");
 
-            if (schedulepayload.push.audience == null || schedulepayload.push.platform == null) {
+            if (schedulepayload.push.audience == null || schedulepayload.push.platform == null)
+            {
                 schedulepayload.push = null;
             }
-            
+
             if (schedulepayload.trigger.getTime() == null && schedulepayload.trigger.getSingleTime() == null)
             {
                 schedulepayload.trigger = null;
@@ -120,7 +118,7 @@ namespace cn.jpush.api.schedule
 
             String schedulepayloadJson = schedulepayload.ToJson();
             Console.WriteLine(schedulepayloadJson);
-            return putSchedule(schedulepayloadJson,schedule_id);
+            return putSchedule(schedulepayloadJson, schedule_id);
         }
 
         public ScheduleResult putSchedule(string schedulepayload, String schedule_id)
@@ -165,7 +163,6 @@ namespace cn.jpush.api.schedule
 
         private String Authorization()
         {
-
             Debug.Assert(!string.IsNullOrEmpty(this.appKey));
             Debug.Assert(!string.IsNullOrEmpty(this.masterSecret));
 
