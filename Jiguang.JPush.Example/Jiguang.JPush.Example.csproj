@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>exe</OutputType>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <StartupObject />
+    <ApplicationIcon />
+    <OutputTypeEx>exe</OutputTypeEx>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jiguang.JPush\Jiguang.JPush\Jiguang.JPush.csproj" />
+  </ItemGroup>
+
+</Project>
