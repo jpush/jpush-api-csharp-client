@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jiguang.JPush.Model;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -14,15 +15,16 @@ namespace Jiguang.JPush
         /// 最多支持 100 个 msg_id。
         /// </summary>
         /// <param name="msgId">具体消息的 msg_id</param>
-        public async Task<HttpResponseMessage> GetMessageReport(List<string> msgIdList)
+        public async Task<HttpResponse> GetMessageReport(List<string> msgIdList)
         {
             if (msgIdList == null)
                 throw new ArgumentNullException(nameof(msgIdList));
 
             var msgIds = string.Join(",", msgIdList);
             var url = BASE_URL + "received?msg_ids=" + msgIds;
-            var resultTask = JPushClient.HttpClient.GetAsync(url);
-            return await resultTask;
+            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url);
+            var content = await msg.Content.ReadAsStringAsync();
+            return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
 
         /// <summary>
@@ -31,18 +33,19 @@ namespace Jiguang.JPush
         /// </summary>
         /// <param name="msgIdList"></param>
         /// <returns></returns>
-        public async Task<HttpResponseMessage> GetMessageDetailReport(List<string> msgIdList)
+        public async Task<HttpResponse> GetMessageDetailReport(List<string> msgIdList)
         {
             if (msgIdList == null)
                 throw new ArgumentNullException(nameof(msgIdList));
 
             var msgIds = string.Join(",", msgIdList);
             var url = BASE_URL + "messages?msg_ids=" + msgIds;
-            var resultTask = JPushClient.HttpClient.GetAsync(url);
-            return await resultTask;
+            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url);
+            var content = await msg.Content.ReadAsStringAsync();
+            return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
 
-        public async Task<HttpResponseMessage> GetUserReport(string timeUnit, string startTime, int duration)
+        public async Task<HttpResponse> GetUserReport(string timeUnit, string startTime, int duration)
         {
             if (string.IsNullOrEmpty(timeUnit))
                 throw new ArgumentNullException(nameof(timeUnit));
@@ -54,8 +57,9 @@ namespace Jiguang.JPush
                 throw new ArgumentOutOfRangeException(nameof(duration));
 
             var url = BASE_URL + "users?time_unit=" + timeUnit + "&start=" + startTime + "&duration=" + duration;
-            var resultTask = JPushClient.HttpClient.GetAsync(url);
-            return await resultTask;
+            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url);
+            var content = await msg.Content.ReadAsStringAsync();
+            return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
     }
 }

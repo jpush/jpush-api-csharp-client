@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Jiguang.JPush.Model
 {
@@ -11,19 +12,13 @@ namespace Jiguang.JPush.Model
         public string Alert { get; set; }
 
         [JsonProperty("android")]
-        public AndroidNotification Android { get; set; }
+        public Android Android { get; set; }
 
         [JsonProperty("ios")]
-        public IosNotification IOS { get; set; }
-
-        public Notification()
-        {
-            Android = new AndroidNotification();
-            IOS = new IosNotification();
-        }
+        public IOS IOS { get; set; }
     }
 
-    public class AndroidNotification
+    public class Android
     {
         [JsonProperty("alert")]
         public string Alert { get; set; }
@@ -49,27 +44,24 @@ namespace Jiguang.JPush.Model
         [JsonProperty("big_text")]
         public string BigText { get; set; }
 
-        //[JsonProperty("inbox", NullValueHandling = NullValueHandling.Ignore)]
-        //public Dictionary<string, object> Inbox { get; set; } = null;
+        [JsonProperty("inbox")]
+        public Dictionary<string, object> Inbox { get; set; }
 
         [JsonProperty("big_pic_path")]
         public string BigPicturePath { get; set; }
 
-        //[JsonProperty("extras", NullValueHandling = NullValueHandling.Ignore)]
-        //public Dictionary<string, object> Extras { get; set; } = null;
+        [JsonProperty("extras")]
+        public Dictionary<string, object> Extras { get; set; }
     }
 
-    public class IosNotification
+    public class IOS
     {
-        [JsonProperty("alert")]
-        public string Alert { get; set; }
-
         /// <summary>
-        /// Apple 官方定义的 alert payload 结构。
+        /// 可以是 string，也可以是 Apple 官方定义的 alert payload 结构。
         /// <see ="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/PayloadKeyReference.html#//apple_ref/doc/uid/TP40008194-CH17-SW5"/>
         /// </summary>
-        //[JsonProperty("alert", NullValueHandling = NullValueHandling.Ignore)]
-        //public Dictionary<string, object> AlertPayload { get; set; } = null;
+        [JsonProperty("alert")]
+        public object Alert { get; set; }
 
         [JsonProperty("sound")]
         public string Sound { get; set; }

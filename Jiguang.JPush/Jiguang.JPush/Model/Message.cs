@@ -9,6 +9,9 @@ namespace Jiguang.JPush.Model
     /// </summary>
     public class Message
     {
+        /// <summary>
+        /// 消息内容本身（必填）。
+        /// </summary>
         [JsonProperty("msg_content")]
         public string Content { get; set; }
 
