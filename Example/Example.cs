@@ -1,13 +1,11 @@
-﻿using Jiguang.JPush.Model;
-using System;
+﻿using System;
+using Jiguang.JPush;
+using Jiguang.JPush.Model;
 using System.Collections.Generic;
 
-namespace Jiguang.JPush.Example
+namespace Example
 {
-    /// <summary>
-    /// 这里只列出基本用法，更多 API 的用法，大家可直接参考注释和源码。
-    /// </summary>
-    public class JPushExample
+    class Example
     {
         private static JPushClient client = new JPushClient("Your AppKey", "Your MasterSecret");
 
@@ -57,7 +55,7 @@ namespace Jiguang.JPush.Example
 
         private static void ExecuteDeviceEample()
         {
-            var registrationId = "12145125123151"; 
+            var registrationId = "12145125123151";
             var devicePayload = new DevicePayload()
             {
                 Alias = "alias1",
