@@ -3,7 +3,6 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace Jiguang.JPush
@@ -51,53 +50,48 @@ namespace Jiguang.JPush
             Schedule = new ScheduleClient();
         }
 
-        public async Task<HttpResponse> Send(string jsonBody)
+        public async Task<HttpResponse> SendPushAsync(string jsonBody)
         {
             if (string.IsNullOrEmpty(jsonBody))
                 throw new ArgumentNullException(nameof(jsonBody));
 
-            HttpContent httpContent = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+            HttpContent httpContent = new StringContent(jsonBody, Encoding.UTF8);
             HttpResponseMessage msg = await HttpClient.PostAsync(BASE_URL, httpContent);
             var content = await msg.Content.ReadAsStringAsync();
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
 
-        public async Task<HttpResponse> Send(PushPayload payload)
+        public async Task<HttpResponse> SendPushAsync(PushPayload payload)
         {
             if (payload == null)
                 throw new ArgumentNullException(nameof(payload));
 
             string body = payload.ToString();
-            Console.WriteLine(body);
-
-            return await Send(body);
+            return await SendPushAsync(body);
         }
 
-        public async Task<HttpResponse> IsPushValid(string jsonBody)
+        public async Task<HttpResponse> IsPushValidAsync(string jsonBody)
         {
             if (string.IsNullOrEmpty(jsonBody))
                 throw new ArgumentNullException(nameof(jsonBody));
 
-            HttpContent httpContent = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+            HttpContent httpContent = new StringContent(jsonBody, Encoding.UTF8);
             var url = BASE_URL + "/validate";
             HttpResponseMessage msg = await HttpClient.PostAsync(url, httpContent);
             var content = await msg.Content.ReadAsStringAsync();
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
 
-        public async Task<HttpResponse> IsPushValid(PushPayload payload)
+        public async Task<HttpResponse> IsPushValidAsync(PushPayload payload)
         {
             if (payload == null)
                 throw new ArgumentNullException(nameof(payload));
 
             var body = payload.ToString();
-
-            Console.WriteLine(body);
-
-            return await IsPushValid(body);
+            return await IsPushValidAsync(body);
         }
 
-        public async Task<HttpResponse> GetCIdList(int? count, string type)
+        public async Task<HttpResponse> GetCIdListAsync(int? count, string type)
         {
             if (count != null && count < 1 && count > 1000)
                 throw new ArgumentOutOfRangeException(nameof(count));
