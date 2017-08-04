@@ -10,6 +10,7 @@
     <Product>JPush</Product>
     <Copyright>MIT</Copyright>
     <PackageLicenseUrl></PackageLicenseUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -36,7 +36,7 @@ namespace Example
                     IOS = new IOS()
                     {
                         Alert = "ios alert",
-                        Badge = 1
+                        Badge = "+1"
                     }
                 },
                 Message = new Message()
