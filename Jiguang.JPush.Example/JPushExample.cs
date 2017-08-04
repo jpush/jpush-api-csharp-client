@@ -1,15 +1,29 @@
 ﻿using Jiguang.JPush.Model;
 using System;
+using System.Collections.Generic;
 
 namespace Jiguang.JPush.Example
 {
+    /// <summary>
+    /// 这里只列出基本用法，更多 API 的用法，大家可直接参考注释和源码。
+    /// </summary>
     public class JPushExample
     {
+        private static JPushClient client = new JPushClient("Your AppKey", "Your MasterSecret");
+
         public static void Main(string[] args)
         {
-            JPushClient client = new JPushClient("b99f062ffc07bc9b3a4e92d7", "5a30a306ea8096212dc52b30");
+            ExecutePushExample();
+            ExecuteDeviceEample();
+            ExecuteReportExample();
+            ExecuteScheduleExample();
 
-            PushPayload notification = new PushPayload
+            Console.ReadLine();
+        }
+
+        private static void ExecutePushExample()
+        {
+            PushPayload pushPayload = new PushPayload()
             {
                 Platform = "android",
                 Audience = "all",
@@ -29,14 +43,65 @@ namespace Jiguang.JPush.Example
                 },
                 Message = new Message()
                 {
-                    Title = "message title"
+                    Title = "message title",
+                    Content = "message content",
+                    Extras = new Dictionary<string, string>()
+                    {
+                        ["key1"] = "value1"
+                    }
                 }
             };
-
-            var response = client.IsPushValid(notification).Result;
+            var response = client.SendPushAsync(pushPayload).Result;
             Console.WriteLine(response.Content);
+        }
 
-            Console.ReadLine();
+        private static void ExecuteDeviceEample()
+        {
+            var registrationId = "12145125123151"; 
+            var devicePayload = new DevicePayload()
+            {
+                Alias = "alias1",
+                Mobile = "12300000000",
+                Tags = new Dictionary<string, object>()
+                {
+                    { "add", new List<string>() { "tag1", "tag2" } },
+                    { "remove", new List<string>() { "tag3", "tag4" } }
+                }
+            };
+            var response = client.Device.UpdateDeviceInfoAsync(registrationId, devicePayload).Result;
+            Console.WriteLine(response.Content);
+        }
+
+        private static void ExecuteReportExample()
+        {
+            var response = client.Report.GetMessageReportAsync(new List<string> { "1251231231" }).Result;
+            Console.WriteLine(response.Content);
+        }
+
+        private static void ExecuteScheduleExample()
+        {
+            var pushPayload = new PushPayload
+            {
+                Platform = "all",
+                Notification = new Notification()
+                {
+                    Alert = "Hello JPush"
+                }
+            };
+            var trigger = new Trigger()
+            {
+                StartDate = "2017-08-03 12:00:00",
+                EndDate = "2017-12-30 12:00:00",
+                TriggerTime = "12:00:00",
+                TimeUnit = "week",
+                Frequency = 2,
+                TimeList = new List<string>()
+                {
+                    "wed", "fri"
+                }
+            };
+            var response = client.Schedule.CreatePeriodicalScheduleTaskAsync("task1", pushPayload, trigger).Result;
+            Console.WriteLine(response.Content);
         }
     }
 }
