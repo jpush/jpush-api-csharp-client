@@ -4,25 +4,25 @@ namespace Jiguang.JPush.Model
 {
     public class PushPayload
     {
-        [JsonProperty("cid")]
+        [JsonProperty("cid", NullValueHandling = NullValueHandling.Ignore)]
         public string CId { get; set; }
 
         [JsonProperty("platform")]
         public string Platform { get; set; } = "all";
 
         [JsonProperty("audience")]
-        public object Audience { get; set; }
+        public object Audience { get; set; } = "all";
 
         [JsonProperty("notification")]
         public Notification Notification { get; set; }
 
-        [JsonProperty("message")]
+        [JsonProperty("message", NullValueHandling = NullValueHandling.Ignore)]
         public Message Message { get; set; }
 
-        [JsonProperty("sms_message")]
+        [JsonProperty("sms_message", NullValueHandling = NullValueHandling.Ignore)]
         public SmsMessage SMSMessage { get; set; }
 
-        [JsonProperty("options")]
+        [JsonProperty("options", NullValueHandling = NullValueHandling.Ignore)]
         public Options Options { get; set; }
 
         internal string GetJson()

@@ -11,10 +11,10 @@ namespace Jiguang.JPush.Model
         [JsonProperty("alert")]
         public string Alert { get; set; }
 
-        [JsonProperty("android")]
+        [JsonProperty("android", NullValueHandling = NullValueHandling.Ignore)]
         public Android Android { get; set; }
 
-        [JsonProperty("ios")]
+        [JsonProperty("ios", NullValueHandling = NullValueHandling.Ignore)]
         public IOS IOS { get; set; }
     }
 
