@@ -67,7 +67,7 @@ namespace Jiguang.JPush.Model
         public string Sound { get; set; }
 
         [JsonProperty("badge")]
-        public int Badge { get; set; }
+        public string Badge { get; set; } = "+1";
 
         [JsonProperty("content-available")]
         public bool ContentAvailable { get; set; }
