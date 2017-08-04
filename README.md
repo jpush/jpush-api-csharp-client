@@ -4,6 +4,8 @@
 
 由[极光](https://www.jiguang.cn/)官方支持的 JPush .NET API Client。
 
+> 注意：**Jiguang.JPush** v1.0.0 为基于 .NET Standard 的重构版本，API 用法有较大改变，不兼容旧版本（**cn.jpush.api**）,升级前请注意。
+
 ## Install
 
 - [NuGet](https://preview.nuget.org/packages/Jiguang.JPush/)
