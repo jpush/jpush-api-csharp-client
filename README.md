@@ -1,8 +1,8 @@
-# JPush API client library for CSharp
+# JPush Library for .NET
 
 [![NuGet](https://img.shields.io/badge/NuGet-v1.0.0-blue.svg)](https://preview.nuget.org/packages/Jiguang.JPush/)
 
-由[极光](https://www.jiguang.cn/)官方支持的 JPush C# API Client。
+由[极光](https://www.jiguang.cn/)官方支持的 JPush .NET API Client。
 
 ## Install
 
