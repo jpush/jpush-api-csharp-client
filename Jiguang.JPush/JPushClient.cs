@@ -7,9 +7,6 @@ using System.Threading.Tasks;
 
 namespace Jiguang.JPush
 {
-    /// <summary>
-    /// SDK 入口。
-    /// </summary>
     public class JPushClient
     {
         private const string BASE_URL = "https://api.jpush.cn/v3/push";
