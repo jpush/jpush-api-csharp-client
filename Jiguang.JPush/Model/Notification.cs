@@ -74,5 +74,11 @@ namespace Jiguang.JPush.Model
 
         [JsonProperty("mutable-content")]
         public bool MutableContent { get; set; }
+
+        [JsonProperty("category")]
+        public string Category { get; set; }
+
+        [JsonProperty("extras")]
+        public Dictionary<string, object> Extras { get; set; }
     }
 }
