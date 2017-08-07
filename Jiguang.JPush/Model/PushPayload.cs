@@ -7,6 +7,9 @@ namespace Jiguang.JPush.Model
         [JsonProperty("cid", NullValueHandling = NullValueHandling.Ignore)]
         public string CId { get; set; }
 
+        /// <summary>
+        /// 推送平台。可以为 "android" / "ios" / "all"。
+        /// </summary>
         [JsonProperty("platform")]
         public string Platform { get; set; } = "all";
 

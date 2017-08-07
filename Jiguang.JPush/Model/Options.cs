@@ -16,8 +16,11 @@ namespace Jiguang.JPush.Model
         [JsonProperty("override_msg_id")]
         public long OverrideMessageId { get; set; }
 
+        /// <summary>
+        /// iOS 推送是否为生产环境。默认为 false，开发环境。
+        /// </summary>
         [JsonProperty("apns_production")]
-        public bool IsApnsProduction { get; set; }
+        public bool IsApnsProduction { get; set; } = false;
 
         [JsonProperty("apns_collapse_id")]
         public string ApnsCollapseId { get; set; }
