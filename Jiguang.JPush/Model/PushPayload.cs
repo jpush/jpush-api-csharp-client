@@ -10,10 +10,10 @@ namespace Jiguang.JPush.Model
         /// <summary>
         /// 推送平台。可以为 "android" / "ios" / "all"。
         /// </summary>
-        [JsonProperty("platform")]
+        [JsonProperty("platform", DefaultValueHandling = DefaultValueHandling.Include)]
         public string Platform { get; set; } = "all";
 
-        [JsonProperty("audience")]
+        [JsonProperty("audience", DefaultValueHandling = DefaultValueHandling.Include)]
         public object Audience { get; set; } = "all";
 
         [JsonProperty("notification")]
@@ -25,8 +25,11 @@ namespace Jiguang.JPush.Model
         [JsonProperty("sms_message", NullValueHandling = NullValueHandling.Ignore)]
         public SmsMessage SMSMessage { get; set; }
 
-        [JsonProperty("options", NullValueHandling = NullValueHandling.Ignore)]
-        public Options Options { get; set; }
+        [JsonProperty("options", DefaultValueHandling = DefaultValueHandling.Include)]
+        public Options Options { get; set; } = new Options
+        {
+            IsApnsProduction = false
+        };
 
         internal string GetJson()
         {
