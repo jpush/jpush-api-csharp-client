@@ -19,7 +19,7 @@ namespace Jiguang.JPush.Model
         /// <summary>
         /// iOS 推送是否为生产环境。默认为 false，开发环境。
         /// </summary>
-        [JsonProperty("apns_production")]
+        [JsonProperty("apns_production",DefaultValueHandling =DefaultValueHandling.Include)]
         public bool IsApnsProduction { get; set; } = false;
 
         [JsonProperty("apns_collapse_id")]
