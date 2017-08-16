@@ -1,10 +1,13 @@
 ﻿using cn.jpush.api.util;
+using Newtonsoft.Json;
 
 namespace cn.jpush.api.push.mode
 {
     public class SmsMessage
     {
         public string content { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Include)]
         public int delay_time { get; set; }
 
         public SmsMessage()
