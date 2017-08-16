@@ -11,7 +11,7 @@ namespace Jiguang.JPush.Model
         [JsonProperty("content")]
         public string Content { get; set; }
 
-        [JsonProperty("delay_time")]
+        [JsonProperty("delay_time", DefaultValueHandling = DefaultValueHandling.Include)]
         public int DelayTime { get; set; }
     }
 }
