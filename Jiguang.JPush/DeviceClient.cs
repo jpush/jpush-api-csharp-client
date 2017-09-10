@@ -23,8 +23,8 @@ namespace Jiguang.JPush
                 throw new ArgumentNullException(registrationId);
 
             var url = BASE_URL + "/v3/devices/" + registrationId;
-            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url);
-            var content = await msg.Content.ReadAsStringAsync();
+            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
+            var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
 
@@ -54,8 +54,8 @@ namespace Jiguang.JPush
 
             var url = BASE_URL + "/v3/devices/" + registrationId;
             HttpContent requestContent = new StringContent(json, Encoding.UTF8);
-            HttpResponseMessage msg = await JPushClient.HttpClient.PostAsync(url, requestContent);
-            string responseContent = await msg.Content.ReadAsStringAsync();
+            HttpResponseMessage msg = await JPushClient.HttpClient.PostAsync(url, requestContent).ConfigureAwait(false);
+            string responseContent = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, responseContent);
         }
 
@@ -75,8 +75,8 @@ namespace Jiguang.JPush
             if (!string.IsNullOrEmpty(platform))
                 url += "?platform=" + platform;
 
-            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url);
-            string responseConetent = await msg.Content.ReadAsStringAsync();
+            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
+            string responseConetent = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, responseConetent);
         }
 
@@ -96,7 +96,7 @@ namespace Jiguang.JPush
             if (!string.IsNullOrEmpty(platform))
                 url += "?platform=" + platform;
 
-            HttpResponseMessage msg = await JPushClient.HttpClient.DeleteAsync(url);
+            HttpResponseMessage msg = await JPushClient.HttpClient.DeleteAsync(url).ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, "");
         }
 
@@ -108,8 +108,8 @@ namespace Jiguang.JPush
         public async Task<HttpResponse> GetTagsAsync()
         {
             var url = BASE_URL + "/v3/tags/";
-            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url);
-            string responseContent = await msg.Content.ReadAsStringAsync();
+            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
+            string responseContent = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, responseContent);
         }
 
@@ -127,8 +127,8 @@ namespace Jiguang.JPush
                 throw new ArgumentNullException(nameof(tag));
 
             var url = BASE_URL + "/v3/tags/" + tag + "/registration_ids/" + registrationId;
-            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url);
-            string responseContent = await msg.Content.ReadAsStringAsync();
+            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
+            string responseContent = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, responseContent);
         }
 
@@ -154,7 +154,7 @@ namespace Jiguang.JPush
             };
 
             var requestContent = new StringContent(jObj.ToString(), Encoding.UTF8);
-            HttpResponseMessage msg = await JPushClient.HttpClient.PostAsync(url, requestContent);
+            HttpResponseMessage msg = await JPushClient.HttpClient.PostAsync(url, requestContent).ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, "");
         }
 
@@ -183,7 +183,7 @@ namespace Jiguang.JPush
             };
 
             var requestContent = new StringContent(jObj.ToString(), Encoding.UTF8);
-            HttpResponseMessage msg = await JPushClient.HttpClient.PostAsync(url, requestContent);
+            HttpResponseMessage msg = await JPushClient.HttpClient.PostAsync(url, requestContent).ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, "");
         }
 
@@ -202,7 +202,7 @@ namespace Jiguang.JPush
             if (!string.IsNullOrEmpty(platform))
                 url += "?platform=" + platform;
 
-            HttpResponseMessage msg = await JPushClient.HttpClient.DeleteAsync(url);
+            HttpResponseMessage msg = await JPushClient.HttpClient.DeleteAsync(url).ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, "");
         }
 
@@ -220,8 +220,8 @@ namespace Jiguang.JPush
 
             var requestJson = JsonConvert.SerializeObject(registrationIds);
             HttpContent requestContent = new StringContent(requestJson, Encoding.UTF8);
-            HttpResponseMessage msg = await JPushClient.HttpClient.PostAsync(url, requestContent);
-            string responseContent = await msg.Content.ReadAsStringAsync();
+            HttpResponseMessage msg = await JPushClient.HttpClient.PostAsync(url, requestContent).ConfigureAwait(false);
+            string responseContent = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, responseContent);
         }
     }

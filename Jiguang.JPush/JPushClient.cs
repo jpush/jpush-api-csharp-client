@@ -53,8 +53,8 @@ namespace Jiguang.JPush
                 throw new ArgumentNullException(nameof(jsonBody));
 
             HttpContent httpContent = new StringContent(jsonBody, Encoding.UTF8);
-            HttpResponseMessage msg = await HttpClient.PostAsync(BASE_URL, httpContent);
-            var content = await msg.Content.ReadAsStringAsync();
+            HttpResponseMessage msg = await HttpClient.PostAsync(BASE_URL, httpContent).ConfigureAwait(false);
+            var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
 
@@ -74,8 +74,8 @@ namespace Jiguang.JPush
 
             HttpContent httpContent = new StringContent(jsonBody, Encoding.UTF8);
             var url = BASE_URL + "/validate";
-            HttpResponseMessage msg = await HttpClient.PostAsync(url, httpContent);
-            var content = await msg.Content.ReadAsStringAsync();
+            HttpResponseMessage msg = await HttpClient.PostAsync(url, httpContent).ConfigureAwait(false);
+            var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
 
@@ -103,8 +103,8 @@ namespace Jiguang.JPush
                     url += ("&type=" + type);
             }
 
-            HttpResponseMessage msg = await HttpClient.GetAsync(url);
-            var content = await msg.Content.ReadAsStringAsync();
+            HttpResponseMessage msg = await HttpClient.GetAsync(url).ConfigureAwait(false);
+            var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
     }

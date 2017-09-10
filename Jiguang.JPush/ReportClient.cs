@@ -22,8 +22,8 @@ namespace Jiguang.JPush
 
             var msgIds = string.Join(",", msgIdList);
             var url = BASE_URL + "received?msg_ids=" + msgIds;
-            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url);
-            var content = await msg.Content.ReadAsStringAsync();
+            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
+            var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
 
@@ -40,8 +40,8 @@ namespace Jiguang.JPush
 
             var msgIds = string.Join(",", msgIdList);
             var url = BASE_URL + "messages?msg_ids=" + msgIds;
-            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url);
-            var content = await msg.Content.ReadAsStringAsync();
+            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
+            var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
 
@@ -57,8 +57,8 @@ namespace Jiguang.JPush
                 throw new ArgumentOutOfRangeException(nameof(duration));
 
             var url = BASE_URL + "users?time_unit=" + timeUnit + "&start=" + startTime + "&duration=" + duration;
-            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url);
-            var content = await msg.Content.ReadAsStringAsync();
+            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
+            var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
     }
