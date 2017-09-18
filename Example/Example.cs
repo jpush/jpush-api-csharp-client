@@ -49,7 +49,7 @@ namespace Example
                     }
                 }
             };
-            var response = client.SendPushAsync(pushPayload).Result;
+            var response = client.SendPush(pushPayload);
             Console.WriteLine(response.Content);
         }
 
@@ -66,13 +66,13 @@ namespace Example
                     { "remove", new List<string>() { "tag3", "tag4" } }
                 }
             };
-            var response = client.Device.UpdateDeviceInfoAsync(registrationId, devicePayload).Result;
+            var response = client.Device.UpdateDeviceInfo(registrationId, devicePayload);
             Console.WriteLine(response.Content);
         }
 
         private static void ExecuteReportExample()
         {
-            var response = client.Report.GetMessageReportAsync(new List<string> { "1251231231" }).Result;
+            var response = client.Report.GetMessageReport(new List<string> { "1251231231" });
             Console.WriteLine(response.Content);
         }
 
@@ -98,7 +98,7 @@ namespace Example
                     "wed", "fri"
                 }
             };
-            var response = client.Schedule.CreatePeriodicalScheduleTaskAsync("task1", pushPayload, trigger).Result;
+            var response = client.Schedule.CreatePeriodicalScheduleTask("task1", pushPayload, trigger);
             Console.WriteLine(response.Content);
         }
     }

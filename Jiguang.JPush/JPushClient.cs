@@ -11,9 +11,6 @@ namespace Jiguang.JPush
     {
         private const string BASE_URL = "https://api.jpush.cn/v3/push";
 
-        private static string APP_KEY;
-        private static string MASTER_SECRET;
-
         public DeviceClient Device;
         public ScheduleClient Schedule;
         private ReportClient report;
@@ -36,9 +33,6 @@ namespace Jiguang.JPush
             if (string.IsNullOrEmpty(masterSecret))
                 throw new ArgumentNullException(nameof(masterSecret));
 
-            APP_KEY = appKey;
-            MASTER_SECRET = masterSecret;
-
             var auth = Convert.ToBase64String(Encoding.UTF8.GetBytes(appKey + ":" + masterSecret));
             HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
 
@@ -58,6 +52,9 @@ namespace Jiguang.JPush
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
 
+        /// <summary>
+        /// <see cref="SendPush(PushPayload)"/>
+        /// </summary>
         public async Task<HttpResponse> SendPushAsync(PushPayload payload)
         {
             if (payload == null)
@@ -65,6 +62,18 @@ namespace Jiguang.JPush
 
             string body = payload.ToString();
             return await SendPushAsync(body);
+        }
+
+        /// <summary>
+        /// 进行消息推送。
+        /// <see cref="https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#_1"/>
+        /// </summary>
+        /// <param name="pushPayload"> 推送对象。<see cref="https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#_7"/> </param>
+        public HttpResponse SendPush(PushPayload pushPayload)
+        {
+            Task<HttpResponse> task = Task.Run(() => SendPushAsync(pushPayload));
+            task.Wait();
+            return task.Result;
         }
 
         public async Task<HttpResponse> IsPushValidAsync(string jsonBody)
@@ -79,6 +88,9 @@ namespace Jiguang.JPush
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
 
+        /// <summary>
+        /// <see cref="IsPushValid(PushPayload)"/>
+        /// </summary>
         public async Task<HttpResponse> IsPushValidAsync(PushPayload payload)
         {
             if (payload == null)
@@ -88,6 +100,20 @@ namespace Jiguang.JPush
             return await IsPushValidAsync(body);
         }
 
+        /// <summary>
+        /// 校验推送能否成功。与推送 API 的区别在于：不会实际向用户发送任何消息。 其他字段说明和推送 API 完全相同。
+        /// </summary>
+        /// <param name="pushPayload"> 推送对象。<see cref="https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#_7"/> </param>
+        public HttpResponse IsPushValid(PushPayload pushPayload)
+        {
+            Task<HttpResponse> task = Task.Run(() => IsPushValidAsync(pushPayload));
+            task.Wait();
+            return task.Result;
+        }
+
+        /// <summary>
+        /// <see cref="GetCIdList(int?, string)"/>
+        /// </summary>
         public async Task<HttpResponse> GetCIdListAsync(int? count, string type)
         {
             if (count != null && count < 1 && count > 1000)
@@ -106,6 +132,19 @@ namespace Jiguang.JPush
             HttpResponseMessage msg = await HttpClient.GetAsync(url).ConfigureAwait(false);
             var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
+        }
+
+        /// <summary>
+        /// 获取 CId（推送的唯一标识符） 列表。
+        /// <see cref="https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#cid"/>
+        /// </summary>
+        /// <param name="count">不传默认为 1。范围为[1, 1000]</param>
+        /// <param name="type">CId 的类型。取值："push" (默认) 或 "schedule"</param>
+        public HttpResponse GetCIdList(int? count, string type)
+        {
+            Task<HttpResponse> task = Task.Run(() => GetCIdListAsync(count, type));
+            task.Wait();
+            return task.Result;
         }
     }
 }
