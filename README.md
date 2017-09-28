@@ -19,6 +19,8 @@
 
 基于 [.NET Standard 1.1](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard1.1.md) 和 [.NET Standard 1.3](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard1.3.md)。
 
+> 如果使用的是 .NET Framework 4.0，需要使用 [v1](https://github.com/jpush/jpush-api-csharp-client/tree/v1) 版本。
+
 ## Support
 
 [极光社区](https://community.jiguang.cn/)
