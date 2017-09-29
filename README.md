@@ -36,4 +36,4 @@ Please contribute! [Look at the issues](https://github.com/jpush/jpush-api-cshar
 
 ## License
 
-MIT © [JiGuang](/license)
+MIT © [JiGuang](https://github.com/jpush/jpush-api-csharp-client/blob/master/license)
