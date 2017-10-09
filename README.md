@@ -1,6 +1,6 @@
 # JPush Library for .NET
 
-[![NuGet](https://img.shields.io/badge/NuGet-v1.0.8-blue.svg)](https://preview.nuget.org/packages/Jiguang.JPush/)
+[![NuGet](https://img.shields.io/badge/NuGet-v1.0.9-blue.svg)](https://preview.nuget.org/packages/Jiguang.JPush/)
 
 由[极光](https://www.jiguang.cn/)官方支持的 JPush .NET API Client。
 
@@ -36,4 +36,4 @@ Please contribute! [Look at the issues](https://github.com/jpush/jpush-api-cshar
 
 ## License
 
-MIT © [JiGuang](/license)
+MIT © [JiGuang](https://github.com/jpush/jpush-api-csharp-client/blob/master/license)
