@@ -8,13 +8,13 @@ namespace Jiguang.JPush.Model
     public class Options
     {
         [JsonProperty("sendno", NullValueHandling = NullValueHandling.Ignore)]
-        public int SendNo { get; set; }
+        public int? SendNo { get; set; }
 
         [JsonProperty("time_to_live", NullValueHandling = NullValueHandling.Ignore)]
-        public int TimeToLive { get; set; }
+        public int? TimeToLive { get; set; }
 
         [JsonProperty("override_msg_id", NullValueHandling = NullValueHandling.Ignore)]
-        public long OverrideMessageId { get; set; }
+        public long? OverrideMessageId { get; set; }
 
         /// <summary>
         /// iOS 推送是否为生产环境。默认为 false，开发环境。
@@ -26,6 +26,6 @@ namespace Jiguang.JPush.Model
         public string ApnsCollapseId { get; set; }
 
         [JsonProperty("big_push_duration", NullValueHandling = NullValueHandling.Ignore)]
-        public int BigPushDuration { get; set; }
+        public int? BigPushDuration { get; set; }
     }
 }
