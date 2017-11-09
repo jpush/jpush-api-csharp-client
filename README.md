@@ -6,6 +6,8 @@
 
 > 注意：**Jiguang.JPush** 为基于 .NET Standard 的重构版本，API 用法有较大改变，不兼容旧版本（**cn.jpush.api**）,升级前请注意。
 
+项目中的 Example 为 .NET Core 控制台应用。
+
 ## Install
 
 - [NuGet](https://preview.nuget.org/packages/Jiguang.JPush/)
@@ -28,7 +30,6 @@
 ## FAQ
 
 1.如果调用异步方法时出现死锁，即一直没有返回 [HttpResponse](https://github.com/jpush/jsms-api-csharp-client/blob/v2-dev/Jiguang.JSMS/Model/HttpResponse.cs)，可参考这篇[文章](https://blogs.msdn.microsoft.com/jpsanders/2017/08/28/asp-net-do-not-use-task-result-in-main-context/)。
-
 
 ## Contribute
 

@@ -58,7 +58,7 @@ namespace Jiguang.JPush.Model
     {
         /// <summary>
         /// 可以是 string，也可以是 Apple 官方定义的 alert payload 结构。
-        /// <see ="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/PayloadKeyReference.html#//apple_ref/doc/uid/TP40008194-CH17-SW5"/>
+        /// <para><see ="https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/PayloadKeyReference.html#//apple_ref/doc/uid/TP40008194-CH17-SW5"/></para>
         /// </summary>
         [JsonProperty("alert")]
         public object Alert { get; set; }
