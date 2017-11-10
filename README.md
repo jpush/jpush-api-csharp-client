@@ -1,6 +1,6 @@
 # JPush Library for .NET
 
-[![NuGet](https://img.shields.io/badge/NuGet-v1.0.11-blue.svg)](https://preview.nuget.org/packages/Jiguang.JPush/)
+[![NuGet](https://img.shields.io/badge/NuGet-v1.1.0-blue.svg)](https://preview.nuget.org/packages/Jiguang.JPush/)
 
 由[极光](https://www.jiguang.cn/)官方支持的 JPush .NET API Client。
 
@@ -11,7 +11,6 @@
 ## Install
 
 - [NuGet](https://preview.nuget.org/packages/Jiguang.JPush/)
-- 手动添加 Jiguang.JPush.dll 依赖（在运行时可能会提示缺少其他的依赖，可根据提示安装）。
 
 ## Documents
 
