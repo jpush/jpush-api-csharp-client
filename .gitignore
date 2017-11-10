@@ -426,3 +426,11 @@ __pycache__/
 # End of https://www.gitignore.io/api/csharp,visualstudio
 
 *.nuspec
+
+NETFrameworkTest/App\.config
+
+NETFrameworkTest/NETFrameworkTest\.csproj
+
+NETFrameworkTest/Program\.cs
+
+NETFrameworkTest/Properties/AssemblyInfo\.cs

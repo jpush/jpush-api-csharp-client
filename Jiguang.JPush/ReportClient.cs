@@ -1,7 +1,9 @@
 ﻿using Jiguang.JPush.Model;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Jiguang.JPush
@@ -32,6 +34,48 @@ namespace Jiguang.JPush
         public HttpResponse GetMessageReport(List<string> msgIdList)
         {
             Task<HttpResponse> task = Task.Run(() => GetMessageReportAsync(msgIdList));
+            task.Wait();
+            return task.Result;
+        }
+
+        /// <summary>
+        /// <see cref="GetMessageSendStatus(string, List{string}, string)"/>
+        /// </summary>
+        public async Task<HttpResponse> GetMessageSendStatusAsync(string msgId, List<string> registrationIdList, string data)
+        {
+            if (string.IsNullOrEmpty(msgId))
+                throw new ArgumentNullException(nameof(msgId));
+
+            if (registrationIdList == null)
+                throw new ArgumentNullException(nameof(registrationIdList));
+
+            JObject body = new JObject
+            {
+                { "msg_id", long.Parse(msgId) },
+                { "registration_ids", JArray.FromObject(registrationIdList) }
+            };
+
+            if (!string.IsNullOrEmpty(data))
+                body.Add("data", data);
+
+            var url = BASE_URL + "/status/message";
+            var httpContent = new StringContent(body.ToString(), Encoding.UTF8);
+
+            HttpResponseMessage msg = await JPushClient.HttpClient.PostAsync(url, httpContent).ConfigureAwait(false);
+            var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return new HttpResponse(msg.StatusCode, msg.Headers, content);
+        }
+
+        /// <summary>
+        /// 查询指定消息的送达状态。
+        /// <para><see cref="https://docs.jiguang.cn/jpush/server/push/rest_api_v3_report/#_7"/></para>
+        /// </summary>
+        /// <param name="msgId">待查询消息的 Message Id。</param>
+        /// <param name="registrationIdList">收到消息设备的 Registration Id 列表。</param>
+        /// <param name="data">待查询日期，格式为 yyyy-MM-dd。如果传 null，则默认为当天。</param>
+        public HttpResponse GetMessageSendStatus(string msgId, List<string> registrationIdList, string data)
+        {
+            Task<HttpResponse> task = Task.Run(() => GetMessageSendStatusAsync(msgId, registrationIdList, data));
             task.Wait();
             return task.Result;
         }

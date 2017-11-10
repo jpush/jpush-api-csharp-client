@@ -16,7 +16,7 @@ namespace Jiguang.JPush.Model
         [JsonProperty("audience", DefaultValueHandling = DefaultValueHandling.Include)]
         public object Audience { get; set; } = "all";
 
-        [JsonProperty("notification")]
+        [JsonProperty("notification", NullValueHandling = NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
         [JsonProperty("message", NullValueHandling = NullValueHandling.Ignore)]
