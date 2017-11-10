@@ -84,6 +84,11 @@ namespace cn.jpush.api
             return _reportClient.getReceiveds_v3(msg_ids);
         }
 
+        public ResponseWrapper getMessageSendStatus(string msgId, List<string> registrationIdList, string data)
+        {
+            return _reportClient.getMessageSendStatus(msgId, registrationIdList, data);
+        }
+
         /// <summary>
         /// 用户统计查询接口，这个接口是vip用户专用
         /// </summary>

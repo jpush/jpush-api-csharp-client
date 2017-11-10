@@ -1,5 +1,6 @@
 ﻿using cn.jpush.api.common;
 using cn.jpush.api.util;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -33,6 +34,31 @@ namespace cn.jpush.api.report
         {
             checkMsgids(msg_ids);
             return getReceiveds_common(msg_ids, REPORT_RECEIVE_PATH_V3);
+        }
+
+        /// <summary>
+        /// 查询消息送达状态。
+        /// </summary>
+        /// <param name="msgId">消息 Id。</param>
+        /// <param name="registrationIdList">待查询设备的 Registration Id，一次调用最多支持 1000 个。</param>
+        /// <param name="data">查询的日期，格式为 yyyy-MM-dd。如果传 null，默认为当天。</param>
+        public ResponseWrapper getMessageSendStatus(string msgId, List<string> registrationIdList, string data)
+        {
+            checkMsgids(msgId);
+
+            string url = REPORT_HOST_NAME + "/v3/status/message";
+
+            JObject body = new JObject
+            {
+                { "msg_id", long.Parse(msgId) },
+                { "registration_ids", JArray.FromObject(registrationIdList) }
+            };
+
+            if (!string.IsNullOrEmpty(data))
+                body.Add("data", data);
+
+            string auth = Base64.getBase64Encode(appKey + ":" + masterSecret);
+            return sendPost(url, auth, body.ToString());
         }
 
         public UsersResult getUsers(TimeUnit timeUnit, string start, int duration)
@@ -98,8 +124,6 @@ namespace cn.jpush.api.report
             ResponseWrapper rsp = sendGet(url, auth, null);
             ReceivedResult result = new ReceivedResult();
             List<ReceivedResult.Received> list = new List<ReceivedResult.Received>();
-
-            Console.WriteLine("recieve content==" + rsp.responseContent);
 
             if (rsp.responseCode == System.Net.HttpStatusCode.OK)
             {

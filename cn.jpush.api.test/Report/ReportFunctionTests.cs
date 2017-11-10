@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using cn.jpush.api.report;
 using cn.jpush.api.common;
+using System.Collections.Generic;
 
 namespace cn.jpush.api.test.Report
 {
@@ -28,6 +29,7 @@ namespace cn.jpush.api.test.Report
             Assert.IsTrue(result.isResultOK());
             Assert.IsTrue(result.messages.Count > 0);
         }
+
         [TestMethod]
         [ExpectedException(typeof(APIRequestException))]
         public void getUserTest2() 
@@ -36,6 +38,7 @@ namespace cn.jpush.api.test.Report
             Assert.IsTrue(result.isResultOK());
             Assert.IsTrue(result.items.Count > 0);
         }
+
         [TestMethod]
         [ExpectedException(typeof(APIRequestException))]
         public void getUserTest3()  
@@ -43,6 +46,13 @@ namespace cn.jpush.api.test.Report
           UsersResult result = jpushClient.getReportUsers(TimeUnit.HOUR, "2016-05-10 06", 10);
           Assert.IsTrue(result.isResultOK());
           Assert.IsTrue(result.items.Count > 0);
+        }
+
+        [TestMethod]
+        public void TestGetMessageSendStatus()
+        {
+            ResponseWrapper result = jpushClient.getMessageSendStatus("20266199867473010", new List<string>() { "1a0018970aa8a0985a2" }, null);
+            Assert.AreEqual(result.responseCode, System.Net.HttpStatusCode.OK);
         }
     }
 }
