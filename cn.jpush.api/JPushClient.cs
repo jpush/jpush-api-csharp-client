@@ -84,6 +84,12 @@ namespace cn.jpush.api
             return _reportClient.getReceiveds_v3(msg_ids);
         }
 
+        /// <summary>
+        /// 查询消息的送达状态。
+        /// </summary>
+        /// <param name="msgId">待查询的消息 Id。</param>
+        /// <param name="registrationIdList">收到消息设备的 registration id 列表。</param>
+        /// <param name="data">日期，格式为 yyyy-MM-dd。如果为 null，则默认为今天。</param>
         public ResponseWrapper getMessageSendStatus(string msgId, List<string> registrationIdList, string data)
         {
             return _reportClient.getMessageSendStatus(msgId, registrationIdList, data);

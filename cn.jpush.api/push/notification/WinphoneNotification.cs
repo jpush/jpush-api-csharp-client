@@ -67,5 +67,15 @@ namespace cn.jpush.api.push.notification
             extras.Add(key, value);
             return this;
         }
+
+        public WinphoneNotification AddExtra(string key, object value)
+        {
+            if (extras == null)
+            {
+                extras = new Dictionary<string, object>();
+            }
+            extras.Add(key, value);
+            return this;
+        }
     }
 }
