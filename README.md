@@ -1,6 +1,8 @@
 # JPush API client library for CSharp
 
-这是 JPush REST API 的 C# 版本封装开发包，是由极光推送官方提供的，一般支持最新的 API 功能。
+目前推荐使用 Master 分支上的新版本库，支持 .NET Standard。该分支下的库（cn.jpush.api）今后将减少维护，一般只修复 bug。
+
+这是 JPush REST API 的 C# 版本封装开发包，是由极光推送官方提供。
 
 对应的 REST API 文档：<http://docs.jiguang.cn/jpush/server/push/server_overview/>
 
