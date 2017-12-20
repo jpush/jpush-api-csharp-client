@@ -38,6 +38,28 @@ namespace cn.jpush.api.push.notification
         [JsonProperty]
         public string big_pic_path { get; private set; }
 
+        // 华为 only - start
+
+        /// <summary>
+        /// 指定开发者想要打开的 Activity，值为 <activity> 节点的 "android:name" 属性值。
+        /// </summary>
+        [JsonProperty]
+        public string url_activity { get; private set; }
+
+        /// <summary>
+        /// 指定打开 Activity 的方式，值为 Intent.java 中预定义的 "access flags" 的取值范围。
+        /// </summary>
+        [JsonProperty]
+        public string url_flag { get; private set; }
+
+        /// <summary>
+        /// 指定开发者想要打开的 Activity，值为 <activity> -> <intent-filter> -> <action> 节点中的 "android:name" 属性值。
+        /// </summary>
+        [JsonProperty]
+        public string uri_action { get; private set; }
+
+        // 华为 only - end
+
         public AndroidNotification() : base()
         {
             title = null;
@@ -101,6 +123,24 @@ namespace cn.jpush.api.push.notification
         public AndroidNotification setBig_pic_path(string big_pic_path)
         {
             this.big_pic_path = big_pic_path;
+            return this;
+        }
+
+        public AndroidNotification setUrlActivity(string url_activity)
+        {
+            this.url_activity = url_activity;
+            return this;
+        }
+
+        public AndroidNotification setUrlFlag(string url_flag)
+        {
+            this.url_flag = url_flag;
+            return this;
+        }
+
+        public AndroidNotification setUriAction(string uri_action)
+        {
+            this.uri_action = uri_action;
             return this;
         }
 
