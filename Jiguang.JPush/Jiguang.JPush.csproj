@@ -12,7 +12,7 @@
     <Copyright>MIT</Copyright>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/jpush/jpush-api-csharp-client</PackageProjectUrl>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
