@@ -10,7 +10,20 @@ namespace Jiguang.JPush
 {
     public class ReportClient
     {
-        private const string BASE_URL = "https://report.jpush.cn/v3/";
+        public const string BASE_URL_REPORT_DEFAULT = "https://report.jpush.cn/v3";
+        public const string BASE_URL_REPORT_BEIJING = "https://bjapi.push.jiguang.cn/v3/report";
+
+        private string BASE_URL = BASE_URL_REPORT_DEFAULT;
+
+        /// <summary>
+        /// 设置 Report API 的调用地址。
+        /// <see cref="https://docs.jiguang.cn/jpush/server/push/rest_api_v3_report/"/>
+        /// </summary>
+        /// <param name="url"><see cref="BASE_URL_REPORT_DEFAULT"/> or <see cref="BASE_URL_REPORT_BEIJING"/></param>
+        public void SetBaseURL(string url)
+        {
+            BASE_URL = url;
+        }
 
         /// <summary>
         /// <see cref="GetMessageReport(List{string})"/>
@@ -21,7 +34,7 @@ namespace Jiguang.JPush
                 throw new ArgumentNullException(nameof(msgIdList));
 
             var msgIds = string.Join(",", msgIdList);
-            var url = BASE_URL + "received?msg_ids=" + msgIds;
+            var url = BASE_URL + "/received?msg_ids=" + msgIds;
             HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
             var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
@@ -89,7 +102,7 @@ namespace Jiguang.JPush
                 throw new ArgumentNullException(nameof(msgIdList));
 
             var msgIds = string.Join(",", msgIdList);
-            var url = BASE_URL + "messages?msg_ids=" + msgIds;
+            var url = BASE_URL + "/messages?msg_ids=" + msgIds;
             HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
             var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
@@ -120,7 +133,7 @@ namespace Jiguang.JPush
             if (duration <= 0)
                 throw new ArgumentOutOfRangeException(nameof(duration));
 
-            var url = BASE_URL + "users?time_unit=" + timeUnit + "&start=" + startTime + "&duration=" + duration;
+            var url = BASE_URL + "/users?time_unit=" + timeUnit + "&start=" + startTime + "&duration=" + duration;
             HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
             var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);

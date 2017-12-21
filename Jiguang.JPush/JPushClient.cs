@@ -9,10 +9,10 @@ namespace Jiguang.JPush
 {
     public class JPushClient
     {
-        public const string BASE_URL_DEFAULT = "https://api.jpush.cn/v3/push";
-        public const string BASE_URL_BEIJING = "https://bjapi.push.jiguang.cn/v3/push";
+        public const string BASE_URL_PUSH_DEFAULT = "https://api.jpush.cn/v3/push";
+        public const string BASE_URL_PUSH_BEIJING = "https://bjapi.push.jiguang.cn/v3/push";
 
-        private string BASE_URL = BASE_URL_DEFAULT;
+        private string BASE_URL = BASE_URL_PUSH_DEFAULT;
 
         public DeviceClient Device;
         public ScheduleClient Schedule;
@@ -45,7 +45,7 @@ namespace Jiguang.JPush
         }
 
         /// <summary>
-        /// 设置 API 调用地址。
+        /// 设置 push 功能的 API 调用地址。
         /// <para>
         /// 如果极光应用分配在北京机房（极光控制台 “应用设置” -> “应用信息” 中可以看到），并且开发者接口调用的服务器也位于北京，则可以调用如下地址：
         ///
