@@ -9,7 +9,10 @@ namespace Jiguang.JPush
 {
     public class JPushClient
     {
-        private const string BASE_URL = "https://api.jpush.cn/v3/push";
+        public const string BASE_URL_DEFAULT = "https://api.jpush.cn/v3/push";
+        public const string BASE_URL_BEIJING = "https://bjapi.push.jiguang.cn/v3/push";
+
+        private string BASE_URL = BASE_URL_DEFAULT;
 
         public DeviceClient Device;
         public ScheduleClient Schedule;
@@ -17,7 +20,7 @@ namespace Jiguang.JPush
 
         public ReportClient Report { get => report; set => report = value; }
 
-        public static readonly HttpClient HttpClient;
+        public static HttpClient HttpClient;
 
         static JPushClient()
         {
@@ -39,6 +42,21 @@ namespace Jiguang.JPush
             Report = new ReportClient();
             Device = new DeviceClient();
             Schedule = new ScheduleClient();
+        }
+
+        /// <summary>
+        /// 设置 API 调用地址。
+        /// <para>
+        /// 如果极光应用分配在北京机房（极光控制台 “应用设置” -> “应用信息” 中可以看到），并且开发者接口调用的服务器也位于北京，则可以调用如下地址：
+        ///
+        /// https://bjapi.push.jiguang.cn/v3/push
+        /// <para>可以提升 API 的响应速度。</para>
+        /// </para>
+        /// </summary>
+        /// <param name="url"><see cref="BASE_URL_DEFAULT"/> or <see cref="BASE_URL_BEIJING"/></param>
+        public void SetBaseURL(string url)
+        {
+            BASE_URL = url;
         }
 
         public async Task<HttpResponse> SendPushAsync(string jsonBody)
