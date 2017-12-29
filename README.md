@@ -8,6 +8,8 @@
 
 项目中的 Example 为 .NET Core 控制台应用。
 
+开发工具：Visual Studio 2017。
+
 ## Install
 
 - [NuGet](https://preview.nuget.org/packages/Jiguang.JPush/)
