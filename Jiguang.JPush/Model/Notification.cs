@@ -20,56 +20,60 @@ namespace Jiguang.JPush.Model
 
     public class Android
     {
+        /// <summary>
+        /// 必填。
+        /// </summary>
         [JsonProperty("alert")]
         public string Alert { get; set; }
 
-        [JsonProperty("title")]
+        [JsonProperty("title", NullValueHandling = NullValueHandling.Ignore)]
         public string Title { get; set; }
 
-        [JsonProperty("builder_id")]
-        public int BuilderId { get; set; }
+        [JsonProperty("builder_id", NullValueHandling = NullValueHandling.Ignore)]
+        public int? BuilderId { get; set; }
 
-        [JsonProperty("priority")]
-        public int Priority { get; set; }
+        [JsonProperty("priority", NullValueHandling = NullValueHandling.Ignore)]
+        public int? Priority { get; set; }
 
-        [JsonProperty("category")]
+        [JsonProperty("category", NullValueHandling = NullValueHandling.Ignore)]
         public string Category { get; set; }
 
-        [JsonProperty("style")]
-        public int Style { get; set; }
+        [JsonProperty("style", NullValueHandling = NullValueHandling.Ignore)]
+        public int? Style { get; set; }
 
-        [JsonProperty("alert_type")]
-        public int AlertType { get; set; }
+        [JsonProperty("alert_type", NullValueHandling = NullValueHandling.Ignore)]
+        public int? AlertType { get; set; }
 
-        [JsonProperty("big_text")]
+        [JsonProperty("big_text", NullValueHandling = NullValueHandling.Ignore)]
         public string BigText { get; set; }
 
-        [JsonProperty("inbox")]
+        [JsonProperty("inbox", NullValueHandling = NullValueHandling.Ignore)]
         public Dictionary<string, object> Inbox { get; set; }
 
-        [JsonProperty("big_pic_path")]
+        [JsonProperty("big_pic_path", NullValueHandling = NullValueHandling.Ignore)]
         public string BigPicturePath { get; set; }
 
-        [JsonProperty("extras")]
+        [JsonProperty("extras", NullValueHandling = NullValueHandling.Ignore)]
         public Dictionary<string, object> Extras { get; set; }
 
         // VIP only - start
+
         /// <summary>
         /// (VIP only)指定开发者想要打开的 Activity，值为 <activity> 节点的 "android:name" 属性值。
         /// </summary>
-        [JsonProperty("url_activity")]
+        [JsonProperty("url_activity", NullValueHandling = NullValueHandling.Ignore)]
         public string URLActivity { get; set; }
 
         /// <summary>
         /// (VIP only)指定打开 Activity 的方式，值为 Intent.java 中预定义的 "access flags" 的取值范围。
         /// </summary>
-        [JsonProperty("url_flag")]
+        [JsonProperty("url_flag", NullValueHandling = NullValueHandling.Ignore)]
         public string URLFlag { get; set; }
 
         /// <summary>
         /// (VIP only)指定开发者想要打开的 Activity，值为 <activity> -> <intent-filter> -> <action> 节点中的 "android:name" 属性值。
         /// </summary>
-        [JsonProperty("uri_action")]
+        [JsonProperty("uri_action", NullValueHandling = NullValueHandling.Ignore)]
         public string URIAction { get; set; }
 
         // VIP only - end
@@ -84,22 +88,25 @@ namespace Jiguang.JPush.Model
         [JsonProperty("alert")]
         public object Alert { get; set; }
 
-        [JsonProperty("sound")]
+        [JsonProperty("sound", NullValueHandling = NullValueHandling.Ignore)]
         public string Sound { get; set; }
 
+        /// <summary>
+        /// 默认角标 +1。
+        /// </summary>
         [JsonProperty("badge")]
         public string Badge { get; set; } = "+1";
 
-        [JsonProperty("content-available")]
-        public bool ContentAvailable { get; set; }
+        [JsonProperty("content-available", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? ContentAvailable { get; set; }
 
-        [JsonProperty("mutable-content")]
-        public bool MutableContent { get; set; }
+        [JsonProperty("mutable-content", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? MutableContent { get; set; }
 
-        [JsonProperty("category")]
+        [JsonProperty("category", NullValueHandling = NullValueHandling.Ignore)]
         public string Category { get; set; }
 
-        [JsonProperty("extras")]
+        [JsonProperty("extras", NullValueHandling = NullValueHandling.Ignore)]
         public Dictionary<string, object> Extras { get; set; }
     }
 }
