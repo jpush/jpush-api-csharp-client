@@ -4,6 +4,7 @@ using System;
 using Newtonsoft.Json.Linq;
 using System.Net.Http;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace Jiguang.JPush
 {
@@ -13,6 +14,11 @@ namespace Jiguang.JPush
         public const string BASE_URL_SCHEDULE_BEIJING = "https://bjapi.push.jiguang.cn/v3/push/schedules";
 
         private string BASE_URL = BASE_URL_SCHEDULE_DEFAULT;
+
+        private JsonSerializer jsonSerializer = new JsonSerializer
+        {
+            NullValueHandling = NullValueHandling.Ignore
+        };
 
         /// <summary>
         /// 设置 Schedule API 的调用地址。
@@ -59,7 +65,7 @@ namespace Jiguang.JPush
             {
                 ["name"] = name,
                 ["enabled"] = true,
-                ["push"] = JObject.FromObject(pushPayload),
+                ["push"] = JObject.FromObject(pushPayload, jsonSerializer),
                 ["trigger"] = new JObject
                 {
                     ["single"] = new JObject
@@ -103,7 +109,7 @@ namespace Jiguang.JPush
             {
                 ["name"] = name,
                 ["enabled"] = true,
-                ["push"] = JObject.FromObject(pushPayload),
+                ["push"] = JObject.FromObject(pushPayload, jsonSerializer),
                 ["trigger"] = new JObject()
                 {
                     ["periodical"] = JObject.FromObject(trigger)
@@ -227,7 +233,7 @@ namespace Jiguang.JPush
 
             if (pushPayload != null)
             {
-                json["push"] = JObject.FromObject(pushPayload);
+                json["push"] = JObject.FromObject(pushPayload, jsonSerializer);
             }
 
             return await UpdateScheduleTaskAsync(scheduleId, json.ToString()).ConfigureAwait(false);
@@ -269,13 +275,13 @@ namespace Jiguang.JPush
             {
                 json["trigger"] = new JObject
                 {
-                    ["periodical"] = JObject.FromObject(trigger)
+                    ["periodical"] = JObject.FromObject(trigger, jsonSerializer)
                 };
             }
 
             if (pushPayload != null)
             {
-                json["push"] = JObject.FromObject(pushPayload);
+                json["push"] = JObject.FromObject(pushPayload, jsonSerializer);
             }
 
             return await UpdateScheduleTaskAsync(scheduleId, json.ToString()).ConfigureAwait(false);
