@@ -46,7 +46,7 @@ namespace Jiguang.JPush
         /// <param name="msgIdList">消息的 msg_id 列表，每次最多支持 100 个。</param>
         public HttpResponse GetMessageReport(List<string> msgIdList)
         {
-            Task<HttpResponse> task = Task.Run(() => GetMessageReportAsync(msgIdList));
+            Task<HttpResponse> task = GetMessageReportAsync(msgIdList);
             task.Wait();
             return task.Result;
         }
@@ -88,7 +88,7 @@ namespace Jiguang.JPush
         /// <param name="data">待查询日期，格式为 yyyy-MM-dd。如果传 null，则默认为当天。</param>
         public HttpResponse GetMessageSendStatus(string msgId, List<string> registrationIdList, string data)
         {
-            Task<HttpResponse> task = Task.Run(() => GetMessageSendStatusAsync(msgId, registrationIdList, data));
+            Task<HttpResponse> task = GetMessageSendStatusAsync(msgId, registrationIdList, data);
             task.Wait();
             return task.Result;
         }
@@ -114,7 +114,7 @@ namespace Jiguang.JPush
         /// <param name="msgIdList">消息的 msg_id 列表，每次最多支持 100 个。</param>
         public HttpResponse GetMessageDetailReport(List<string> msgIdList)
         {
-            Task<HttpResponse> task = Task.Run(() => GetMessageDetailReportAsync(msgIdList));
+            Task<HttpResponse> task = GetMessageDetailReportAsync(msgIdList);
             task.Wait();
             return task.Result;
         }
@@ -157,7 +157,7 @@ namespace Jiguang.JPush
         /// </param>
         public HttpResponse GetUserReport(string timeUnit, string startTime, int duration)
         {
-            Task<HttpResponse> task = Task.Run(() => GetUserReportAsync(timeUnit, startTime, duration));
+            Task<HttpResponse> task = GetUserReportAsync(timeUnit, startTime, duration);
             task.Wait();
             return task.Result;
         }
