@@ -23,7 +23,7 @@ namespace Example
         {
             PushPayload pushPayload = new PushPayload()
             {
-                Platform = "android",
+                Platform = "all",
                 Audience = "all",
                 Notification = new Notification()
                 {
