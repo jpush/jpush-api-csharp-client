@@ -36,7 +36,7 @@ namespace Jiguang.JPush
         /// </param>
         public HttpResponse GetDeviceInfo(string registrationId)
         {
-            Task<HttpResponse> task = Task.Run(() => GetDeviceInfoAsync(registrationId));
+            Task<HttpResponse> task = GetDeviceInfoAsync(registrationId);
             task.Wait();
             return task.Result;
         }
@@ -81,7 +81,7 @@ namespace Jiguang.JPush
         /// <param name="devicePayload">设备信息对象</param>
         public HttpResponse UpdateDeviceInfo(string registrationId, DevicePayload devicePayload)
         {
-            Task<HttpResponse> task = Task.Run(() => UpdateDeviceInfoAsync(registrationId, devicePayload));
+            Task<HttpResponse> task = UpdateDeviceInfoAsync(registrationId, devicePayload);
             task.Wait();
             return task.Result;
         }
@@ -112,7 +112,7 @@ namespace Jiguang.JPush
         /// <param name="platform">"android" 或 "ios", 为 null 则默认为所有平台。</param>
         public HttpResponse GetDeviceByAlias(string alias, string platform)
         {
-            Task<HttpResponse> task = Task.Run(() => GetDevicesByAliasAsync(alias, platform));
+            Task<HttpResponse> task = GetDevicesByAliasAsync(alias, platform);
             task.Wait();
             return task.Result;
         }
@@ -142,7 +142,7 @@ namespace Jiguang.JPush
         /// <param name="platform">"android" 或 "ios"，为 null 则默认为所有平台。</param>
         public HttpResponse DeleteAlias(string alias, string platform)
         {
-            Task<HttpResponse> task = Task.Run(() => DeleteAliasAsync(alias, platform));
+            Task<HttpResponse> task = DeleteAliasAsync(alias, platform);
             task.Wait();
             return task.Result;
         }
@@ -164,7 +164,7 @@ namespace Jiguang.JPush
         /// </summary>
         public HttpResponse GetTags()
         {
-            Task<HttpResponse> task = Task.Run(() => GetTagsAsync());
+            Task<HttpResponse> task = GetTagsAsync();
             task.Wait();
             return task.Result;
         }
@@ -194,7 +194,7 @@ namespace Jiguang.JPush
         /// <param name="tag">要查询的 tag</param>
         public HttpResponse IsDeviceInTag(string registrationId, string tag)
         {
-            Task<HttpResponse> task = Task.Run(() => IsDeviceInTagAsync(registrationId, tag));
+            Task<HttpResponse> task = IsDeviceInTagAsync(registrationId, tag);
             task.Wait();
             return task.Result;
         }
@@ -233,7 +233,7 @@ namespace Jiguang.JPush
         /// <param name="registrationIdList">设备的 registration id 列表</param>
         public HttpResponse AddDevicesToTag(string tag, List<string> registrationIdList)
         {
-            Task<HttpResponse> task = Task.Run(() => AddDevicesToTagAsync(tag, registrationIdList));
+            Task<HttpResponse> task = AddDevicesToTagAsync(tag, registrationIdList);
             task.Wait();
             return task.Result;
         }
@@ -272,7 +272,7 @@ namespace Jiguang.JPush
         /// <param name="registrationIdList">设备的 registration id 列表</param>
         public HttpResponse RemoveDevicesFromTag(string tag, List<string> registrationIdList)
         {
-            Task<HttpResponse> task = Task.Run(() => RemoveDevicesFromTagAsync(tag, registrationIdList));
+            Task<HttpResponse> task = RemoveDevicesFromTagAsync(tag, registrationIdList);
             task.Wait();
             return task.Result;
         }
@@ -302,7 +302,7 @@ namespace Jiguang.JPush
         /// <param name="platform">"android" 或 "ios"，如果为 null，则默认为所有平台</param>
         public HttpResponse DeleteTag(string tag, string platform)
         {
-            Task<HttpResponse> task = Task.Run(() => DeleteTagAsync(tag, platform));
+            Task<HttpResponse> task = DeleteTagAsync(tag, platform);
             task.Wait();
             return task.Result;
         }
@@ -331,7 +331,7 @@ namespace Jiguang.JPush
         /// <param name="registrationIdList">待查询用户设备的 registration id，每次最多支持 1000 个。</param>
         public HttpResponse GetUserOnlineStatus(List<string> registrationIdList)
         {
-            Task<HttpResponse> task = Task.Run(() => GetUserOnlineStatusAsync(registrationIdList));
+            Task<HttpResponse> task = GetUserOnlineStatusAsync(registrationIdList);
             task.Wait();
             return task.Result;
         }

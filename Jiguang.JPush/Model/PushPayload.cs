@@ -11,7 +11,7 @@ namespace Jiguang.JPush.Model
         /// 推送平台。可以为 "android" / "ios" / "all"。
         /// </summary>
         [JsonProperty("platform", DefaultValueHandling = DefaultValueHandling.Include)]
-        public string Platform { get; set; } = "all";
+        public object Platform { get; set; } = "all";
 
         [JsonProperty("audience", DefaultValueHandling = DefaultValueHandling.Include)]
         public object Audience { get; set; } = "all";
