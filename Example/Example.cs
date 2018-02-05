@@ -25,28 +25,32 @@ namespace Example
             {
                 Platform = new List<string> { "android", "ios" },
                 Audience = "all",
-                Notification = new Notification()
+                Notification = new Notification
                 {
                     Alert = "hello jpush",
-                    Android = new Android()
+                    Android = new Android
                     {
                         Alert = "android alert",
                         Title = "title"
                     },
-                    IOS = new IOS()
+                    IOS = new IOS
                     {
                         Alert = "ios alert",
                         Badge = "+1"
                     }
                 },
-                Message = new Message()
+                Message = new Message
                 {
                     Title = "message title",
                     Content = "message content",
-                    Extras = new Dictionary<string, string>()
+                    Extras = new Dictionary<string, string>
                     {
                         ["key1"] = "value1"
                     }
+                },
+                Options = new Options
+                {
+                    IsApnsProduction = true // 设置 iOS 推送生产环境。不设置默认为开发环境。
                 }
             };
             var response = client.SendPush(pushPayload);
@@ -56,11 +60,11 @@ namespace Example
         private static void ExecuteDeviceEample()
         {
             var registrationId = "12145125123151";
-            var devicePayload = new DevicePayload()
+            var devicePayload = new DevicePayload
             {
                 Alias = "alias1",
                 Mobile = "12300000000",
-                Tags = new Dictionary<string, object>()
+                Tags = new Dictionary<string, object>
                 {
                     { "add", new List<string>() { "tag1", "tag2" } },
                     { "remove", new List<string>() { "tag3", "tag4" } }
@@ -81,19 +85,19 @@ namespace Example
             var pushPayload = new PushPayload
             {
                 Platform = "all",
-                Notification = new Notification()
+                Notification = new Notification
                 {
                     Alert = "Hello JPush"
                 }
             };
-            var trigger = new Trigger()
+            var trigger = new Trigger
             {
                 StartDate = "2017-08-03 12:00:00",
                 EndDate = "2017-12-30 12:00:00",
                 TriggerTime = "12:00:00",
                 TimeUnit = "week",
                 Frequency = 2,
-                TimeList = new List<string>()
+                TimeList = new List<string>
                 {
                     "wed", "fri"
                 }
