@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jiguang.JPush", "Jiguang.JP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "..\Example\Example.csproj", "{E87821A4-FB7B-4744-8188-17C348ABCE55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2", "C:\Users\hasee\Downloads\ConsoleApp2\ConsoleApp2.csproj", "{BE150D1B-23E3-4EC3-A6AD-631DAA90D1E5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
