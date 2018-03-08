@@ -89,7 +89,7 @@ namespace Jiguang.JPush
         /// <param name="pushPayload"> 推送对象。<see cref="https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#_7"/> </param>
         public HttpResponse SendPush(PushPayload pushPayload)
         {
-            Task<HttpResponse> task = SendPushAsync(pushPayload);
+            Task<HttpResponse> task = Task.Run(() => SendPushAsync(pushPayload));
             task.Wait();
             return task.Result;
         }
@@ -124,7 +124,7 @@ namespace Jiguang.JPush
         /// <param name="pushPayload"> 推送对象。<see cref="https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#_7"/> </param>
         public HttpResponse IsPushValid(PushPayload pushPayload)
         {
-            Task<HttpResponse> task = IsPushValidAsync(pushPayload);
+            Task<HttpResponse> task = Task.Run(() => IsPushValidAsync(pushPayload));
             task.Wait();
             return task.Result;
         }
@@ -160,7 +160,7 @@ namespace Jiguang.JPush
         /// <param name="type">CId 的类型。取值："push" (默认) 或 "schedule"</param>
         public HttpResponse GetCIdList(int? count, string type)
         {
-            Task<HttpResponse> task = GetCIdListAsync(count, type);
+            Task<HttpResponse> task = Task.Run(() => GetCIdListAsync(count, type));
             task.Wait();
             return task.Result;
         }

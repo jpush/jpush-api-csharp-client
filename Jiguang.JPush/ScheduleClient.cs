@@ -86,7 +86,7 @@ namespace Jiguang.JPush
         /// <param name="trigger">触发器</param>
         public HttpResponse CreateSingleScheduleTask(string name, PushPayload pushPayload, string triggeringTime)
         {
-            Task<HttpResponse> task = CreateSingleScheduleTaskAsync(name, pushPayload, triggeringTime);
+            Task<HttpResponse> task = Task.Run(() => CreateSingleScheduleTaskAsync(name, pushPayload, triggeringTime));
             task.Wait();
             return task.Result;
         }
@@ -128,7 +128,7 @@ namespace Jiguang.JPush
         /// <param name="trigger">触发器</param>
         public HttpResponse CreatePeriodicalScheduleTask(string name, PushPayload pushPayload, Trigger trigger)
         {
-            Task<HttpResponse> task = CreatePeriodicalScheduleTaskAsync(name, pushPayload, trigger);
+            Task<HttpResponse> task = Task.Run(() => CreatePeriodicalScheduleTaskAsync(name, pushPayload, trigger));
             task.Wait();
             return task.Result;
         }
@@ -158,7 +158,7 @@ namespace Jiguang.JPush
         /// </param>
         public HttpResponse GetValidScheduleTasks(int page = 1)
         {
-            Task<HttpResponse> task = GetValidScheduleTasksAsync(page);
+            Task<HttpResponse> task = Task.Run(() => GetValidScheduleTasksAsync(page));
             task.Wait();
             return task.Result;
         }
@@ -183,7 +183,7 @@ namespace Jiguang.JPush
         /// <param name="scheduleId">定时任务 ID。在创建定时任务时会返回。</param>
         public HttpResponse GetScheduleTask(string scheduleId)
         {
-            Task<HttpResponse> task = GetScheduleTaskAsync(scheduleId);
+            Task<HttpResponse> task = Task.Run(() => GetScheduleTaskAsync(scheduleId));
             task.Wait();
             return task.Result;
         }
@@ -249,7 +249,7 @@ namespace Jiguang.JPush
         /// <param name="pushPayload">推送内容，为 null 表示不更新。</param>
         public HttpResponse UpdateSingleScheduleTask(string scheduleId, string name, bool? enabled, string triggeringTime, PushPayload pushPayload)
         {
-            Task<HttpResponse> task = UpdateSingleScheduleTaskAsync(scheduleId, name, enabled, triggeringTime, pushPayload);
+            Task<HttpResponse> task = Task.Run(() => UpdateSingleScheduleTaskAsync(scheduleId, name, enabled, triggeringTime, pushPayload));
             task.Wait();
             return task.Result;
         }
@@ -298,7 +298,7 @@ namespace Jiguang.JPush
         /// <param name="pushPayload">推送内容，为 null 表示不更新。</param>
         public HttpResponse UpdatePeriodicalScheduleTask(string scheduleId, string name, bool? enabled, Trigger trigger, PushPayload pushPayload)
         {
-            Task<HttpResponse> task = UpdatePeriodicalScheduleTaskAsync(scheduleId, name, enabled, trigger, pushPayload);
+            Task<HttpResponse> task = Task.Run(() => UpdatePeriodicalScheduleTaskAsync(scheduleId, name, enabled, trigger, pushPayload));
             task.Wait();
             return task.Result;
         }
@@ -324,7 +324,7 @@ namespace Jiguang.JPush
         /// <param name="scheduleId">已创建的 schedule 任务的 id。如果 scheduleId 不合法，即不是有效的 uuid，则返回 404。</param>
         public HttpResponse DeleteScheduleTask(string scheduleId)
         {
-            Task<HttpResponse> task = DeleteScheduleTaskAsync(scheduleId);
+            Task<HttpResponse> task = Task.Run(() => DeleteScheduleTaskAsync(scheduleId));
             task.Wait();
             return task.Result;
         }
