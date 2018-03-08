@@ -12,7 +12,11 @@
     <Copyright>MIT</Copyright>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/jpush/jpush-api-csharp-client</PackageProjectUrl>
-    <Version>1.1.4</Version>
+    <Version>1.1.5</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard1.1|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard1.1\Jiguang.JPush.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
