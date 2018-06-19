@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Jiguang.JPush.Model
 {
@@ -8,10 +9,11 @@ namespace Jiguang.JPush.Model
     /// </summary>
     public class SmsMessage
     {
-        [JsonProperty("content")]
-        public string Content { get; set; }
-
-        [JsonProperty("delay_time", DefaultValueHandling = DefaultValueHandling.Include)]
+        [JsonProperty("delay_time")]
         public int DelayTime { get; set; }
+        [JsonProperty("temp_id")]
+        public long TempId { get; set; }
+        [JsonProperty("temp_para", NullValueHandling = NullValueHandling.Ignore)]
+        public Dictionary<string, object> TempPara { get; set; }
     }
 }
