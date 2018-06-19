@@ -56,27 +56,11 @@ namespace Jiguang.JPush.Model
         [JsonProperty("extras", NullValueHandling = NullValueHandling.Ignore)]
         public Dictionary<string, object> Extras { get; set; }
 
-        // VIP only - start
-
         /// <summary>
         /// (VIP only)指定开发者想要打开的 Activity，值为 <activity> 节点的 "android:name" 属性值。
         /// </summary>
-        [JsonProperty("url_activity", NullValueHandling = NullValueHandling.Ignore)]
-        public string URLActivity { get; set; }
-
-        /// <summary>
-        /// (VIP only)指定打开 Activity 的方式，值为 Intent.java 中预定义的 "access flags" 的取值范围。
-        /// </summary>
-        [JsonProperty("url_flag", NullValueHandling = NullValueHandling.Ignore)]
-        public string URLFlag { get; set; }
-
-        /// <summary>
-        /// (VIP only)指定开发者想要打开的 Activity，值为 <activity> -> <intent-filter> -> <action> 节点中的 "android:name" 属性值。
-        /// </summary>
-        [JsonProperty("uri_action", NullValueHandling = NullValueHandling.Ignore)]
-        public string URIAction { get; set; }
-
-        // VIP only - end
+        [JsonProperty("uri_activity", NullValueHandling = NullValueHandling.Ignore)]
+        public string URIActivity { get; set; }
     }
 
     public class IOS
