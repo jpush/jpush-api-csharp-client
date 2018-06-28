@@ -316,9 +316,14 @@ namespace Jiguang.JPush
                 throw new ArgumentException(nameof(registrationIdList));
 
             var url = BASE_URL + "/v3/devices/status/";
+            JObject jObj = new JObject
+            {
+                ["registration_ids"] = new JArray(registrationIdList)
 
-            var requestJson = JsonConvert.SerializeObject(registrationIdList);
-            HttpContent requestContent = new StringContent(requestJson, Encoding.UTF8);
+            };
+
+            var requestContent = new StringContent(jObj.ToString(), Encoding.UTF8);
+
             HttpResponseMessage msg = await JPushClient.HttpClient.PostAsync(url, requestContent).ConfigureAwait(false);
             string responseContent = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, responseContent);
