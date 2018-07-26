@@ -44,19 +44,7 @@ namespace cn.jpush.api.push.notification
         /// 指定开发者想要打开的 Activity，值为 <activity> 节点的 "android:name" 属性值。
         /// </summary>
         [JsonProperty]
-        public string url_activity { get; private set; }
-
-        /// <summary>
-        /// 指定打开 Activity 的方式，值为 Intent.java 中预定义的 "access flags" 的取值范围。
-        /// </summary>
-        [JsonProperty]
-        public string url_flag { get; private set; }
-
-        /// <summary>
-        /// 指定开发者想要打开的 Activity，值为 <activity> -> <intent-filter> -> <action> 节点中的 "android:name" 属性值。
-        /// </summary>
-        [JsonProperty]
-        public string uri_action { get; private set; }
+        public string uri_activity { get; private set; }
 
         // 华为 only - end
 
@@ -126,21 +114,9 @@ namespace cn.jpush.api.push.notification
             return this;
         }
 
-        public AndroidNotification setUrlActivity(string url_activity)
+        public AndroidNotification setUriActivity(string uri_activity)
         {
-            this.url_activity = url_activity;
-            return this;
-        }
-
-        public AndroidNotification setUrlFlag(string url_flag)
-        {
-            this.url_flag = url_flag;
-            return this;
-        }
-
-        public AndroidNotification setUriAction(string uri_action)
-        {
-            this.uri_action = uri_action;
+            this.uri_activity = uri_activity;
             return this;
         }
 
