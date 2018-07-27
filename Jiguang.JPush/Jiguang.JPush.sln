@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jiguang.JPush", "Jiguang.JP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "..\Example\Example.csproj", "{E87821A4-FB7B-4744-8188-17C348ABCE55}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.AspNetCore20", "..\Example.AspNetCore20\Example.AspNetCore20.csproj", "{EE9B2ECE-B491-4BAA-A145-9EAA6326AC11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,10 +23,10 @@ Global
 		{E87821A4-FB7B-4744-8188-17C348ABCE55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E87821A4-FB7B-4744-8188-17C348ABCE55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E87821A4-FB7B-4744-8188-17C348ABCE55}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BE150D1B-23E3-4EC3-A6AD-631DAA90D1E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE150D1B-23E3-4EC3-A6AD-631DAA90D1E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BE150D1B-23E3-4EC3-A6AD-631DAA90D1E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BE150D1B-23E3-4EC3-A6AD-631DAA90D1E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE9B2ECE-B491-4BAA-A145-9EAA6326AC11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE9B2ECE-B491-4BAA-A145-9EAA6326AC11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE9B2ECE-B491-4BAA-A145-9EAA6326AC11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE9B2ECE-B491-4BAA-A145-9EAA6326AC11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
