@@ -188,6 +188,32 @@ namespace Jiguang.JPush
             return task.Result;
         }
 
+
+        /// <summary>
+        /// <see cref="GetScheduleTaskMsgId(string)"/>
+        /// </summary>
+        public async Task<HttpResponse> GetScheduleTaskMsgIdAsync(string scheduleId)
+        {
+            if (string.IsNullOrEmpty(scheduleId))
+                throw new ArgumentNullException(nameof(scheduleId));
+
+            var url = BASE_URL + $"/{scheduleId}/msg_ids";
+            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
+            string responseContent = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return new HttpResponse(msg.StatusCode, msg.Headers, responseContent);
+        }
+
+        /// <summary>
+        /// 获取定时任务对应的所有 msg_id。
+        /// </summary>
+        /// <param name="scheduleId">定时任务 ID。在创建定时任务时会返回。</param>
+        public HttpResponse GetScheduleTaskMsgId(string scheduleId)
+        {
+            Task<HttpResponse> task = Task.Run(() => GetScheduleTaskMsgIdAsync(scheduleId));
+            task.Wait();
+            return task.Result;
+        }
+
         public async Task<HttpResponse> UpdateScheduleTaskAsync(string scheduleId, string json)
         {
             if (string.IsNullOrEmpty(scheduleId))
