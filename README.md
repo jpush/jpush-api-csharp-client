@@ -35,3 +35,7 @@ Please contribute! [Look at the issues](https://github.com/jpush/jpush-api-cshar
 ## License
 
 MIT © [JiGuang](https://github.com/jpush/jpush-api-csharp-client/blob/master/license)
+
+## Extensions
+
+.Net core 2.0 可以使用[Jiguang.JPush.Extensions](https://github.com/Weidaicheng/jpush-api-csharp-client.Extensions)扩展添加注入，方便使用。
