@@ -1,0 +1,10 @@
+
+
+namespace Example
+{
+    class ExampleConfig
+    {
+        public const string APP_KEY = "Your AppKey";
+        public const string MASTER_SECRET = "Your MasterSecret";
+    }
+}

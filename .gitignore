@@ -434,3 +434,5 @@ NETFrameworkTest/NETFrameworkTest\.csproj
 NETFrameworkTest/Program\.cs
 
 NETFrameworkTest/Properties/AssemblyInfo\.cs
+/.vscode
+/Example/ExampleConfig.cs

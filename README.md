@@ -6,7 +6,7 @@
 
 > 注意：**Jiguang.JPush** 为基于 .NET Standard 的重构版本，API 用法有较大改变，不兼容旧版本（**cn.jpush.api**）,升级前请注意。
 
-项目中的 Example 为 .NET Core 控制台应用。
+项目中的 Example 为 .NET Core 控制台应用。将ExampleConfig.cs.example重命名为ExampleConfig.cs并且填上自己的AppKey、MasterSecret后即可进行单元测试。
 
 开发工具：Visual Studio 2017。
 

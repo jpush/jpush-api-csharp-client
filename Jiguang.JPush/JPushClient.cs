@@ -4,6 +4,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Jiguang.JPush
 {
@@ -163,6 +166,73 @@ namespace Jiguang.JPush
             Task<HttpResponse> task = Task.Run(() => GetCIdListAsync(count, type));
             task.Wait();
             return task.Result;
+        }
+
+        /// <summary>
+        /// 针对RegID方式批量单推（VIP专属接口）
+        /// 如果您在给每个用户的推送内容都不同的情况下，可以使用此接口。
+        /// <see cref="https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#vip"/>
+        /// </summary>
+        /// <param name="singlePayLoadList">批量单推的载体列表</param>
+        public async Task<HttpResponse> BatchPushByRegidAsync(List<SinglePayload> singlePayLoadList)
+        {
+            var url = BASE_URL + "/batch/regid/single";
+            return await BatchPushAsync(url, singlePayLoadList);
+        }
+
+        /// <summary>
+        /// 针对RegID方式批量单推（VIP专属接口）
+        /// 如果您在给每个用户的推送内容都不同的情况下，可以使用此接口。
+        /// <see cref="https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#vip"/>
+        /// </summary>
+        /// <param name="singlePayLoadList">批量单推的载体列表</param>
+        public HttpResponse BatchPushByRegid(List<SinglePayload> singlePayLoadList)
+        {
+            Task<HttpResponse> task = Task.Run(() => BatchPushByRegidAsync(singlePayLoadList));
+            task.Wait();
+            return task.Result;
+        }
+
+        /// <summary>
+        /// 针对Alias方式批量单推（VIP专属接口）
+        /// 如果您在给每个用户的推送内容都不同的情况下，可以使用此接口。
+        /// <see cref="https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#vip"/>
+        /// </summary>
+        /// <param name="singlePayLoadList">批量单推的载体列表</param>
+        public async Task<HttpResponse> BatchPushByAliasAsync(List<SinglePayload> singlePayLoadList)
+        {
+            var url = BASE_URL + "/batch/alias/single";
+            return await BatchPushAsync(url, singlePayLoadList);
+        }
+
+        /// <summary>
+        /// 针对Alias方式批量单推（VIP专属接口）
+        /// 如果您在给每个用户的推送内容都不同的情况下，可以使用此接口。
+        /// <see cref="https://docs.jiguang.cn/jpush/server/push/rest_api_v3_push/#vip"/>
+        /// </summary>
+        /// <param name="singlePayLoadList">批量单推的载体列表</param>
+        public HttpResponse BatchPushByAlias(List<SinglePayload> singlePayLoadList)
+        {
+            Task<HttpResponse> task = Task.Run(() => BatchPushByAliasAsync(singlePayLoadList));
+            task.Wait();
+            return task.Result;
+        }
+
+        private async Task<HttpResponse> BatchPushAsync(String url, List<SinglePayload> singlePayLoadList)
+        {
+            HttpResponse cidResponse = await this.GetCIdListAsync(singlePayLoadList.Count, "push");
+            JObject jObject = (JObject) JsonConvert.DeserializeObject(cidResponse.Content);
+            JArray jArray = ((JArray) jObject["cidlist"]);
+            BatchPushPayload batchPushPayload = new BatchPushPayload();
+            batchPushPayload.Pushlist = new Dictionary<String, SinglePayload>();
+            for (int i = 0; i < singlePayLoadList.Count; i++)
+            {
+                batchPushPayload.Pushlist.Add((String) jArray[i], singlePayLoadList[i]);
+            }
+            HttpContent httpContent = new StringContent(batchPushPayload.ToString(), Encoding.UTF8);
+            HttpResponseMessage msg = await HttpClient.PostAsync(url, httpContent).ConfigureAwait(false);
+            var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
     }
 }
