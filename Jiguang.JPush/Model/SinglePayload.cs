@@ -1,21 +1,22 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
 
 namespace Jiguang.JPush.Model
 {
-    public class PushPayload
+    public class SinglePayload
     {
-        [JsonProperty("cid", NullValueHandling = NullValueHandling.Ignore)]
-        public string CId { get; set; }
-
         /// <summary>
         /// 推送平台。可以为 "android" / "ios" / "all"。
         /// </summary>
         [JsonProperty("platform", DefaultValueHandling = DefaultValueHandling.Include)]
         public object Platform { get; set; } = "all";
 
-        [JsonProperty("audience", DefaultValueHandling = DefaultValueHandling.Include)]
-        public object Audience { get; set; } = "all";
+        /// <summary>
+        /// 推送设备指定。
+        /// 如果是调用RegID方式批量单推接口（/v3/push/batch/regid/single），那此处就是指定regid值；
+        /// 如果是调用Alias方式批量单推接口（/v3/push/batch/alias/single），那此处就是指定alias值。
+        /// </summary>
+        [JsonProperty("target", DefaultValueHandling = DefaultValueHandling.Include)]
+        public string Target { get; set; }
 
         [JsonProperty("notification", NullValueHandling = NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
@@ -27,7 +28,6 @@ namespace Jiguang.JPush.Model
         public SmsMessage SMSMessage { get; set; }
 
         [JsonProperty("options", DefaultValueHandling = DefaultValueHandling.Include)]
-        [JsonConverter(typeof(OptionsJsonConvert))]
         public Options Options { get; set; } = new Options
         {
             IsApnsProduction = false

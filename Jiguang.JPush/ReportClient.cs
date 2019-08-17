@@ -52,6 +52,33 @@ namespace Jiguang.JPush
         }
 
         /// <summary>
+        /// <see cref="GetReceivedDetailReport(List{string})"/>
+        /// </summary>
+        public async Task<HttpResponse> GetReceivedDetailReportAsync(List<string> msgIdList)
+        {
+            if (msgIdList == null)
+                throw new ArgumentNullException(nameof(msgIdList));
+
+            var msgIds = string.Join(",", msgIdList);
+            var url = BASE_URL + "/received/detail?msg_ids=" + msgIds;
+            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
+            var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return new HttpResponse(msg.StatusCode, msg.Headers, content);
+        }
+
+        /// <summary>
+        /// 送达统计详情（新）
+        /// <see cref="https://docs.jiguang.cn/jpush/server/push/rest_api_v3_report/#_7"/>
+        /// </summary>
+        /// <param name="msgIdList">消息的 msg_id 列表，每次最多支持 100 个。</param>
+        public HttpResponse GetReceivedDetailReport(List<string> msgIdList)
+        {
+            Task<HttpResponse> task = Task.Run(() => GetReceivedDetailReportAsync(msgIdList));
+            task.Wait();
+            return task.Result;
+        }
+
+        /// <summary>
         /// <see cref="GetMessageSendStatus(string, List{string}, string)"/>
         /// </summary>
         public async Task<HttpResponse> GetMessageSendStatusAsync(string msgId, List<string> registrationIdList, string data)
@@ -109,12 +136,40 @@ namespace Jiguang.JPush
         }
 
         /// <summary>
-        /// 提供包括点击数等更详细的统计数据（VIP only）。
+        /// 消息统计（VIP 专属接口，旧）
+        /// <see cref="https://docs.jiguang.cn/jpush/server/push/rest_api_v3_report/#vip"/>
         /// </summary>
         /// <param name="msgIdList">消息的 msg_id 列表，每次最多支持 100 个。</param>
         public HttpResponse GetMessageDetailReport(List<string> msgIdList)
         {
             Task<HttpResponse> task = Task.Run(() => GetMessageDetailReportAsync(msgIdList));
+            task.Wait();
+            return task.Result;
+        }
+
+        /// <summary>
+        /// <see cref="GetMessagesDetailReport(List{string})"/>
+        /// </summary>
+        public async Task<HttpResponse> GetMessagesDetailReportAsync(List<string> msgIdList)
+        {
+            if (msgIdList == null)
+                throw new ArgumentNullException(nameof(msgIdList));
+
+            var msgIds = string.Join(",", msgIdList);
+            var url = BASE_URL + "/messages/detail?msg_ids=" + msgIds;
+            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
+            var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return new HttpResponse(msg.StatusCode, msg.Headers, content);
+        }
+
+        /// <summary>
+        /// 消息统计详情（VIP 专属接口，新）
+        /// <see cref="https://docs.jiguang.cn/jpush/server/push/rest_api_v3_report/#vip_1"/>
+        /// </summary>
+        /// <param name="msgIdList">消息的 msg_id 列表，每次最多支持 100 个。</param>
+        public HttpResponse GetMessagesDetailReport(List<string> msgIdList)
+        {
+            Task<HttpResponse> task = Task.Run(() => GetMessagesDetailReportAsync(msgIdList));
             task.Wait();
             return task.Result;
         }

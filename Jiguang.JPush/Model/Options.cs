@@ -1,4 +1,8 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
+using System.Reflection;
+using System.Collections.Generic;
 
 namespace Jiguang.JPush.Model
 {
@@ -48,5 +52,76 @@ namespace Jiguang.JPush.Model
         /// </summary>
         [JsonProperty("big_push_duration", NullValueHandling = NullValueHandling.Ignore)]
         public int? BigPushDuration { get; set; }
+
+        /// <summary>
+        /// 自定义参数
+        /// </summary>
+        public Dictionary<string, object> Dict { get; set; }
+
+        public void Add(string key, object value) {
+            if (Dict == null) {
+                Dict = new Dictionary<string, object>();
+            }
+            Dict.Add(key, value);
+        }
+    }
+
+    public class OptionsJsonConvert : JsonConverter 
+    {
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            throw new Exception("Unsupport ReadJson convert.");
+        }
+
+        public override bool CanConvert(Type objectType)
+        {
+            if (objectType.FullName == typeof(Options).FullName)
+            {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            if (value == null)
+            {
+                writer.WriteNull();
+                return;
+            }
+            writer.WriteStartObject();
+            Options options = (Options) value;
+            if (options.SendNo != null) {
+                writer.WritePropertyName("sendno");
+                writer.WriteValue(options.SendNo);
+            }
+            if (options.TimeToLive != null) {
+                writer.WritePropertyName("time_to_live");
+                writer.WriteValue(options.TimeToLive);
+            }
+            if (options.OverrideMessageId != null) {
+                writer.WritePropertyName("override_msg_id");
+                writer.WriteValue(options.OverrideMessageId);
+            }
+            writer.WritePropertyName("apns_production");
+            writer.WriteValue(options.IsApnsProduction);
+            if (options.ApnsCollapseId != null) {
+                writer.WritePropertyName("apns_collapse_id");
+                writer.WriteValue(options.ApnsCollapseId);
+            }
+            if (options.BigPushDuration != null) {
+                writer.WritePropertyName("big_push_duration");
+                writer.WriteValue(options.BigPushDuration);
+            }
+            if (options.Dict != null) {
+                foreach (KeyValuePair<string, object> item in options.Dict)
+                {
+                    writer.WritePropertyName(item.Key);
+                    serializer.Serialize(writer, item.Value);
+                }
+            }
+        }
     }
 }

@@ -32,6 +32,9 @@ namespace Jiguang.JPush.Model
         [JsonProperty("builder_id", NullValueHandling = NullValueHandling.Ignore)]
         public int? BuilderId { get; set; }
 
+        [JsonProperty("channel_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string ChannelId { get; set; }
+
         [JsonProperty("priority", NullValueHandling = NullValueHandling.Ignore)]
         public int? Priority { get; set; }
 
@@ -110,5 +113,8 @@ namespace Jiguang.JPush.Model
 
         [JsonProperty("extras", NullValueHandling = NullValueHandling.Ignore)]
         public Dictionary<string, object> Extras { get; set; }
+
+        [JsonProperty("thread-id", NullValueHandling = NullValueHandling.Ignore)]
+        public string ThreadId { get; set; }
     }
 }

@@ -7,13 +7,16 @@ namespace Example
 {
     class Example
     {
-        private static JPushClient client = new JPushClient("Your AppKey", "Your MasterSecret");
+        private static JPushClient client = new JPushClient(ExampleConfig.APP_KEY, ExampleConfig.MASTER_SECRET);
 
         public static void Main(string[] args)
         {
             ExecutePushExample();
-            ExecuteDeviceEample();
+            ExecuteBatchPushExample();
+            ExecuteDeviceExample();
             ExecuteReportExample();
+            ExecuteReceivedDetailReportExample();
+            ExecuteMessagesDetialReportExample();
             ExecuteScheduleExample();
 
             Console.ReadLine();
@@ -57,7 +60,48 @@ namespace Example
             Console.WriteLine(response.Content);
         }
 
-        private static void ExecuteDeviceEample()
+        private static void ExecuteBatchPushExample()
+        {
+            SinglePayload singlePayload = new SinglePayload()
+            {
+                Platform = new List<string> { "android", "ios" },
+                Target = "flink",
+                Notification = new Notification
+                {
+                    Alert = "hello jpush",
+                    Android = new Android
+                    {
+                        Alert = "android alert",
+                        Title = "title"
+                    },
+                    IOS = new IOS
+                    {
+                        Alert = "ios alert",
+                        Badge = "+1"
+                    }
+                },
+                Message = new Message
+                {
+                    Title = "message title",
+                    Content = "message content",
+                    Extras = new Dictionary<string, string>
+                    {
+                        ["key1"] = "value1"
+                    }
+                },
+                Options = new Options
+                {
+                    IsApnsProduction = true // 设置 iOS 推送生产环境。不设置默认为开发环境。
+                }
+            };
+            List<SinglePayload> singlePayloads = new List<SinglePayload>();
+            singlePayloads.Add(singlePayload);
+            Console.WriteLine("start send");
+            var response = client.BatchPushByAlias(singlePayloads);
+            Console.WriteLine(response.Content);
+        }
+
+        private static void ExecuteDeviceExample()
         {
             var registrationId = "12145125123151";
             var devicePayload = new DevicePayload
@@ -77,6 +121,18 @@ namespace Example
         private static void ExecuteReportExample()
         {
             var response = client.Report.GetMessageReport(new List<string> { "1251231231" });
+            Console.WriteLine(response.Content);
+        }
+
+        private static void ExecuteReceivedDetailReportExample()
+        {
+            var response = client.Report.GetReceivedDetailReport(new List<string> { "1251231231" });
+            Console.WriteLine(response.Content);
+        }
+
+        private static void ExecuteMessagesDetialReportExample()
+        {
+            var response = client.Report.GetMessagesDetailReport(new List<string> { "1251231231" });
             Console.WriteLine(response.Content);
         }
 
