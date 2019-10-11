@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Jiguang.JPush.Model
 {
@@ -26,6 +27,7 @@ namespace Jiguang.JPush.Model
         public SmsMessage SMSMessage { get; set; }
 
         [JsonProperty("options", DefaultValueHandling = DefaultValueHandling.Include)]
+        [JsonConverter(typeof(OptionsJsonConvert))]
         public Options Options { get; set; } = new Options
         {
             IsApnsProduction = false
