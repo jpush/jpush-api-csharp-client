@@ -119,7 +119,7 @@ namespace Jiguang.JPush.Model
                 foreach (KeyValuePair<string, object> item in options.Dict)
                 {
                     writer.WritePropertyName(item.Key);
-                    writer.WriteValue(item.Value);
+                    writer.WriteValue(string.Join(",", item.Value));
                 }
             }
         }
