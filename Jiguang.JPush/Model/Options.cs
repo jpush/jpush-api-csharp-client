@@ -119,7 +119,7 @@ namespace Jiguang.JPush.Model
                 foreach (KeyValuePair<string, object> item in options.Dict)
                 {
                     writer.WritePropertyName(item.Key);
-                    jsonSerializer.Serialize(writer, item.Value);
+                    serializer.Serialize(writer, item.Value);
                 }
             }
         }

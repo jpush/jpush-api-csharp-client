@@ -2,7 +2,6 @@
 using Jiguang.JPush;
 using Jiguang.JPush.Model;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace Example
 {
@@ -12,12 +11,13 @@ namespace Example
 
         public static void Main(string[] args)
         {
-            var ThirdPartyChannel = new Dictionary<string, object>();
-            var Xiaomi= new Dictionary<string, object>();
-            Xiaomi.Add("distribution","ospush");
-            ThirdPartyChannel.Add("xiaomi",Xiaomi);
-            Console.WriteLine(JsonConvert.SerializeObject(ThirdPartyChannel));
-
+            ExecutePushExample();
+            ExecuteBatchPushExample();
+            ExecuteDeviceExample();
+            ExecuteReportExample();
+            ExecuteReceivedDetailReportExample();
+            ExecuteMessagesDetialReportExample();
+            ExecuteScheduleExample();
 
             Console.ReadLine();
         }
