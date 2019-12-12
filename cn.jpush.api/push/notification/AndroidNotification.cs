@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
@@ -47,6 +47,16 @@ namespace cn.jpush.api.push.notification
         public string uri_activity { get; private set; }
 
         // 华为 only - end
+
+        // oppo only - start
+
+        /// <summary>
+        /// 指定开发者想要打开的 Activity，值为 <activity> 节点的 "android:name" 属性值。
+        /// </summary>
+        [JsonProperty]
+        public string uri_action { get; private set; }
+
+        // oppo only - end
 
         public AndroidNotification() : base()
         {
@@ -117,6 +127,11 @@ namespace cn.jpush.api.push.notification
         public AndroidNotification setUriActivity(string uri_activity)
         {
             this.uri_activity = uri_activity;
+            return this;
+        }
+        public AndroidNotification setUriAction(string uri_action)
+        {
+            this.uri_action = uri_action;
             return this;
         }
 
