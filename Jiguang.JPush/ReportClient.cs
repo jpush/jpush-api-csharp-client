@@ -14,6 +14,12 @@ namespace Jiguang.JPush
         public const string BASE_URL_REPORT_BEIJING = "https://bjapi.push.jiguang.cn/v3/report";
 
         private string BASE_URL = BASE_URL_REPORT_DEFAULT;
+        private HttpClient _client;
+
+        public ReportClient(HttpClient client)
+        {
+            _client = client;
+        }
 
         /// <summary>
         /// 设置 Report API 的调用地址。
@@ -35,7 +41,7 @@ namespace Jiguang.JPush
 
             var msgIds = string.Join(",", msgIdList);
             var url = BASE_URL + "/received?msg_ids=" + msgIds;
-            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
+            HttpResponseMessage msg = await _client.GetAsync(url).ConfigureAwait(false);
             var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
@@ -61,7 +67,7 @@ namespace Jiguang.JPush
 
             var msgIds = string.Join(",", msgIdList);
             var url = BASE_URL + "/received/detail?msg_ids=" + msgIds;
-            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
+            HttpResponseMessage msg = await _client.GetAsync(url).ConfigureAwait(false);
             var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
@@ -101,7 +107,7 @@ namespace Jiguang.JPush
             var url = BASE_URL + "/status/message";
             var httpContent = new StringContent(body.ToString(), Encoding.UTF8);
 
-            HttpResponseMessage msg = await JPushClient.HttpClient.PostAsync(url, httpContent).ConfigureAwait(false);
+            HttpResponseMessage msg = await _client.PostAsync(url, httpContent).ConfigureAwait(false);
             var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
@@ -130,7 +136,7 @@ namespace Jiguang.JPush
 
             var msgIds = string.Join(",", msgIdList);
             var url = BASE_URL + "/messages?msg_ids=" + msgIds;
-            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
+            HttpResponseMessage msg = await _client.GetAsync(url).ConfigureAwait(false);
             var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
@@ -157,7 +163,7 @@ namespace Jiguang.JPush
 
             var msgIds = string.Join(",", msgIdList);
             var url = BASE_URL + "/messages/detail?msg_ids=" + msgIds;
-            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
+            HttpResponseMessage msg = await _client.GetAsync(url).ConfigureAwait(false);
             var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
@@ -189,7 +195,7 @@ namespace Jiguang.JPush
                 throw new ArgumentOutOfRangeException(nameof(duration));
 
             var url = BASE_URL + "/users?time_unit=" + timeUnit + "&start=" + startTime + "&duration=" + duration;
-            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
+            HttpResponseMessage msg = await _client.GetAsync(url).ConfigureAwait(false);
             var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
