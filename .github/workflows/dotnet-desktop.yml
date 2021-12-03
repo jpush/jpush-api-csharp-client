@@ -17,8 +17,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.415
+        path: Jiguang.JPush
     - name: Install dependencies
-      run: cd Jiguang.JPush && dotnet restore
+      run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release
     - name: Test
