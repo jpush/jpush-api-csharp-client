@@ -24,7 +24,7 @@ jobs:
     - name: Test
       run: cd Jiguang.JPush && dotnet test --no-restore --verbosity normal
     - name: Publish
-      uses: cd Jiguang.JPush && brandedoutcast/publish-nuget@v2.5.2
+      uses: brandedoutcast/publish-nuget@v2.5.2
       with:
         PROJECT_FILE_PATH: Extensions/Extensions.csproj
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
