@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.415
+        dotnet-version: 4.5
     - name: Install dependencies
       run: cd Jiguang.JPush && dotnet restore
     - name: Build
