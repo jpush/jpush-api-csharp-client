@@ -17,15 +17,14 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.415
-        path: Jiguang.JPush
     - name: Install dependencies
-      run: dotnet restore
+      run: cd Jiguang.JPush && dotnet restore
     - name: Build
-      run: dotnet build --configuration Release
+      run: cd Jiguang.JPush && dotnet build --configuration Release
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: cd Jiguang.JPush && dotnet test --no-restore --verbosity normal
     - name: Publish
-      uses: brandedoutcast/publish-nuget@v2.5.2
+      uses: cd Jiguang.JPush && brandedoutcast/publish-nuget@v2.5.2
       with:
         PROJECT_FILE_PATH: Extensions/Extensions.csproj
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
