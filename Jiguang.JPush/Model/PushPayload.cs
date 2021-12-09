@@ -11,9 +11,9 @@ namespace Jiguang.JPush.Model
         /// <summary>
         /// 推送平台。可以为 "android" / "ios" / "all"。
         /// </summary>
-        
+
         [JsonProperty("callback", NullValueHandling = NullValueHandling.Ignore)]
-        public Callback Callback { get; set; }
+        public CallBack CallBack { get; set; }
 
         [JsonProperty("notification_3rd", NullValueHandling = NullValueHandling.Ignore)]
         public Notification3rd Notification3rd { get; set; }
