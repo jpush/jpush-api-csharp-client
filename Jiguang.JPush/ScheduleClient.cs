@@ -15,10 +15,17 @@ namespace Jiguang.JPush
 
         private string BASE_URL = BASE_URL_SCHEDULE_DEFAULT;
 
+        private HttpClient _client;
+        
         private JsonSerializer jsonSerializer = new JsonSerializer
         {
             NullValueHandling = NullValueHandling.Ignore
         };
+
+        public ScheduleClient(HttpClient httpClient)
+        {
+            _client = httpClient;
+        }
 
         /// <summary>
         /// 设置 Schedule API 的调用地址。
@@ -42,7 +49,7 @@ namespace Jiguang.JPush
                 throw new ArgumentNullException(nameof(json));
 
             HttpContent requestContent = new StringContent(json, Encoding.UTF8);
-            HttpResponseMessage msg = await JPushClient.HttpClient.PostAsync(BASE_URL, requestContent).ConfigureAwait(false);
+            HttpResponseMessage msg = await _client.PostAsync(BASE_URL, requestContent).ConfigureAwait(false);
             string responseContent = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, responseContent);
         }
@@ -142,7 +149,7 @@ namespace Jiguang.JPush
                 throw new ArgumentNullException(nameof(page));
 
             var url = BASE_URL + "?page=" + page;
-            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
+            HttpResponseMessage msg = await _client.GetAsync(url).ConfigureAwait(false);
             string responseContent = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, responseContent);
         }
@@ -172,7 +179,7 @@ namespace Jiguang.JPush
                 throw new ArgumentNullException(nameof(scheduleId));
 
             var url = BASE_URL + $"/{scheduleId}";
-            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
+            HttpResponseMessage msg = await _client.GetAsync(url).ConfigureAwait(false);
             string responseContent = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, responseContent);
         }
@@ -198,7 +205,7 @@ namespace Jiguang.JPush
                 throw new ArgumentNullException(nameof(scheduleId));
 
             var url = BASE_URL + $"/{scheduleId}/msg_ids";
-            HttpResponseMessage msg = await JPushClient.HttpClient.GetAsync(url).ConfigureAwait(false);
+            HttpResponseMessage msg = await _client.GetAsync(url).ConfigureAwait(false);
             string responseContent = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, responseContent);
         }
@@ -224,7 +231,7 @@ namespace Jiguang.JPush
 
             var url = BASE_URL + $"/{scheduleId}";
             HttpContent requestContent = new StringContent(json, Encoding.UTF8);
-            HttpResponseMessage msg = await JPushClient.HttpClient.PutAsync(url, requestContent).ConfigureAwait(false);
+            HttpResponseMessage msg = await _client.PutAsync(url, requestContent).ConfigureAwait(false);
             string responseContent = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, responseContent);
         }
@@ -338,7 +345,7 @@ namespace Jiguang.JPush
                 throw new ArgumentNullException(nameof(scheduleId));
 
             var url = BASE_URL + $"/{scheduleId}";
-            HttpResponseMessage msg = await JPushClient.HttpClient.DeleteAsync(url).ConfigureAwait(false);
+            HttpResponseMessage msg = await _client.DeleteAsync(url).ConfigureAwait(false);
             string responseContent = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, responseContent);
         }
