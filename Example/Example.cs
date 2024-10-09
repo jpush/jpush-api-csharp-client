@@ -3,11 +3,15 @@ using Jiguang.JPush;
 using Jiguang.JPush.Model;
 using System.Collections.Generic;
 
+
 namespace Example
 {
     class Example
     {
-        private static JPushClient client = new JPushClient(ExampleConfig.APP_KEY, ExampleConfig.MASTER_SECRET);
+        public const string APP_KEY = "Your AppKey";
+        public const string MASTER_SECRET = "Your MasterSecret";
+
+        private static JPushClient client = new JPushClient(APP_KEY, MASTER_SECRET);
 
         public static void Main(string[] args)
         {
@@ -26,7 +30,7 @@ namespace Example
         {
             PushPayload pushPayload = new PushPayload()
             {
-                Platform = new List<string> { "android", "ios" },
+                Platform = new List<string> { "android", "ios", "hmos"},
                 Audience = "all",
                 Notification = new Notification
                 {
@@ -40,6 +44,15 @@ namespace Example
                     {
                         Alert = "ios alert",
                         Badge = "+1"
+                    },
+
+                    HMOS = new HMOS
+                    {
+                        Alert = "hmos alert",
+                        Title = "title",
+                        Category = "IM",
+                        BadgeAddNum = 1,
+                        ReceiptId = "abc1212"
                     }
                 },
                 Message = new Message
@@ -64,7 +77,7 @@ namespace Example
         {
             SinglePayload singlePayload = new SinglePayload()
             {
-                Platform = new List<string> { "android", "ios" },
+                Platform = new List<string> { "android", "ios", "hmos" },
                 Target = "flink",
                 Notification = new Notification
                 {
@@ -78,7 +91,19 @@ namespace Example
                     {
                         Alert = "ios alert",
                         Badge = "+1"
-                    }
+                    },
+                    HMOS = new HMOS
+                    {
+                        Alert = "hmos alert",
+                        Title = "title",
+                        Category = "IM",
+                        BadgeAddNum = 1,
+                        ReceiptId = "abc1212",
+                        //Intent = new Dictionary<string, string>
+                        //{
+                            //["url"] = "scheme://test?key1=val1&key2=val2"
+                       }
+                   // }
                 },
                 Message = new Message
                 {

@@ -16,6 +16,9 @@ namespace Jiguang.JPush.Model
 
         [JsonProperty("ios", NullValueHandling = NullValueHandling.Ignore)]
         public IOS IOS { get; set; }
+
+        [JsonProperty("hmos", NullValueHandling = NullValueHandling.Ignore)]
+        public HMOS HMOS { get; set; }
     }
 
     public class Android
@@ -117,4 +120,54 @@ namespace Jiguang.JPush.Model
         [JsonProperty("thread-id", NullValueHandling = NullValueHandling.Ignore)]
         public string ThreadId { get; set; }
     }
+
+    public class HMOS
+    {
+        /// <summary>
+        /// 必填。
+        /// </summary>
+        [JsonProperty("alert")]
+        public string Alert { get; set; }
+
+        [JsonProperty("title", NullValueHandling = NullValueHandling.Ignore)]
+        public string Title { get; set; }
+
+        [JsonProperty("category")]
+        public string Category { get; set; }
+
+        [JsonProperty("large_icon", NullValueHandling = NullValueHandling.Ignore)]
+        public string LargeIcon { get; set; }
+
+        [JsonProperty("intent", NullValueHandling = NullValueHandling.Ignore)]
+        public Dictionary<string, object> Intent { get; set; }
+
+        [JsonProperty("badge_add_num", NullValueHandling = NullValueHandling.Ignore)]
+        public int? BadgeAddNum { get; set; }
+
+        [JsonProperty("badge_set_num", NullValueHandling = NullValueHandling.Ignore)]
+        public int? BadgeSetNum { get; set; }
+
+        [JsonProperty("test_message", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? TestMessage { get; set; }
+
+        [JsonProperty("receipt_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string ReceiptId { get; set; }
+
+        [JsonProperty("extras", NullValueHandling = NullValueHandling.Ignore)]
+        public Dictionary<string, object> Extras { get; set; }
+
+        [JsonProperty("style", NullValueHandling = NullValueHandling.Ignore)]
+        public int? Style { get; set; }
+
+        [JsonProperty("inbox", NullValueHandling = NullValueHandling.Ignore)]
+        public Dictionary<string, object> Inbox { get; set; }
+
+        [JsonProperty("push_type", NullValueHandling = NullValueHandling.Ignore)]
+        public int? PushType { get; set; }
+
+        [JsonProperty("extra_data", NullValueHandling = NullValueHandling.Ignore)]
+        public string ExtraData { get; set; }
+        
+    }
+
 }
