@@ -85,6 +85,25 @@ namespace Jiguang.JPush.Model
         /// </summary>
         [JsonProperty("uri_action", NullValueHandling = NullValueHandling.Ignore)]
         public string URIAction { get; set; }
+
+        /// <summary>
+        /// 使用DisplayForeground进行设置。
+        /// </summary>
+        [JsonProperty("display_foreground", NullValueHandling = NullValueHandling.Ignore)]
+        internal string Display_Foreground
+        {
+            get
+            {
+                return DisplayForeground == null ? null : (DisplayForeground.Value ? "1" : "0");
+            }
+        }
+
+        /// <summary>
+        /// APP在前台，通知是否展示。默认情况下 APP 在前台会弹出通知栏消息。
+        /// </summary>
+        /// <remarks>JPush Android SDK v3.5.8 版本开始支持。</remarks>
+        [JsonIgnore]
+        public bool? DisplayForeground { get; set; }
     }
 
     public class IOS
