@@ -23,13 +23,7 @@ namespace Jiguang.JPush
 
         public ReportClient Report { get => report; set => report = value; }
 
-        public static HttpClient HttpClient;
-
-        static JPushClient()
-        {
-            HttpClient = new HttpClient();
-            HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        }
+        public HttpClient _client;
 
         public JPushClient(string appKey, string masterSecret)
         {
@@ -39,12 +33,14 @@ namespace Jiguang.JPush
             if (string.IsNullOrEmpty(masterSecret))
                 throw new ArgumentNullException(nameof(masterSecret));
 
+            _client = new HttpClient();
+            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             var auth = Convert.ToBase64String(Encoding.UTF8.GetBytes(appKey + ":" + masterSecret));
-            HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", auth);
 
-            Report = new ReportClient();
-            Device = new DeviceClient();
-            Schedule = new ScheduleClient();
+            Report = new ReportClient(_client);
+            Device = new DeviceClient(_client);
+            Schedule = new ScheduleClient(_client);
         }
 
         /// <summary>
@@ -68,7 +64,7 @@ namespace Jiguang.JPush
                 throw new ArgumentNullException(nameof(jsonBody));
 
             HttpContent httpContent = new StringContent(jsonBody, Encoding.UTF8);
-            HttpResponseMessage msg = await HttpClient.PostAsync(BASE_URL, httpContent).ConfigureAwait(false);
+            HttpResponseMessage msg = await _client.PostAsync(BASE_URL, httpContent).ConfigureAwait(false);
             var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
@@ -104,7 +100,7 @@ namespace Jiguang.JPush
 
             HttpContent httpContent = new StringContent(jsonBody, Encoding.UTF8);
             var url = BASE_URL + "/validate";
-            HttpResponseMessage msg = await HttpClient.PostAsync(url, httpContent).ConfigureAwait(false);
+            HttpResponseMessage msg = await _client.PostAsync(url, httpContent).ConfigureAwait(false);
             var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
@@ -150,7 +146,7 @@ namespace Jiguang.JPush
                     url += ("&type=" + type);
             }
 
-            HttpResponseMessage msg = await HttpClient.GetAsync(url).ConfigureAwait(false);
+            HttpResponseMessage msg = await _client.GetAsync(url).ConfigureAwait(false);
             var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
@@ -230,7 +226,7 @@ namespace Jiguang.JPush
                 batchPushPayload.Pushlist.Add((String) jArray[i], singlePayLoadList[i]);
             }
             HttpContent httpContent = new StringContent(batchPushPayload.ToString(), Encoding.UTF8);
-            HttpResponseMessage msg = await HttpClient.PostAsync(url, httpContent).ConfigureAwait(false);
+            HttpResponseMessage msg = await _client.PostAsync(url, httpContent).ConfigureAwait(false);
             var content = await msg.Content.ReadAsStringAsync().ConfigureAwait(false);
             return new HttpResponse(msg.StatusCode, msg.Headers, content);
         }
